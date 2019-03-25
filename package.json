@@ -1,0 +1,26 @@
+{
+  "name": "alice",
+  "version": "1.0.0",
+  "description": "RabbitMQ Visualizer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chris-N/alice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chris-N/alice/issues"
+  },
+  "homepage": "https://github.com/Chris-N/alice#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "jest": "^24.5.0"
+  }
+}
