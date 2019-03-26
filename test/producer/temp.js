@@ -3,21 +3,25 @@ require('dotenv').config();
 const amqp = require('amqplib/callback_api');
 
 const directAP = ({ex, exType, msg, binding, times}) => {
-    amqp.connect(process.env.RABBIT_API_URI, function (err, conn) {
+    amqp.connect(process.env.RABBIT_TEST_URI, function (err, conn) {
+        console.log('--- CONNECTION ---');
         conn.createChannel(function (err, ch) {
-            console.log('')
+            console.log('--- CHANNEL CREATED ---');
             ch.assertExchange(ex, exType, { durable: false });
             for(let i = 0; i < times; i++){
-                ch.publish(ex, binding, new Buffer.from(msg));
+                ch.publish(ex, binding, new Buffer.from((msg+i).toString()));
+                console.log(" [x] Sent %s: '%s'", binding, i);
             }
-            console.log(" [x] Sent %s: '%s'", binding, msg);
-        });
 
-        conn.close();
-        process.exit(0);
+            // setTimeout(function() { conn.close(); process.exit(0) }, 500);
+        });
     });
 }
 
-const obj = {ex: 'exchange1', exType: 'fanout', msg: 'Hello Alice.', binding: '', times: 10};
+const obj = {ex: 'exchange1', 
+    exType: 'fanout', 
+    msg: 'Hello Alice. Welcome to Wonderland...', 
+    binding: '', 
+    times: 1000};
 
 directAP(obj);
