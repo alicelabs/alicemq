@@ -4,7 +4,14 @@
   "description": "RabbitMQ Visualizer",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server",
     "test": "nodemon server/api/index.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
   },
   "repository": {
     "type": "git",
@@ -22,12 +29,16 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
+    "d3": "^5.9.2",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "node-fetch": "^2.3.0",
     "ws": "^6.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
     "jest": "^24.5.0",
     "nodemon": "^1.18.10"
   }
