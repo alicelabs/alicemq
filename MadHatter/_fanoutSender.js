@@ -2,8 +2,9 @@
 //using an exchange and using fanout borker type
 
 const amqp = require('amqplib/callback_api');
+var uri = process.env.CATTERPILLAR_URI
 
-amqp.connect('amqp://localhost', (err, conn) => {
+amqp.connect(uri, (err, conn) => {
   conn.createChannel((err, ch) => {
     
     var ex = 'logs';

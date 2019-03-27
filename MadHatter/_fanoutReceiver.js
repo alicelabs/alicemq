@@ -3,11 +3,13 @@
 
 
 const amqp = require('amqplib/callback_api');
+var uri = process.env.CATTERPILLAR_URI
 
-amqp.connect((err, conn) => {
+
+amqp.connect(uri,(err, conn) => {
   conn.createChannel((err, ch) => {
 
-    var ex = 'logs';
+    var ex = 'exchange1';
     
     ch.assertExchange(ex, 'fanout', {durable: false});
     ch.assertQueue('', {exclusive: true}, (err, q)=> {
