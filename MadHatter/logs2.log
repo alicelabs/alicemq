@@ -1,2 +1,2 @@
  [*] Waiting for logs. To exit press CTRL+C
- [x] error: 'this should just appear in log1'
+ [x] info:'logs2'

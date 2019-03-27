@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 var amqp = require('amqplib/callback_api');
+require('dotenv').config();
+var uri = process.env.CATERPILLAR_URI;
 
 var args = process.argv.slice(2);
 
@@ -9,9 +11,9 @@ if (args.length == 0) {
   process.exit(1);
 }
 
-amqp.connect('amqp://localhost', function(err, conn) {
+amqp.connect(uri, function(err, conn) {
   conn.createChannel(function(err, ch) {
-    var ex = 'direct_logs';
+    var ex = 'direx';
 
     ch.assertExchange(ex, 'direct', {durable: false});
 

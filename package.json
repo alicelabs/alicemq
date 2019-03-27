@@ -2,9 +2,11 @@
   "name": "alice",
   "version": "1.0.0",
   "description": "RabbitMQ Visualizer",
-  "main": "index.js",
+  "main": "./client/main.js",
   "scripts": {
-    "test": "nodemon server/api/index.js"
+    "test": "nodemon server/api/index.js",
+    "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "electronon": "electron ."
   },
   "repository": {
     "type": "git",
@@ -22,13 +24,21 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
+    "create-react-app": "^2.1.8",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "node-fetch": "^2.3.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1",
     "ws": "^6.2.0"
   },
   "devDependencies": {
+    "babel": "^6.23.0",
+    "electron": "^4.1.1",
     "jest": "^24.5.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "webpack": "^4.29.6"
   }
 }
