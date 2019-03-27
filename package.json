@@ -24,7 +24,8 @@
     "cookie-parser": "^1.4.4",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.3.0",
+    "ws": "^6.2.0"
   },
   "devDependencies": {
     "jest": "^24.5.0",
