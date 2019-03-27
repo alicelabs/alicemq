@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 var amqp = require('amqplib/callback_api');
-var uri = process.env.CATTERPILLAR_URI
+const dotenv = require('dotenv').config();
+var uri = process.env.CATERPILLAR_URI
 
 var args = process.argv.slice(2);
 
@@ -12,13 +13,14 @@ if (args.length == 0) {
 
 amqp.connect(uri, function(err, conn) {
   conn.createChannel(function(err, ch) {
-    var ex = 'topic_logs';
+    var ex = 'topex';
 
     ch.assertExchange(ex, 'topic', {durable: false});
 
     ch.assertQueue('', {exclusive: true}, function(err, q) {
       console.log(' [*] Waiting for logs. To exit press CTRL+C');
 
+      //key here is the binding key
       args.forEach(function(key) {
         //name of queue - name of exhange - name of binding key
         ch.bindQueue(q.queue, ex, key);

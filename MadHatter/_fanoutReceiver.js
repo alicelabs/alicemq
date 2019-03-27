@@ -3,13 +3,14 @@
 
 
 const amqp = require('amqplib/callback_api');
-var uri = process.env.CATTERPILLAR_URI
+require('dotenv').config();
+const uri = process.env.CATERPILLAR_URI
 
 
-amqp.connect(uri,(err, conn) => {
+amqp.connect(uri, (err, conn) => {
   conn.createChannel((err, ch) => {
 
-    var ex = 'exchange1';
+    var ex = 'fanex';
     
     ch.assertExchange(ex, 'fanout', {durable: false});
     ch.assertQueue('', {exclusive: true}, (err, q)=> {
