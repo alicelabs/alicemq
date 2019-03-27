@@ -3,7 +3,7 @@ require('dotenv').config();
 const amqp = require('amqplib/callback_api');
 
 const directAP = ({ex, exType, msg, binding, times}) => {
-    amqp.connect(process.env.RABBIT_TEST_URI, function (err, conn) {
+    amqp.connect(process.env.CATERPILLAR_URI, function (err, conn) {
         console.log('--- CONNECTION ---');
         conn.createChannel(function (err, ch) {
             console.log('--- CHANNEL CREATED ---');
@@ -22,6 +22,6 @@ const obj = {ex: 'exchange1',
     exType: 'fanout', 
     msg: 'Hello Alice. Welcome to Wonderland...', 
     binding: '', 
-    times: 1000};
+    times: 10000};
 
 directAP(obj);
