@@ -65,12 +65,31 @@ apiController.consumers = (req, res) => {
 apiController.channels = (req, res) => {
   fetch(rabbit_url + '/channels')
   .then(result =>result.json())
-  .then(data => data.forEach(producer => {
-    fetch(rabbit_url + '/channels/' + producer.name)
-    .then(result =>result.json()
-    .then(data => console.log(data.channel_details, data.queue)))
+  .then(data => {
+    let result = {
+      producers: [],
+      consumers: []
+    }
+    data.forEach(el => {
+    if (el.consumer_count === 0) {
+      let producer = {
+        "message_stats": el.message_stats,
+        "name": el.name,
+        "state": el.state
+      }
+      result.producers.push(producer)
+    } 
+    if (el.consumer_count === 1) {
+      let consumer = {
+        "message_stats": el.message_stats,
+        "name": el.name,
+        "state": el.state
+      }
+      result.consumers.push(consumer)
+    } 
     })
-  )
+    res.json(result)
+  })
   .catch(err => console.error(err.stack))  
 }
 

@@ -2,11 +2,13 @@
 //using an exchange and using fanout borker type
 
 const amqp = require('amqplib/callback_api');
+require('dotenv').config();
+const uri = process.env.CATERPILLAR_URI
 
-amqp.connect('amqp://localhost', (err, conn) => {
+amqp.connect(uri, (err, conn) => {
   conn.createChannel((err, ch) => {
     
-    var ex = 'logs';
+    var ex = 'fanex';
     var msg = process.argv.slice(2).join(' ') || 'Hello_World';
     
     ch.assertExchange(ex, 'fanout', {durable: false});
