@@ -1,12 +1,11 @@
 const electron = require('electron');
 const { app, BrowserWindow } = require('electron');
+const path = require('path');
 let win;
-
-
 
 function createWindow (){
   win = new BrowserWindow({width: 800, height: 600})
-  win.loadFile('./client/index.html');
+  win.loadURL('http://localhost:8080');
   win.webContents.openDevTools();
   win.on('closed', () => {
     win = null;
@@ -20,6 +19,5 @@ app.on('window-all-close', () => {
 app.on('activate', () => {
   if (win === null) createWindow();
 })
-
 
 app.on('ready', createWindow)
