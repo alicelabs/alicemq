@@ -93,35 +93,8 @@ apiController.channels = (req, res) => {
   .catch(err => console.error(err.stack))  
 }
 
-
-
-
-
-
-
-apiController.onLoad = function(req, res) {
-  let rabbit_instance = {}
-  // console.log(apiController.overview)
-  let promises = [Promise.resolve(apiController.overview), Promise.resolve(apiController.exchanges), Promise.resolve(apiController.queues), Promise.resolve(apiController.consumers), Promise.resolve(apiController.channels)]
-
-  Promise.all(promises)
-  .then(values => {
-    // console.log(values)
-    rabbit_instance.overview = values[0]
-    rabbit_instance.exchanges = values[1]
-    rabbit_instance.queues = values[2]
-    rabbit_instance.consumers = values[3]
-    rabbit_instance.channels = values[4]
-    console.log(rabbit_instance)
-  })
-  .then(res.json(rabbit_instance))
-  .catch(err => console.error(err.stack))  
-
-}
-
 apiController.onLoad = function(req, res) {
   const urls = [rabbit_url + '/overview', rabbit_url + '/exchanges', rabbit_url + '/queues', rabbit_url + '/consumers', rabbit_url + '/channels']
-  let initResult = []
 
   Promise.all(urls.map(url => 
    new Promise((resolve, reject) =>
