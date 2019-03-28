@@ -1,13 +1,25 @@
-console.log('index.js')
-
-import React  from 'react';
+import React, { Component }  from 'react';
 import ReactDOM from 'react-dom';
+import Main from '../Containers/Main.jsx'
+
+
+
+
 
 const Hello = (props) => {
     return (
-        <div>Hello World</div>
+      <h1> hello world </h1>
     );
 };
 
-const element = document.getElementById('app');
-ReactDOM.render(<Hello />, element);
+// const element = document.getElementById('app');
+// ReactDOM.render(<App />, element);
+
+const App = (props) => {
+    return (
+        <Main />
+    )
+}
+
+const el = document.getElementById('app');
+ReactDOM.render(<App/ >, el )

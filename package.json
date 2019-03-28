@@ -2,7 +2,7 @@
   "name": "alice",
   "version": "1.0.0",
   "description": "RabbitMQ Visualizer",
-  "main": "./client/dist/index.js",
+  "main": "./client/main.js",
   "scripts": {
     "test": "nodemon server/api/index.js",
     "dev": "webpack-dev-server",
@@ -11,23 +11,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chris-N/alice.git"
+    "url": "git+https://github.com/alicelabs/alice.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Chris-N/alice/issues"
+    "url": "https://github.com/alicelabs/alice/issues"
   },
-  "homepage": "https://github.com/Chris-N/alice#readme",
+  "homepage": "https://github.com/alicelabs/alice#readme",
   "dependencies": {
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
-    "d3": "^5.9.2",
     "create-react-app": "^2.1.8",
+    "d3": "^5.9.2",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "node-fetch": "^2.3.0",
@@ -41,6 +41,7 @@
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
+    "babel-register": "^6.26.0",
     "electron": "^4.1.1",
     "jest": "^24.5.0",
     "nodemon": "^1.18.10",
