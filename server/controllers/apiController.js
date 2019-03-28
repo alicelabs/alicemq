@@ -42,7 +42,7 @@ apiController.exchanges = (req, res) => {
   .then(data=> {
     const result = data.map(el => {
       const { message_stats, name, type, durable } = el
-      res.jsonel = { message_stats, name, type, durable }
+      return el = { message_stats, name, type, durable }
     })
     res.json(result)
   })
