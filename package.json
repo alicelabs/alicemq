@@ -2,9 +2,10 @@
   "name": "alice",
   "version": "1.0.0",
   "description": "RabbitMQ Visualizer",
-  "main": "./client/main.js",
+  "main": "./client/dist/index.js",
   "scripts": {
     "test": "nodemon server/api/index.js",
+    "dev": "webpack-dev-server",
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "electronon": "electron ."
   },
@@ -22,6 +23,7 @@
   "dependencies": {
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
+    "babel-loader": "^8.0.5",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "d3": "^5.9.2",
