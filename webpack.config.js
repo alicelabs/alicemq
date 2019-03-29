@@ -2,12 +2,14 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    entry: path.resolve(__dirname, './client/dist/index.js'),
+    entry: path.resolve(__dirname, './client/index.js'),
     output:{
-        path: path.resolve(__dirname, '/client/dist'),
-        filename: './client/dist/bundle.js'
+        path: path.resolve(__dirname, 'client/dist'),
+        filename: 'bundle.js'
     },
-    target: 'electron-renderer',
+    devServer: {
+        contentBase: path.join('client/dist')
+    },
     module: {
         rules: [
             {
@@ -18,6 +20,10 @@ module.exports = {
                         presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 }
+            },
+            {
+                test: /.css$/,
+                use: ['style-loader', 'css-loader']
             }
         ]
     }

@@ -1,6 +1,8 @@
 import React, { Component }  from 'react';
 import ReactDOM from 'react-dom';
-import Main from '../Containers/Main.jsx'
+import Main from './Containers/Main.jsx';
+import css from './static/style.css';
+
 
 const Hello = (props) => {
     return (
