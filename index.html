@@ -7,6 +7,9 @@
   </head>
   <body>
     <div id="app"></div>
-    <script src="./client/dist/bundle.js"></script>
+    <script>
+      require("@babel/register");
+      require("client/dist/bundle.js");
+    </script>
    </body>
 </html>

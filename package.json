@@ -7,7 +7,7 @@
     "test": "nodemon server/api/index.js",
     "dev": "webpack-dev-server",
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "electronon": "electron ."
+    "electronon": "electron -r @babel/register ."
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
-    "babel-register": "^6.26.0",
+    "@babel/register": "^7.4.0",
     "electron": "^4.1.1",
     "jest": "^24.5.0",
     "nodemon": "^1.18.10",
