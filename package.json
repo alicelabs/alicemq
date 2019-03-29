@@ -30,7 +30,7 @@
     "cookie-parser": "^1.4.4",
     "create-react-app": "^2.1.8",
     "css-loader": "^2.1.1",
-    "d3": "^5.9.2",
+    "d3": "^3.5.16",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "node-fetch": "^2.3.0",

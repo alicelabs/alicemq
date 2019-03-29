@@ -8,7 +8,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: path.join('client/dist')
+        contentBase: './'
     },
     module: {
         rules: [
