@@ -1,23 +1,8 @@
-import React, { Component }  from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './Containers/Main.jsx';
+import App from './App.jsx';
+
 import css from './static/style.css';
 
-
-const Hello = (props) => {
-    return (
-      <h1> hello world </h1>
-    );
-};
-
-const App = (props) => {
-    return (
-        <div>
-            <Hello />
-            <Main />
-        </div>
-    )
-}
-
 const el = document.getElementById('app');
-ReactDOM.render(<App/ >, el )
+ReactDOM.render(<App />, el );
