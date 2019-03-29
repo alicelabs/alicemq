@@ -71,119 +71,187 @@
       }
   },
   "exchanges": [
-      {
-          "message_stats": {
-              "publish_in": 27181214,
-              "publish_in_details": {
-                  "rate": 16618.2
-              },
-              "publish_out": 27182358,
-              "publish_out_details": {
-                  "rate": 16843.2
-              }
-          },
-          "name": "",
-          "type": "direct",
-          "durable": true
-      },
-      {
-          "name": "amq.direct",
-          "type": "direct",
-          "durable": true
-      },
-      {
-          "name": "amq.fanout",
-          "type": "fanout",
-          "durable": true
-      },
-      {
-          "name": "amq.headers",
-          "type": "headers",
-          "durable": true
-      },
-      {
-          "name": "amq.match",
-          "type": "headers",
-          "durable": true
-      },
-      {
-          "name": "amq.rabbitmq.trace",
-          "type": "topic",
-          "durable": true
-      },
-      {
-          "name": "amq.topic",
-          "type": "topic",
-          "durable": true
-      },
-      {
-          "message_stats": {
-              "publish_in": 9,
-              "publish_in_details": {
-                  "rate": 0
-              },
-              "publish_out": 2,
-              "publish_out_details": {
-                  "rate": 0
-              }
-          },
-          "name": "direx",
-          "type": "direct",
-          "durable": false
-      },
-      {
-          "message_stats": {
-              "publish_in": 402600,
-              "publish_in_details": {
-                  "rate": 0
-              }
-          },
-          "name": "exchange1",
-          "type": "fanout",
-          "durable": false
-      },
-      {
-          "message_stats": {
-              "publish_in": 10,
-              "publish_in_details": {
-                  "rate": 0
-              },
-              "publish_out": 18,
-              "publish_out_details": {
-                  "rate": 0
-              }
-          },
-          "name": "fanex",
-          "type": "fanout",
-          "durable": false
-      },
-      {
-          "message_stats": {
-              "publish_in": 1,
-              "publish_in_details": {
-                  "rate": 0
-              }
-          },
-          "name": "logs",
-          "type": "fanout",
-          "durable": false
-      },
-      {
-          "message_stats": {
-              "publish_in": 2,
-              "publish_in_details": {
-                  "rate": 0
-              },
-              "publish_out": 2,
-              "publish_out_details": {
-                  "rate": 0
-              }
-          },
-          "name": "topex",
-          "type": "topic",
-          "durable": false
-      }
-  ],
+    {
+        "message_stats": {
+            "publish_in": 27905102,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 27905102,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "",
+        "type": "direct",
+        "durable": true
+    },
+    {
+        "message_stats": {
+            "publish_in": 0,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 0,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "amq.direct",
+        "type": "direct",
+        "durable": true
+    },
+    {
+        "message_stats": {
+            "publish_in": 0,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 0,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "amq.fanout",
+        "type": "fanout",
+        "durable": true
+    },
+    {
+        "message_stats": {
+            "publish_in": 0,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 0,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "amq.headers",
+        "type": "headers",
+        "durable": true
+    },
+    {
+        "message_stats": {
+            "publish_in": 0,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 0,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "amq.match",
+        "type": "headers",
+        "durable": true
+    },
+    {
+        "message_stats": {
+            "publish_in": 0,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 0,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "amq.rabbitmq.trace",
+        "type": "topic",
+        "durable": true
+    },
+    {
+        "message_stats": {
+            "publish_in": 0,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 0,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "amq.topic",
+        "type": "topic",
+        "durable": true
+    },
+    {
+        "message_stats": {
+            "publish_in": 10,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 3,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "direx",
+        "type": "direct",
+        "durable": false
+    },
+    {
+        "message_stats": {
+            "publish_in": 0,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 0,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "exchange1",
+        "type": "fanout",
+        "durable": false
+    },
+    {
+        "message_stats": {
+            "publish_in": 10,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 18,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "fanex",
+        "type": "fanout",
+        "durable": false
+    },
+    {
+        "message_stats": {
+            "publish_in": 0,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 0,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "logs",
+        "type": "fanout",
+        "durable": false
+    },
+    {
+        "message_stats": {
+            "publish_in": 2,
+            "publish_in_details": {
+                "rate": 0
+            },
+            "publish_out": 2,
+            "publish_out_details": {
+                "rate": 0
+            }
+        },
+        "name": "topex",
+        "type": "topic",
+        "durable": false
+    }
+],
   "queues": [
       {
           "backing_queue_status": {
@@ -582,5 +650,31 @@
           "name": "192.168.0.147:50520 -> 192.168.0.236:5672 (1)",
           "state": "flow"
       }
-  ]
+  ], 
+  "bindings": [
+        {
+            "exchange_name": "",
+            "queue_name": "hello"
+        },
+        {
+            "exchange_name": "",
+            "queue_name": "no_persist"
+        },
+        {
+            "exchange_name": "",
+            "queue_name": "no_persist_new"
+        },
+        {
+            "exchange_name": "",
+            "queue_name": "no_presist"
+        },
+        {
+            "exchange_name": "",
+            "queue_name": "task_queue"
+        },
+        {
+            "exchange_name": "direx",
+            "queue_name": "hello"
+        }
+    ]
 }

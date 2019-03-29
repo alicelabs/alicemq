@@ -23,4 +23,6 @@ app.get('/api/v1/channels', apiController.channels)
 
 app.get('/api/v1/onload', apiController.onLoad)
 
+app.get('/api/v1/bindings', apiController.bindings)
+
 app.listen(3000, ()=> console.log('listening on port 3000'))

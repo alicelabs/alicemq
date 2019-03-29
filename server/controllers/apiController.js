@@ -42,8 +42,23 @@ apiController.exchanges = (req, res) => {
   .then(data=> {
     const result = data.map(el => {
       const { message_stats, name, type, durable } = el
-      return el = { message_stats, name, type, durable }
-    })
+
+       let result = { message_stats, name, type, durable }
+       if (!result.message_stats || !result.message_stats.publish_out) {
+         result.message_stats = {
+          "publish_in": 0,
+          "publish_in_details": {
+              "rate": 0
+          },
+          "publish_out": 0,
+          "publish_out_details": {
+              "rate": 0
+          }
+      }
+         }
+         return el = result;
+       }
+    )
     res.json(result)
   })
   .catch(err => console.error(err.stack))  
@@ -93,8 +108,24 @@ apiController.channels = (req, res) => {
   .catch(err => console.error(err.stack))  
 }
 
+apiController.bindings = (req, res) => {
+  fetch(rabbit_url + '/bindings')
+  .then(res => res.json())
+  .then(data => {
+    let result = []
+    data.forEach(el =>  {
+      let binding = {
+      "exchange_name": el.source,
+      "queue_name": el.destination
+    }
+    result.push(binding)
+  })
+  res.json(result)
+  })
+}
+
 apiController.onLoad = function(req, res) {
-  const urls = [rabbit_url + '/overview', rabbit_url + '/exchanges', rabbit_url + '/queues', rabbit_url + '/consumers', rabbit_url + '/channels']
+  const urls = [rabbit_url + '/overview', rabbit_url + '/exchanges', rabbit_url + '/queues', rabbit_url + '/consumers', rabbit_url + '/channels', rabbit_url + '/bindings']
 
   Promise.all(urls.map(url => 
    new Promise((resolve, reject) =>
@@ -105,7 +136,7 @@ apiController.onLoad = function(req, res) {
     ))
     )
     .then(result => {
-      // return result order: overview, exchanges, queues, consumers, channels 
+      // return result order: overview, exchanges, queues, consumers, channels, bindings 
       let data = {}
 
       data.cluster_name = result[0].clustername
@@ -114,7 +145,21 @@ apiController.onLoad = function(req, res) {
       data.message_stats = result[0].message_stats
       data.exchanges = result[1].map(el => {
         const { message_stats, name, type, durable } = el
-        return el = { message_stats, name, type, durable }
+
+        let result = { message_stats, name, type, durable }
+        if (!result.message_stats || !result.message_stats.publish_out) {
+          result.message_stats = {
+           "publish_in": 0,
+           "publish_in_details": {
+               "rate": 0
+           },
+           "publish_out": 0,
+           "publish_out_details": {
+               "rate": 0
+           }
+       }
+          }
+          return el = result;
       })
       data.queues = result[2].map(el => {
         const { message_stats, backing_queue_status, messages, messages_details, name, node, state } = el
@@ -122,6 +167,7 @@ apiController.onLoad = function(req, res) {
       })
       data.consumers = []
       data.producers = [] 
+      data.bindings = []
       
         result[4].forEach(el => {
         if (el.consumer_count === 0) {
@@ -149,7 +195,13 @@ apiController.onLoad = function(req, res) {
             }
           })
         })
-      
+      result[5].forEach(b=> {
+        let binding = {
+          "exchange_name": b.source,
+          "queue_name": b.destination
+        }
+        data.bindings.push(binding)
+      })
       // console.log('this is the final result ', result)
       res.send(data)
     })
