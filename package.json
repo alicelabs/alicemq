@@ -9,7 +9,7 @@
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "electronon": "electron -r @babel/register .",
     "web": "webpack-dev-server --config webpack.config.js",
-    "app": "webpack --config webpack.config.js && electron ."
+    "app": "webpack --config webpack.config.electron.js && electron ."
   },
   "repository": {
     "type": "git",
