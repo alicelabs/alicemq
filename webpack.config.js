@@ -5,7 +5,7 @@ module.exports = {
     mode: 'development',
     entry: path.resolve(__dirname, './client/index.js'),
     output:{
-        path: path.resolve(__dirname, '/client/dist'),
+        path: path.resolve(__dirname, 'client/dist'),
         filename: './client/dist/bundle.js'
         
     },
@@ -26,6 +26,10 @@ module.exports = {
                         presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 }
+            },
+            {
+                test: /.css$/,
+                use: ['style-loader', 'css-loader']
             }
         ]
     }
