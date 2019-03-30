@@ -1,9 +1,6 @@
 import React, { Component }  from 'react';
 import ReactDOM from 'react-dom';
-import Main from '../Containers/Main.jsx'
-
-
-
+import Main from './Containers/Main.jsx'
 
 
 const Hello = (props) => {
@@ -11,9 +8,6 @@ const Hello = (props) => {
       <h1> hello world </h1>
     );
 };
-
-// const element = document.getElementById('app');
-// ReactDOM.render(<App />, element);
 
 const App = (props) => {
     return (
@@ -23,3 +17,7 @@ const App = (props) => {
 
 const el = document.getElementById('app');
 ReactDOM.render(<App/ >, el )
+
+if (module.hot) {
+    module.hot.accept();
+}

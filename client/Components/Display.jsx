@@ -4,7 +4,7 @@ const Display = (props) => {
   
   return (
     <div className="viz"> 
-    <p>viz</p>
+    <p>vis . body</p>
     </div>
   )
 }

@@ -2,7 +2,7 @@
   "name": "alice",
   "version": "1.0.0",
   "description": "RabbitMQ Visualizer",
-  "main": "./client/main.js",
+  "main": "./main.js",
   "scripts": {
     "test": "nodemon server/api/index.js",
     "dev": "webpack-dev-server",
@@ -45,6 +45,7 @@
     "electron": "^4.1.1",
     "jest": "^24.5.0",
     "nodemon": "^1.18.10",
+    "react-hot-loader": "^4.8.1",
     "webpack": "^4.29.6"
   }
 }
