@@ -1,657 +1,664 @@
 {
-  "queue_totals": {
-      "messages": 0,
-      "messages_details": {
-          "rate": -1776
-      },
-      "messages_ready": 0,
-      "messages_ready_details": {
-          "rate": -1776
-      },
-      "messages_unacknowledged": 0,
-      "messages_unacknowledged_details": {
-          "rate": 0
-      }
-  },
-  "object_totals": {
-      "channels": 5,
-      "connections": 5,
-      "consumers": 3,
-      "exchanges": 12,
-      "queues": 5
-  },
-  "message_stats": {
-      "ack": 1,
-      "ack_details": {
-          "rate": 0
-      },
-      "confirm": 1,
-      "confirm_details": {
-          "rate": 0
-      },
-      "deliver": 2486577,
-      "deliver_details": {
-          "rate": 0
-      },
-      "deliver_get": 30142783,
-      "deliver_get_details": {
-          "rate": 16118.6
-      },
-      "deliver_no_ack": 27656206,
-      "deliver_no_ack_details": {
-          "rate": 16118.6
-      },
-      "disk_reads": 9770369,
-      "disk_reads_details": {
-          "rate": 0
-      },
-      "disk_writes": 9877677,
-      "disk_writes_details": {
-          "rate": 0
-      },
-      "get": 0,
-      "get_details": {
-          "rate": 0
-      },
-      "get_no_ack": 0,
-      "get_no_ack_details": {
-          "rate": 0
-      },
-      "publish": 27583836,
-      "publish_details": {
-          "rate": 16618.2
-      },
-      "redeliver": 2486486,
-      "redeliver_details": {
-          "rate": 0
-      },
-      "return_unroutable": 0,
-      "return_unroutable_details": {
-          "rate": 0
-      }
-  },
-  "exchanges": [
-    {
-        "message_stats": {
-            "publish_in": 27905102,
-            "publish_in_details": {
-                "rate": 0
-            },
-            "publish_out": 27905102,
-            "publish_out_details": {
-                "rate": 0
-            }
+    "cluster_name": "rabbit@parkers-macbook-pro",
+    "queue_totals": {
+        "messages": 3700,
+        "messages_details": {
+            "rate": -74.6
         },
-        "name": "",
-        "type": "direct",
-        "durable": true
+        "messages_ready": 3700,
+        "messages_ready_details": {
+            "rate": -74.6
+        },
+        "messages_unacknowledged": 0,
+        "messages_unacknowledged_details": {
+            "rate": 0
+        }
     },
-    {
-        "message_stats": {
-            "publish_in": 0,
-            "publish_in_details": {
-                "rate": 0
-            },
-            "publish_out": 0,
-            "publish_out_details": {
-                "rate": 0
-            }
-        },
-        "name": "amq.direct",
-        "type": "direct",
-        "durable": true
+    "object_totals": {
+        "channels": 5,
+        "connections": 5,
+        "consumers": 3,
+        "exchanges": 12,
+        "queues": 5
     },
-    {
-        "message_stats": {
-            "publish_in": 0,
-            "publish_in_details": {
-                "rate": 0
-            },
-            "publish_out": 0,
-            "publish_out_details": {
-                "rate": 0
-            }
+    "message_stats": {
+        "ack": 1,
+        "ack_details": {
+            "rate": 0
         },
-        "name": "amq.fanout",
-        "type": "fanout",
-        "durable": true
+        "confirm": 2,
+        "confirm_details": {
+            "rate": 0
+        },
+        "deliver": 2486577,
+        "deliver_details": {
+            "rate": 0
+        },
+        "deliver_get": 31210008,
+        "deliver_get_details": {
+            "rate": 17681.6
+        },
+        "deliver_no_ack": 28723431,
+        "deliver_no_ack_details": {
+            "rate": 17681.6
+        },
+        "disk_reads": 9770369,
+        "disk_reads_details": {
+            "rate": 0
+        },
+        "disk_writes": 9877677,
+        "disk_writes_details": {
+            "rate": 0
+        },
+        "get": 0,
+        "get_details": {
+            "rate": 0
+        },
+        "get_no_ack": 0,
+        "get_no_ack_details": {
+            "rate": 0
+        },
+        "publish": 28648598,
+        "publish_details": {
+            "rate": 17103.2
+        },
+        "redeliver": 2486486,
+        "redeliver_details": {
+            "rate": 0
+        },
+        "return_unroutable": 0,
+        "return_unroutable_details": {
+            "rate": 0
+        }
     },
-    {
-        "message_stats": {
-            "publish_in": 0,
-            "publish_in_details": {
+    "exchanges": [
+        {
+            "message_stats": {
+                "publish_in": 28245975,
+                "publish_in_details": {
+                    "rate": 17103.2
+                },
+                "publish_out": 28248090,
+                "publish_out_details": {
+                    "rate": 17262
+                }
+            },
+            "name": "",
+            "type": "direct",
+            "durable": true
+        },
+        {
+            "message_stats": {
+                "publish_in": 0,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 0,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "amq.direct",
+            "type": "direct",
+            "durable": true
+        },
+        {
+            "message_stats": {
+                "publish_in": 0,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 0,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "amq.fanout",
+            "type": "fanout",
+            "durable": true
+        },
+        {
+            "message_stats": {
+                "publish_in": 0,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 0,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "amq.headers",
+            "type": "headers",
+            "durable": true
+        },
+        {
+            "message_stats": {
+                "publish_in": 0,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 0,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "amq.match",
+            "type": "headers",
+            "durable": true
+        },
+        {
+            "message_stats": {
+                "publish_in": 0,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 0,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "amq.rabbitmq.trace",
+            "type": "topic",
+            "durable": true
+        },
+        {
+            "message_stats": {
+                "publish_in": 0,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 0,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "amq.topic",
+            "type": "topic",
+            "durable": true
+        },
+        {
+            "message_stats": {
+                "publish_in": 10,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 3,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "direx",
+            "type": "direct",
+            "durable": false
+        },
+        {
+            "message_stats": {
+                "publish_in": 0,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 0,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "exchange1",
+            "type": "fanout",
+            "durable": false
+        },
+        {
+            "message_stats": {
+                "publish_in": 10,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 18,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "fanex",
+            "type": "fanout",
+            "durable": false
+        },
+        {
+            "message_stats": {
+                "publish_in": 0,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 0,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "logs",
+            "type": "fanout",
+            "durable": false
+        },
+        {
+            "message_stats": {
+                "publish_in": 2,
+                "publish_in_details": {
+                    "rate": 0
+                },
+                "publish_out": 2,
+                "publish_out_details": {
+                    "rate": 0
+                }
+            },
+            "name": "topex",
+            "type": "topic",
+            "durable": false
+        }
+    ],
+    "queues": [
+        {
+            "message_stats": {
+                "publish": 1,
+                "publish_details": {
+                    "rate": 0
+                }
+            },
+            "backing_queue_status": {
+                "avg_ack_egress_rate": 0,
+                "avg_ack_ingress_rate": 0,
+                "avg_egress_rate": 0,
+                "avg_ingress_rate": 0,
+                "delta": [
+                    "delta",
+                    "undefined",
+                    0,
+                    0,
+                    "undefined"
+                ],
+                "len": 1,
+                "mode": "default",
+                "next_seq_id": 1,
+                "q1": 0,
+                "q2": 0,
+                "q3": 0,
+                "q4": 1,
+                "target_ram_count": 0
+            },
+            "messages": 1,
+            "messages_details": {
                 "rate": 0
             },
-            "publish_out": 0,
-            "publish_out_details": {
-                "rate": 0
-            }
+            "name": "hello",
+            "node": "rabbit@localhost",
+            "state": "running"
         },
-        "name": "amq.headers",
-        "type": "headers",
-        "durable": true
-    },
-    {
-        "message_stats": {
-            "publish_in": 0,
-            "publish_in_details": {
+        {
+            "message_stats": {
+                "ack": 0,
+                "ack_details": {
+                    "rate": 0
+                },
+                "deliver": 1440396,
+                "deliver_details": {
+                    "rate": 0
+                },
+                "deliver_get": 2880792,
+                "deliver_get_details": {
+                    "rate": 0
+                },
+                "deliver_no_ack": 1440396,
+                "deliver_no_ack_details": {
+                    "rate": 0
+                },
+                "get": 0,
+                "get_details": {
+                    "rate": 0
+                },
+                "get_no_ack": 0,
+                "get_no_ack_details": {
+                    "rate": 0
+                },
+                "publish": 1440396,
+                "publish_details": {
+                    "rate": 0
+                },
+                "redeliver": 1440396,
+                "redeliver_details": {
+                    "rate": 0
+                }
+            },
+            "backing_queue_status": {
+                "avg_ack_egress_rate": 0,
+                "avg_ack_ingress_rate": 0,
+                "avg_egress_rate": 0,
+                "avg_ingress_rate": 0,
+                "delta": [
+                    "delta",
+                    "undefined",
+                    0,
+                    0,
+                    "undefined"
+                ],
+                "len": 0,
+                "mode": "default",
+                "next_seq_id": 1440396,
+                "q1": 0,
+                "q2": 0,
+                "q3": 0,
+                "q4": 0,
+                "target_ram_count": 0
+            },
+            "messages": 0,
+            "messages_details": {
                 "rate": 0
             },
-            "publish_out": 0,
-            "publish_out_details": {
-                "rate": 0
-            }
+            "name": "no_persist",
+            "node": "rabbit@localhost",
+            "state": "running"
         },
-        "name": "amq.match",
-        "type": "headers",
-        "durable": true
-    },
-    {
-        "message_stats": {
-            "publish_in": 0,
-            "publish_in_details": {
+        {
+            "message_stats": {
+                "ack": 0,
+                "ack_details": {
+                    "rate": 0
+                },
+                "deliver": 0,
+                "deliver_details": {
+                    "rate": 0
+                },
+                "deliver_get": 24124989,
+                "deliver_get_details": {
+                    "rate": 17681.6
+                },
+                "deliver_no_ack": 24124989,
+                "deliver_no_ack_details": {
+                    "rate": 17681.6
+                },
+                "get": 0,
+                "get_details": {
+                    "rate": 0
+                },
+                "get_no_ack": 0,
+                "get_no_ack_details": {
+                    "rate": 0
+                },
+                "publish": 24132613,
+                "publish_details": {
+                    "rate": 17262
+                },
+                "redeliver": 0,
+                "redeliver_details": {
+                    "rate": 0
+                }
+            },
+            "backing_queue_status": {
+                "avg_ack_egress_rate": 0,
+                "avg_ack_ingress_rate": 0,
+                "avg_egress_rate": 9182.1859707348,
+                "avg_ingress_rate": 9284.223317907317,
+                "delta": [
+                    "delta",
+                    "undefined",
+                    0,
+                    0,
+                    "undefined"
+                ],
+                "len": 3699,
+                "mode": "default",
+                "next_seq_id": 21402356,
+                "q1": 0,
+                "q2": 0,
+                "q3": 0,
+                "q4": 3699,
+                "target_ram_count": "infinity"
+            },
+            "messages": 3699,
+            "messages_details": {
+                "rate": -74.6
+            },
+            "name": "no_persist_new",
+            "node": "rabbit@localhost",
+            "state": "running"
+        },
+        {
+            "backing_queue_status": {
+                "avg_ack_egress_rate": 0,
+                "avg_ack_ingress_rate": 0,
+                "avg_egress_rate": 0,
+                "avg_ingress_rate": 0,
+                "delta": [
+                    "delta",
+                    "undefined",
+                    0,
+                    0,
+                    "undefined"
+                ],
+                "len": 0,
+                "mode": "default",
+                "next_seq_id": 0,
+                "q1": 0,
+                "q2": 0,
+                "q3": 0,
+                "q4": 0,
+                "target_ram_count": 0
+            },
+            "messages": 0,
+            "messages_details": {
                 "rate": 0
             },
-            "publish_out": 0,
-            "publish_out_details": {
-                "rate": 0
-            }
+            "name": "no_presist",
+            "node": "rabbit@localhost",
+            "state": "running"
         },
-        "name": "amq.rabbitmq.trace",
-        "type": "topic",
-        "durable": true
-    },
-    {
-        "message_stats": {
-            "publish_in": 0,
-            "publish_in_details": {
+        {
+            "message_stats": {
+                "ack": 1,
+                "ack_details": {
+                    "rate": 0
+                },
+                "deliver": 1046181,
+                "deliver_details": {
+                    "rate": 0
+                },
+                "deliver_get": 3720921,
+                "deliver_get_details": {
+                    "rate": 0
+                },
+                "deliver_no_ack": 2674740,
+                "deliver_no_ack_details": {
+                    "rate": 0
+                },
+                "get": 0,
+                "get_details": {
+                    "rate": 0
+                },
+                "get_no_ack": 0,
+                "get_no_ack_details": {
+                    "rate": 0
+                },
+                "publish": 2675081,
+                "publish_details": {
+                    "rate": 0
+                },
+                "redeliver": 1046090,
+                "redeliver_details": {
+                    "rate": 0
+                }
+            },
+            "backing_queue_status": {
+                "avg_ack_egress_rate": 0,
+                "avg_ack_ingress_rate": 0.0014808433989067537,
+                "avg_egress_rate": 15795.302188144879,
+                "avg_ingress_rate": 0.002413608857586266,
+                "delta": [
+                    "delta",
+                    "undefined",
+                    0,
+                    0,
+                    "undefined"
+                ],
+                "len": 0,
+                "mode": "default",
+                "next_seq_id": 2675081,
+                "q1": 0,
+                "q2": 0,
+                "q3": 0,
+                "q4": 0,
+                "target_ram_count": "infinity"
+            },
+            "messages": 0,
+            "messages_details": {
                 "rate": 0
             },
-            "publish_out": 0,
-            "publish_out_details": {
-                "rate": 0
-            }
-        },
-        "name": "amq.topic",
-        "type": "topic",
-        "durable": true
-    },
-    {
-        "message_stats": {
-            "publish_in": 10,
-            "publish_in_details": {
-                "rate": 0
+            "name": "task_queue",
+            "node": "rabbit@localhost",
+            "state": "running"
+        }
+    ],
+    "consumers": [
+        {
+            "message_stats": {
+                "ack": 0,
+                "ack_details": {
+                    "rate": 0
+                },
+                "deliver": 0,
+                "deliver_details": {
+                    "rate": 0
+                },
+                "deliver_get": 108468,
+                "deliver_get_details": {
+                    "rate": 8433.6
+                },
+                "deliver_no_ack": 108468,
+                "deliver_no_ack_details": {
+                    "rate": 8433.6
+                },
+                "get": 0,
+                "get_details": {
+                    "rate": 0
+                },
+                "get_no_ack": 0,
+                "get_no_ack_details": {
+                    "rate": 0
+                },
+                "redeliver": 0,
+                "redeliver_details": {
+                    "rate": 0
+                }
             },
-            "publish_out": 3,
-            "publish_out_details": {
-                "rate": 0
-            }
+            "name": "192.168.0.141:58823 -> 192.168.0.236:5672 (1)",
+            "state": "running",
+            "queue": "no_persist_new"
         },
-        "name": "direx",
-        "type": "direct",
-        "durable": false
-    },
-    {
-        "message_stats": {
-            "publish_in": 0,
-            "publish_in_details": {
-                "rate": 0
+        {
+            "message_stats": {
+                "ack": 0,
+                "ack_details": {
+                    "rate": 0
+                },
+                "deliver": 0,
+                "deliver_details": {
+                    "rate": 0
+                },
+                "deliver_get": 129181,
+                "deliver_get_details": {
+                    "rate": 3086.2
+                },
+                "deliver_no_ack": 129181,
+                "deliver_no_ack_details": {
+                    "rate": 3086.2
+                },
+                "get": 0,
+                "get_details": {
+                    "rate": 0
+                },
+                "get_no_ack": 0,
+                "get_no_ack_details": {
+                    "rate": 0
+                },
+                "redeliver": 0,
+                "redeliver_details": {
+                    "rate": 0
+                }
             },
-            "publish_out": 0,
-            "publish_out_details": {
-                "rate": 0
-            }
+            "name": "192.168.0.147:64944 -> 192.168.0.236:5672 (1)",
+            "state": "running",
+            "queue": "no_persist_new"
         },
-        "name": "exchange1",
-        "type": "fanout",
-        "durable": false
-    },
-    {
-        "message_stats": {
-            "publish_in": 10,
-            "publish_in_details": {
-                "rate": 0
+        {
+            "message_stats": {
+                "ack": 0,
+                "ack_details": {
+                    "rate": 0
+                },
+                "deliver": 0,
+                "deliver_details": {
+                    "rate": 0
+                },
+                "deliver_get": 103209,
+                "deliver_get_details": {
+                    "rate": 6161.8
+                },
+                "deliver_no_ack": 103209,
+                "deliver_no_ack_details": {
+                    "rate": 6161.8
+                },
+                "get": 0,
+                "get_details": {
+                    "rate": 0
+                },
+                "get_no_ack": 0,
+                "get_no_ack_details": {
+                    "rate": 0
+                },
+                "redeliver": 0,
+                "redeliver_details": {
+                    "rate": 0
+                }
             },
-            "publish_out": 18,
-            "publish_out_details": {
-                "rate": 0
-            }
-        },
-        "name": "fanex",
-        "type": "fanout",
-        "durable": false
-    },
-    {
-        "message_stats": {
-            "publish_in": 0,
-            "publish_in_details": {
-                "rate": 0
+            "name": "192.168.0.147:64945 -> 192.168.0.236:5672 (1)",
+            "state": "running",
+            "queue": "no_persist_new"
+        }
+    ],
+    "producers": [
+        {
+            "message_stats": {
+                "confirm": 0,
+                "confirm_details": {
+                    "rate": 0
+                },
+                "publish": 135156,
+                "publish_details": {
+                    "rate": 8687.8
+                },
+                "return_unroutable": 0,
+                "return_unroutable_details": {
+                    "rate": 0
+                }
             },
-            "publish_out": 0,
-            "publish_out_details": {
-                "rate": 0
-            }
+            "name": "192.168.0.141:59067 -> 192.168.0.236:5672 (1)",
+            "state": "flow"
         },
-        "name": "logs",
-        "type": "fanout",
-        "durable": false
-    },
-    {
-        "message_stats": {
-            "publish_in": 2,
-            "publish_in_details": {
-                "rate": 0
+        {
+            "message_stats": {
+                "confirm": 0,
+                "confirm_details": {
+                    "rate": 0
+                },
+                "publish": 205717,
+                "publish_details": {
+                    "rate": 8415.4
+                },
+                "return_unroutable": 0,
+                "return_unroutable_details": {
+                    "rate": 0
+                }
             },
-            "publish_out": 2,
-            "publish_out_details": {
-                "rate": 0
-            }
-        },
-        "name": "topex",
-        "type": "topic",
-        "durable": false
-    }
-],
-  "queues": [
-      {
-          "backing_queue_status": {
-              "avg_ack_egress_rate": 0,
-              "avg_ack_ingress_rate": 0,
-              "avg_egress_rate": 0,
-              "avg_ingress_rate": 0,
-              "delta": [
-                  "delta",
-                  "undefined",
-                  0,
-                  0,
-                  "undefined"
-              ],
-              "len": 0,
-              "mode": "default",
-              "next_seq_id": 0,
-              "q1": 0,
-              "q2": 0,
-              "q3": 0,
-              "q4": 0,
-              "target_ram_count": 0
-          },
-          "messages": 0,
-          "messages_details": {
-              "rate": 0
-          },
-          "name": "hello",
-          "node": "rabbit@localhost",
-          "state": "running"
-      },
-      {
-          "message_stats": {
-              "ack": 0,
-              "ack_details": {
-                  "rate": 0
-              },
-              "deliver": 1440396,
-              "deliver_details": {
-                  "rate": 0
-              },
-              "deliver_get": 2880792,
-              "deliver_get_details": {
-                  "rate": 0
-              },
-              "deliver_no_ack": 1440396,
-              "deliver_no_ack_details": {
-                  "rate": 0
-              },
-              "get": 0,
-              "get_details": {
-                  "rate": 0
-              },
-              "get_no_ack": 0,
-              "get_no_ack_details": {
-                  "rate": 0
-              },
-              "publish": 1440396,
-              "publish_details": {
-                  "rate": 0
-              },
-              "redeliver": 1440396,
-              "redeliver_details": {
-                  "rate": 0
-              }
-          },
-          "backing_queue_status": {
-              "avg_ack_egress_rate": 0,
-              "avg_ack_ingress_rate": 0,
-              "avg_egress_rate": 0,
-              "avg_ingress_rate": 0,
-              "delta": [
-                  "delta",
-                  "undefined",
-                  0,
-                  0,
-                  "undefined"
-              ],
-              "len": 0,
-              "mode": "default",
-              "next_seq_id": 1440396,
-              "q1": 0,
-              "q2": 0,
-              "q3": 0,
-              "q4": 0,
-              "target_ram_count": 0
-          },
-          "messages": 0,
-          "messages_details": {
-              "rate": 0
-          },
-          "name": "no_persist",
-          "node": "rabbit@localhost",
-          "state": "running"
-      },
-      {
-          "message_stats": {
-              "ack": 0,
-              "ack_details": {
-                  "rate": 0
-              },
-              "deliver": 0,
-              "deliver_details": {
-                  "rate": 0
-              },
-              "deliver_get": 23057764,
-              "deliver_get_details": {
-                  "rate": 16118.6
-              },
-              "deliver_no_ack": 23057764,
-              "deliver_no_ack_details": {
-                  "rate": 16118.6
-              },
-              "get": 0,
-              "get_details": {
-                  "rate": 0
-              },
-              "get_no_ack": 0,
-              "get_no_ack_details": {
-                  "rate": 0
-              },
-              "publish": 23066881,
-              "publish_details": {
-                  "rate": 16843.2
-              },
-              "redeliver": 0,
-              "redeliver_details": {
-                  "rate": 0
-              }
-          },
-          "backing_queue_status": {
-              "avg_ack_egress_rate": 0,
-              "avg_ack_ingress_rate": 0,
-              "avg_egress_rate": 7493.378449802793,
-              "avg_ingress_rate": 7024.529503982299,
-              "delta": [
-                  "delta",
-                  "undefined",
-                  0,
-                  0,
-                  "undefined"
-              ],
-              "len": 0,
-              "mode": "default",
-              "next_seq_id": 21030243,
-              "q1": 0,
-              "q2": 0,
-              "q3": 0,
-              "q4": 0,
-              "target_ram_count": "infinity"
-          },
-          "messages": 0,
-          "messages_details": {
-              "rate": -1776
-          },
-          "name": "no_persist_new",
-          "node": "rabbit@localhost",
-          "state": "running"
-      },
-      {
-          "backing_queue_status": {
-              "avg_ack_egress_rate": 0,
-              "avg_ack_ingress_rate": 0,
-              "avg_egress_rate": 0,
-              "avg_ingress_rate": 0,
-              "delta": [
-                  "delta",
-                  "undefined",
-                  0,
-                  0,
-                  "undefined"
-              ],
-              "len": 0,
-              "mode": "default",
-              "next_seq_id": 0,
-              "q1": 0,
-              "q2": 0,
-              "q3": 0,
-              "q4": 0,
-              "target_ram_count": 0
-          },
-          "messages": 0,
-          "messages_details": {
-              "rate": 0
-          },
-          "name": "no_presist",
-          "node": "rabbit@localhost",
-          "state": "running"
-      },
-      {
-          "message_stats": {
-              "ack": 1,
-              "ack_details": {
-                  "rate": 0
-              },
-              "deliver": 1046181,
-              "deliver_details": {
-                  "rate": 0
-              },
-              "deliver_get": 3720921,
-              "deliver_get_details": {
-                  "rate": 0
-              },
-              "deliver_no_ack": 2674740,
-              "deliver_no_ack_details": {
-                  "rate": 0
-              },
-              "get": 0,
-              "get_details": {
-                  "rate": 0
-              },
-              "get_no_ack": 0,
-              "get_no_ack_details": {
-                  "rate": 0
-              },
-              "publish": 2675081,
-              "publish_details": {
-                  "rate": 0
-              },
-              "redeliver": 1046090,
-              "redeliver_details": {
-                  "rate": 0
-              }
-          },
-          "backing_queue_status": {
-              "avg_ack_egress_rate": 0,
-              "avg_ack_ingress_rate": 0.0014808433989067537,
-              "avg_egress_rate": 15795.302188144879,
-              "avg_ingress_rate": 0.002413608857586266,
-              "delta": [
-                  "delta",
-                  "undefined",
-                  0,
-                  0,
-                  "undefined"
-              ],
-              "len": 0,
-              "mode": "default",
-              "next_seq_id": 2675081,
-              "q1": 0,
-              "q2": 0,
-              "q3": 0,
-              "q4": 0,
-              "target_ram_count": "infinity"
-          },
-          "messages": 0,
-          "messages_details": {
-              "rate": 0
-          },
-          "name": "task_queue",
-          "node": "rabbit@localhost",
-          "state": "running"
-      }
-  ],
-  "consumers": [
-      {
-          "message_stats": {
-              "ack": 0,
-              "ack_details": {
-                  "rate": 0
-              },
-              "deliver": 0,
-              "deliver_details": {
-                  "rate": 0
-              },
-              "deliver_get": 295950,
-              "deliver_get_details": {
-                  "rate": 7190
-              },
-              "deliver_no_ack": 295950,
-              "deliver_no_ack_details": {
-                  "rate": 7190
-              },
-              "get": 0,
-              "get_details": {
-                  "rate": 0
-              },
-              "get_no_ack": 0,
-              "get_no_ack_details": {
-                  "rate": 0
-              },
-              "redeliver": 0,
-              "redeliver_details": {
-                  "rate": 0
-              }
-          },
-          "name": "192.168.0.141:58233 -> 192.168.0.236:5672 (1)",
-          "state": "running",
-          "queue": "no_persist_new"
-      },
-      {
-          "message_stats": {
-              "ack": 0,
-              "ack_details": {
-                  "rate": 0
-              },
-              "deliver": 0,
-              "deliver_details": {
-                  "rate": 0
-              },
-              "deliver_get": 575197,
-              "deliver_get_details": {
-                  "rate": 2809.4
-              },
-              "deliver_no_ack": 575197,
-              "deliver_no_ack_details": {
-                  "rate": 2809.4
-              },
-              "get": 0,
-              "get_details": {
-                  "rate": 0
-              },
-              "get_no_ack": 0,
-              "get_no_ack_details": {
-                  "rate": 0
-              },
-              "redeliver": 0,
-              "redeliver_details": {
-                  "rate": 0
-              }
-          },
-          "name": "192.168.0.147:50385 -> 192.168.0.236:5672 (1)",
-          "state": "running",
-          "queue": "no_persist_new"
-      },
-      {
-          "message_stats": {
-              "ack": 0,
-              "ack_details": {
-                  "rate": 0
-              },
-              "deliver": 0,
-              "deliver_details": {
-                  "rate": 0
-              },
-              "deliver_get": 854250,
-              "deliver_get_details": {
-                  "rate": 6119.2
-              },
-              "deliver_no_ack": 854250,
-              "deliver_no_ack_details": {
-                  "rate": 6119.2
-              },
-              "get": 0,
-              "get_details": {
-                  "rate": 0
-              },
-              "get_no_ack": 0,
-              "get_no_ack_details": {
-                  "rate": 0
-              },
-              "redeliver": 0,
-              "redeliver_details": {
-                  "rate": 0
-              }
-          },
-          "name": "192.168.0.147:50386 -> 192.168.0.236:5672 (1)",
-          "state": "running",
-          "queue": "no_persist_new"
-      }
-  ],
-  "producers": [
-      {
-          "message_stats": {
-              "confirm": 0,
-              "confirm_details": {
-                  "rate": 0
-              },
-              "publish": 192144,
-              "publish_details": {
-                  "rate": 8806.8
-              },
-              "return_unroutable": 0,
-              "return_unroutable_details": {
-                  "rate": 0
-              }
-          },
-          "name": "192.168.0.141:58290 -> 192.168.0.236:5672 (1)",
-          "state": "flow"
-      },
-      {
-          "message_stats": {
-              "confirm": 0,
-              "confirm_details": {
-                  "rate": 0
-              },
-              "publish": 107626,
-              "publish_details": {
-                  "rate": 7811.4
-              },
-              "return_unroutable": 0,
-              "return_unroutable_details": {
-                  "rate": 0
-              }
-          },
-          "name": "192.168.0.147:50520 -> 192.168.0.236:5672 (1)",
-          "state": "flow"
-      }
-  ], 
-  "bindings": [
+            "name": "192.168.0.147:64947 -> 192.168.0.236:5672 (1)",
+            "state": "flow"
+        }
+    ],
+    "bindings": [
         {
             "exchange_name": "",
             "queue_name": "hello"
