@@ -5,7 +5,7 @@ const Settings1 = (props) => {
   
   return (
     <div className="settings1"> 
-    <p>Hi I'm setting 1</p>
+    <p>Hi Im settings 1</p>
     </div>
   )
 }
