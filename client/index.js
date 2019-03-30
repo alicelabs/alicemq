@@ -18,6 +18,4 @@ const App = (props) => {
 const el = document.getElementById('app');
 ReactDOM.render(<App/ >, el )
 
-if (module.hot) {
-    module.hot.accept();
-}
+module.hot.accept();

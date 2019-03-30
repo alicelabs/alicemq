@@ -7,9 +7,10 @@ module.exports = {
     output:{
         path: path.resolve(__dirname, '/client/dist'),
         filename: './client/dist/bundle.js'
+        
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin() 
     ],
     devServer: {
         contentBase: __dirname,
