@@ -1,3 +1,4 @@
+const webpack = require('webpack') 
 const path = require('path');
 
 module.exports = {
@@ -6,6 +7,14 @@ module.exports = {
     output:{
         path: path.resolve(__dirname, '/client/dist'),
         filename: './client/dist/bundle.js'
+        
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    devServer: {
+        contentBase: __dirname,
+        hot: true
     },
     module: {
         rules: [

@@ -23,3 +23,5 @@ const App = (props) => {
 
 const el = document.getElementById('app');
 ReactDOM.render(<App/ >, el )
+
+module.hot.accept();
