@@ -1,13 +1,18 @@
 const onLoadData = require('../../test/onLoad.json')
-const { producers, exchanges, queues, consumers, bindings } = require('../../test/onLoad.json')
 
-let d3Data = { "nodes": [], "links": []}
+const { producers, exchanges, queues, consumers, bindings } = onLoadData;
+
+
+const d3Data = { "nodes": [], "links": []}
 
 function buildNodes(nodeType, groupNumber) {
-  nodeType.forEach(type => {
+  let total = nodeType.length
+  nodeType.forEach((type, i) => {
     let node = {
       "name": type.name,
-      "group": groupNumber
+      "group": groupNumber,
+      "x": (800 / 4) * groupNumber - 75,
+      "y": Math.floor((500 / total) * (i+1) - 20)
     }
     d3Data.nodes.push(node)
   })
@@ -88,4 +93,4 @@ linkConsumersToQueues(consumers, queues)
 linkExhcnageToQueues(bindings, queues)
 linkFanoutExchangesToAllQueues(exchanges)
 
-console.log(d3Data)
+module.exports = d3Data;
