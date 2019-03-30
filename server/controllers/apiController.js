@@ -139,7 +139,7 @@ apiController.onLoad = function(req, res) {
       // return result order: overview, exchanges, queues, consumers, channels, bindings 
       let data = {}
 
-      data.cluster_name = result[0].clustername
+      data.cluster_name = result[0].cluster_name
       data.queue_totals = result[0].queue_totals
       data.object_totals = result[0].object_totals
       data.message_stats = result[0].message_stats
