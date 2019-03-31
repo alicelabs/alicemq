@@ -25,7 +25,7 @@ describe('Testing the carrot library', () => {
 
     test('fetch from rabbit EXCHANGES (async/await)', async () => {
         expect.assertions(1);
-        const data = await carrots.queues();
+        const data = await carrots.exchanges();
         expect(data).toBeTruthy();
     });
 
@@ -41,4 +41,22 @@ describe('Testing the carrot library', () => {
         expect(data).toBeTruthy();
     });
 
+    test('fetch from rabbit CHANNELS (async/await)', async () => {
+        expect.assertions(1);
+        const data = await carrots.channels();
+        expect(data).toBeTruthy();
+    });
+
+    test('fetch from rabbit BINDINGS (async/await)', async () => {
+        expect.assertions(1);
+        const data = await carrots.bindings();
+        expect(data).toBeTruthy();
+    });
+
+    test('fetch from rabbit MOTHERLOAD (async/await)', async () => {
+        expect.assertions(1);
+        const data = await carrots.motherLoad();
+        console.log(data);
+        expect(data).toBeTruthy();
+    });
 })
