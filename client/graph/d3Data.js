@@ -1,6 +1,6 @@
 const onLoadData = require('../../test/onLoad.json')
-
 const { producers, exchanges, queues, consumers, bindings, cluster_name } = onLoadData;
+
 
 const d3Data = { "cluster_name": cluster_name, "nodes": [], "links": [], "producers": producers.length, "exchanges": exchanges.length,
 "queues": queues.length, "consumers": consumers.length}

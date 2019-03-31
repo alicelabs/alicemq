@@ -8,7 +8,7 @@ async function main() {
     // });
 
     // --- ASYNC/AWAIT ---
-    const data = await carrots.overview()
+    const data = await carrots.motherLoad()
     console.log(data.cluster_name);
 
     // const data = await carrots.exchanges();

@@ -1,6 +1,7 @@
-require('dotenv').config();
-const rabbit_url = process.env.RABBIT_API_URI
+// require('dotenv').config();
+// const rabbit_url = process.env.RABBIT_API_URI
 const fetch = require('node-fetch');
+const rabbit_url = "https://atzbrnzc:4a0gh_rjeEDZKEwwX6n68IK_ZZH0Ukld@dinosaur.rmq.cloudamqp.com/api";
 
 const carrots = {};
 
@@ -143,11 +144,17 @@ carrots.bindings = () => {
 };
 
 function massageData(result){
+    //combine data from multiple mq endpoints into single JSON
+
       const data = {};
+      
+      //totals and globals
       data.cluster_name = result[0].cluster_name
       data.queue_totals = result[0].queue_totals
       data.object_totals = result[0].object_totals
       data.message_stats = result[0].message_stats
+      
+      //exchanges
       data.exchanges = result[1].map(el => {
         const { message_stats, name, type, durable } = el
 
@@ -157,15 +164,17 @@ function massageData(result){
            "publish_in": 0,
            "publish_in_details": {
                "rate": 0
-           },
+            },
            "publish_out": 0,
            "publish_out_details": {
                "rate": 0
-           }
-       }
+            }
           }
+        }
           return el = result;
       })
+      
+      //queues
       data.queues = result[2].map(el => {
         const { message_stats, backing_queue_status, messages, messages_details, name, node, state } = el
         return el = { message_stats, backing_queue_status, messages, messages_details, name, node, state }       
@@ -173,33 +182,36 @@ function massageData(result){
       data.consumers = []
       data.producers = [] 
       data.bindings = []
-      
-        result[4].forEach(el => {
-        if (el.consumer_count === 0) {
-          let producer = {
-            "message_stats": el.message_stats,
-            "name": el.name,
-            "state": el.state
-          }
-          data.producers.push(producer)
-        } 
-        if (el.consumer_count === 1) {
-          let consumer = {
-            "message_stats": el.message_stats,
-            "name": el.name,
-            "state": el.state
-          }
-          data.consumers.push(consumer)
-        } 
-        })
+        
+        //consumers
+      result[4].forEach(el => {
+      if (el.consumer_count === 0) {
+        let producer = {
+          "message_stats": el.message_stats,
+          "name": el.name,
+          "state": el.state
+        }
+        data.producers.push(producer)
+      } 
+      if (el.consumer_count === 1) {
+        let consumer = {
+          "message_stats": el.message_stats,
+          "name": el.name,
+          "state": el.state
+        }
+        data.consumers.push(consumer)
+      } 
+      })
 
-        data.consumers.forEach(consumer => {
-          result[3].forEach(el => {
-            if (el.channel_details.name == consumer.name) {
-              consumer.queue = el.queue.name
-            }
-          })
+      //channels
+      data.consumers.forEach(consumer => {
+        result[3].forEach(el => {
+          if (el.channel_details.name == consumer.name) {
+            consumer.queue = el.queue.name
+          }
         })
+      })
+      //bindings
       result[5].forEach(b=> {
         let binding = {
           "exchange_name": b.source,
@@ -210,6 +222,26 @@ function massageData(result){
       // console.log('this is the final result ', result)
       return data;
 } 
+
+var secondMassage = function(firstMassage) {
+  //get data ready for d3
+
+  const { producers, exchanges, queues, consumers, bindings, cluster_name } = firstMassage;
+  const cherryPicked = {
+    "cluster_name": cluster_name,
+    "nodes": [],
+    "links": [],
+    "producers": producers.length,
+    "exchanges": exchanges.length,
+    "queues": queues.length,
+    "consumers": consumers.length
+   }
+  
+  console.log('nodes', cherryPicked.nodes)
+  console.log('links', cherryPicked.links)
+  return cherryPicked;
+}
+
 
 carrots.motherLoad = function () {
   return new Promise((res, rej) => {
@@ -225,11 +257,16 @@ carrots.motherLoad = function () {
     ))
     .then(result => {
       // return result order: overview, exchanges, queues, consumers, channels, bindings 
-      let data = massageData(result);
-      res(data);
+      let initial = massageData(result);
+      // let data = secondMassage(initial)
+      res(initial);
     })
     .catch(err => {console.error(err.stack); rej('MotherLoad FAILED: ', err.stack)})  
   });
 }
+
+
+
+
 
 module.exports = carrots;
