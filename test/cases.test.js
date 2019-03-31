@@ -1,4 +1,3 @@
-// const sum = require('../server/useLib.js');
 const carrots = require('../server/carrots.js');
 
 function sum(a,b){
