@@ -5,6 +5,7 @@
   "main": "./main.js",
   "scripts": {
     "test": "nodemon server/api/index.js",
+    "tests": "jest",
     "dev": "webpack-dev-server",
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "electronon": "electron -r @babel/register .",
