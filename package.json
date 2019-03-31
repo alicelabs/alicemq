@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/alicelabs/alice#readme",
   "dependencies": {
+    "acorn": "^6.1.1",
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
