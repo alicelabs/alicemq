@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/alicelabs/alice#readme",
   "dependencies": {
+    "acorn": "^6.1.1",
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
@@ -49,7 +50,10 @@
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.0",
+    "babel-jest": "^24.5.0",
     "electron": "^4.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "jest": "^24.5.0",
     "nodemon": "^1.18.10",
     "react-hot-loader": "^4.8.1",

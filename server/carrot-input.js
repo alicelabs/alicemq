@@ -1,13 +1,15 @@
-require('dotenv').config();
-const rabbit_url = process.env.CLOUD_RABBIT_API_URI
 const fetch = require('node-fetch');
 
-const carrots = {};
+function Carrot(config){
+    this.host = config.host;
+    this.username = config.username;
+    this.password = config.password;
+    this.uri = `https://${config.username}:${config.password}@${config.host}`;
+}
 
-
-carrots.overview = () => {
+Carrot.prototype.overview = function() {
   return new Promise((res, rej) => {
-    fetch(rabbit_url + '/overview')
+    fetch(this.uri + '/overview')
     .then(result=>result.json())
     .then(data=> { 
       const { message_stats, cluster_name, queue_totals, object_totals } = data
@@ -18,9 +20,9 @@ carrots.overview = () => {
   });
 };
 
-carrots.queues = () => {
+Carrot.prototype.queues = function() {
   return new Promise((res, rej) => {
-    fetch(rabbit_url + '/queues')
+    fetch(this.uri + '/queues')
     .then(result=>result.json())
     .then(data => {
       const result = data.map(el => {
@@ -41,9 +43,9 @@ carrots.queues = () => {
   });
 };
 
-carrots.exchanges = () => {
+Carrot.prototype.exchanges = function() {
   return new Promise((res, rej) => {
-    fetch(rabbit_url + '/exchanges')
+    fetch(this.uri + '/exchanges')
     .then(result=>result.json())
     .then(data=> {
       const result = data.map(el => {
@@ -71,9 +73,9 @@ carrots.exchanges = () => {
   });
 };
 
-carrots.consumers = () => {
+Carrot.prototype.consumers = function() {
   return new Promise((res, rej) => {
-    fetch(rabbit_url + '/consumers')
+    fetch(this.uri + '/consumers')
     .then(result=>result.json())
     .then(data => {
         const result = data.map(el => {
@@ -91,9 +93,9 @@ carrots.consumers = () => {
   });
 };
 
-carrots.channels = () => {
+Carrot.prototype.channels = function() {
   return new Promise((res, rej) => {
-    fetch(rabbit_url + '/channels')
+    fetch(this.uri + '/channels')
     .then(result =>result.json())
     .then(data => {
       let result = {
@@ -124,9 +126,9 @@ carrots.channels = () => {
   });
 };
 
-carrots.bindings = () => {
+Carrot.prototype.bindings = function() {
   return new Promise((res, rej) => {
-    fetch(rabbit_url + '/bindings')
+    fetch(this.uri + '/bindings')
     .then(res => res.json())
     .then(data => {
       let result = []
@@ -143,6 +145,30 @@ carrots.bindings = () => {
   });
 };
 
+ 
+
+Carrot.prototype.motherLoad = function () {
+  return new Promise((res, rej) => {
+    const urls = [this.uri + '/overview', this.uri + '/exchanges', this.uri + '/queues', this.uri + '/consumers', this.uri + '/channels', this.uri + '/bindings'];
+
+    Promise.all(urls.map(url => 
+    new Promise((resolve, reject) =>
+        fetch(url)
+        .then(result => result.json())
+        // .then(data => console.log(data))
+        .then(data => resolve(data))
+      )
+    ))
+    .then(result => {
+      // return result order: overview, exchanges, queues, consumers, channels, bindings 
+      let data = massageData(result);
+      res(data);
+    })
+    .catch(err => {console.error(err.stack); rej('MotherLoad FAILED: ', err.stack)})  
+  });
+}
+
+// private helper function
 function massageData(result){
       const data = {};
       data.cluster_name = result[0].cluster_name
@@ -210,27 +236,6 @@ function massageData(result){
       })
       // console.log('this is the final result ', result)
       return data;
-} 
-
-carrots.motherLoad = function () {
-  return new Promise((res, rej) => {
-    const urls = [rabbit_url + '/overview', rabbit_url + '/exchanges', rabbit_url + '/queues', rabbit_url + '/consumers', rabbit_url + '/channels', rabbit_url + '/bindings']
-
-    Promise.all(urls.map(url => 
-    new Promise((resolve, reject) =>
-        fetch(url)
-        .then(result => result.json())
-        // .then(data => console.log(data))
-        .then(data => resolve(data))
-      )
-    ))
-    .then(result => {
-      // return result order: overview, exchanges, queues, consumers, channels, bindings 
-      let data = massageData(result);
-      res(data);
-    })
-    .catch(err => {console.error(err.stack); rej('MotherLoad FAILED: ', err.stack)})  
-  });
 }
 
-module.exports = carrots;
+export default Carrot;

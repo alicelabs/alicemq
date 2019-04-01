@@ -14,34 +14,36 @@ export default class Canvas extends React.Component{
       titles: [
         {
           name: 'Producers', 
-          x: (800 / 4) * 1 - (800 * 0.1),
+          x: (d3Data.width / 4) * 1 - (d3Data.width * 0.1),
           y: 10
         },
         {
           name: 'Exchanges', 
-          x: (800 / 4) * 2 - (800 * 0.1),
+          x: (d3Data.width / 4) * 2 - (d3Data.width * 0.1),
           y: 10
         },
         {
           name: 'Queues', 
-          x: (800 / 4) * 3 - (800 * 0.1),
+          x: (d3Data.width / 4) * 3 - (d3Data.width * 0.1),
           y: 10
         },
         {
           name: 'Consumers', 
-          x: (800 / 4) * 4 - (800 * 0.1),
+          x: (d3Data.width / 4) * 4 - (d3Data.width * 0.1),
           y: 10
-        },
+        }
       ]
     }
   }
-  componentWillMount(){
 
+  componentWillMount(){
+    
   }
+
   render() {
     return (
       <div>
-        <h1>RabbitMQ Instance: {this.state.cluster_name}</h1>
+        <h1>RabbitMQ Instance: {this.props.cluster_name}</h1>
         <NetworkGraph {...this.state} />
       </div>
     )

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const renderTitles = (props) => {
-  console.log(props.titles)
   return (coords, index) => {
     const titlesProps = {
       x: props.titles[index].x - 12.5,
@@ -15,5 +14,5 @@ const renderTitles = (props) => {
 }
 
 export default (props) => {
-  return <g>{ props.titles.map(renderTitles(props))}</g>
+  return <g>{ props.titles.map(renderTitles(props)) }</g>
 }

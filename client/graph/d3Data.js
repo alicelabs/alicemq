@@ -1,6 +1,6 @@
 const onLoadData = require('../../test/onLoad.json')
-
 const { producers, exchanges, queues, consumers, bindings, cluster_name } = onLoadData;
+
 
 const d3Data = { "cluster_name": cluster_name, "nodes": [], "links": [], "producers": producers.length, "exchanges": exchanges.length,
 "queues": queues.length, "consumers": consumers.length, "width": 800, "height": 400}
@@ -12,10 +12,10 @@ function buildNodes(nodeType, groupNumber) {
       "name": type.name,
       "group": groupNumber,
       "x": (d3Data.width / 4) * groupNumber - (d3Data.width * 0.1),
-      "y": Math.floor((d3Data.height / total) * (i+1)),
+      "y": Math.floor((d3Data.height / total) * (i+1) - (d3Data.height / (total * 2))) + 20,
       "width": (d3Data.width / total) / 2,
       "height": (d3Data.height / total) / 2,
-      "r": (d3Data.width / total) / 8
+      "r": (d3Data.width / total) / 8,
     }
     d3Data.nodes.push(node)
   })
