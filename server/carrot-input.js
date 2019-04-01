@@ -4,7 +4,12 @@ function Carrot(config){
     this.host = config.host;
     this.username = config.username;
     this.password = config.password;
-    this.uri = `https://${config.username}:${config.password}@${config.host}`;
+    this.port = config.port;
+
+    if(config.port)
+      this.uri = `http://${config.username}:${config.password}@${config.host}:${config.port}/api`;
+    else
+      this.uri = `http://${config.username}:${config.password}@${config.host}/api`;
 }
 
 Carrot.prototype.overview = function() {
@@ -144,8 +149,6 @@ Carrot.prototype.bindings = function() {
     .catch(err => {console.error(err.stack); rej('Bindings FAILED: ', err.stack)})  
   });
 };
-
- 
 
 Carrot.prototype.motherLoad = function () {
   return new Promise((res, rej) => {
