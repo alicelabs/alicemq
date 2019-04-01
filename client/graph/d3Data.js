@@ -1,6 +1,12 @@
 const onLoadData = require('../../test/onLoad.json')
 const { producers, exchanges, queues, consumers, bindings, cluster_name } = onLoadData;
 
+const carrot = new Carrot({
+  host: '192.168.0.236',
+  port: 15672,
+  username: 'test',
+  password: 'test'
+})
 
 const d3Data = { "cluster_name": cluster_name, "nodes": [], "links": [], "producers": producers.length, "exchanges": exchanges.length,
 "queues": queues.length, "consumers": consumers.length, "width": 800, "height": 400}
