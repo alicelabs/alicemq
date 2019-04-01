@@ -51,11 +51,9 @@ function carrot2D3(carrotData) {
       let node = {
         "name": type.name,
         "group": groupNumber,
-        "x": (800 / 4) * groupNumber - 75,
-        "y": Math.floor((400 / total) * (i + 1)),
-        "width": (800 / total) / 2,
-        "height": (800 / total) / 2,
-        "r": (800 / total) / 8
+        "x": (d3Data.width / 4) * groupNumber - (d3Data.width * 0.1),
+        "y": Math.floor((d3Data.height / total) * (i+1) - (d3Data.height / (total * 2))) + 20,
+        "r": (d3Data.width / total) / 8
       }
       d3Data.nodes.push(node)
     })
