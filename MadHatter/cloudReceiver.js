@@ -1,10 +1,7 @@
-#!usr/bin/env node
-//using an exchange and using fanout borker type
-
 const amqp = require('amqplib/callback_api');
 require('dotenv').config();
-const uri = process.env.CATERPILLAR_URI
-// const uri = process.env.CLOUD_AMQP
+// const uri = process.env.CATERPILLAR_URI
+const uri = process.env.CLOUD_AMQP
 
 amqp.connect(uri, (err, conn) => {
   conn.createChannel((err, ch) => {
@@ -26,4 +23,3 @@ amqp.connect(uri, (err, conn) => {
   })
 })
 
-export default fanoutReceiver;
