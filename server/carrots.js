@@ -1,5 +1,5 @@
 require('dotenv').config();
-const rabbit_url = process.env.RABBIT_API_URI
+const rabbit_url = process.env.CLOUD_RABBIT_API_URI
 const fetch = require('node-fetch');
 
 const carrots = {};

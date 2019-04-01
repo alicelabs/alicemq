@@ -1,13 +1,15 @@
 require('dotenv').config();
+// Enzyme config
+import React from 'react';
+import Enzyme, { shallow, mount, render } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
+
+// Alice objects and components
 import Carrot from '../server/carrot-input.js';
+import Settings1 from '../client/Components/Settings1.jsx';
 
-function sum(a,b){
-    return a + b;
-}
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
-});
 
 describe('Testing the carrot library (Hardcoded URI)', () => {
     const carrots = require('../server/carrots.js');
@@ -119,3 +121,10 @@ describe('Testing the carrot library (User defined URI)', () => {
         expect(data).toBeTruthy();
     });
 });
+
+describe('Enzyme suite testing', () => {
+    it('Should have a class name of "settings1"', () => {
+        expect(shallow(<Settings1 />).is('.settings1')).toBe(true);
+    });
+});
+
