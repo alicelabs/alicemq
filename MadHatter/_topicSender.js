@@ -18,3 +18,5 @@ amqp.connect(uri, function(err, conn) {
 
   setTimeout(function() { conn.close(); process.exit(0) }, 500);
 });
+
+export default topicSender;
