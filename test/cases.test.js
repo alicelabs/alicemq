@@ -65,21 +65,15 @@ describe('Testing the carrot library (Hardcoded URI)', () => {
     });
 });
 
+let config = {
+    host: '192.168.0.236', // process.env.RABBIT_HOST
+    username: 'test', // process.env.RABBIT_USERNAME
+    password: 'test', // process.env.RABBIT_PASSWORD
+    port: 15672
+};
+const carrot = new Carrot(config);
+
 describe('Testing the carrot library (User defined URI)', () => {
-    let config = {
-        host: process.env.RABBIT_HOST, 
-        username: process.env.RABBIT_USERNAME, 
-        password: process.env.RABBIT_PASSWORD
-    }; 
-
-    config = {
-        host: '192.168.0.236',
-        username: 'test',
-        password: 'test',
-        port: 15672
-    };
-
-    const carrot = new Carrot(config);
 
     test('Host is set correctly', () => {
         expect(carrot.host).toBe(config.host);
