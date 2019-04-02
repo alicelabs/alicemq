@@ -26,7 +26,7 @@ const lib = new BlueBottle({
 // "consumers": consumers.length
 
 
-class Main extends React.Component{
+class Main extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -34,34 +34,37 @@ class Main extends React.Component{
           width: 800,
           height: 500,
           padding: 10,
-          titles: [
-            {
-              name: 'Producers',
-              x: (d3Data.width / 4) * 1 - (d3Data.width * 0.1),
-              y: 10
-            },
-            {
-              name: 'Exchanges',
-              x: (d3Data.width / 4) * 2 - (d3Data.width * 0.1),
-              y: 10
-            },
-            {
-              name: 'Queues',
-              x: (d3Data.width / 4) * 3 - (d3Data.width * 0.1),
-              y: 10
-            },
-            {
-              name: 'Consumers',
-              x: (d3Data.width / 4) * 4 - (d3Data.width * 0.1),
-              y: 10
-            }
-          ]
+          // titles: [
+            // {
+            //   name: 'Producers',
+            //   x: (d3Data.width / 4) * 1 - (d3Data.width * 0.1),
+            //   y: 10
+            // },
+            // {
+            //   name: 'Exchanges',
+            //   x: (d3Data.width / 4) * 2 - (d3Data.width * 0.1),
+            //   y: 10
+            // },
+            // {
+            //   name: 'Queues',
+            //   x: (d3Data.width / 4) * 3 - (d3Data.width * 0.1),
+            //   y: 10
+            // },
+            // {
+            //   name: 'Consumers',
+            //   x: (d3Data.width / 4) * 4 - (d3Data.width * 0.1),
+            //   y: 10
+            // }
+          // ]
         }
+
         this.decrementTarget = this.decrementTarget.bind(this);
       }    
     async componentDidMount() {
+      console.log('MOUNT');
       const d3Data = await lib.getData()
       this.setState({...d3Data});
+      console.log('ASYNC FETCH DONE!');
     }
     decrementTarget(e) {
       
@@ -81,15 +84,24 @@ class Main extends React.Component{
 
   
   render() {
-    return (
-      <div className="the-grid">
-        <Display {...this.state}/>
-        <Settings1 {...this.state} decrementTarget={this.decrementTarget}/>
-        <Settings2 {...this.state} decrementTarget={this.decrementTarget}/>
-        <Settings3 {...this.state} decrementTarget={this.decrementTarget}/>
-        <Settings4 {...this.state} decrementTarget={this.decrementTarget}/>
-      </div>
-    )
+    if(!this.state.cluster_name){
+      return(
+        <div className="form">
+          RabbitMQ user instance
+        </div>
+      )
+    }
+    else{
+      return (
+        <div className="the-grid">
+          <Display {...this.state}/>
+          <Settings1 {...this.state} decrementTarget={this.decrementTarget}/>
+          <Settings2 {...this.state} decrementTarget={this.decrementTarget}/>
+          <Settings3 {...this.state} decrementTarget={this.decrementTarget}/>
+          <Settings4 {...this.state} decrementTarget={this.decrementTarget}/>
+        </div>
+      )
+    }
   }
 }
 
