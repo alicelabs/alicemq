@@ -9,11 +9,11 @@ amqp.connect(uri, (err, conn) => {
     var ex = 'topex';
     
     ch.assertExchange(ex, 'topic', {durable: false});
-    ch.assertQueue('sharks', {exclusive: true}, (err, q)=> {
+    ch.assertQueue('red-rabbits', {exclusive: true}, (err, q)=> {
       console.log('.-. waiting for messages', q.queue);
       
       //arguments: queueName  - exchangeName - key
-      ch.bindQueue(q.queue, ex, 'sharks');
+      ch.bindQueue(q.queue, ex, 'red-rabbits');
       ch.consume(q.queue, function(msg){
         if (msg.content) {
           console.log('message:', msg.content.toString())

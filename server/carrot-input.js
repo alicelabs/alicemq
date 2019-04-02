@@ -7,14 +7,25 @@ function Carrot(config){
     this.username = config.username;
     this.password = config.password;
     this.port = config.port;
+    this.isWeb = config.isWeb
 
-    const headers = new Headers();
-    headers.set('Authorization', 'Basic ' + Base64.encode(`${config.username}:${config.password}`));
-
-    this.options = {
-      method: 'GET',
-      headers: headers
+    console.log('code22', process.env.WEBHEAD)
+    
+    if (config.isWeb){
+  
+      this.options = {
+        method: 'GET',
+        credentials: 'include'
+      }  
+    } else {
+      const headers = new Headers();
+      headers.set('Authorization', 'Basic ' + Base64.encode(`${config.username}:${config.password}`));
+      this.options = {
+       method: 'GET',
+       headers: headers,
+     }  
     }
+    
 
     if(config.port)
       // this.uri = `http://${config.username}:${config.password}@${config.host}:${config.port}/api`;
