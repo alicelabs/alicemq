@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/alicelabs/alice#readme",
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
     "acorn": "^6.1.1",
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
