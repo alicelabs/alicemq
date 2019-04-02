@@ -212,6 +212,7 @@ function massageData(result){
       return data;
 } 
 
+// this function provides the entire overview of data needed to render the d3 animation
 carrots.motherLoad = function () {
   return new Promise((res, rej) => {
     const urls = [rabbit_url + '/overview', rabbit_url + '/exchanges', rabbit_url + '/queues', rabbit_url + '/consumers', rabbit_url + '/channels', rabbit_url + '/bindings']
