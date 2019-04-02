@@ -1,45 +1,60 @@
 import React from 'react';
 import Button from './Button.jsx'
 import Typography from '@material-ui/core/Typography'
+import {TextField} from '@material-ui/core'
 
 function SignIn(props) {
     
   return <React.Fragment>
-    <Typography variant = 'title' color="inherit">Sign In RabbitMQ:</Typography>
     <div className='login-box'>
-      <input
+    <Typography variant = 'h3' color="primary">Alice Visualizer</Typography>
+    <Typography variant = 'caption' color="secondary">Enter your credentials to begin</Typography>
+      <TextField
         id='host'
+        variant='outlined'
+        label='Host'
         type='text'
         name='host'
         placeholder='RabbitMQ HTTP Hostname'
         onChange={ props.updateHostname }
+        margin="dense"
       />
-      <input
+      <TextField
         id='username'
         type='text'
         name='username'
         placeholder='Username'
         onChange={ props.updateUsername }
+        label='Username'
+        variant='outlined'
+        margin="dense"
       />
-      <input
+      <TextField
         id='password'
         type='password'
         name='password'
-        placeholder='Password'
+        variant='outlined'
+        label='Password'
         onChange={ props.updatePassword }
+        margin="dense"
       />
-      <input
+      <TextField
         id='port'
         type='text'
         name='port'
         placeholder='Default: 15672'
         onChange={ props.updatePort }
+        variant='outlined'
+        label='Port'
+        margin="dense"
       />
-      <button
-        onClick={ props.visualize }
+    </div>
+    <div id='signIn'>
+      <Button
+          visualize={ props.visualize }
       >
-        Visualize
-      </button>
+      Visualize
+      </Button>
     </div>
   </React.Fragment>
   

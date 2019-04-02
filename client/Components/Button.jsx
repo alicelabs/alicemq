@@ -1,32 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { grey } from '@material-ui/core/colors';
-const {Button} = require('@material-ui/core');
-
-// const buttonColor = purple['A700']
+import { red, purple } from '@material-ui/core/colors';
+import { Button } from '@material-ui/core';
+import { sizing } from '@material-ui/system';
 
 const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-    color: purple.A700
-  },
-  input: {
-    display: 'none',
-  },
+  sizing: "75%"
 });
 
 function ContainedButtons(props) {
   const { classes } = props;
   return (
-      <Button variant="contained" color="primary" id="signIn">
+      <Button width='75%' margin="normal" variant="contained" color="primary" id="signIn" onClick={props.visualize} >
         Visualize
       </Button>
   );
 }
 
-ContainedButtons.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(ContainedButtons);
