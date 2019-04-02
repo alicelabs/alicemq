@@ -7,6 +7,7 @@ import Display from '../Components/Display.jsx'
 import "@babel/polyfill";
 // import d3Data from '../graph/d3Data';
 import BlueBottle from '../../server/blueBottle.js';
+import { Base64 } from 'js-base64'
 
 const lib = new BlueBottle({
     host: '192.168.0.236',
@@ -61,11 +62,39 @@ class Main extends Component{
         this.decrementTarget = this.decrementTarget.bind(this);
       }    
     async componentDidMount() {
-      console.log('MOUNT');
-      const d3Data = await lib.getData()
-      this.setState({...d3Data});
-      console.log('ASYNC FETCH DONE!');
+      // console.log('MOUNT');
+      // const d3Data = await lib.getData()
+      // this.setState({...d3Data});
+      // console.log('ASYNC FETCH DONE!');
+     
+
+        let host = '192.168.0.236';
+        let username = 'test';
+        let password = 'test';
+        let port = 15672;
+        let uri = `http://${host}:${port}/api/overview`
+  
+    
+        const headers = new Headers();
+        headers.set('Authorization', 'Basic ' + Base64.encode(`${username}:${password}`));
+        headers.set('Access-Control-Request-Headers', ['origin', 'x-requested-with']);
+        headers.set('Access-Control-Allow-Origin', '192.168.0.158');
+        // headers.set('Access-Control-Request-Headers', '*');
+        let options = {
+          method: 'GET',
+          headers: headers,
+        }
+         
+        fetch(uri, options)
+        .then(data => data.json())
+        .then(data => console.log(data))
+          
     }
+
+
+      
+     
+    
     decrementTarget(e) {
       
       console.log(this.state)

@@ -164,7 +164,7 @@ Carrot.prototype.bindings = function() {
 
 Carrot.prototype.motherLoad = function () {
   return new Promise((res, rej) => {
-    const urls = [this.uri + '/overview', this.uri + '/exchanges', this.uri + '/queues', this.uri + '/consumers', this.uri + '/channels', this.uri + '/bindings'];
+    const urls = [this.uri + '/overview', this.uri + '/exchanges', this.uri + '/queues', this.uri + '/consumers', this.uri + '/bindings', this.uri + '/channels'];
 
     Promise.all(urls.map(url => 
     new Promise((resolve, reject) =>
