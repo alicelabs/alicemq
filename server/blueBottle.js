@@ -62,11 +62,11 @@ function carrot2D3(carrotData) {
   function linkConsumersToQueues(c, q) {
     c.forEach((consumer) => {
       const queueName = consumer.queue
-      data.nodes.forEach((node, j) => {
+      d3Data.nodes.forEach((node, j) => {
         if (node.name === queueName && node.group === 3) {
           const link = {
             "source": j,
-            "target": data.nodes.findIndex(el => el.name === consumer.name),
+            "target": d3Data.nodes.findIndex(el => el.name === consumer.name),
             "weight": Math.floor(Math.log(consumer.message_stats.deliver_get_details.rate))
           }
           d3Data.links.push(link)
