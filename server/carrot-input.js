@@ -1,20 +1,43 @@
 const fetch = require('node-fetch');
+import { Base64 } from 'js-base64';
+
 
 function Carrot(config){
     this.host = config.host;
     this.username = config.username;
     this.password = config.password;
     this.port = config.port;
+    this.isWeb = config.isWeb
+
+    console.log('code22', process.env.WEBHEAD)
+    
+    if (config.isWeb){
+  
+      this.options = {
+        method: 'GET',
+        credentials: 'include'
+      }  
+    } else {
+      const headers = new Headers();
+      headers.set('Authorization', 'Basic ' + Base64.encode(`${config.username}:${config.password}`));
+      this.options = {
+       method: 'GET',
+       headers: headers,
+     }  
+    }
+    
 
     if(config.port)
-      this.uri = `http://${config.username}:${config.password}@${config.host}:${config.port}/api`;
+      // this.uri = `http://${config.username}:${config.password}@${config.host}:${config.port}/api`;
+      this.uri = `http://${config.host}:${config.port}/api`;
     else
       this.uri = `http://${config.username}:${config.password}@${config.host}/api`;
 }
 
+
 Carrot.prototype.overview = function() {
   return new Promise((res, rej) => {
-    fetch(this.uri + '/overview')
+    fetch(this.uri + '/overview', this.options)
     .then(result=>result.json())
     .then(data=> { 
       const { message_stats, cluster_name, queue_totals, object_totals } = data
@@ -27,7 +50,7 @@ Carrot.prototype.overview = function() {
 
 Carrot.prototype.queues = function() {
   return new Promise((res, rej) => {
-    fetch(this.uri + '/queues')
+    fetch(this.uri + '/queues', this.options)
     .then(result=>result.json())
     .then(data => {
       const result = data.map(el => {
@@ -50,7 +73,7 @@ Carrot.prototype.queues = function() {
 
 Carrot.prototype.exchanges = function() {
   return new Promise((res, rej) => {
-    fetch(this.uri + '/exchanges')
+    fetch(this.uri + '/exchanges', this.options)
     .then(result=>result.json())
     .then(data=> {
       const result = data.map(el => {
@@ -80,7 +103,7 @@ Carrot.prototype.exchanges = function() {
 
 Carrot.prototype.consumers = function() {
   return new Promise((res, rej) => {
-    fetch(this.uri + '/consumers')
+    fetch(this.uri + '/consumers', this.options)
     .then(result=>result.json())
     .then(data => {
         const result = data.map(el => {
@@ -100,7 +123,7 @@ Carrot.prototype.consumers = function() {
 
 Carrot.prototype.channels = function() {
   return new Promise((res, rej) => {
-    fetch(this.uri + '/channels')
+    fetch(this.uri + '/channels', this.options)
     .then(result =>result.json())
     .then(data => {
       let result = {
@@ -133,7 +156,7 @@ Carrot.prototype.channels = function() {
 
 Carrot.prototype.bindings = function() {
   return new Promise((res, rej) => {
-    fetch(this.uri + '/bindings')
+    fetch(this.uri + '/bindings', this.options)
     .then(res => res.json())
     .then(data => {
       let result = []
@@ -152,11 +175,11 @@ Carrot.prototype.bindings = function() {
 
 Carrot.prototype.motherLoad = function () {
   return new Promise((res, rej) => {
-    const urls = [this.uri + '/overview', this.uri + '/exchanges', this.uri + '/queues', this.uri + '/consumers', this.uri + '/channels', this.uri + '/bindings'];
+    const urls = [this.uri + '/overview', this.uri + '/exchanges', this.uri + '/queues', this.uri + '/consumers', this.uri + '/bindings', this.uri + '/channels'];
 
     Promise.all(urls.map(url => 
     new Promise((resolve, reject) =>
-        fetch(url)
+        fetch(url, this.options)
         .then(result => result.json())
         // .then(data => console.log(data))
         .then(data => resolve(data))

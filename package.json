@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/alicelabs/alice#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.4.0",
     "acorn": "^6.1.1",
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
@@ -36,6 +37,7 @@
     "d3": "^5.9.2",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "js-base64": "^2.5.1",
     "node-fetch": "^2.3.0",
     "path": "^0.12.7",
     "react": "^16.8.5",
