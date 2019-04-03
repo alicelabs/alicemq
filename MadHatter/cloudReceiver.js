@@ -3,17 +3,26 @@ require('dotenv').config();
 const uri = process.env.CATERPILLAR_URI
 // const uri = process.env.CLOUD_AMQP
 
+//type, exchange, binding, message,  uri
+let obj = {
+  type: 'topic',
+  exchange: 'topex',
+  binding: 'red-rabbits',
+  message: 'message on topex from Christian',
+  uri: uri 
+};
+
 amqp.connect(uri, (err, conn) => {
   conn.createChannel((err, ch) => {
 
     var ex = 'topex';
     
-    ch.assertExchange(ex, 'topic', {durable: false});
-    ch.assertQueue('red-rabbits', {exclusive: true}, (err, q)=> {
+    ch.assertExchange(obj.exchange, obj.type, {durable: false});
+    ch.assertQueue(obj.binding, {exclusive: true}, (err, q)=> {
       console.log('.-. waiting for messages', q.queue);
       
       //arguments: queueName  - exchangeName - key
-      ch.bindQueue(q.queue, ex, 'red-rabbits');
+      ch.bindQueue(q.queue, ex, obj.binding);
       ch.consume(q.queue, function(msg){
         if (msg.content) {
           console.log('message:', msg.content.toString())
@@ -22,4 +31,3 @@ amqp.connect(uri, (err, conn) => {
     })
   })
 })
-
