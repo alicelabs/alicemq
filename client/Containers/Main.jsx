@@ -9,6 +9,18 @@ import SignIn from '../Components/SignIn.jsx'
 import d3Data from '../graph/d3Data'
 
 // import 'typeface-roboto'
+import "@babel/polyfill";
+// import d3Data from '../graph/d3Data';
+import BlueBottle from '../../server/blueBottle.js';
+import { Base64 } from 'js-base64'
+
+const lib = new BlueBottle({
+    host: '192.168.0.236',
+    username: 'test',
+    password: 'test',
+    port: 15672,
+    isWeb: true
+});
 
 // d3Data reference
 
@@ -45,14 +57,44 @@ class Main extends React.Component {
       height: 500,
       padding: 10,
       visualizer: false
-    }
-    // this.decrementTarget = this.decrementTarget.bind(this);
+      }    
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.updatePort = this.updatePort.bind(this);
     this.visualize = this.visualize.bind(this)
+    // this.decrementTarget = this.decrementTarget.bind(this);
+    
   }
+     
+
+        
+
+    async componentDidMount() {
+      console.log('MOUNT');
+      const d3Data = await lib.getData()
+      this.setState({...d3Data});
+      await console.log(d3Data);
+      // let host = '192.168.0.236';
+        // let username = 'test';
+        // let password = 'test';
+        // let port = 15672;
+        // let uri = `http://${host}:${port}/api/bindings`
+  
+    
+        // const headers = new Headers();
+        // // headers.set('Access-Control-Request-Headers', '*');
+        // let options = {
+        //   credentials: 'include',
+        //   method: 'GET',
+        //   headers: headers,
+        // }
+         
+        // fetch(uri, options)
+        // .then(data => data.json())
+        // .then(data => console.log(data))
+  
+    }
 
   updateHostname(e) {
     this.setState({ hostname: e.target.value });

@@ -33,18 +33,6 @@ function carrot2D3(carrotData) {
     "height": 400
   };
 
-  buildNodes(producers, 1);
-  buildNodes(exchanges, 2);
-  buildNodes(queues, 3);
-  buildNodes(consumers, 4);
-
-  linkConsumersToQueues(consumers, queues);
-  linkExchangeToQueues(bindings, queues);
-  linkFanoutExchangesToAllQueues(exchanges);
-
-  return d3Data;
-
-
   function buildNodes(nodeType, groupNumber) {
     let total = nodeType.length
     nodeType.forEach((type, i) => {
@@ -123,6 +111,16 @@ function carrot2D3(carrotData) {
       }
     })
   }
+
+  buildNodes(producers, 1);
+  buildNodes(exchanges, 2);
+  buildNodes(queues, 3);
+  buildNodes(consumers, 4);
+  linkConsumersToQueues(consumers, queues);
+  linkExchangeToQueues(bindings, queues);
+  linkFanoutExchangesToAllQueues(exchanges);
+
+  return d3Data
 }
 
 export default BlueBottle;
