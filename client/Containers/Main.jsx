@@ -6,7 +6,6 @@ import Settings3 from '../Components/Settings3.jsx'
 import Settings4 from '../Components/Settings4.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
-import d3Data from '../graph/d3Data'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
 import { Base64 } from 'js-base64'
@@ -14,11 +13,11 @@ import { Base64 } from 'js-base64'
 // import d3Data from '../graph/d3Data';
 
 const lib = new BlueBottle({
-    host: '192.168.0.236',
-    username: 'test',
-    password: 'test',
-    port: 15672,
-    isWeb: true
+  host: '192.168.0.236',
+  username: 'test',
+  password: 'test',
+  port: 15672,
+  isWeb: true
 });
 
 // d3Data reference
@@ -31,16 +30,16 @@ const lib = new BlueBottle({
 // "queues": queues.length,
 // "consumers": consumers.length
 
-const purpleTheme = createMuiTheme({ 
-    palette: {
-      primary: {
-        main: '#6200EE',
-      },
-      secondary: {
-        main: '#f44336',
-      },
+const purpleTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#6200EE',
     },
-    spacing: 10
+    secondary: {
+      main: '#f44336',
+    },
+  },
+  spacing: 10
 })
 
 class Main extends React.Component {
@@ -51,49 +50,72 @@ class Main extends React.Component {
       username: "",
       password: "",
       port: "",
-      ...d3Data,
       width: 800,
       height: 500,
       padding: 10,
-      visualizer: false
-      }    
+      visualizer: false,
+    }
+
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.updatePort = this.updatePort.bind(this);
     this.visualize = this.visualize.bind(this)
     // this.decrementTarget = this.decrementTarget.bind(this);
-    
+
   }
-     
 
-        
 
-    async componentDidMount() {
-      console.log('MOUNT');
-      const d3Data = await lib.getData()
-      this.setState({...d3Data});
-      await console.log(d3Data);
-      // let host = '192.168.0.236';
-        // let username = 'test';
-        // let password = 'test';
-        // let port = 15672;
-        // let uri = `http://${host}:${port}/api/bindings`
-  
-    
-        // const headers = new Headers();
-        // // headers.set('Access-Control-Request-Headers', '*');
-        // let options = {
-        //   credentials: 'include',
-        //   method: 'GET',
-        //   headers: headers,
-        // }
-         
-        // fetch(uri, options)
-        // .then(data => data.json())
-        // .then(data => console.log(data))
-  
-    }
+
+
+  async componentDidMount() {
+    console.log('MOUNT');
+    const d3Data = await lib.getData()
+    this.setState({ ...d3Data,
+      titles: [
+        {
+          name: 'Producers',
+          x: (d3Data.width / 4) * 1 - (d3Data.width * 0.1),
+          y: 10
+        },
+        {
+          name: 'Exchanges',
+          x: (d3Data.width / 4) * 2 - (d3Data.width * 0.1),
+          y: 10
+        },
+        {
+          name: 'Queues',
+          x: (d3Data.width / 4) * 3 - (d3Data.width * 0.1),
+          y: 10
+        },
+        {
+          name: 'Consumers',
+          x: (d3Data.width / 4) * 4 - (d3Data.width * 0.1),
+          y: 10
+        }
+      ] 
+    });
+    await console.log(d3Data);
+    // let host = '192.168.0.236';
+    // let username = 'test';
+    // let password = 'test';
+    // let port = 15672;
+    // let uri = `http://${host}:${port}/api/bindings`
+
+
+    // const headers = new Headers();
+    // // headers.set('Access-Control-Request-Headers', '*');
+    // let options = {
+    //   credentials: 'include',
+    //   method: 'GET',
+    //   headers: headers,
+    // }
+
+    // fetch(uri, options)
+    // .then(data => data.json())
+    // .then(data => console.log(data))
+
+  }
 
   updateHostname(e) {
     this.setState({ hostname: e.target.value });
@@ -133,15 +155,15 @@ class Main extends React.Component {
   render() {
     if (!this.state.visualizer) {
       return (
-      <MuiThemeProvider theme={purpleTheme}>
-        <SignIn className="container"
-        updateHostname={ this.updateHostname }
-        updateUsername={ this.updateUsername }
-        updatePassword={ this.updatePassword }
-        updatePort={ this.updatePort }
-        visualize={this.visualize}
-      />
-      </MuiThemeProvider>)
+        <MuiThemeProvider theme={purpleTheme}>
+          <SignIn className="container"
+            updateHostname={this.updateHostname}
+            updateUsername={this.updateUsername}
+            updatePassword={this.updatePassword}
+            updatePort={this.updatePort}
+            visualize={this.visualize}
+          />
+        </MuiThemeProvider>)
     } else {
       return (
         <div className="the-grid">
@@ -153,7 +175,6 @@ class Main extends React.Component {
         </div>
       )
     }
-
   }
 }
 
