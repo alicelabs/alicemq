@@ -17,7 +17,7 @@ const lib = new BlueBottle({
   username: 'test',
   password: 'test',
   port: 15672,
-  isWeb: true
+  isWeb: true,
 });
 
 // d3Data reference
@@ -65,10 +65,7 @@ class Main extends React.Component {
 
   }
 
-
-
-
-  async componentDidMount() {
+  async tick() {
     console.log('MOUNT');
     const d3Data = await lib.getData()
     this.setState({ ...d3Data,
@@ -95,26 +92,21 @@ class Main extends React.Component {
         }
       ] 
     });
-    await console.log(d3Data);
-    // let host = '192.168.0.236';
-    // let username = 'test';
-    // let password = 'test';
-    // let port = 15672;
-    // let uri = `http://${host}:${port}/api/bindings`
+      console.log(d3Data);
 
+  }
+  
 
-    // const headers = new Headers();
-    // // headers.set('Access-Control-Request-Headers', '*');
-    // let options = {
-    //   credentials: 'include',
-    //   method: 'GET',
-    //   headers: headers,
-    // }
+    componentDidMount() {
+    this.timer = setInterval(
+      () => {
+        this.tick()
+      }
+      , 501)
+  }
 
-    // fetch(uri, options)
-    // .then(data => data.json())
-    // .then(data => console.log(data))
-
+   componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   updateHostname(e) {
