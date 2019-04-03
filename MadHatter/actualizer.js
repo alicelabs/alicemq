@@ -8,7 +8,7 @@ let obj = {
   type: 'topic',
   exchange: 'topex',
   binding: 'red-rabbits',
-  message: 'message on topex',
+  message: 'message on topex from Christian',
   uri: uri 
 };
 
@@ -35,5 +35,5 @@ const actualizer = function (obj, timer){
   return setInterval(bound, timer)
 }
   
-actualizer(obj, 700);
+actualizer(obj, 200);
 
