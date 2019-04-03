@@ -7,12 +7,11 @@ import Settings4 from '../Components/Settings4.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
 import d3Data from '../graph/d3Data'
-
-// import 'typeface-roboto'
 import "@babel/polyfill";
-// import d3Data from '../graph/d3Data';
 import BlueBottle from '../../server/blueBottle.js';
 import { Base64 } from 'js-base64'
+// import 'typeface-roboto'
+// import d3Data from '../graph/d3Data';
 
 const lib = new BlueBottle({
     host: '192.168.0.236',
