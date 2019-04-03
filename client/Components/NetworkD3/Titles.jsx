@@ -9,6 +9,7 @@ const renderTitles = (props) => {
       key: index,
       fill: "black"
     }
+
     return <text {...titlesProps}>{props.titles[index].name}</text> // <rect> is d3 function
   }
 }

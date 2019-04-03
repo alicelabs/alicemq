@@ -8,27 +8,15 @@ import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
-import { Base64 } from 'js-base64'
-// import 'typeface-roboto'
-// import d3Data from '../graph/d3Data';
-
-const lib = new BlueBottle({
-  host: '192.168.0.236',
-  username: 'test',
-  password: 'test',
-  port: 15672,
-  isWeb: true,
-});
 
 // d3Data reference
-
-// "cluster_name": cluster_name,
-// "nodes": [],
-// "links": [],
-// "producers": producers.length,
-// "exchanges": exchanges.length,
-// "queues": queues.length,
-// "consumers": consumers.length
+  // "cluster_name": cluster_name,
+  // "nodes": [],
+  // "links": [],
+  // "producers": producers.length,
+  // "exchanges": exchanges.length,
+  // "queues": queues.length,
+  // "consumers": consumers.length
 
 const purpleTheme = createMuiTheme({
   palette: {
@@ -42,67 +30,58 @@ const purpleTheme = createMuiTheme({
   spacing: 10
 })
 
+function makeTitles(d3Data) {
+  const titles = [];
+  const nameTitles = ['Producers', 'Exchanges', 'Queues', 'Consumers']
+
+  for(let i = 0; i < nameTitles.length; i++)
+    titles.push({
+      name: nameTitles[i],
+      x: (d3Data.width / 4) * (i+1) - (d3Data.width * 0.1),
+      y: 10
+    });
+
+  return titles;
+}
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hostname: "",
-      username: "",
-      password: "",
-      port: "",
+      hostname: "192.168.0.236",
+      username: "test",
+      password: "test",
+      port: "15672",
       width: 800,
       height: 500,
       padding: 10,
       visualizer: false,
     }
 
+    this.blueBottle = null;
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.updatePort = this.updatePort.bind(this);
     this.visualize = this.visualize.bind(this)
     // this.decrementTarget = this.decrementTarget.bind(this);
-
   }
 
   async tick() {
-    console.log('MOUNT');
-    const d3Data = await lib.getData()
-    this.setState({ ...d3Data,
-      titles: [
-        {
-          name: 'Producers',
-          x: (d3Data.width / 4) * 1 - (d3Data.width * 0.1),
-          y: 10
-        },
-        {
-          name: 'Exchanges',
-          x: (d3Data.width / 4) * 2 - (d3Data.width * 0.1),
-          y: 10
-        },
-        {
-          name: 'Queues',
-          x: (d3Data.width / 4) * 3 - (d3Data.width * 0.1),
-          y: 10
-        },
-        {
-          name: 'Consumers',
-          x: (d3Data.width / 4) * 4 - (d3Data.width * 0.1),
-          y: 10
-        }
-      ] 
-    });
-      console.log(d3Data);
+    if(this.blueBottle === null) return;
 
+    const d3Data = await this.blueBottle.getData();
+    const dataTitles = makeTitles(d3Data);
+    this.setState({ ...d3Data, titles: dataTitles});
   }
   
 
-    componentDidMount() {
+  componentDidMount() {
     this.timer = setInterval(
       () => {
         this.tick()
       }
-      , 501)
+      , 2501)
   }
 
    componentWillUnmount() {
@@ -126,6 +105,15 @@ class Main extends React.Component {
   };
 
   visualize(e) {
+    const userConfig = {
+      host: this.state.hostname,
+      username: this.state.username,
+      password: this.state.password,
+      port: this.state.port,
+      isWeb: true
+    };
+
+    this.blueBottle = new BlueBottle(userConfig);
     this.setState({ visualizer: true })
   }
 
@@ -154,6 +142,7 @@ class Main extends React.Component {
             updatePassword={this.updatePassword}
             updatePort={this.updatePort}
             visualize={this.visualize}
+            {...this.state}
           />
         </MuiThemeProvider>)
     } else {

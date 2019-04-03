@@ -7,7 +7,6 @@ function BlueBottle(config) {
 
 BlueBottle.prototype.getData = async function () {
   this.carrotData = await this.carrot.motherLoad();
-  console.log(this.carrotData)
   return carrot2D3(this.carrotData);
 }
 
@@ -31,7 +30,7 @@ function carrot2D3(carrotData) {
     "queues": queues.length,
     "consumers": consumers.length,
     "width": 800,
-    "height": 400
+    "height": 500
   };
 
   function buildNodes(nodeType, groupNumber) {
