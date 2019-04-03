@@ -7,6 +7,7 @@ function BlueBottle(config) {
 
 BlueBottle.prototype.getData = async function () {
   this.carrotData = await this.carrot.motherLoad();
+  console.log(this.carrotData)
   return carrot2D3(this.carrotData);
 }
 
@@ -33,18 +34,6 @@ function carrot2D3(carrotData) {
     "height": 400
   };
 
-  buildNodes(producers, 1);
-  buildNodes(exchanges, 2);
-  buildNodes(queues, 3);
-  buildNodes(consumers, 4);
-
-  linkConsumersToQueues(consumers, queues);
-  linkExchangeToQueues(bindings, queues);
-  linkFanoutExchangesToAllQueues(exchanges);
-
-  return d3Data;
-
-
   function buildNodes(nodeType, groupNumber) {
     let total = nodeType.length
     nodeType.forEach((type, i) => {
@@ -62,11 +51,11 @@ function carrot2D3(carrotData) {
   function linkConsumersToQueues(c, q) {
     c.forEach((consumer) => {
       const queueName = consumer.queue
-      data.nodes.forEach((node, j) => {
+      d3Data.nodes.forEach((node, j) => {
         if (node.name === queueName && node.group === 3) {
           const link = {
             "source": j,
-            "target": data.nodes.findIndex(el => el.name === consumer.name),
+            "target": d3Data.nodes.findIndex(el => el.name === consumer.name),
             "weight": Math.floor(Math.log(consumer.message_stats.deliver_get_details.rate))
           }
           d3Data.links.push(link)
@@ -123,6 +112,16 @@ function carrot2D3(carrotData) {
       }
     })
   }
+
+  buildNodes(producers, 1);
+  buildNodes(exchanges, 2);
+  buildNodes(queues, 3);
+  buildNodes(consumers, 4);
+  linkConsumersToQueues(consumers, queues);
+  linkExchangeToQueues(bindings, queues);
+  linkFanoutExchangesToAllQueues(exchanges);
+
+  return d3Data
 }
 
 export default BlueBottle;
