@@ -9,10 +9,7 @@ function Carrot(config) {
   this.port = config.port;
   this.isWeb = config.isWeb
 
-  console.log('code22', process.env.WEBHEAD)
-
   if (config.isWeb) {
-
     this.options = {
       method: 'GET',
       credentials: 'include'
@@ -181,12 +178,10 @@ Carrot.prototype.motherLoad = function () {
       new Promise((resolve, reject) =>
         fetch(url, this.options)
           .then(result => result.json())
-          // .then(data => console.log(data))
           .then(data => resolve(data))
       )
     ))
       .then(result => {
-        console.log('this is the result before masage', result)
         // return result order: overview, exchanges, queues, consumers, channels, bindings 
         let data = massageData(result);
         
@@ -262,7 +257,6 @@ function massageData(result) {
     }
     data.bindings.push(binding)
   })
-  // console.log('this is the final result ', result)
   return data;
 }
 
