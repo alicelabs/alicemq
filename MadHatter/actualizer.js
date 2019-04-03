@@ -1,13 +1,14 @@
 const dotenv = require('dotenv').config();
-const uri = process.env.CLOUD_AMQP
+// const uri = process.env.CLOUD_AMQP
+const uri = process.env.CATERPILLAR_URI
 const amqp = require('amqplib/callback_api');
 
 //type, exchange, binding, message,  uri
 let obj = {
-  type: 'fanout',
-  exchange: 'fanex',
-  binding: '',
-  message: 'message on fanex',
+  type: 'topic',
+  exchange: 'topex',
+  binding: 'red-rabbits',
+  message: 'message on topex',
   uri: uri 
 };
 
@@ -34,5 +35,5 @@ const actualizer = function (obj, timer){
   return setInterval(bound, timer)
 }
   
-actualizer(obj, 10 * 3000);
+actualizer(obj, 700);
 

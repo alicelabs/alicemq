@@ -1,8 +1,7 @@
-body {
-  color: blue;
-  background-color: red; 
-}
 
+body {
+  /* background: #995DFF */
+}
 .the-grid {
   display: grid;
   width: 100%;
@@ -14,6 +13,21 @@ body {
     "settings1 settings2 settings3 settings4";
 }
 
+.login-box {
+  margin: 10% auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-width: 20%;
+  max-height: 40%;
+}
+
+#signIn {
+  margin: auto;
+  display: flex;
+  align-content: center;
+  margin-top: 5px;
+}
 .settings1 {
   background-color: aquamarine;
   grid-area: settings1
