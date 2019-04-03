@@ -9,7 +9,6 @@ import SignIn from '../Components/SignIn.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
 import { Base64 } from 'js-base64'
-import { setInterval } from 'core-js';
 // import 'typeface-roboto'
 // import d3Data from '../graph/d3Data';
 
