@@ -34,7 +34,6 @@
     "body-parser": "^1.18.3",
     "browserify": "^16.2.3",
     "cookie-parser": "^1.4.4",
-    "create-react-app": "^2.1.8",
     "css-loader": "^2.1.1",
     "d3": "^5.9.2",
     "dotenv": "^7.0.0",
