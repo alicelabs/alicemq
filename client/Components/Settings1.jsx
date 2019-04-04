@@ -21,27 +21,27 @@ const Settings1 = (props) => {
 
   console.log(props.cluster_name)
   if (props.nodes) {
-    producers = props.nodes.map((node) => {
+    producers = props.nodes.map((node, i) => {
       if (node.group === 1) {
-        return <Toggle content={node.name} />
+        return <Toggle key={i} content={node.name} />
       }
     })
 
-    exchanges = props.nodes.map((node) => {
+    exchanges = props.nodes.map((node, i) => {
       if (node.group === 2) {
-        return <Toggle content={node.name} />
+        return <Toggle key={i} content={node.name} />
       }
     })
 
-    queues = props.nodes.map((node) => {
+    queues = props.nodes.map((node, i) => {
       if (node.group === 3) {
-        return <Toggle content={node.name} />
+        return <Toggle key={i} content={node.name} />
       }
     })
 
-    consumers = props.nodes.map((node) => {
+    consumers = props.nodes.map((node, i) => {
       if (node.group === 4) {
-        return <Toggle content={node.name} />
+        return <Toggle key={i} content={node.name} />
       }
     })
   }
