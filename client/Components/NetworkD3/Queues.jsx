@@ -8,6 +8,8 @@ const renderQueues = (props) => {
       width: 40,
       height: 25,
       key: 14+index,
+      stroke: 'black',
+      strokeWidth: 2,
       fill: "green"
     }
     return <rect {...queuesProps} /> // <rect> is d3 function

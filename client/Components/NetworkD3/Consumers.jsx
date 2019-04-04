@@ -8,6 +8,8 @@ const renderConsumers = (props) => {
       width: 25,
       height: 25,
       key: 19+index,
+      stroke: 'black',
+      strokeWidth: 2,
       fill: "purple"
     }
     return <rect {...consumerProps} /> // <rect> is d3 function

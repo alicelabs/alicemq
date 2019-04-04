@@ -9,7 +9,7 @@ const renderLinks = (props) => {
       y2: props.nodes[props.links[index].target].y,
       strokeWidth: props.links[index].weight,
       key: index,
-      stroke: "gray"
+      stroke: "gray",
     }
     return <line {...linksProps} /> // <rect> is d3 function
   }

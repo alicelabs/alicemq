@@ -19,6 +19,9 @@ import BlueBottle from '../../server/blueBottle.js';
   // "consumers": consumers.length
 
 const purpleTheme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: {
       main: '#6200EE',
@@ -133,7 +136,19 @@ class Main extends React.Component {
   // }
 
   render() {
-    if (!this.state.visualizer) {
+    // if (!this.state.visualizer) {
+
+    const userConfig = {
+      host: this.state.hostname,
+      username: this.state.username,
+      password: this.state.password,
+      port: this.state.port,
+      isWeb: true
+    };
+
+    this.blueBottle = new BlueBottle(userConfig);
+
+    if (false) {
       return (
         <MuiThemeProvider theme={purpleTheme}>
           <SignIn className="container"
