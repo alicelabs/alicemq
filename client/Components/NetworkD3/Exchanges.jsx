@@ -8,6 +8,8 @@ const renderExchanges = (props) => {
       cy: props.nodes[props.producers+index].y,
       r: props.nodes[props.producers+index].r,
       key: 2 + index,
+      stroke: 'black',
+      strokeWidth: 2,
       fill: "red"
     }
     return <circle {...exchangeProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+index])}/> // <rect> is d3 function

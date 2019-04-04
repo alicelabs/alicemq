@@ -8,6 +8,8 @@ const renderProducers = (props) => {
       width: 25,
       height: 25,
       key: index,
+      stroke: 'black',
+      strokeWidth: 2,
       fill: "blue"
     }
     return <rect {...producerProps} onClick={(e)=>props.updateNodeCards(props.nodes[index])}/> // <rect> is d3 function
