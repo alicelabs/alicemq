@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const Toggle = (props) => {
   return (
-    <li>{props.content}</li>
+   <Typography color="inherit"><li>{props.content}</li></Typography>
   )
 }
 
