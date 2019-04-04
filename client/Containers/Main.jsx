@@ -48,7 +48,7 @@ function makeTitles(d3Data) {
   for (let i = 0; i < nameTitles.length; i++)
     titles.push({
       name: nameTitles[i],
-      y: (d3Data.height / 4) * (i+1) - (d3Data.height * 0.1) - 40,
+      y: (d3Data.height / 4) * (i + 1) - (d3Data.height * 0.1) - 40,
       x: 25
     });
 
@@ -80,8 +80,8 @@ class Main extends React.Component {
     this.updateNodeCards = this.updateNodeCards.bind(this);
     // this.decrementTarget = this.decrementTarget.bind(this);
   }
-  
-  
+
+
   async tick() {
     if (this.blueBottle === null) return;
 
@@ -137,17 +137,17 @@ class Main extends React.Component {
     console.log(node)
     switch (node.group) {
       case 1: {
-       return this.setState({
+        return this.setState({
           nodecards: [
             { "Type": "Producer" },
-            { "Messages Published": node.message_stats.publish },
+            { "Total Published": node.message_stats.publish },
             { "Publishes/s": node.message_stats.publish_details.rate },
             { "state": node.state }
           ]
         })
       }
       case 2: {
-       return this.setState({
+        return this.setState({
           nodecards: [
             { "Type": node.type },
             { "Publishes/s": node.message_stats.publish_in_details.rate },
@@ -157,20 +157,20 @@ class Main extends React.Component {
         })
       }
       case 3: {
-       return this.setState({
+        return this.setState({
           nodecards: [
-            { "Messages Published": node.message_stats.publish },
+            { "Total Published": node.message_stats.publish },
             { "Publishes/s": node.message_stats.publish_details.rate },
-            { "Messages Sent": node.message_stats.deliver_get },
+            { "Total Sent": node.message_stats.deliver_get },
             { "Sent/s": node.message_stats.deliver_get_details.rate },
           ]
         })
       }
       case 4: {
-       return this.setState({
+        return this.setState({
           nodecards: [
             { "Type": "Consumer" },
-            { "Messages Recieved": node.message_stats.deliver_get },
+            { "Total Recieved": node.message_stats.deliver_get },
             { "Delivery Rate": node.message_stats.deliver_get_details.rate },
             { "state": node.state }
           ]
@@ -191,8 +191,8 @@ class Main extends React.Component {
     const div = d3.select('div')
 
     div.transition()
-    .duration(300)
-    .style('opacity', 0)
+      .duration(300)
+      .style('opacity', 0)
   }
   // decrementTarget(e) {
   //   console.log(this.state)
@@ -228,13 +228,15 @@ class Main extends React.Component {
       document.body.classList.add('background-vis')
       return (
         <div className="grid-reloaded">
-          <Typography variant="h1" color="inherit" className="instance">RabbitMQ Instance: {this.state.cluster_name}</Typography>
-          <Display {...this.state} updateNodeCards={this.updateNodeCards} popup={this.popup} popOff={this.popOff}/>
+          <div className="instance">
+            <Typography color="inherit"><h1>RabbitMQ Instance: {this.state.cluster_name}</h1></Typography>
+          </div>
+          <Display {...this.state} updateNodeCards={this.updateNodeCards} />
           {this.state.message_stats && <OverviewCards {...this.state} />}
           <NodeCards {...this.state} />
           <Settings1 {...this.state} decrementTarget={this.decrementTarget} />
         </div>
-       )
+      )
     }
   }
 }

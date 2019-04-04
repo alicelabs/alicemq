@@ -15,10 +15,10 @@ const styles = {
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14,
+    fontSize: 0.2 + 'em',
   },
   pos: {
-    marginBottom: 12,
+    marginBottom: 2,
   },
 };
 
@@ -30,7 +30,7 @@ const OverviewCards = (props) => {
         <Card className="s1">
           <CardContent>
             <Typography color='inherit' gutterBottom>
-              Total Msgs Delivered
+              Total Delivered
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
               {numeral(`${props.message_stats.deliver_get}`).format('0,0')}
@@ -43,7 +43,7 @@ const OverviewCards = (props) => {
         <Card className="s2">
           <CardContent>
             <Typography color='inherit' gutterBottom>
-              Publish/s
+              Published/s
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
             {/* TODO: Bug, publish_details is undefined after rabbit resets with no messages */}
@@ -86,7 +86,7 @@ const OverviewCards = (props) => {
         <Card className="s5">
           <CardContent>
             <Typography color='inherit' gutterBottom>
-              Total Msgs in Queues
+              In-Queue
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
               {numeral(`${props.queue_totals.messages}`).format('0,0')}

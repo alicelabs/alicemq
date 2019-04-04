@@ -24,7 +24,7 @@ function carrot2D3(carrotData) {
   } = carrotData;
 
   let calcWidth = (window.innerWidth * 60) / 100
-  let calHeight = (window.innerHeight * 95) / 100
+  let calcHeight = (window.innerHeight * 80) / 100
 
   const d3Data = {
     "queue_totals": queue_totals,
@@ -37,7 +37,7 @@ function carrot2D3(carrotData) {
     "queues": queues.length,
     "consumers": consumers.length,
     "width": calcWidth,
-    "height": calHeight
+    "height": calcHeight
   };
 
   function buildNodes(nodeType, groupNumber) {

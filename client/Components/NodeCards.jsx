@@ -18,7 +18,7 @@ const styles = {
     fontSize: 14,
   },
   pos: {
-    marginBottom: 12,
+    marginBottom: 0,
   },
 };
 const NodeCards = (props) => {
@@ -30,7 +30,7 @@ let cards = [];
         <Typography color='inherit' gutterBottom>
           {Object.keys(card)[0]}
     </Typography>
-        <Typography variant="h5" component="h2" color='inherit'>
+        <Typography variant="h5" component="p" color='inherit'>
         {Object.values(card)[0]}
         </Typography>
       </CardContent>
