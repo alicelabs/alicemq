@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import numeral from 'numeral';
 
 const styles = {
   card: {
@@ -22,9 +23,7 @@ const styles = {
 };
 const NodeCards = (props) => {
 let cards = [];
-console.log("props.nodecards inside of nodecards component    ", props.nodecards)
   props.nodecards.forEach((card) => {
-    console.log(card)
     cards.push( <React.Fragment>
     <Card className="nodecard">
       <CardContent>

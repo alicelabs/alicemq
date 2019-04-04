@@ -5,7 +5,7 @@ const Display = (props) => {
   
   return (
     <div className="viz"> 
-      <Canvas {...props} />
+      <Canvas {...props} popup={props.popup} popOff={props.popOff}/>
     </div>
   )
 }

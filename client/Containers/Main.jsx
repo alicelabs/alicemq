@@ -9,7 +9,8 @@ import SignIn from '../Components/SignIn.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
-import NodeCards from '../Components/NodeCards.jsx'
+import NodeCards from '../Components/NodeCards.jsx';
+import * as d3 from 'd3';
 
 
 // d3Data reference
@@ -43,8 +44,8 @@ function makeTitles(d3Data) {
   for(let i = 0; i < nameTitles.length; i++)
     titles.push({
       name: nameTitles[i],
-      x: (d3Data.width / 4) * (i+1) - (d3Data.width * 0.1),
-      y: 10
+      y: (d3Data.height / 4) * (i+1) - (d3Data.height * 0.1) - 40,
+      x: 25
     });
 
   return titles;
@@ -88,7 +89,7 @@ class Main extends React.Component {
       () => {
         this.tick()
       }
-      , 2501)
+      , 200)
   }
 
   componentWillUnmount() {
@@ -140,7 +141,6 @@ class Main extends React.Component {
           ]
         })
       }
-      break;
       case 2: {
        return this.setState({
           nodecards: [
@@ -152,7 +152,6 @@ class Main extends React.Component {
           ]
         })
       }
-      break;
       case 3: {
        return this.setState({
           nodecards: [
@@ -164,7 +163,6 @@ class Main extends React.Component {
           ]
         })
       }
-      break;
       case 4: {
        return this.setState({
           nodecards: [
@@ -175,11 +173,34 @@ class Main extends React.Component {
           ]
         })
       }
-      break;
       default: return;
     }
   }
 
+  popup(node) {
+    console.log('HOVERING')
+    let div = d3.select('svg').append('div')
+      .attr('class', 'popup')
+      .style('opacity', 0)
+
+    div.transition()
+      .duration(200)
+      .style('opacity', 0.9)
+
+      div.html(node.name)
+      .style('left', node.x + 5 +'px')
+      .style('top', node.y - 5 +'px')
+
+  }
+
+  popOff(node) {
+    console.log('UNHOVERING')
+    const div = d3.select('div')
+
+    div.transition()
+    .duration(300)
+    .style('opacity', 0)
+  }
   // decrementTarget(e) {
   //   console.log(this.state)
   //   let target = e.target.identifier;
@@ -211,7 +232,7 @@ class Main extends React.Component {
     } else {
       return (
         <div className="the-grid">
-          <Display {...this.state} updateNodeCards={this.updateNodeCards}/>
+          <Display {...this.state} updateNodeCards={this.updateNodeCards} popup={this.popup} popOff={this.popOff}/>
           {this.state.message_stats && <OverviewCards {...this.state} />}
           <NodeCards {...this.state} />
           <Settings1 {...this.state} decrementTarget={this.decrementTarget} />
