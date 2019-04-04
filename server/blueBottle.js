@@ -23,6 +23,9 @@ function carrot2D3(carrotData) {
     cluster_name
   } = carrotData;
 
+  let calcWidth = (window.innerWidth * 60) / 100
+  let calHeight = (window.innerHeight * 95) / 100
+
   const d3Data = {
     "queue_totals": queue_totals,
     "message_stats": message_stats,
@@ -33,8 +36,8 @@ function carrot2D3(carrotData) {
     "exchanges": exchanges.length,
     "queues": queues.length,
     "consumers": consumers.length,
-    "width": 1300,
-    "height": 1000
+    "width": calcWidth,
+    "height": calHeight
   };
 
   function buildNodes(nodeType, groupNumber) {

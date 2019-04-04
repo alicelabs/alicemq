@@ -27,8 +27,8 @@ const styles = {
 const OverviewCards = (props) => {
   return (
     <React.Fragment>
-      <div className="overview1">
-        <Card className="overviewCard">
+      
+        <Card className="s1">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Total Msgs Delivered
@@ -41,7 +41,7 @@ const OverviewCards = (props) => {
 
 
 
-        <Card className="overviewCard">
+        <Card className="s2">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Publish/s
@@ -54,7 +54,7 @@ const OverviewCards = (props) => {
 
 
 
-        <Card className="overviewCard">
+        <Card className="s3">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Producers
@@ -67,7 +67,7 @@ const OverviewCards = (props) => {
 
 
 
-        <Card className="overviewCard">
+        <Card className="s4">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Exchanges
@@ -79,11 +79,11 @@ const OverviewCards = (props) => {
         </Card>
 
 
-      </div >
+      
 
-      <div className="overview2">
+      
 
-        <Card className="overviewCard">
+        <Card className="s5">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Total Msgs in Queues
@@ -94,7 +94,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="overviewCard">
+        <Card className="s6">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Deliveries/s
@@ -105,7 +105,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="overviewCard">
+        <Card className="s7">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Consumers
@@ -116,7 +116,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="overviewCard">
+        <Card className="s8">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Queues
@@ -126,9 +126,10 @@ const OverviewCards = (props) => {
             </Typography>
           </CardContent>
         </Card>
-      </div>
+     
     </React.Fragment>
   );
 }
 
-export default withStyles(styles)(OverviewCards);
+// export default withStyles(styles)(OverviewCards);
+export default OverviewCards;

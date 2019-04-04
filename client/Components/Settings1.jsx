@@ -14,17 +14,58 @@ import Toggle from './Toggle.jsx'
 
 
 const Settings1 = (props) => {
+  let queues = [];
+  let exchanges = [];
+  let consumers = [];
+  let producers = [];
 
-  let exchanges = []
-  for (let i = 0; i < props.exchanges; i++){
-    exchanges.push(<Toggle identifier="exchanges" key={i} mute={"false"} decrementTarget={props.decrementTarget}/>)
+  console.log(props.cluster_name)
+  if (props.nodes) {
+    producers = props.nodes.map((node) => {
+      if (node.group === 1) {
+        return <Toggle content={node.name} />
+      }
+    })
+
+    exchanges = props.nodes.map((node) => {
+      if (node.group === 2) {
+        return <Toggle content={node.name} />
+      }
+    })
+
+    queues = props.nodes.map((node) => {
+      if (node.group === 3) {
+        return <Toggle content={node.name} />
+      }
+    })
+
+    consumers = props.nodes.map((node) => {
+      if (node.group === 4) {
+        return <Toggle content={node.name} />
+      }
+    })
   }
-  
+
+
   return (
-    <div className="settings1"> 
-    <p>Exchanges</p>
-      {exchanges}
-    </div>
+    <React.Fragment>
+      <div className="nodes-1">
+        <h3>Producers</h3>
+        <ul className="noDots">{producers}</ul>
+      </div>
+      <div className="nodes-2">
+        <h3>Exchanges</h3>
+        <ul className="noDots">{exchanges}</ul>
+      </div>
+      <div className="nodes-3">
+        <h3>Queues</h3>
+        <ul className="noDots">{queues}</ul>
+      </div>
+      <div className="nodes-4">
+        <h3>Consumers</h3>
+        <ul className="noDots">{consumers}</ul>
+      </div>
+    </React.Fragment>
   )
 }
 

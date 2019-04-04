@@ -6,8 +6,11 @@ const renderExchanges = (props) => {
 
       cx: props.nodes[props.producers+index].x,
       cy: props.nodes[props.producers+index].y,
-      r: props.nodes[props.producers+index].r,
+      r: props.nodes[props.producers+index].r + 10,
       key: props.producers + index,
+      stroke: 'black',
+      strokeWidth: 5,
+      fillOpacity: 0.8,
       fill: "red"
     }
     return (
