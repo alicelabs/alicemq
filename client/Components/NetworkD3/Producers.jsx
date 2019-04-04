@@ -1,4 +1,5 @@
 import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const renderProducers = (props) => {
   return (coords, index) => {
@@ -14,7 +15,11 @@ const renderProducers = (props) => {
       strokeWidth: 5,
       fill: "blue"
     }
-    return <rect {...producerProps} onClick={(e)=>props.updateNodeCards(props.nodes[index])}/> // <rect> is d3 function
+    return (
+      <Tooltip title={props.nodes[index].name}>
+      <rect {...producerProps} onClick={(e)=>props.updateNodeCards(props.nodes[index])}/>
+      </Tooltip>
+      ) // <rect> is d3 function
   }
 }
 

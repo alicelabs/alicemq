@@ -13,7 +13,7 @@ amqp.connect(uri, function(err, conn) {
 
     ch.assertExchange(ex, 'topic', {durable: false});
     ch.publish(ex, key, new Buffer(msg));
-    console.log(" [x] Sent %s:'%s'", key, msg);
+    console.log(" [x] Sent %s:'%s'", key, msg); 
   });
 
   setTimeout(function() { conn.close(); process.exit(0) }, 500);
