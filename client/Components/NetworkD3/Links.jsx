@@ -7,7 +7,7 @@ const renderLinks = (props) => {
       y1: props.nodes[props.links[index].source].y + props.links[index].sourceYCenter,
       x2: props.nodes[props.links[index].target].x + props.links[index].xCenter,
       y2: props.nodes[props.links[index].target].y + props.links[index].yCenter,
-      strokeWidth: props.links[index].weight + 5,
+      strokeWidth: props.links[index].weight * 2,
       key: index,
       fill: "#ffa500",
       stroke: "black",
