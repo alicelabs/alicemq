@@ -97,7 +97,7 @@ class Main extends React.Component {
   }
   
 
-    componentDidMount() {
+  componentDidMount() {
     this.timer = setInterval(
       () => {
         this.tick()
