@@ -63,11 +63,12 @@ class Main extends React.Component {
       username: "test",
       password: "test",
       port: "15672",
-      width: 800,
-      height: 500,
+      width: (window.innerWidth * 60) / 100,
+      height: (window.innerHeight * 95) / 100,
       padding: 10,
       nodecards: [],
       visualizer: false,
+      hoverNode: false,
     }
 
     this.blueBottle = null;
@@ -80,7 +81,7 @@ class Main extends React.Component {
     // this.decrementTarget = this.decrementTarget.bind(this);
   }
   
-
+  
   async tick() {
     if (this.blueBottle === null) return;
 
@@ -179,24 +180,14 @@ class Main extends React.Component {
     }
   }
 
-  popup(node) {
+  popup(popuprect) {
     console.log('HOVERING')
-    let div = d3.select('svg').append('div')
-      .attr('class', 'popup')
-      .style('opacity', 0)
-
-    div.transition()
-      .duration(200)
-      .style('opacity', 0.9)
-
-      div.html(node.name)
-      .style('left', node.x + 5 +'px')
-      .style('top', node.y - 5 +'px')
 
   }
 
   popOff(node) {
     console.log('UNHOVERING')
+    // this.setState({hoverNode: true})
     const div = d3.select('div')
 
     div.transition()

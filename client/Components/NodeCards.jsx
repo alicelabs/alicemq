@@ -23,7 +23,7 @@ const styles = {
 };
 const NodeCards = (props) => {
 let cards = [];
-  props.nodecards.forEach((card) => {
+  props.nodecards.forEach((card, i) => {
     cards.push( <React.Fragment>
     <Card id={'s' + (i + 9)}>
       <CardContent>
