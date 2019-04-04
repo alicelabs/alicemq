@@ -13,15 +13,18 @@ import NodeCards from '../Components/NodeCards.jsx'
 
 
 // d3Data reference
-  // "cluster_name": cluster_name,
-  // "nodes": [],
-  // "links": [],
-  // "producers": producers.length,
-  // "exchanges": exchanges.length,
-  // "queues": queues.length,
-  // "consumers": consumers.length
+// "cluster_name": cluster_name,
+// "nodes": [],
+// "links": [],
+// "producers": producers.length,
+// "exchanges": exchanges.length,
+// "queues": queues.length,
+// "consumers": consumers.length
 
 const purpleTheme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: {
       main: '#6200EE',
@@ -40,10 +43,10 @@ function makeTitles(d3Data) {
   const titles = [];
   const nameTitles = ['Producers', 'Exchanges', 'Queues', 'Consumers']
 
-  for(let i = 0; i < nameTitles.length; i++)
+  for (let i = 0; i < nameTitles.length; i++)
     titles.push({
       name: nameTitles[i],
-      x: (d3Data.width / 4) * (i+1) - (d3Data.width * 0.1),
+      x: (d3Data.width / 4) * (i + 1) - (d3Data.width * 0.1),
       y: 10
     });
 
@@ -76,11 +79,11 @@ class Main extends React.Component {
   }
 
   async tick() {
-    if(this.blueBottle === null) return;
+    if (this.blueBottle === null) return;
 
     const d3Data = await this.blueBottle.getData();
     const dataTitles = makeTitles(d3Data);
-    this.setState({ ...d3Data, titles: dataTitles});
+    this.setState({ ...d3Data, titles: dataTitles });
   }
 
   componentDidMount() {
@@ -92,7 +95,6 @@ class Main extends React.Component {
   }
 
   componentWillUnmount() {
-
     clearInterval(this.timer)
   }
 
@@ -123,8 +125,6 @@ class Main extends React.Component {
 
     this.blueBottle = new BlueBottle(userConfig);
     this.setState({ visualizer: true })
-    document.body.classList.remove('background')
-    document.body.classList.add('background-vis')
   }
 
   updateNodeCards(node) {
@@ -145,7 +145,6 @@ class Main extends React.Component {
        return this.setState({
           nodecards: [
             { "Type": node.type },
-            { "Messages Published": node.message_stats.publish_in },
             { "Publishes/s": node.message_stats.publish_in_details.rate },
             { "Messages Sent": node.message_stats.publish_out },
             { "Sent/s": node.message_stats.publish_out_details.rate },
@@ -156,7 +155,6 @@ class Main extends React.Component {
       case 3: {
        return this.setState({
           nodecards: [
-            { "Type": "Queue" },
             { "Messages Published": node.message_stats.publish },
             { "Publishes/s": node.message_stats.publish_details.rate },
             { "Messages Sent": node.message_stats.deliver_get },
@@ -195,8 +193,10 @@ class Main extends React.Component {
   //   }
   // }
 
+
   render() {
     if (!this.state.visualizer) {
+      document.body.classList.remove('background')
       return (
         <MuiThemeProvider theme={purpleTheme}>
           <SignIn className="container"
@@ -209,17 +209,16 @@ class Main extends React.Component {
           />
         </MuiThemeProvider>)
     } else {
+      document.body.classList.add('background-vis')
       return (
-        <div className="the-grid">
+        <div className="grid-reloaded">
+          <h1 className="instance">RabbitMQ Instance: {this.state.cluster_name}</h1>
           <Display {...this.state} updateNodeCards={this.updateNodeCards}/>
           {this.state.message_stats && <OverviewCards {...this.state} />}
           <NodeCards {...this.state} />
           <Settings1 {...this.state} decrementTarget={this.decrementTarget} />
-          <Settings2 {...this.state} decrementTarget={this.decrementTarget} />
-          <Settings3 {...this.state} decrementTarget={this.decrementTarget} />
-          <Settings4 {...this.state} decrementTarget={this.decrementTarget} />
         </div>
-      )
+       )
     }
   }
 }

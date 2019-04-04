@@ -22,11 +22,10 @@ const styles = {
 };
 const NodeCards = (props) => {
 let cards = [];
-console.log("props.nodecards inside of nodecards component    ", props.nodecards)
-  props.nodecards.forEach((card) => {
-    console.log(card)
+
+  props.nodecards.forEach((card, i) => {
     cards.push( <React.Fragment>
-    <Card className="nodecard">
+    <Card id={'s' + (i + 9)}>
       <CardContent>
         <Typography color='inherit' gutterBottom>
           {Object.keys(card)[0]}
@@ -38,13 +37,13 @@ console.log("props.nodecards inside of nodecards component    ", props.nodecards
     </Card>
     </React.Fragment>)
   })
-
-
  
   return (
-    <div className="nodecards">
-    {cards}
-    </div>
+    <React.Fragment>
+       {cards}
+    </React.Fragment>
+   
+   
    )
  }
 

@@ -1,35 +1,131 @@
-
-body. {
+body {
   background: #995DFF;
 }
-.the-grid {
+
+/* .the-grid {
   display: grid;
   width: 100%;
   height: 1000px;
   grid-template-columns: 12.5% 12.5% 25% 25% 25%;
   grid-template-rows: 500 30%;
   grid-template-areas:
-    "overview1 overview2 viz viz viz"
-    "settings1 settings1 settings2 settings3 settings4";
-  grid-gap: 15px;
+    "viz viz viz viz"
+    "settings1 settings2 settings3 second-grid";
+} */
+
+/* 5/6 */
+
+.grid-reloaded {
+  display: grid;
+  height: 1000px;
+  width: 100%;
+  grid-template-columns: 10% 3% 3.5% 3.5% 3% 10% 67%;
+  grid-template-rows: 20% 10% 10% 10% 10% 20% 20%;
+  grid-template-areas: 
+    "instance instance instance instance instance instance viz"
+    "s1 s2 s2 s2 space s9 viz"
+    "s3 s4 s4 s4 space s10 viz"
+    "s5 s6 s6 s6 space s11 viz"
+    "s7 s8 s8 s8 space s12 viz"
+    "nodes-1 nodes-1 nodes-1 nodes-2 nodes-2 nodes-2 viz"
+    "nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz"
 }
 
-.login-box {
-  margin: 1.5rem auto 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  max-width: 20%;
-  max-height: 40%;
+.instance {
+  grid-area: instance;
 }
 
-#signIn {
-  margin: auto;
-  display: flex;
-  align-content: center;
-  margin-top: 5px;
+.s1 {
+  grid-area: s1;
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
 }
-.overview1 {
+
+.s2 {
+  grid-area: s2;
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
+}
+
+.s3 {
+  grid-area: s3;
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
+}
+
+.s4 {
+  grid-area: s4;
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
+}
+
+.s5 {
+  grid-area: s5;
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
+}
+
+.s6 {
+  grid-area: s6;
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
+}
+
+.s7{
+  grid-area: s7;
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
+}
+
+.s8 {
+  grid-area: s8;
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
+}
+
+#s9 {
+  grid-area: s9;
+}
+
+#s10 {
+  grid-area: s10;
+}
+
+#s11{
+  grid-area: s11;
+}
+
+#s12 {
+  grid-area: s12;
+}
+
+
+.nodes-1 {
+  grid-area: nodes-1;
+  background-color: aquamarine
+}
+
+.nodes-2 {
+  grid-area: nodes-2;
+  background-color: aquamarine
+}
+
+.nodes-3 {
+  grid-area: nodes-3;
+  background-color: red
+}
+
+.nodes-4 {
+  grid-area: nodes-4;
+  background-color: aquamarine
+}
+
+.viz {
+  background-color: azure;
+  grid-area: viz;
+}
+
+/* .overview1 {
   grid-area: overview1;
   margin: 20%, 5%, auto, 5%;
   padding-top: 10px;
@@ -41,24 +137,16 @@ body. {
   margin: 20%, 5%, auto, 5%;
   padding-top: 10px;
   grid-gap: 2px;
-}
-.overviewCard {
+} */
+
+/* .s1 {
   background-color: #5F3A9E !important;
   color: #ffffff !important;
-}
+} */
+
 .settings1 {
   background-color: aquamarine;
   grid-area: settings1
-}
-
-.settings2 {
-  background-color: rgb(87, 223, 177);
-  grid-area: settings2;
-}
-
-.settings3 {
-  background-color: aquamarine;
-  grid-area: settings3;
 }
 
 .cluster {
@@ -74,17 +162,31 @@ body. {
   background-color: rgb(87, 223, 177);
   grid-area: settings4;
 }
-  
+
+
+.login-box {
+  margin: 10% auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-width: 20%;
+  max-height: 40%;
+}
+
 .viz {
   background-color: #995DFF;
   grid-area: viz;
 }
 
-.appName{
-  text-align: center;
-  margin-top: 8rem;
+#signIn {
+  margin: auto;
+  display: flex;
+  align-content: center;
+  margin-top: 5px;
 }
+
 /* CSS for initial D3 setup: BELOW */
+
 h1 {
   text-align: center;
 }
@@ -96,8 +198,7 @@ svg {
   margin-top: 40px;
 }
 
-.axis path,
-.axis line {
+.axis path, .axis line {
   fill: none;
   stroke: black;
   shape-rendering: crispEdges;
@@ -123,3 +224,9 @@ svg {
 }
 
 /* CSS for initial D3 setup: ABOVE */
+
+.noDots {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
