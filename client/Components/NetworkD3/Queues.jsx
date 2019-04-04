@@ -5,11 +5,15 @@ const renderQueues = (props) => {
     const queuesProps = {
       x: props.nodes[props.producers+props.exchanges+index].x,
       y: props.nodes[props.producers+props.exchanges+index].y,
-      width: 40,
-      height: 25,
+      rx: 10,
+      ry: 10,
+      width: 80,
+      height: 50,
       key: 14+index,
-      fill: "green"
-    }
+      stroke: 'black',
+      strokeWidth: 5,
+      fill: "#4caf50"
+     }
     return <rect {...queuesProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> // <rect> is d3 function
   }
 }

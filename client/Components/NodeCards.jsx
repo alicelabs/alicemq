@@ -22,9 +22,8 @@ const styles = {
 };
 const NodeCards = (props) => {
 let cards = [];
-console.log("props.nodecards inside of nodecards component    ", props.nodecards)
+
   props.nodecards.forEach((card, i) => {
-    console.log(card)
     cards.push( <React.Fragment>
     <Card id={'s' + (i + 9)}>
       <CardContent>
@@ -38,8 +37,6 @@ console.log("props.nodecards inside of nodecards component    ", props.nodecards
     </Card>
     </React.Fragment>)
   })
-
-
  
   return (
     <React.Fragment>

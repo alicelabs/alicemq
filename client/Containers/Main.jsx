@@ -22,6 +22,9 @@ import NodeCards from '../Components/NodeCards.jsx'
 // "consumers": consumers.length
 
 const purpleTheme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: {
       main: '#6200EE',
@@ -122,8 +125,6 @@ class Main extends React.Component {
 
     this.blueBottle = new BlueBottle(userConfig);
     this.setState({ visualizer: true })
-    document.body.classList.remove('background')
-    document.body.classList.add('background-vis')
   }
 
   updateNodeCards(node) {
@@ -192,8 +193,10 @@ class Main extends React.Component {
   //   }
   // }
 
+
   render() {
     if (!this.state.visualizer) {
+      document.body.classList.remove('background')
       return (
         <MuiThemeProvider theme={purpleTheme}>
           <SignIn className="container"
@@ -206,6 +209,7 @@ class Main extends React.Component {
           />
         </MuiThemeProvider>)
     } else {
+      document.body.classList.add('background-vis')
       return (
         <div className="grid-reloaded">
           <h1 className="instance">RabbitMQ Instance: {this.state.cluster_name}</h1>
