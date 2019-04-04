@@ -126,8 +126,6 @@ class Main extends React.Component {
 
     this.blueBottle = new BlueBottle(userConfig);
     this.setState({ visualizer: true })
-    document.body.classList.remove('background')
-    document.body.classList.add('background-vis')
   }
 
   updateNodeCards(node) {
@@ -198,20 +196,10 @@ class Main extends React.Component {
   //   }
   // }
 
+
   render() {
-    // if (!this.state.visualizer) {
-
-    const userConfig = {
-      host: this.state.hostname,
-      username: this.state.username,
-      password: this.state.password,
-      port: this.state.port,
-      isWeb: true
-    };
-
-    this.blueBottle = new BlueBottle(userConfig);
-
-    if (false) {
+    if (!this.state.visualizer) {
+      document.body.classList.remove('background')
       return (
         <MuiThemeProvider theme={purpleTheme}>
           <SignIn className="container"
@@ -224,6 +212,7 @@ class Main extends React.Component {
           />
         </MuiThemeProvider>)
     } else {
+      document.body.classList.add('background-vis')
       return (
         <div className="the-grid">
           <Display {...this.state} updateNodeCards={this.updateNodeCards}/>

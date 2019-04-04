@@ -8,11 +8,10 @@ import Titles from './Titles.jsx'
 import * as d3 from 'd3';
 
 const NetworkGraph = (props) => {
-  console.log('TITLES: ', props.titles)
   return  <svg width={props.width} height={props.height}>
       {props.titles && <Titles {...props} />}
       {props.links && props.nodes && <Links {...props} />}
-      {props.prducers && <Producers {...props} />}
+      {props.producers && <Producers {...props} />}
       {props.exchanges && <Exchanges {...props} />}
       {props.queues && <Queues {...props} />}
       {props.consumers && <Consumers {...props} />}
