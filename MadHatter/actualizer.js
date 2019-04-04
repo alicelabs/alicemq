@@ -25,7 +25,7 @@ let spammer = function(obj) {
       
     });
     // setTimeout(function() { conn.close(); process.exit(0) }, 500)
-    setTimeout(function() { conn.close() }, 500)
+    // setTimeout(function() { conn.close() }, 1000)
   }) 
 } 
 
@@ -35,5 +35,5 @@ const actualizer = function (obj, timer){
   return setInterval(bound, timer)
 }
   
-actualizer(obj, 200);
+actualizer(obj, 30);
 

@@ -6,10 +6,10 @@ import {TextField} from '@material-ui/core'
 function SignIn(props) {
     
   return <React.Fragment>
-    <div className="appName">
-      <Typography variant = 'h3' color="primary" className="appName">Alice Visualizer</Typography>
-    </div>
+   
+    
     <div className='login-box'>
+    <Typography variant = 'h4' color="primary" >Alice Visualizer</Typography>
       <TextField
         id='host'
         variant='outlined'
