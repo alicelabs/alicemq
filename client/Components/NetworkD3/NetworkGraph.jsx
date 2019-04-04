@@ -18,6 +18,4 @@ const NetworkGraph =(props)=> {
     </svg>)
   }
 
-
-
 export default NetworkGraph;
