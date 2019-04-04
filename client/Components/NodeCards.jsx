@@ -31,7 +31,7 @@ let cards = [];
           {Object.keys(card)[0]}
     </Typography>
         <Typography variant="h5" component="p" color='inherit'>
-        {Object.values(card)[0]}
+        {numeral(Object.values(card)[0]).format("0,0") === '0' ? Object.values(card)[0] : numeral(Object.values(card)[0]).format("0,0")}
         </Typography>
       </CardContent>
     </Card>
