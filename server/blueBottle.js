@@ -7,13 +7,14 @@ function BlueBottle(config) {
 
 BlueBottle.prototype.getData = async function () {
   this.carrotData = await this.carrot.motherLoad();
-  console.log(this.carrotData)
   return carrot2D3(this.carrotData);
 }
 
 // private helper functions
 function carrot2D3(carrotData) {
   const {
+    queue_totals,
+    message_stats,
     producers,
     exchanges,
     queues,
@@ -22,7 +23,12 @@ function carrot2D3(carrotData) {
     cluster_name
   } = carrotData;
 
+  let calcWidth = (window.innerWidth * 60) / 100
+  let calHeight = (window.innerHeight * 95) / 100
+
   const d3Data = {
+    "queue_totals": queue_totals,
+    "message_stats": message_stats,
     "cluster_name": cluster_name,
     "nodes": [],
     "links": [],
@@ -30,19 +36,22 @@ function carrot2D3(carrotData) {
     "exchanges": exchanges.length,
     "queues": queues.length,
     "consumers": consumers.length,
-    "width": 800,
-    "height": 400
+    "width": calcWidth,
+    "height": calHeight
   };
 
   function buildNodes(nodeType, groupNumber) {
     let total = nodeType.length
     nodeType.forEach((type, i) => {
       let node = {
+        "message_stats": type.message_stats,
+        "state": type.state,
+        "type": type.type || "non-exchange",
         "name": type.name,
         "group": groupNumber,
-        "x": (d3Data.width / 4) * groupNumber - (d3Data.width * 0.1),
-        "y": Math.floor((d3Data.height / total) * (i+1) - (d3Data.height / (total * 2))) + 20,
-        "r": (d3Data.width / total) / 8
+        "y": (d3Data.height / 4) * groupNumber - (d3Data.height * 0.1),
+        "x": Math.floor((d3Data.width / total) * (i + 1) - (d3Data.width / (total * 2))),
+        "r": (d3Data.height / total) / 8
       }
       d3Data.nodes.push(node)
     })
@@ -53,6 +62,22 @@ function carrot2D3(carrotData) {
       const queueName = consumer.queue
       d3Data.nodes.forEach((node, j) => {
         if (node.name === queueName && node.group === 3) {
+          if (consumer.state === 'idle') {
+            consumer.message_stats = {
+              "ack": 0,
+              "ack_details": {
+                "rate": 0
+              },
+              "deliver": 0,
+              "deliver_details": {
+                "rate": 0
+              },
+              "deliver_get": 0,
+              "deliver_get_details": {
+                "rate": 0
+              },
+            }
+          }
           const link = {
             "source": j,
             "target": d3Data.nodes.findIndex(el => el.name === consumer.name),

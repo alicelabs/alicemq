@@ -7,15 +7,17 @@ import Links from './Links.jsx';
 import Titles from './Titles.jsx'
 import * as d3 from 'd3';
 
-const NetworkGraph = (props) => {
-  return  <svg width={props.width} height={props.height}>
-      <Titles {...props} />
-      <Links {...props} />
-      <Producers {...props} />
-      <Exchanges {...props} />
-      <Queues {...props} />
-      <Consumers {...props} />
-    </svg>
-}
+const NetworkGraph =(props)=> {
+    return (<svg width={props.width} height={props.height}>
+      {props.titles && <Titles {...props} />}
+      {props.links && props.nodes && <Links {...props} />}
+      {props.producers && <Producers className="node" {...props} />}
+      {props.exchanges && <Exchanges popup={props.popup} popOff={props.popOff} className="node"{...props} />}
+      {props.queues && <Queues className="node"{...props} />}
+      {props.consumers && <Consumers className="node"{...props} />}
+    </svg>)
+  }
+
+
 
 export default NetworkGraph;

@@ -3,13 +3,18 @@ import React from 'react';
 const renderExchanges = (props) => {
   return (coords, index) => {
     const exchangeProps = {
+
       cx: props.nodes[props.producers+index].x,
       cy: props.nodes[props.producers+index].y,
-      r: props.nodes[props.producers+index].r,
-      key: 2 + index,
+      r: props.nodes[props.producers+index].r + 10,
+      key: props.producers + index,
+      stroke: 'black',
+      strokeWidth: 5,
+      fillOpacity: 0.8,
       fill: "red"
     }
-    return <circle {...exchangeProps} /> // <rect> is d3 function
+    return (
+    <circle {...exchangeProps} onMouseOver={(node)=>props.popup(props.nodes[props.producers+index])} onMouseOut={(node)=>props.popup(props.nodes[props.producers+index])} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+index])}/>) // <rect> is d3 function
   }
 }
 
