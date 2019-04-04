@@ -75,6 +75,7 @@ class Main extends React.Component {
     this.updateNodeCards = this.updateNodeCards.bind(this);
     // this.decrementTarget = this.decrementTarget.bind(this);
   }
+  
 
   async tick() {
     if(this.blueBottle === null) return;
@@ -83,7 +84,9 @@ class Main extends React.Component {
     const dataTitles = makeTitles(d3Data);
     this.setState({ ...d3Data, titles: dataTitles});
   }
-
+  componentWillMount() {
+    document.body.classList.add('background')
+  }
   componentDidMount() {
     this.timer = setInterval(
       () => {
