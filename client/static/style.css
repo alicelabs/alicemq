@@ -1,6 +1,6 @@
-body {
+/* body {
   background: #995DFF;
-}
+} */
 
 /* .the-grid {
   display: grid;
@@ -224,6 +224,12 @@ svg {
 }
 
 /* CSS for initial D3 setup: ABOVE */
+
+.popup {
+  height: 30px;
+  width: 60px;
+  background-color: #995DFF
+}
 
 .noDots {
   list-style-type: none;

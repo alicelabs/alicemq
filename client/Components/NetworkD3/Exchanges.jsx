@@ -1,4 +1,5 @@
 import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const renderExchanges = (props) => {
   return (coords, index) => {
@@ -7,13 +8,17 @@ const renderExchanges = (props) => {
       cx: props.nodes[props.producers+index].x,
       cy: props.nodes[props.producers+index].y,
       r: props.nodes[props.producers+index].r + 10,
-      key: 2 + index,
+      key: props.producers + index,
       stroke: 'black',
       strokeWidth: 5,
       fillOpacity: 0.8,
       fill: "red"
     }
-    return <circle {...exchangeProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+index])}/> // <rect> is d3 function
+    return (
+      <Tooltip title={props.nodes[props.producers+index].name || "default"}>
+        <circle {...exchangeProps}onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+index])}/>
+      </Tooltip>
+    ) // <rect> is d3 function
   }
 }
 
