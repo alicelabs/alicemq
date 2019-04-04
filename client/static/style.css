@@ -1,16 +1,17 @@
 
-body {
-  /* background: #995DFF */
+body. {
+  background: #995DFF;
 }
 .the-grid {
   display: grid;
   width: 100%;
   height: 1000px;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 12.5% 12.5% 25% 25% 25%;
   grid-template-rows: 500 30%;
   grid-template-areas:
-    "viz viz viz viz"
-    "settings1 settings2 settings3 settings4";
+    "overview1 overview2 viz viz viz"
+    "settings1 settings1 settings2 settings3 settings4";
+  grid-gap: 15px;
 }
 
 .login-box {
@@ -28,6 +29,23 @@ body {
   align-content: center;
   margin-top: 5px;
 }
+.overview1 {
+  grid-area: overview1;
+  margin: 20%, 5%, auto, 5%;
+  padding-top: 10px;
+  grid-gap: 2px;
+}
+
+.overview2 {
+  grid-area: overview2;
+  margin: 20%, 5%, auto, 5%;
+  padding-top: 10px;
+  grid-gap: 2px;
+}
+.overviewCard {
+  background-color: #5F3A9E !important;
+  color: #ffffff !important;
+}
 .settings1 {
   background-color: aquamarine;
   grid-area: settings1
@@ -43,13 +61,22 @@ body {
   grid-area: settings3;
 }
 
+.cluster {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #DAB2FF;
+  margin-top: 3%;
+}
+
 .settings4 {
   background-color: rgb(87, 223, 177);
   grid-area: settings4;
 }
   
 .viz {
-  background-color: azure;
+  background-color: #995DFF;
   grid-area: viz;
 }
 
@@ -63,8 +90,10 @@ h1 {
 }
 
 svg {
+  background-color: #FFFFFF;
   display: block;
-  margin: auto;
+  border-radius: 20px;
+  margin-top: 40px;
 }
 
 .axis path,
@@ -84,4 +113,13 @@ svg {
   margin: 4em auto 4em auto;
   background-color: 'aquawhite';
 }
+
+.background {
+  background-color: white !important;
+}
+
+.background-vis {
+  background-color: #995DFF !important;
+}
+
 /* CSS for initial D3 setup: ABOVE */
