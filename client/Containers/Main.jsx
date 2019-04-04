@@ -10,6 +10,7 @@ import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
 import NodeCards from '../Components/NodeCards.jsx'
+import { Typography } from '@material-ui/core';
 
 
 // d3Data reference
@@ -61,8 +62,8 @@ class Main extends React.Component {
       username: "test",
       password: "test",
       port: "15672",
-      width: 800,
-      height: 500,
+      width: window.innerWidth * 60 / 100,
+      height: window.innerHeight * 95/100,
       padding: 10,
       nodecards: [],
       visualizer: false,
@@ -134,7 +135,7 @@ class Main extends React.Component {
        return this.setState({
           nodecards: [
             { "Type": "Producer" },
-            { "Messages Published": node.message_stats.publish },
+            { "Total Published": node.message_stats.publish },
             { "Publishes/s": node.message_stats.publish_details.rate },
             { "state": node.state }
           ]
@@ -155,9 +156,9 @@ class Main extends React.Component {
       case 3: {
        return this.setState({
           nodecards: [
-            { "Messages Published": node.message_stats.publish },
+            { "Total Published": node.message_stats.publish },
             { "Publishes/s": node.message_stats.publish_details.rate },
-            { "Messages Sent": node.message_stats.deliver_get },
+            { "Total Sent": node.message_stats.deliver_get },
             { "Sent/s": node.message_stats.deliver_get_details.rate },
           ]
         })
@@ -167,7 +168,7 @@ class Main extends React.Component {
        return this.setState({
           nodecards: [
             { "Type": "Consumer" },
-            { "Messages Recieved": node.message_stats.deliver_get },
+            { "Total Recieved": node.message_stats.deliver_get },
             { "Delivery Rate": node.message_stats.deliver_get_details.rate },
             { "state": node.state }
           ]
@@ -212,7 +213,10 @@ class Main extends React.Component {
       document.body.classList.add('background-vis')
       return (
         <div className="grid-reloaded">
-          <h1 className="instance">RabbitMQ Instance: {this.state.cluster_name}</h1>
+        <div className="instance">
+        <Typography color="white"><h1>RabbitMQ Instance: {this.state.cluster_name}</h1></Typography>
+        </div>
+          
           <Display {...this.state} updateNodeCards={this.updateNodeCards}/>
           {this.state.message_stats && <OverviewCards {...this.state} />}
           <NodeCards {...this.state} />

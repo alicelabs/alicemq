@@ -1,6 +1,7 @@
-body {
+/* body {
   background: #995DFF;
-}
+  color: white;
+} */
 
 /* .the-grid {
   display: grid;
@@ -17,10 +18,11 @@ body {
 
 .grid-reloaded {
   display: grid;
-  height: 1000px;
+  height: 110%;
   width: 100%;
   grid-template-columns: 10% 3% 3.5% 3.5% 3% 10% 67%;
-  grid-template-rows: 20% 10% 10% 10% 10% 20% 20%;
+  grid-template-rows: 8% 10% 10% 10% 10% 20% 20%;
+  grid-gap: 5px;
   grid-template-areas: 
     "instance instance instance instance instance instance viz"
     "s1 s2 s2 s2 space s9 viz"
@@ -102,22 +104,46 @@ body {
 
 .nodes-1 {
   grid-area: nodes-1;
-  background-color: aquamarine
+  background-color: aquamarine;
+  border-radius: 4px;
+  padding-left: 15px;
+  background-color: #543393;
+  color: #fff;
+  overflow-y: scroll;
+
 }
 
 .nodes-2 {
   grid-area: nodes-2;
-  background-color: aquamarine
+  background-color: aquamarine;
+  border-radius: 4px;
+  padding-left: 15px;
+  background-color: #543393;
+  color: #fff;
+  overflow-y: scroll;
+
 }
 
 .nodes-3 {
   grid-area: nodes-3;
-  background-color: red
+  background-color: red;
+  border-radius: 4px;
+  padding-left: 15px;
+  background-color: #543393;
+  color: #fff;
+  overflow-y: scroll;
+
 }
 
 .nodes-4 {
   grid-area: nodes-4;
-  background-color: aquamarine
+  background-color: aquamarine;
+  border-radius: 4px;
+  padding-left: 15px;
+  background-color: #543393;
+  color: #fff;
+  overflow-y: scroll;
+
 }
 
 .viz {
@@ -229,4 +255,8 @@ svg {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.appName {
+  text-align: center;
 }
