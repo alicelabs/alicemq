@@ -47,6 +47,7 @@ const OverviewCards = (props) => {
               Publish/s
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
+            {/* TODO: Bug, publish_details is undefined after rabbit resets with no messages */}
               {numeral(`${props.message_stats.publish_details.rate}`).format('0,0')}
             </Typography>
           </CardContent>
