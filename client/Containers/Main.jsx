@@ -10,13 +10,13 @@ import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
 
 // d3Data reference
-  // "cluster_name": cluster_name,
-  // "nodes": [],
-  // "links": [],
-  // "producers": producers.length,
-  // "exchanges": exchanges.length,
-  // "queues": queues.length,
-  // "consumers": consumers.length
+// "cluster_name": cluster_name,
+// "nodes": [],
+// "links": [],
+// "producers": producers.length,
+// "exchanges": exchanges.length,
+// "queues": queues.length,
+// "consumers": consumers.length
 
 const purpleTheme = createMuiTheme({
   palette: {
@@ -34,10 +34,10 @@ function makeTitles(d3Data) {
   const titles = [];
   const nameTitles = ['Producers', 'Exchanges', 'Queues', 'Consumers']
 
-  for(let i = 0; i < nameTitles.length; i++)
+  for (let i = 0; i < nameTitles.length; i++)
     titles.push({
       name: nameTitles[i],
-      x: (d3Data.width / 4) * (i+1) - (d3Data.width * 0.1),
+      x: (d3Data.width / 4) * (i + 1) - (d3Data.width * 0.1),
       y: 10
     });
 
@@ -68,13 +68,13 @@ class Main extends React.Component {
   }
 
   async tick() {
-    if(this.blueBottle === null) return;
+    if (this.blueBottle === null) return;
 
     const d3Data = await this.blueBottle.getData();
     const dataTitles = makeTitles(d3Data);
-    this.setState({ ...d3Data, titles: dataTitles});
+    this.setState({ ...d3Data, titles: dataTitles });
   }
-  
+
 
   componentDidMount() {
     this.timer = setInterval(
@@ -84,7 +84,7 @@ class Main extends React.Component {
       , 2501)
   }
 
-   componentWillUnmount() {
+  componentWillUnmount() {
     clearInterval(this.timer)
   }
 
@@ -147,14 +147,12 @@ class Main extends React.Component {
         </MuiThemeProvider>)
     } else {
       return (
-        <div className="the-grid">
+        <div className="grid-reloaded">
+          <h1 className="instance">RabbitMQ Instance: {this.state.cluster_name}</h1>
           <Display {...this.state} />
           <Settings1 {...this.state} decrementTarget={this.decrementTarget} />
-          <Settings2 {...this.state} decrementTarget={this.decrementTarget} />
-          <Settings3 {...this.state} decrementTarget={this.decrementTarget} />
-          <Settings4 {...this.state} decrementTarget={this.decrementTarget} />
         </div>
-      )
+       )
     }
   }
 }
