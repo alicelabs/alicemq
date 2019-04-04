@@ -5,7 +5,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import numeral from 'numeral';
 
-
 const styles = {
   card: {
     minWidth: 275,
@@ -47,6 +46,7 @@ const OverviewCards = (props) => {
               Published/s
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
+            {/* TODO: Bug, publish_details is undefined after rabbit resets with no messages */}
               {numeral(`${props.message_stats.publish_details.rate}`).format('0,0')}
             </Typography>
           </CardContent>

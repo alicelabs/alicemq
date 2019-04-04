@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 const Canvas = (props) => {
     return (
       <div className="cluster">
-        <NetworkGraph {...props} />
+        <NetworkGraph {...props} popup={props.popup} popOff={props.popOff}/>
       </div>
     )
 }

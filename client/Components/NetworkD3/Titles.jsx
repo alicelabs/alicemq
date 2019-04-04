@@ -10,7 +10,7 @@ const renderTitles = (props) => {
       fill: "black"
     }
 
-    return <text {...titlesProps}>{props.titles[index].name}</text> // <rect> is d3 function
+    return <text font-family="roboto" {...titlesProps} >{props.titles[index].name} </text> // <rect> is d3 function
   }
 }
 

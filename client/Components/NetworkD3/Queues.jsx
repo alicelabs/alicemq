@@ -1,4 +1,16 @@
 import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
+
+// styles is not working
+const styles = theme => ({
+  absolute: {
+    position: 'absolute',
+    bottom: 15,
+    right: 15,
+    fontSize: 20
+  },
+})
 
 const renderQueues = (props) => {
   return (coords, index) => {
@@ -9,15 +21,20 @@ const renderQueues = (props) => {
       ry: 10,
       width: 80,
       height: 50,
-      key: 14+index,
+      key: [props.producers+props.exchanges+index]+index,
       stroke: 'black',
       strokeWidth: 5,
       fill: "#4caf50"
      }
-    return <rect {...queuesProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> // <rect> is d3 function
+    return (
+      <Tooltip title={props.nodes[props.producers+props.exchanges+index].name}>
+        <rect {...queuesProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> 
+      </Tooltip>
+    )
+    //<rect> is d3 function
   }
 }
-
-export default (props) => {
+const Queues = (props) => {
   return <g>{ props.nodes.filter(el => el.group === 3).map(renderQueues(props))}</g>
 }
+export default withStyles(styles)(Queues)

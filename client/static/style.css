@@ -3,18 +3,6 @@
   color: white;
 } */
 
-/* .the-grid {
-  display: grid;
-  width: 100%;
-  height: 1000px;
-  grid-template-columns: 12.5% 12.5% 25% 25% 25%;
-  grid-template-rows: 500 30%;
-  grid-template-areas:
-    "viz viz viz viz"
-    "settings1 settings2 settings3 second-grid";
-} */
-
-/* 5/6 */
 
 .grid-reloaded {
   display: grid;
@@ -35,6 +23,7 @@
 
 .instance {
   grid-area: instance;
+  color: white !important;
 }
 
 .s1 {
@@ -250,6 +239,12 @@ svg {
 }
 
 /* CSS for initial D3 setup: ABOVE */
+
+.popup {
+  height: 30px;
+  width: 60px;
+  background-color: #995DFF
+}
 
 .noDots {
   list-style-type: none;

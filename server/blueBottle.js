@@ -78,10 +78,17 @@ function carrot2D3(carrotData) {
               },
             }
           }
+
+          // TODO: BUG, deliver_get_details undefined when we only have a consumer/receiver
           const link = {
             "source": j,
             "target": d3Data.nodes.findIndex(el => el.name === consumer.name),
-            "weight": Math.floor(Math.log(consumer.message_stats.deliver_get_details.rate))
+            "weight": Math.floor(Math.log(consumer.message_stats.deliver_get_details.rate)),
+            // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
+            "xCenter": 25,
+            "yCenter": 25,
+            "sourceXCenter": 40, 
+            "sourceYCenter": 25, 
           }
           d3Data.links.push(link)
         }
@@ -95,6 +102,7 @@ function carrot2D3(carrotData) {
       d3Data.nodes.forEach((node, i) => {
         if (node.name === exchangeName && node.group === 2) {
           let currentExchange = exchanges[exchanges.findIndex(el => el.name === exchangeName)]
+          
           let message_rate = Math.floor(Math.log(currentExchange.message_stats.publish_out_details.rate))
           if (message_rate < 0) {
             message_rate = 1
@@ -106,7 +114,12 @@ function carrot2D3(carrotData) {
                 return el.name === binding.queue_name
               }
             }),
-            "weight": message_rate
+            "weight": message_rate,
+            // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
+            "xCenter": 40,
+            "yCenter": 25,
+            "sourceXCenter": 0, 
+            "sourceYCenter": 0, 
           }
           d3Data.links.push(link)
         }
@@ -128,7 +141,12 @@ function carrot2D3(carrotData) {
             link = {
               "source": exchangeIndex,
               "target": i,
-              "weight": message_rate
+              "weight": message_rate,
+            // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
+              "xCenter": 40,
+              "yCenter": 25,
+              "sourceXCenter": 0, 
+              "sourceYCenter": 0, 
             }
             d3Data.links.push(link)
           }
