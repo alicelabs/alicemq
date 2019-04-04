@@ -10,9 +10,7 @@ import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
 import NodeCards from '../Components/NodeCards.jsx';
-import * as d3 from 'd3';
-import Typography from '@material-ui/core/Typography'
-
+import Typography from '@material-ui/core/Typography';
 
 // d3Data reference
 // "cluster_name": cluster_name,
