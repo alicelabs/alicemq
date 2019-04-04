@@ -3,13 +3,14 @@ import React from 'react';
 const renderExchanges = (props) => {
   return (coords, index) => {
     const exchangeProps = {
+
       cx: props.nodes[props.producers+index].x,
       cy: props.nodes[props.producers+index].y,
       r: props.nodes[props.producers+index].r,
       key: 2 + index,
       fill: "red"
     }
-    return <circle {...exchangeProps} /> // <rect> is d3 function
+    return <circle {...exchangeProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+index])}/> // <rect> is d3 function
   }
 }
 

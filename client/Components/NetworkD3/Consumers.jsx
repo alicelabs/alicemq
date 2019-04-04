@@ -10,7 +10,7 @@ const renderConsumers = (props) => {
       key: 19+index,
       fill: "purple"
     }
-    return <rect {...consumerProps} /> // <rect> is d3 function
+    return <rect {...consumerProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+props.queues+index])}/> // <rect> is d3 function
   }
 }
 

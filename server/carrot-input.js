@@ -186,7 +186,6 @@ Carrot.prototype.motherLoad = function () {
       )
     ))
       .then(result => {
-        console.log('this is the result before masage', result)
         // return result order: overview, exchanges, queues, consumers, channels, bindings 
         let data = massageData(result);
         
@@ -222,8 +221,45 @@ function massageData(result) {
     return el = result;
   })
   data.queues = result[2].map(el => {
-    const { message_stats, backing_queue_status, messages, messages_details, name, node, state } = el
-    return el = { message_stats, backing_queue_status, messages, messages_details, name, node, state }
+    const { message_stats, backing_queue_status, messages, messages_details, name, node, state } = el;
+    const result = { message_stats, backing_queue_status, messages, messages_details, name, node, state }
+    if (!result.message_stats) {
+      result.message_stats = {
+        "ack": 0,
+        "ack_details": {
+            "rate": 0
+        },
+        "deliver": 0,
+        "deliver_details": {
+            "rate": 0
+        },
+        "deliver_get": 0,
+        "deliver_get_details": {
+            "rate": 0
+        },
+        "deliver_no_ack": 0,
+        "deliver_no_ack_details": {
+            "rate": 0
+        },
+        "get": 0,
+        "get_details": {
+            "rate": 0
+        },
+        "get_no_ack": 0,
+        "get_no_ack_details": {
+            "rate": 0
+        },
+        "publish": 0,
+        "publish_details": {
+            "rate": 0
+        },
+        "redeliver": 0,
+        "redeliver_details": {
+            "rate": 0
+        }
+      }
+    }
+    return el = result;
   })
   data.consumers = []
   data.producers = []
@@ -262,7 +298,7 @@ function massageData(result) {
     }
     data.bindings.push(binding)
   })
-  // console.log('this is the final result ', result)
+
   return data;
 }
 

@@ -6,8 +6,10 @@ import Settings3 from '../Components/Settings3.jsx'
 import Settings4 from '../Components/Settings4.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
+import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
+import NodeCards from '../Components/NodeCards.jsx'
 import { Base64 } from 'js-base64'
 // import 'typeface-roboto'
 // import d3Data from '../graph/d3Data';
@@ -38,6 +40,9 @@ const purpleTheme = createMuiTheme({
     secondary: {
       main: '#f44336',
     },
+    error: {
+      main: '#ffffff',
+    }
   },
   spacing: 10
 })
@@ -53,6 +58,7 @@ class Main extends React.Component {
       width: 800,
       height: 500,
       padding: 10,
+      nodecards: [],
       visualizer: false,
     }
 
@@ -60,15 +66,17 @@ class Main extends React.Component {
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.updatePort = this.updatePort.bind(this);
-    this.visualize = this.visualize.bind(this)
+    this.visualize = this.visualize.bind(this);
+    this.updateNodeCards = this.updateNodeCards.bind(this);
     // this.decrementTarget = this.decrementTarget.bind(this);
 
   }
 
   async tick() {
-    console.log('MOUNT');
+    console.log('state updated');
     const d3Data = await lib.getData()
-    this.setState({ ...d3Data,
+    this.setState({
+      ...d3Data,
       titles: [
         {
           name: 'Producers',
@@ -90,14 +98,17 @@ class Main extends React.Component {
           x: (d3Data.width / 4) * 4 - (d3Data.width * 0.1),
           y: 10
         }
-      ] 
+      ]
     });
-      console.log(d3Data);
-
   }
-  
 
-    componentDidMount() {
+  componentWillMount() {
+    if (this.state.visualizer === false) {
+      document.body.classList.add("background");
+    }
+  }
+
+  componentDidMount() {
     this.timer = setInterval(
       () => {
         this.tick()
@@ -105,7 +116,8 @@ class Main extends React.Component {
       , 501)
   }
 
-   componentWillUnmount() {
+  componentWillUnmount() {
+
     clearInterval(this.timer)
   }
 
@@ -127,6 +139,61 @@ class Main extends React.Component {
 
   visualize(e) {
     this.setState({ visualizer: true })
+    document.body.classList.remove('background')
+    document.body.classList.add('background-vis')
+  }
+
+  updateNodeCards(node) {
+    console.log(node)
+    switch (node.group) {
+      case 1: {
+       return this.setState({
+          nodecards: [
+            { "Type": "Producer" },
+            { "Messages Published": node.message_stats.publish },
+            { "Publishes/s": node.message_stats.publish_details.rate },
+            { "state": node.state }
+          ]
+        })
+      }
+      break;
+      case 2: {
+       return this.setState({
+          nodecards: [
+            { "Type": node.type },
+            { "Messages Published": node.message_stats.publish_in },
+            { "Publishes/s": node.message_stats.publish_in_details.rate },
+            { "Messages Sent": node.message_stats.publish_out },
+            { "Sent/s": node.message_stats.publish_out_details.rate },
+          ]
+        })
+      }
+      break;
+      case 3: {
+       return this.setState({
+          nodecards: [
+            { "Type": "Queue" },
+            { "Messages Published": node.message_stats.publish },
+            { "Publishes/s": node.message_stats.publish_details.rate },
+            { "Messages Sent": node.message_stats.deliver_get },
+            { "Sent/s": node.message_stats.deliver_get_details.rate },
+          ]
+        })
+      }
+      break;
+      case 4: {
+       return this.setState({
+          nodecards: [
+            { "Type": "Consumer" },
+            { "Messages Recieved": node.message_stats.deliver_get },
+            { "Delivery Rate": node.message_stats.deliver_get_details.rate },
+            { "state": node.state }
+          ]
+        })
+      }
+      break;
+      default: return;
+    }
   }
 
   // decrementTarget(e) {
@@ -159,7 +226,9 @@ class Main extends React.Component {
     } else {
       return (
         <div className="the-grid">
-          <Display {...this.state} />
+          <Display {...this.state} updateNodeCards={this.updateNodeCards}/>
+          <OverviewCards {...this.state} />
+          <NodeCards {...this.state} />
           <Settings1 {...this.state} decrementTarget={this.decrementTarget} />
           <Settings2 {...this.state} decrementTarget={this.decrementTarget} />
           <Settings3 {...this.state} decrementTarget={this.decrementTarget} />

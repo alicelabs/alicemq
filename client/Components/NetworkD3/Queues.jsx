@@ -10,7 +10,7 @@ const renderQueues = (props) => {
       key: 14+index,
       fill: "green"
     }
-    return <rect {...queuesProps} /> // <rect> is d3 function
+    return <rect {...queuesProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> // <rect> is d3 function
   }
 }
 
