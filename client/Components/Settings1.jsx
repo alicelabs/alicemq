@@ -50,16 +50,20 @@ const Settings1 = (props) => {
   return (
     <React.Fragment>
       <div className="nodes-1">
+        <h3>Producers</h3>
         <ul className="noDots">{producers}</ul>
       </div>
       <div className="nodes-2">
-      <ul className="noDots">{exchanges}</ul>
+        <h3>Exchanges</h3>
+        <ul className="noDots">{exchanges}</ul>
       </div>
       <div className="nodes-3">
-      <ul className="noDots">{queues}</ul>
+        <h3>Queues</h3>
+        <ul className="noDots">{queues}</ul>
       </div>
       <div className="nodes-4">
-      <ul className="noDots">{consumers}</ul>
+        <h3>Consumers</h3>
+        <ul className="noDots">{consumers}</ul>
       </div>
     </React.Fragment>
   )

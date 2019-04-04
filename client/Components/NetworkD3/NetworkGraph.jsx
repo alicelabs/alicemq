@@ -12,7 +12,7 @@ const NetworkGraph = (props) => {
   return  <svg width={props.width} height={props.height}>
       {props.titles && <Titles {...props} />}
       {props.links && props.nodes && <Links {...props} />}
-      {props.prducers && <Producers {...props} />}
+      {props.producers && <Producers {...props} />}
       {props.exchanges && <Exchanges {...props} />}
       {props.queues && <Queues {...props} />}
       {props.consumers && <Consumers {...props} />}
