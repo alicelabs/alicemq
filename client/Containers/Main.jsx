@@ -212,7 +212,7 @@ class Main extends React.Component {
       return (
         <div className="the-grid">
           <Display {...this.state} updateNodeCards={this.updateNodeCards}/>
-          <OverviewCards {...this.state} />
+          {this.state.message_stats && <OverviewCards {...this.state} />}
           <NodeCards {...this.state} />
           <Settings1 {...this.state} decrementTarget={this.decrementTarget} />
           <Settings2 {...this.state} decrementTarget={this.decrementTarget} />
