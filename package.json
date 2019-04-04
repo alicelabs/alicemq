@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/alicelabs/alice#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.4.0",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
-    "@babel/polyfill": "^7.4.0",
     "acorn": "^6.1.1",
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
@@ -40,6 +40,7 @@
     "express": "^4.16.4",
     "js-base64": "^2.5.1",
     "node-fetch": "^2.3.0",
+    "numeral": "^2.0.6",
     "path": "^0.12.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",

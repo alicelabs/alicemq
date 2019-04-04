@@ -15,7 +15,7 @@ body. {
 }
 
 .login-box {
-  margin: 10% auto 0;
+  margin: 1.5rem auto 0;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -78,6 +78,11 @@ body. {
 .viz {
   background-color: #995DFF;
   grid-area: viz;
+}
+
+.appName{
+  text-align: center;
+  margin-top: 8rem;
 }
 /* CSS for initial D3 setup: BELOW */
 h1 {
