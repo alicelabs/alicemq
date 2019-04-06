@@ -2,5 +2,4 @@ node_modules
 package-lock.json
 client/dist/bundle.js
 .env
-test/.DS_Store
-.DS_Store
+*.DS_Store
