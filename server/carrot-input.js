@@ -226,6 +226,7 @@ function massageData(result) {
     }
     return el = result; //return result
   })
+
   data.queues = result[2].map(el => {
     const { message_stats, backing_queue_status, messages, messages_details, name, node, state } = el;
     const result = { message_stats, backing_queue_status, messages, messages_details, name, node, state }
@@ -268,6 +269,7 @@ function massageData(result) {
     }
     return el = result;
   })
+
   data.consumers = []
   data.producers = []
   data.bindings = []
@@ -305,6 +307,8 @@ function massageData(result) {
     }
     data.bindings.push(binding)
   })
+
+  
   return data;
 }
 

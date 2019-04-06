@@ -5,24 +5,22 @@ const uri = process.env.CATERPILLAR_URI
 
 //type, exchange, binding, message,  uri
 let obj = {
-  type: 'topic',
-  exchange: 'topex',
-  binding: 'jimmy',
-  message: 'message bound jimmy',
+  type: 'fanout',
+  exchange: 'hatsu',
+  binding: '',
+  message: '',
   uri: uri 
 };
 
 amqp.connect(uri, (err, conn) => {
   conn.createChannel((err, ch) => {
-
-    var ex = 'topex';
     
     ch.assertExchange(obj.exchange, obj.type, {durable: false});
     ch.assertQueue(obj.binding, {exclusive: true}, (err, q)=> {
       console.log('.-. waiting for messages', q.queue);
       
       //arguments: queueName  - exchangeName - key
-      ch.bindQueue(q.queue, ex, obj.binding);
+      ch.bindQueue(q.queue, obj.exchange, obj.binding);
       ch.consume(q.queue, function(msg){
         if (msg.content) {
           console.log('message:', msg.content.toString())

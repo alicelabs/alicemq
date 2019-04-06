@@ -5,10 +5,10 @@ const amqp = require('amqplib/callback_api');
 
 //type, exchange, binding, message,  uri
 let obj = {
-  type: 'topic',
-  exchange: 'topex',
-  binding: 'jimmy',
-  message: 'message on topex from Christian',
+  type: 'fanout',
+  exchange: 'hatsu',
+  binding: '',
+  message: 'Zangief',
   uri: uri 
 };
 
