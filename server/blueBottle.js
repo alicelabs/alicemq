@@ -160,12 +160,10 @@ function carrot2D3(carrotData) {
       e.message_stats.deliver_get = 0
     }
     if(!e.message_stats.deliver_get_details) {
-      e.message_stats.deliver_get_details = {}
-      e.message_stats.deliver_get_details.rate = 0
+      e.message_stats.deliver_get_details = {"rate": 0}
     }
     if(!e.message_stats.publish_details) {
-      e.message_stats.publish_details = {}
-      e.message_stats.publish_details.rate = 0
+      e.message_stats.publish_details = {"rate": 0}
     }
   }
 
