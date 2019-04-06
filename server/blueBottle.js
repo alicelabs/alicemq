@@ -1,5 +1,11 @@
 import Carrot from './carrot-input.js';
 
+/**
+ * This will parse the data from Carrot and prepare it for D3
+ * 
+ * @param {All the data needed to make the RabbitMQ connection} config 
+ */
+
 function BlueBottle(config) {
   this.carrot = new Carrot(config);
   this.carrotData = undefined;

@@ -1,6 +1,11 @@
 const fetch = require('node-fetch');
 import { Base64 } from 'js-base64';
 
+/**
+ * This will parse the data from RabbitMQ API and gather all data of interest
+ * 
+ * @param {All the data needed to make the RabbitMQ connection} config 
+ */
 
 function Carrot(config) {
   this.host = config.host;
