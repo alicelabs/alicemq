@@ -7,7 +7,7 @@ const amqp = require('amqplib/callback_api');
 let obj = {
   type: 'topic',
   exchange: 'topex',
-  binding: 'red-rabbits',
+  binding: 'jimmy',
   message: 'message on topex from Christian',
   uri: uri 
 };
