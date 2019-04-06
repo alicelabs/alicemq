@@ -24,6 +24,7 @@ const styles = {
 
 
 const OverviewCards = (props) => {
+
   return (
     <React.Fragment>
       
@@ -38,8 +39,6 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-
-
         <Card className="s2">
           <CardContent>
             <Typography color='inherit' gutterBottom>
@@ -52,8 +51,6 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-
-
         <Card className="s3">
           <CardContent>
             <Typography color='inherit' gutterBottom>
@@ -65,8 +62,6 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-
-
         <Card className="s4">
           <CardContent>
             <Typography color='inherit' gutterBottom>
@@ -77,11 +72,6 @@ const OverviewCards = (props) => {
             </Typography>
           </CardContent>
         </Card>
-
-
-      
-
-      
 
         <Card className="s5">
           <CardContent>
