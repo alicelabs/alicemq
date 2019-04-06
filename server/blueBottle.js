@@ -68,7 +68,7 @@ function carrot2D3(carrotData) {
       const queueName = consumer.queue
       d3Data.nodes.forEach((node, j) => {
         if (node.name === queueName && node.group === 3) {
-          if (consumer.state === 'idle') {
+          if (!consumer.message_stats) {
             consumer.message_stats = {
               "ack": 0,
               "ack_details": {
@@ -85,7 +85,6 @@ function carrot2D3(carrotData) {
             }
           }
 
-          // TODO: BUG, deliver_get_details undefined when we only have a consumer/receiver
           const link = {
             "source": j,
             "target": d3Data.nodes.findIndex(el => el.name === consumer.name),
@@ -162,6 +161,20 @@ function carrot2D3(carrotData) {
     })
   }
 
+  function fixOverviewMessageStats(e) {
+    if (!e.message_stats.deliver_get) {
+      e.message_stats.deliver_get = 0
+    }
+    if(!e.message_stats.deliver_get_details) {
+      e.message_stats.deliver_get_details = {}
+      e.message_stats.deliver_get_details.rate = 0
+    }
+    if(!e.message_stats.publish_details) {
+      e.message_stats.publish_details = {}
+      e.message_stats.publish_details.rate = 0
+    }
+  }
+
   buildNodes(producers, 1);
   buildNodes(exchanges, 2);
   buildNodes(queues, 3);
@@ -169,6 +182,7 @@ function carrot2D3(carrotData) {
   linkConsumersToQueues(consumers, queues);
   linkExchangeToQueues(bindings, queues);
   linkFanoutExchangesToAllQueues(exchanges);
+  fixOverviewMessageStats(d3Data);
 
   return d3Data
 }
