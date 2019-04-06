@@ -158,7 +158,7 @@ class Main extends React.Component {
         return this.setState({
           nodecards: [
             { "Total Received": node.message_stats.publish },
-            { "/s": node.message_stats.publish_details.rate },
+            { "Received/s": node.message_stats.publish_details.rate },
             { "Total Sent": node.message_stats.deliver_get },
             { "Sent/s": node.message_stats.deliver_get_details.rate },
           ]
