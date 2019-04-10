@@ -8,7 +8,6 @@
     "tests": "jest",
     "dev": "webpack-dev-server",
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "electronon": "electron -r @babel/register .",
     "web": "webpack-dev-server --config webpack.config.js",
     "app": "webpack --config webpack.config.electron.js && electron ."
   },
@@ -17,7 +16,7 @@
     "url": "git+https://github.com/alicelabs/alice.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anthony Valentin, Christian Niedermayer, Parker Allen, Siye Yu ",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/alicelabs/alice/issues"
@@ -29,10 +28,8 @@
     "@material-ui/icons": "^3.0.2",
     "acorn": "^6.1.1",
     "amqplib": "^0.5.3",
-    "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "body-parser": "^1.18.3",
-    "browserify": "^16.2.3",
     "cookie-parser": "^1.4.4",
     "css-loader": "^2.1.1",
     "d3": "^5.9.2",
@@ -42,13 +39,11 @@
     "node-fetch": "^2.3.0",
     "numeral": "^2.0.6",
     "path": "^0.12.7",
-    "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "style-loader": "^0.23.1",
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1",
-    "ws": "^6.2.0"
+    "webpack-dev-server": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

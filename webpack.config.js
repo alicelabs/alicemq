@@ -18,7 +18,7 @@ module.exports = {
     module: {
         rules: [
             {
-                exclude: [/node_modules/, /onLoad.json/],
+                exclude: [/node_modules/, /onLoad.json/, /test/],
                 use: {
                     loader: 'babel-loader',
                     options: {

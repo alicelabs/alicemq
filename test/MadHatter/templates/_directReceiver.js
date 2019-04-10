@@ -31,4 +31,3 @@ amqp.connect(uri, function(err, conn) {
   });
 });
 
-// export default directReceiver;
