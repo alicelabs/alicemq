@@ -17,7 +17,7 @@ const renderExchanges = (props) => {
     }
     return (
       <Tooltip title={props.nodes[props.producers+index].name || "default"}>
-        <circle className={coords.visibility ? "class88" : "disappear"} classbame={()=> exchangeProps.mute ? class99 : disappear } {...exchangeProps}onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+index])}/>
+        <circle className={coords.visibility ? "class88" : "disappear"}  {...exchangeProps}onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+index])}/>
       </Tooltip>
     ) // <rect> is d3 function
   }

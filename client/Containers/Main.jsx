@@ -104,7 +104,7 @@ class Main extends React.Component {
         this.tick()
         console.log(this.state)
       }
-      , 200)
+      , 900)
   }
 
   componentWillUnmount() {
@@ -133,10 +133,12 @@ class Main extends React.Component {
     let newToggled = this.state.toggled;
      nodes.forEach((x)=>{
        console.log(e.target.id)
-      if (x.identifier === e.target.id){
-
+      if (x.identifier === e.target.id && x.group === 2){
+        
+        console.log('first', newToggled)
         // x.visibility = false;
         newToggled[x.identifier] = !newToggled[x.identifier];
+        console.log('second', newToggled)
       }
     
     })

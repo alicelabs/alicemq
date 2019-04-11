@@ -5,10 +5,10 @@ const amqp = require('amqplib/callback_api');
 
 //type, exchange, binding, message,  uri
 let obj = {
-  type: 'fanout',
-  exchange: 'hatsu',
-  binding: '',
-  message: 'say hi',
+  type: 'direct',
+  exchange: 'sumo',
+  binding: 'b6',
+  message: 'b6 fanout',
   uri: uri 
 };
 
@@ -35,5 +35,5 @@ const actualizer = function (obj, timer){
   return setInterval(bound, timer)
 }
   
-actualizer(obj, 90);
+actualizer(obj, 333);
 

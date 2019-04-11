@@ -49,7 +49,14 @@ function carrot2D3(carrotData) {
 
   function createIdentifiers(bindings){
     bindings.forEach((x)=>{
-      d3Data.identifiers[x.queue_name] = x.exchange_name
+      if (x.exchange_name === "") x.exchange_name = 'default';
+      d3Data.identifiers[x.queue_name] = x.exchange_name;
+    })
+  }
+
+  function giveNametoDefaultExchange(nodes){
+    nodes.forEach((x)=>{
+      if (x.name === "") x.name = 'default';
     })
   }
   // (producers-> 1);
@@ -62,7 +69,7 @@ function carrot2D3(carrotData) {
     let total = nodeType.length
     nodeType.forEach((type, i) => {
       let idt;
-      if (groupNumber === 2)  idt = type.name;
+      if (groupNumber === 2)  type.name === "" ? idt = 'default' : idt = type.name;
       else if (groupNumber === 3) d3Data.identifiers[type.name] ?  idt = d3Data.identifiers[type.name] : idt = 'other' //idt = d3Data.identifiers[type.name];
       else if (groupNumber === 4) d3Data.identifiers[type.queue] ?  idt = d3Data.identifiers[type.queue] : idt = 'other';
       else idt = 'other'
@@ -127,7 +134,9 @@ function carrot2D3(carrotData) {
     b.forEach((binding) => {
       const exchangeName = binding.exchange_name
       d3Data.nodes.forEach((node, i) => {
-        if (node.name === exchangeName && node.group === 2) {
+        console.log(node.name)
+
+        if ( (node.name === exchangeName)  && node.group === 2 ) {
           let currentExchange = exchanges[exchanges.findIndex(el => el.name === exchangeName)]
           
           let message_rate = Math.floor(Math.log(currentExchange.message_stats.publish_out_details.rate))
@@ -198,6 +207,7 @@ function carrot2D3(carrotData) {
     }
   }
   createIdentifiers(bindings);
+  giveNametoDefaultExchange(exchanges);
   buildNodes(producers, 1);
   buildNodes(exchanges, 2);
   buildNodes(queues, 3);

@@ -211,7 +211,6 @@ function massageData(result) {
   data.message_stats = result[0].message_stats
   data.exchanges = result[1].map(el => {
     const { message_stats, name, type, durable } = el
-
     let result = { message_stats, name, type, durable }
     if (!result.message_stats || !result.message_stats.publish_out) {
       result.message_stats = {
