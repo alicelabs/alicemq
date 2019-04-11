@@ -37,7 +37,7 @@ function carrot2D3(carrotData) {
   } = carrotData;
 
   // Preparing a canvas
-  let calcWidth = (window.innerWidth * 67) / 100
+  let calcWidth = (window.innerWidth * 62) / 100
   let calcHeight = (parent.innerHeight)
 
   // Provides the app the state for D3
