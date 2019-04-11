@@ -4,7 +4,10 @@ import Carrot from './carrot-input.js';
 /**
  * This will parse the data from Carrot and prepare it for D3
  * 
- * @param {All the data needed to make the RabbitMQ connection} config 
+ * @param {Object} config 
+ * 
+ * @output {Object} d3Data
+ * 
  */
 
 // Pass the config data to Carrot
