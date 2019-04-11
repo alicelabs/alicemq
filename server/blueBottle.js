@@ -26,8 +26,8 @@ function carrot2D3(carrotData) {
   } = carrotData;
 
   // Preparing a canvas
-  let calcWidth = (window.innerWidth * 60) / 100
-  let calcHeight = (window.innerHeight * 80) / 100
+  let calcWidth = (window.innerWidth * 67) / 100
+  let calcHeight = (parent.innerHeight)
 
   // Provides the app the state for D3
   const d3Data = {
@@ -88,7 +88,7 @@ function carrot2D3(carrotData) {
           const link = {
             "source": j,
             "target": d3Data.nodes.findIndex(el => el.name === consumer.name),
-            "weight": Math.floor(Math.log(consumer.message_stats.deliver_get_details.rate)),
+            "weight": consumer.message_stats.deliver_get_details.rate,
             // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
             "xCenter": 25,
             "yCenter": 25,
@@ -109,7 +109,7 @@ function carrot2D3(carrotData) {
         if (node.name === exchangeName && node.group === 2) {
           let currentExchange = exchanges[exchanges.findIndex(el => el.name === exchangeName)]
           
-          let message_rate = Math.floor(Math.log(currentExchange.message_stats.publish_out_details.rate))
+          let message_rate = currentExchange.message_stats.publish_out_details.rate;
           // Handles the case it will draw a negative line so we assign 1 to avoid that
           if (message_rate < 0) {
             message_rate = 1
@@ -141,7 +141,7 @@ function carrot2D3(carrotData) {
         d3Data.nodes.forEach((node, i) => {
           let link;
           if (node.group === 3) {
-            let message_rate = Math.floor(Math.log(exchange.message_stats.publish_out_details.rate))
+            let message_rate = exchange.message_stats.publish_out_details.rate;
             if (message_rate < 0) {
               message_rate = 1
             }
