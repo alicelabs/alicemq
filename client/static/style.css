@@ -256,3 +256,7 @@ svg {
 .appName {
   text-align: center;
 }
+
+.disappear {
+  display: none;
+}

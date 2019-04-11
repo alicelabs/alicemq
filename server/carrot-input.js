@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
-import { Base64 } from 'js-base64';
+// import { Base64 } from 'js-base64';
+const  {Base64} = require('js-base64');
+
 
 // takes credentials from a user and instantiates connection with rabbitmq
 function Carrot(config) {
@@ -94,7 +96,7 @@ Carrot.prototype.exchanges = function () {
               }
             }
           }
-          return el = result;
+          return result;
         }
         )
         res(result);
@@ -224,7 +226,7 @@ function massageData(result) {
         }
       }
     }
-    return el = result; //return result
+    return result; 
   })
 
   data.queues = result[2].map(el => {
@@ -312,4 +314,5 @@ function massageData(result) {
   return data;
 }
 
-export default Carrot;
+// export default Carrot;
+module.exports =  Carrot;

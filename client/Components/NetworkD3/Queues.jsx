@@ -24,11 +24,12 @@ const renderQueues = (props) => {
       key: [props.producers+props.exchanges+index]+index,
       stroke: 'black',
       strokeWidth: 5,
-      fill: "#4caf50"
+      fill: "#4caf50",
+      mute: coords.visibility
      }
     return (
       <Tooltip title={props.nodes[props.producers+props.exchanges+index].name}>
-        <rect {...queuesProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> 
+        <rect {...queuesProps} className={queuesProps.mute ? 'class93' : 'disappear'} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> 
       </Tooltip>
     )
     //<rect> is d3 function

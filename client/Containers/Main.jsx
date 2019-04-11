@@ -57,13 +57,18 @@ class Main extends React.Component {
       hostname: "192.168.0.236",
       username: "test",
       password: "test",
+      // hostname: "192.168.0.35",
+      // username: "vhs",
+      // password: "4444",
+
       port: "15672",
       width: (window.innerWidth * 60) / 100,
       height: (window.innerHeight * 95) / 100,
       padding: 10,
       nodecards: [],
       visualizer: false,
-      hoverNode: false, // Delete this!
+      hoverNode: false,// Delete this!
+      toggled: {}
     }
 
     this.blueBottle = null;
@@ -73,23 +78,31 @@ class Main extends React.Component {
     this.updatePort = this.updatePort.bind(this);
     this.visualize = this.visualize.bind(this);
     this.updateNodeCards = this.updateNodeCards.bind(this);
+    this.toggleVisibility = this.toggleVisibility.bind(this);
   }
 
 
   async tick() {
     if (this.blueBottle === null) return;
-
     const d3Data = await this.blueBottle.getData();
+    await d3Data.nodes.forEach((x)=>{
+      if (this.state.toggled[x.identifier]){
+        x.visibility = false
+      } else {x.visibility = true}
+    })
     const dataTitles = makeTitles(d3Data);
     this.setState({ ...d3Data, titles: dataTitles });
   }
+
   componentWillMount() {
     document.body.classList.add('background')
   }
+
   componentDidMount() {
     this.timer = setInterval(
       () => {
         this.tick()
+        console.log(this.state)
       }
       , 200)
   }
@@ -113,6 +126,22 @@ class Main extends React.Component {
   updatePort(e) {
     this.setState({ port: e.target.value });
   };
+
+  toggleVisibility(e) {
+    let nodes = this.state.nodes;
+    console.log('stateNodes', this.state.nodes)
+    let newToggled = this.state.toggled;
+     nodes.forEach((x)=>{
+       console.log(e.target.id)
+      if (x.identifier === e.target.id){
+
+        // x.visibility = false;
+        newToggled[x.identifier] = !newToggled[x.identifier];
+      }
+    
+    })
+    this.setState({ toggled: Object.assign(newToggled) })
+  }
 
   visualize(e) {
     const userConfig = {
@@ -154,9 +183,9 @@ class Main extends React.Component {
         return this.setState({
           nodecards: [
             { "Total Received": node.message_stats.publish },
-            { "/s": node.message_stats.publish_details.rate },
-            { "Total Sent": node.message_stats.deliver_get },
-            { "Sent/s": node.message_stats.deliver_get_details.rate },
+            { "Received/s": node.message_stats.publish_details.rate },
+            { "Total Sent": node.message_stats.deliver_get === undefined ? '0': node.message_stats.deliver_get},
+            { "Sent/s": node.message_stats.deliver_get_details === undefined ? '0': node.message_stats.deliver_get_details.rate},
           ]
         })
       }
@@ -199,7 +228,7 @@ class Main extends React.Component {
           <Display {...this.state} updateNodeCards={this.updateNodeCards} />
           {this.state.message_stats && <OverviewCards {...this.state} />}
           <NodeCards {...this.state} />
-          <Settings1 {...this.state} />
+          <Settings1 {...this.state} mute={this.toggleVisibility} />
         </div>
       )
     }

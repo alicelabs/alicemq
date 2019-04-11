@@ -8,7 +8,7 @@ let obj = {
   type: 'fanout',
   exchange: 'hatsu',
   binding: '',
-  message: '',
+  message: 'b6 on fanout',
   uri: uri 
 };
 

@@ -8,7 +8,7 @@ let obj = {
   type: 'fanout',
   exchange: 'hatsu',
   binding: '',
-  message: 'Zangief',
+  message: 'say hi',
   uri: uri 
 };
 
@@ -25,7 +25,7 @@ let spammer = function(obj) {
       
     });
     // setTimeout(function() { conn.close(); process.exit(0) }, 500)
-    // setTimeout(function() { conn.close() }, 1000)
+    setTimeout(function() { conn.close() }, 1000)
   }) 
 } 
 
@@ -35,5 +35,5 @@ const actualizer = function (obj, timer){
   return setInterval(bound, timer)
 }
   
-actualizer(obj, 30);
+actualizer(obj, 90);
 

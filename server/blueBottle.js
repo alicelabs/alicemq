@@ -1,10 +1,12 @@
-import Carrot from './carrot-input.js';
+// import Carrot from './carrot-input.js';
+const Carrot = require('./carrot-input');
 // BlueBottle is the library for parsing data for D3
 
 // Pass the config data to Carrot
 function BlueBottle(config) {
   this.carrot = new Carrot(config);
   this.carrotData = undefined;
+  
 }
 
 BlueBottle.prototype.getData = async function () {
@@ -41,22 +43,40 @@ function carrot2D3(carrotData) {
     "queues": queues.length,
     "consumers": consumers.length,
     "width": calcWidth,
-    "height": calcHeight
+    "height": calcHeight,
+    "identifiers": {}
   };
+
+  function createIdentifiers(bindings){
+    bindings.forEach((x)=>{
+      d3Data.identifiers[x.queue_name] = x.exchange_name
+    })
+  }
+  // (producers-> 1);
+  // (exchanges-> 2);
+  // (queues-> 3);
+  // (consumers-> 4);
 
   // Prepares coordinate data for SVG object
   function buildNodes(nodeType, groupNumber) {
     let total = nodeType.length
     nodeType.forEach((type, i) => {
+      let idt;
+      if (groupNumber === 2)  idt = type.name;
+      else if (groupNumber === 3) d3Data.identifiers[type.name] ?  idt = d3Data.identifiers[type.name] : idt = 'other' //idt = d3Data.identifiers[type.name];
+      else if (groupNumber === 4) d3Data.identifiers[type.queue] ?  idt = d3Data.identifiers[type.queue] : idt = 'other';
+      else idt = 'other'
       let node = {
+        
         "message_stats": type.message_stats,
+        "identifier": idt,
         "state": type.state,
         "type": type.type || "non-exchange",
         "name": type.name,
         "group": groupNumber,
         "y": (d3Data.height / 4) * groupNumber - (d3Data.height * 0.1),
         "x": Math.floor((d3Data.width / total) * (i + 1) - (d3Data.width / (total * 2))),
-        "r": (d3Data.height / total) / 8
+        "r": (d3Data.height / total) / 8,
       }
       d3Data.nodes.push(node)
     })
@@ -64,6 +84,7 @@ function carrot2D3(carrotData) {
 
   // Prepares the edges between consumers and queues
   function linkConsumersToQueues(c, q) {
+
     c.forEach((consumer) => {
       const queueName = consumer.queue
       d3Data.nodes.forEach((node, j) => {
@@ -176,7 +197,7 @@ function carrot2D3(carrotData) {
       e.message_stats.publish_details.rate = 0
     }
   }
-
+  createIdentifiers(bindings);
   buildNodes(producers, 1);
   buildNodes(exchanges, 2);
   buildNodes(queues, 3);
@@ -190,3 +211,5 @@ function carrot2D3(carrotData) {
 }
 
 export default BlueBottle;
+
+
