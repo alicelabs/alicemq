@@ -4,7 +4,7 @@ import { Base64 } from 'js-base64';
 /**
  * This will parse the data from RabbitMQ API and gather all data of interest
  * 
- * @param {All the data needed to make the RabbitMQ connection} config 
+ * @param {Object} config 
  */
 
 // takes credentials from a user and instantiates connection with rabbitmq
