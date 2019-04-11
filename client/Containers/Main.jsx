@@ -58,8 +58,8 @@ class Main extends React.Component {
       username: "test",
       password: "test",
       port: "15672",
-      width: (window.innerWidth * 60) / 100,
-      height: (window.innerHeight * 95) / 100,
+      width: (window.innerWidth),
+      height: (parent.innerHeight),
       padding: 10,
       nodecards: [],
       visualizer: false,
@@ -154,9 +154,9 @@ class Main extends React.Component {
         return this.setState({
           nodecards: [
             { "Total Received": node.message_stats.publish },
-            { "/s": node.message_stats.publish_details.rate },
-            { "Total Sent": node.message_stats.deliver_get },
-            { "Sent/s": node.message_stats.deliver_get_details.rate },
+            { "Recieved/s": node.message_stats.publish_details.rate },
+            { "Total Sent": node.message_stats.deliver_get === undefined ? '0': node.message_stats.deliver_get},
+            { "Sent/s": node.message_stats.deliver_get_details === undefined ? '0': node.message_stats.deliver_get_details.rate},
           ]
         })
       }
