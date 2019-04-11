@@ -10,7 +10,7 @@ amqp.connect(URI, (err, conn) => {
     const q = 'no_persist_new'; // channel name
 
     ch.assertQueue(q, {durable: false}); // message is not persistent
-    for(let i = 0; i < 100000; i++){
+    for(let i = 0; i < 1000; i++){
       ch.sendToQueue(q, new Buffer.from(`${i}`), {persistent: false});
     }
     console.log(" [x] Message Sent");

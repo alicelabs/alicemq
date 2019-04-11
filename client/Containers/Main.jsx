@@ -159,8 +159,8 @@ class Main extends React.Component {
           nodecards: [
             { "Total Received": node.message_stats.publish },
             { "Received/s": node.message_stats.publish_details.rate },
-            { "Total Sent": node.message_stats.deliver_get },
-            { "Sent/s": node.message_stats.deliver_get_details.rate },
+            { "Total Sent": node.message_stats.deliver_get === undefined ? '0': node.message_stats.deliver_get},
+            { "Sent/s": node.message_stats.deliver_get_details === undefined ? '0': node.message_stats.deliver_get_details.rate},
           ]
         })
       }

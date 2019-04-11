@@ -3,3 +3,4 @@ package-lock.json
 client/dist/bundle.js
 .env
 *.DS_Store
+*.Rhistory
