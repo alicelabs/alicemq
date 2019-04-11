@@ -2,7 +2,7 @@ import React from 'react';
 
 const Legend = (props) => {
   //ranges give the string in first element, and color in second element of sub arrays
-  let ranges = [['0 msg/s', '#bdbdbd'], ['1-50 msg/s', '#4caf50'], ['50-150 msg/s', '#ffeb3b'], ['150-500 msg/s', '#f9a825'], ['500-2000 msg/s', '#ff5722'], ['> 2000 msg/s', '#b71c1c']];
+  let ranges = [['0', '#bdbdbd'], ['1-50', '#4caf50'], ['50-150', '#ffeb3b'], ['150-500', '#f9a825'], ['500-2000', '#ff5722'], ['> 2000', '#b71c1c']];
   let rangeIcons = [];
   let rangeValues = [];
 

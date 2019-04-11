@@ -159,7 +159,7 @@ apiController.onLoad = function(req, res) {
            }
        }
           }
-          return el = result;
+          return result;
       })
       data.queues = result[2].map(el => {
         const { message_stats, backing_queue_status, messages, messages_details, name, node, state } = el
