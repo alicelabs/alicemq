@@ -113,21 +113,25 @@ function carrot2D3(carrotData) {
   // Prepares the edges between exchanges and queues
   function linkExchangeToQueues(b, q) {
     b.forEach((binding) => {
-      const exchangeName = binding.exchange_name
+      const queueName = binding.queue_name
       d3Data.nodes.forEach((node, i) => {
-        if (node.name === exchangeName && node.group === 2) {
-          let currentExchange = exchanges[exchanges.findIndex(el => el.name === exchangeName)]
+        if (node.name === queueName && node.group === 3) {
+          let currentQueue = queues[queues.findIndex(el => el.name === queueName)]
           
-          let message_rate = currentExchange.message_stats.publish_out_details.rate;
+          if (!currentQueue.message_stats) {
+            currentQueue.message_stats = { "publish_details": {"rate": 0} }
+          }
+
+          let message_rate = currentQueue.message_stats.publish_details.rate;
           // Handles the case it will draw a negative line so we assign 1 to avoid that
           if (message_rate < 0) {
             message_rate = 1
           }
           const link = {
-            "source": i,
-            "target": d3Data.nodes.findIndex(el => {
-              if (el.group === 3) {
-                return el.name === binding.queue_name
+            "target": i,
+            "source": d3Data.nodes.findIndex(el => {
+              if (el.group === 2) {
+                return el.name === binding.exchange_name
               }
             }),
             "weight": message_rate,
@@ -140,35 +144,6 @@ function carrot2D3(carrotData) {
           d3Data.links.push(link)
         }
       })
-    })
-  }
-
-  function linkFanoutExchangesToAllQueues(e) {
-    e.forEach(exchange => {
-      const exchangeIndex = d3Data.nodes.findIndex(el => exchange.name === el.name)
-      if (exchange.type === "fanout") {
-        d3Data.nodes.forEach((node, i) => {
-          let link;
-          if (node.group === 3) {
-            let message_rate = exchange.message_stats.publish_out_details.rate;
-            if (message_rate < 0) {
-              message_rate = 1
-            }
-            link = {
-              "source": exchangeIndex,
-              "target": i,
-              "weight": message_rate,
-            // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
-              "xCenter": 40,
-              "yCenter": 25,
-              "sourceXCenter": 0, 
-              "sourceYCenter": 0, 
-            }
-            d3Data.links.push(link)
-          }
-
-        })
-      }
     })
   }
 
@@ -190,7 +165,6 @@ function carrot2D3(carrotData) {
   buildNodes(consumers, 4);
   linkConsumersToQueues(consumers, queues);
   linkExchangeToQueues(bindings, queues);
-  linkFanoutExchangesToAllQueues(exchanges);
   fixOverviewMessageStats(d3Data);
 
   return d3Data
