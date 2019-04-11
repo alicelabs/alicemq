@@ -28,9 +28,10 @@ const renderLinks = (props) => {
       key: index,
       fill: "#ffa500",
       stroke: lineColor,
-      strokeLinecap: "round"
+      strokeLinecap: "round",
+      mute: props.nodes[coords.source].visibility
     }
-    return <line {...linksProps} /> // <rect> is d3 function
+    return <line className={linksProps.mute ? '' : 'disappear'} {...linksProps} /> // <rect> is d3 function
   }
 }
 

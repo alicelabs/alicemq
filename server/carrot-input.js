@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 import { Base64 } from 'js-base64';
 
+
+
 /**
  * This will parse the data from RabbitMQ API and gather all data of interest
  * 
@@ -100,7 +102,7 @@ Carrot.prototype.exchanges = function () {
               }
             }
           }
-          return el = result;
+          return result;
         }
         )
         res(result);
@@ -215,7 +217,6 @@ function massageData(result) {
   data.message_stats = result[0].message_stats
   data.exchanges = result[1].map(el => {
     const { message_stats, name, type, durable } = el
-
     let result = { message_stats, name, type, durable }
     if (!result.message_stats || !result.message_stats.publish_out) {
       result.message_stats = {
@@ -230,7 +231,7 @@ function massageData(result) {
         }
       }
     }
-    return el = result; //return result
+    return result; 
   })
 
   data.queues = result[2].map(el => {

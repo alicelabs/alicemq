@@ -14,11 +14,12 @@ const renderConsumers = (props) => {
       strokeWidth: 5,
       fill: "#ba68c8",
       stroke: "black",
+      mute: coords.visibility
     }
     return (
       <g>
         <Tooltip title={props.nodes[props.producers+props.exchanges+props.queues+index].name}>
-          <rect {...consumerProps} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+props.queues+index])} />
+          <rect {...consumerProps} className={coords.visibility ? '' : 'disappear'} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+props.queues+index])} />
         </Tooltip>
       </g>
     ) // <rect> is d3 function)
