@@ -5,11 +5,12 @@
 
 
 .grid-reloaded {
+  position: fixed;
   display: grid;
-  height: 110%;
+  height: 95%;
   width: 100%;
   grid-template-columns: 10% 3% 3.5% 3.5% 3% 10% 67%;
-  grid-template-rows: 8% 10% 10% 10% 10% 20% 20%;
+  grid-template-rows: 8% 10% 10% 10% 10% 26% 26%;
   grid-gap: 5px;
   grid-template-areas: 
     "nonviz instance instance instance instance instance viz"
@@ -94,7 +95,6 @@
 
 .nodes-1 {
   grid-area: nodes-1;
-  background-color: aquamarine;
   border-radius: 4px;
   padding-left: 15px;
   background-color: #543393;
@@ -105,7 +105,6 @@
 
 .nodes-2 {
   grid-area: nodes-2;
-  background-color: aquamarine;
   border-radius: 4px;
   padding-left: 15px;
   background-color: #543393;
@@ -116,7 +115,6 @@
 
 .nodes-3 {
   grid-area: nodes-3;
-  background-color: red;
   border-radius: 4px;
   padding-left: 15px;
   background-color: #543393;
@@ -127,19 +125,14 @@
 
 .nodes-4 {
   grid-area: nodes-4;
-  background-color: aquamarine;
   border-radius: 4px;
   padding-left: 15px;
   background-color: #543393;
-  color: #fff;
   overflow-y: scroll;
+  color: #fff;
+  scrollbar-color: auto;
 
 }
-
-/* .viz {
-  background-color: azure;
-  grid-area: viz;
-} */
 
 .nonviz {
   grid-area: nonviz;
@@ -178,7 +171,6 @@
   justify-content: center;
   align-items: center;
   color: #DAB2FF;
-  margin-top: 3%;
 }
 
 .settings4 {
@@ -200,6 +192,9 @@
 .viz {
   background-color: #995DFF;
   grid-area: viz;
+  top:0; 
+  left:35%; 
+  height:100%; 
 }
 
 #signIn {
@@ -218,8 +213,12 @@ h1 {
 svg {
   background-color: #FFFFFF;
   display: block;
-  border-radius: 20px;
-  margin-top: 40px;
+  position:fixed; 
+  left:35%;
+  top: 0; 
+  height:100%; 
+  width:65%;
+  border-radius: 5px;
 }
 
 .axis path, .axis line {
