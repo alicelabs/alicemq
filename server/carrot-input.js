@@ -7,6 +7,7 @@ import { Base64 } from 'js-base64';
  * @param {All the data needed to make the RabbitMQ connection} config 
  */
 
+// takes credentials from a user and instantiates connection with rabbitmq
 function Carrot(config) {
   this.host = config.host;
   this.username = config.username;
@@ -14,6 +15,7 @@ function Carrot(config) {
   this.port = config.port;
   this.isWeb = config.isWeb
 
+  // This "credentials" options is needed for /api/bindings CORS issue
   if (config.isWeb) {
     this.options = {
       method: 'GET',
@@ -28,7 +30,7 @@ function Carrot(config) {
     }
   }
 
-
+  // Port is needed for user hosted server
   if (config.port)
     // this.uri = `http://${config.username}:${config.password}@${config.host}:${config.port}/api`;
     this.uri = `http://${config.host}:${config.port}/api`;
@@ -36,6 +38,9 @@ function Carrot(config) {
     this.uri = `http://${config.username}:${config.password}@${config.host}/api`;
 }
 
+
+//Queries for HTTP api endpoints
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 Carrot.prototype.overview = function () {
   return new Promise((res, rej) => {
@@ -49,6 +54,7 @@ Carrot.prototype.overview = function () {
       .catch(err => { console.error(err.stack); rej('Overview FAILED: ', err.stack) })
   });
 };
+
 
 Carrot.prototype.queues = function () {
   return new Promise((res, rej) => {
@@ -175,6 +181,10 @@ Carrot.prototype.bindings = function () {
   });
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// returns combined queries to send to frontend
 Carrot.prototype.motherLoad = function () {
   return new Promise((res, rej) => {
     const urls = [this.uri + '/overview', this.uri + '/exchanges', this.uri + '/queues', this.uri + '/consumers', this.uri + '/channels', this.uri + '/bindings'];
@@ -196,7 +206,7 @@ Carrot.prototype.motherLoad = function () {
   });
 }
 
-// private helper function
+// private helper function to parse relevant information for further processing
 function massageData(result) {
   const data = {};
   data.cluster_name = result[0].cluster_name
@@ -209,6 +219,7 @@ function massageData(result) {
     let result = { message_stats, name, type, durable }
     if (!result.message_stats || !result.message_stats.publish_out) {
       result.message_stats = {
+        //in case no message stats exist / hardcode
         "publish_in": 0,
         "publish_in_details": {
           "rate": 0
@@ -219,13 +230,14 @@ function massageData(result) {
         }
       }
     }
-    return el = result;
+    return el = result; //return result
   })
 
   data.queues = result[2].map(el => {
     const { message_stats, backing_queue_status, messages, messages_details, name, node, state } = el;
     const result = { message_stats, backing_queue_status, messages, messages_details, name, node, state }
     if (!result.message_stats) {
+      //default 
       result.message_stats = {
         "ack": 0,
         "ack_details": {

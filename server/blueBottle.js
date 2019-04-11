@@ -1,4 +1,5 @@
 import Carrot from './carrot-input.js';
+// BlueBottle is the library for parsing data for D3
 
 /**
  * This will parse the data from Carrot and prepare it for D3
@@ -6,6 +7,7 @@ import Carrot from './carrot-input.js';
  * @param {All the data needed to make the RabbitMQ connection} config 
  */
 
+// Pass the config data to Carrot
 function BlueBottle(config) {
   this.carrot = new Carrot(config);
   this.carrotData = undefined;
@@ -16,7 +18,7 @@ BlueBottle.prototype.getData = async function () {
   return carrot2D3(this.carrotData);
 }
 
-// private helper functions
+// private helper functions: parsing data ready for D3
 function carrot2D3(carrotData) {
   const {
     queue_totals,
@@ -29,9 +31,11 @@ function carrot2D3(carrotData) {
     cluster_name
   } = carrotData;
 
+  // Preparing a canvas
   let calcWidth = (window.innerWidth * 60) / 100
-  let calcHeight = (window.innerHeight * 80) / 100
+  let calcHeight = (parent.innerHeight)
 
+  // Provides the app the state for D3
   const d3Data = {
     "queue_totals": queue_totals,
     "message_stats": message_stats,
@@ -46,6 +50,7 @@ function carrot2D3(carrotData) {
     "height": calcHeight
   };
 
+  // Prepares coordinate data for SVG object
   function buildNodes(nodeType, groupNumber) {
     let total = nodeType.length
     nodeType.forEach((type, i) => {
@@ -63,6 +68,7 @@ function carrot2D3(carrotData) {
     })
   }
 
+  // Prepares the edges between consumers and queues
   function linkConsumersToQueues(c, q) {
     c.forEach((consumer) => {
       const queueName = consumer.queue
@@ -88,7 +94,7 @@ function carrot2D3(carrotData) {
           const link = {
             "source": j,
             "target": d3Data.nodes.findIndex(el => el.name === consumer.name),
-            "weight": Math.floor(Math.log(consumer.message_stats.deliver_get_details.rate)),
+            "weight": consumer.message_stats.deliver_get_details.rate,
             // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
             "xCenter": 25,
             "yCenter": 25,
@@ -101,6 +107,7 @@ function carrot2D3(carrotData) {
     })
   }
 
+  // Prepares the edges between exchanges and queues
   function linkExchangeToQueues(b, q) {
     b.forEach((binding) => {
       const exchangeName = binding.exchange_name
@@ -108,7 +115,8 @@ function carrot2D3(carrotData) {
         if (node.name === exchangeName && node.group === 2) {
           let currentExchange = exchanges[exchanges.findIndex(el => el.name === exchangeName)]
           
-          let message_rate = Math.floor(Math.log(currentExchange.message_stats.publish_out_details.rate))
+          let message_rate = currentExchange.message_stats.publish_out_details.rate;
+          // Handles the case it will draw a negative line so we assign 1 to avoid that
           if (message_rate < 0) {
             message_rate = 1
           }
@@ -139,7 +147,7 @@ function carrot2D3(carrotData) {
         d3Data.nodes.forEach((node, i) => {
           let link;
           if (node.group === 3) {
-            let message_rate = Math.floor(Math.log(exchange.message_stats.publish_out_details.rate))
+            let message_rate = exchange.message_stats.publish_out_details.rate;
             if (message_rate < 0) {
               message_rate = 1
             }

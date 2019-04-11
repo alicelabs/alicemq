@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Settings1 from '../Components/Settings1.jsx'
-import Settings2 from '../Components/Settings2.jsx'
-import Settings3 from '../Components/Settings3.jsx'
-import Settings4 from '../Components/Settings4.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
@@ -61,12 +58,12 @@ class Main extends React.Component {
       username: "test",
       password: "test",
       port: "15672",
-      width: (window.innerWidth * 60) / 100,
-      height: (window.innerHeight * 95) / 100,
+      width: (window.innerWidth),
+      height: (parent.innerHeight),
       padding: 10,
       nodecards: [],
       visualizer: false,
-      hoverNode: false,
+      hoverNode: false, // Delete this!
     }
 
     this.blueBottle = null;
@@ -76,7 +73,6 @@ class Main extends React.Component {
     this.updatePort = this.updatePort.bind(this);
     this.visualize = this.visualize.bind(this);
     this.updateNodeCards = this.updateNodeCards.bind(this);
-    // this.decrementTarget = this.decrementTarget.bind(this);
   }
 
 
@@ -158,7 +154,7 @@ class Main extends React.Component {
         return this.setState({
           nodecards: [
             { "Total Received": node.message_stats.publish },
-            { "Received/s": node.message_stats.publish_details.rate },
+            { "Recieved/s": node.message_stats.publish_details.rate },
             { "Total Sent": node.message_stats.deliver_get === undefined ? '0': node.message_stats.deliver_get},
             { "Sent/s": node.message_stats.deliver_get_details === undefined ? '0': node.message_stats.deliver_get_details.rate},
           ]
@@ -177,35 +173,6 @@ class Main extends React.Component {
       default: return;
     }
   }
-
-  popup(popuprect) {
-    console.log('HOVERING')
-
-  }
-
-  popOff(node) {
-    console.log('UNHOVERING')
-    // this.setState({hoverNode: true})
-    const div = d3.select('div')
-
-    div.transition()
-      .duration(300)
-      .style('opacity', 0)
-  }
-  // decrementTarget(e) {
-  //   console.log(this.state)
-  //   let target = e.target.identifier;
-  //   let mute = e.target.mute;
-  //   if (e.target.mute === "false") {
-  //     e.target.mute = "true";
-  //     console.log('triggered with false')
-  //     this.setState({ [target]: this.state[target]-- })
-  //   } else if (e.target.mute === "true") {
-  //     e.target.mute = "false"
-  //     console.log('triggered with true')
-  //     this.setState({ [target]: this.state[target]++ })
-  //   }
-  // }
 
 
   render() {
@@ -232,7 +199,7 @@ class Main extends React.Component {
           <Display {...this.state} updateNodeCards={this.updateNodeCards} />
           {this.state.message_stats && <OverviewCards {...this.state} />}
           <NodeCards {...this.state} />
-          <Settings1 {...this.state} decrementTarget={this.decrementTarget} />
+          <Settings1 {...this.state} />
         </div>
       )
     }

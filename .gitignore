@@ -4,3 +4,5 @@ client/dist/bundle.js
 .env
 *.DS_Store
 *.Rhistory
+test/.DS_Store
+.DS_Store

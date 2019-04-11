@@ -1,22 +1,26 @@
-#!usr/bin/env node
-//using an exchange and using fanout borker type
-
 const amqp = require('amqplib/callback_api');
 require('dotenv').config();
 const uri = process.env.CATERPILLAR_URI
 // const uri = process.env.CLOUD_AMQP
 
+//type, exchange, binding, message,  uri
+let obj = {
+  type: 'fanout',
+  exchange: 'hatsu',
+  binding: '',
+  message: '',
+  uri: uri 
+};
+
 amqp.connect(uri, (err, conn) => {
   conn.createChannel((err, ch) => {
-
-    var ex = 'fanex';
     
-    ch.assertExchange(ex, 'fanout', {durable: false});
-    ch.assertQueue('', {exclusive: true}, (err, q)=> {
+    ch.assertExchange(obj.exchange, obj.type, {durable: false});
+    ch.assertQueue(obj.binding, {exclusive: true}, (err, q)=> {
       console.log('.-. waiting for messages', q.queue);
       
       //arguments: queueName  - exchangeName - key
-      ch.bindQueue(q.queue, ex, '');
+      ch.bindQueue(q.queue, obj.exchange, obj.binding);
       ch.consume(q.queue, function(msg){
         if (msg.content) {
           console.log('message:', msg.content.toString())
@@ -25,5 +29,3 @@ amqp.connect(uri, (err, conn) => {
     })
   })
 })
-
-export default fanoutReceiver;
