@@ -52,7 +52,6 @@ class Main extends React.Component {
     }
 
     this.blueBottle = null;
-    this.pause = false;
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
