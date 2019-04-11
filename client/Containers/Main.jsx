@@ -116,7 +116,7 @@ class Main extends React.Component {
     };
 
     this.blueBottle = new BlueBottle(userConfig);
-    this.setState({ visualizer: true });
+    this.setState({ visualizer: true, pause: false });
   }
 
   updateNodeCards(node) {
