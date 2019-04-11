@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
-// import { Base64 } from 'js-base64';
-const  {Base64} = require('js-base64');
+import { Base64 } from 'js-base64';
+
 
 
 /**
@@ -319,5 +319,4 @@ function massageData(result) {
   return data;
 }
 
-// export default Carrot;
-module.exports =  Carrot;
+export default Carrot;

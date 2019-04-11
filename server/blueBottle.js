@@ -1,12 +1,11 @@
-// import Carrot from './carrot-input.js';
-const Carrot = require('./carrot-input');
+import Carrot from './carrot-input.js';
 // BlueBottle is the library for parsing data for D3
 
 /**
  * This will parse the data from Carrot and prepare it for D3
  * 
  * @param {Object} config 
- * 
+ *
  * @output {Object} d3Data
  * 
  */

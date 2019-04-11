@@ -29,7 +29,7 @@ const renderQueues = (props) => {
      }
     return (
       <Tooltip title={props.nodes[props.producers+props.exchanges+index].name}>
-        <rect {...queuesProps} className={queuesProps.mute ? 'class93' : 'disappear'} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> 
+        <rect {...queuesProps} className={queuesProps.mute ? '' : 'disappear'} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> 
       </Tooltip>
     )
     //<rect> is d3 function
