@@ -13,12 +13,13 @@
   grid-template-rows: 8% 10% 10% 10% 10% 26% 26%;
   grid-gap: 5px;
   grid-template-areas: 
-    "instance instance instance instance instance instance viz"
+    "nonviz instance instance instance instance instance viz"
     "s1 s5 s5 s5 space s9 viz"
     "s2 s6 s6 s6 space s10 viz"
     "s4 s8 s8 s8 space s11 viz"
     "s3 s7 s7 s7 space s12 viz"
     "nodes-1 nodes-1 nodes-1 nodes-2 nodes-2 nodes-2 viz"
+    "nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz"
     "nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz"
 }
 
@@ -133,6 +134,12 @@
 
 }
 
+.nonviz {
+  grid-area: nonviz;
+  display:flex;
+  justify-content: space-around;
+  color: #ffffff !important;
+}
 
 /* .overview1 {
   grid-area: overview1;

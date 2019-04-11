@@ -1,6 +1,15 @@
 import Carrot from './carrot-input.js';
 // BlueBottle is the library for parsing data for D3
 
+/**
+ * This will parse the data from Carrot and prepare it for D3
+ * 
+ * @param {Object} config 
+ * 
+ * @output {Object} d3Data
+ * 
+ */
+
 // Pass the config data to Carrot
 function BlueBottle(config) {
   this.carrot = new Carrot(config);
