@@ -8,70 +8,35 @@ Enzyme.configure({ adapter: new Adapter() });
 // Alice objects and components
 import Carrot from '../server/carrot-input.js';
 import BlueBottle from '../server/blueBottle.js';
-import Settings1 from '../client/Components/Settings1.jsx';
+import SignIn from '../client/Components/SignIn.jsx';
 
-
-
-describe('Testing the carrot library (Hardcoded URI)', () => {
-    const carrots = require('../server/carrots.js');
-
-    test('fetch from rabbit OVERVIEW (promises)', () => {
-        return carrots.overview()
-                .then(data => {
-                    expect(data).toBeTruthy();
-                });
-    });
-
-    test('fetch from rabbit OVERVIEW (async/await)', async () => {
-        expect.assertions(1);
-        const data = await carrots.overview();
-        expect(data).toBeTruthy();
-    });
-
-    test('fetch from rabbit EXCHANGES (async/await)', async () => {
-        expect.assertions(1);
-        const data = await carrots.exchanges();
-        expect(data).toBeTruthy();
-    });
-
-    test('fetch from rabbit QUEUES (async/await)', async () => {
-        expect.assertions(1);
-        const data = await carrots.queues();
-        expect(data).toBeTruthy();
-    });
-
-    test('fetch from rabbit CONSUMERS (async/await)', async () => {
-        expect.assertions(1);
-        const data = await carrots.consumers();
-        expect(data).toBeTruthy();
-    });
-
-    test('fetch from rabbit CHANNELS (async/await)', async () => {
-        expect.assertions(1);
-        const data = await carrots.channels();
-        expect(data).toBeTruthy();
-    });
-
-    test('fetch from rabbit BINDINGS (async/await)', async () => {
-        expect.assertions(1);
-        const data = await carrots.bindings();
-        expect(data).toBeTruthy();
-    });
-
-    test('fetch from rabbit MOTHERLOAD (async/await)', async () => {
-        expect.assertions(1);
-        const data = await carrots.motherLoad();
-        expect(data).toBeTruthy();
-    });
-});
 
 let config = {
     host: '192.168.0.236', // process.env.RABBIT_HOST
     username: 'test', // process.env.RABBIT_USERNAME
     password: 'test', // process.env.RABBIT_PASSWORD
-    port: 15672
+    port: 15672,
+    isWeb: true
 };
 const carrot = new Carrot(config);
+
+// // define `append` as a mocked fn
+// const append = jest.fn();
+// // set test `Headers`
+// global.Headers = () => ({
+// headers: append,
+// });
+
+const bearer = 'Basic ' + Base64.encode(`${config.username}:${config.password}`);
+carrot.options = {
+    method: 'GET',
+    withCredentials: true,
+    credentials: 'included',
+    headers: {
+        Authorization: bearer,
+        'Content-Type': 'application/json'
+    },
+}
 
 describe('Testing the carrot library (User defined URI)', () => {
 
@@ -124,7 +89,9 @@ describe('Testing the carrot library (User defined URI)', () => {
 
 describe('Enzyme suite testing', () => {
     it('Should have a class name of "settings1"', () => {
-        expect(shallow(<Settings1 />).is('.settings1')).toBe(true);
+        const wrapper = shallow(<SignIn visualize="false" />);
+        console.log(wrapper);
+        expect(wrapper.prop("visualize")).toEqual("false");
     });
 });
 
@@ -134,10 +101,21 @@ describe('Blue bottle testing', () => {
         host: '192.168.0.236',
         username: 'test',
         password: 'test',
-        port: 15672
+        port: 15672,
+        isWeb: true,
     };
 
     const bb = new BlueBottle(config);
+    const bearer = 'Basic ' + Base64.encode(`${config.username}:${config.password}`);
+    bb.carrot.options = {
+        method: 'GET',
+        withCredentials: true,
+        credentials: 'included',
+        headers: {
+            Authorization: bearer,
+            'Content-Type': 'application/json'
+        },
+    }
 
     test('fetch from carrot MOTHERLOAD (async/await)', async () => {
         expect.assertions(1);

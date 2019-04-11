@@ -3,6 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Settings1 from '../Components/Settings1.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
+import SignOut from '../Components/SignOut.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
@@ -13,28 +14,11 @@ import Typography from '@material-ui/core/Typography';
 // "cluster_name": cluster_name,
 // "nodes": [],
 // "links": [],
+// "identifiers": [{binding: exchange}],
 // "producers": producers.length,
 // "exchanges": exchanges.length,
 // "queues": queues.length,
 // "consumers": consumers.length
-
-const purpleTheme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-  palette: {
-    primary: {
-      main: '#6200EE',
-    },
-    secondary: {
-      main: '#f44336',
-    },
-    error: {
-      main: '#ffffff',
-    }
-  },
-  spacing: 10
-})
 
 function makeTitles(d3Data) {
   const titles = [];
@@ -62,16 +46,17 @@ class Main extends React.Component {
       // password: "4444",
 
       port: "15672",
-      width: (window.innerWidth * 60) / 100,
-      height: (window.innerHeight * 95) / 100,
+      width: (window.innerWidth),
+      height: (parent.innerHeight),
       padding: 10,
       nodecards: [],
       visualizer: false,
-      hoverNode: false,// Delete this!
-      toggled: {}
+      toggled: {},
+      pause: false
     }
 
     this.blueBottle = null;
+    this.pause = false;
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -79,8 +64,9 @@ class Main extends React.Component {
     this.visualize = this.visualize.bind(this);
     this.updateNodeCards = this.updateNodeCards.bind(this);
     this.toggleVisibility = this.toggleVisibility.bind(this);
+    this.configureInstance = this.configureInstance.bind(this);
+    this.toggleStartStop = this.toggleStartStop.bind(this);
   }
-
 
   async tick() {
     if (this.blueBottle === null) return;
@@ -101,28 +87,27 @@ class Main extends React.Component {
   componentDidMount() {
     this.timer = setInterval(
       () => {
+        if(this.state.pause) return;
+
         this.tick()
         console.log(this.state)
       }
       , 900)
   }
-
   componentWillUnmount() {
-    clearInterval(this.timer)
+    this.blueBottle = null;
+    clearInterval(this.timer);
   }
 
   updateHostname(e) {
     this.setState({ hostname: e.target.value });
   };
-
   updateUsername(e) {
     this.setState({ username: e.target.value });
   };
-
   updatePassword(e) {
     this.setState({ password: e.target.value });
   };
-
   updatePort(e) {
     this.setState({ port: e.target.value });
   };
@@ -134,18 +119,20 @@ class Main extends React.Component {
      nodes.forEach((x)=>{
        console.log(e.target.id)
       if (x.identifier === e.target.id && x.group === 2){
-        
-        console.log('first', newToggled)
-        // x.visibility = false;
         newToggled[x.identifier] = !newToggled[x.identifier];
-        console.log('second', newToggled)
       }
-    
     })
     this.setState({ toggled: Object.assign(newToggled) })
   }
 
+  toggleStartStop(e){
+    this.setState({pause: !this.state.pause})
+  }
+  configureInstance(e){
+    this.setState({ visualizer: false })
+  }
   visualize(e) {
+    console.log('Visualize: ', e);
     const userConfig = {
       host: this.state.hostname,
       username: this.state.username,
@@ -155,7 +142,7 @@ class Main extends React.Component {
     };
 
     this.blueBottle = new BlueBottle(userConfig);
-    this.setState({ visualizer: true })
+    this.setState({ visualizer: true });
   }
 
   updateNodeCards(node) {
@@ -185,7 +172,7 @@ class Main extends React.Component {
         return this.setState({
           nodecards: [
             { "Total Received": node.message_stats.publish },
-            { "Received/s": node.message_stats.publish_details.rate },
+            { "Recieved/s": node.message_stats.publish_details.rate },
             { "Total Sent": node.message_stats.deliver_get === undefined ? '0': node.message_stats.deliver_get},
             { "Sent/s": node.message_stats.deliver_get_details === undefined ? '0': node.message_stats.deliver_get_details.rate},
           ]
@@ -208,9 +195,7 @@ class Main extends React.Component {
 
   render() {
     if (!this.state.visualizer) {
-      document.body.classList.remove('background')
       return (
-        <MuiThemeProvider theme={purpleTheme}>
           <SignIn className="container"
             updateHostname={this.updateHostname}
             updateUsername={this.updateUsername}
@@ -218,14 +203,14 @@ class Main extends React.Component {
             updatePort={this.updatePort}
             visualize={this.visualize}
             {...this.state}
-          />
-        </MuiThemeProvider>)
+          />)
     } else {
       document.body.classList.add('background-vis')
       return (
         <div className="grid-reloaded">
+          <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} />
           <div className="instance">
-            <Typography color="inherit"><h1>RabbitMQ Instance: {this.state.cluster_name}</h1></Typography>
+            <Typography color="inherit"><h1>RabbitMQ Instance: {this.state.cluster_name}</h1><h3>{this.state.hostname}</h3></Typography>
           </div>
           <Display {...this.state} updateNodeCards={this.updateNodeCards} />
           {this.state.message_stats && <OverviewCards {...this.state} />}
