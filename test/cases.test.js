@@ -87,11 +87,12 @@ describe('Testing the carrot library (User defined URI)', () => {
     });
 });
 
+
 describe('Enzyme suite testing', () => {
     it('Should have a class name of "settings1"', () => {
         const wrapper = shallow(<SignIn visualize="false" />);
         console.log(wrapper);
-        expect(wrapper.prop("visualize")).toEqual("false");
+        expect(wrapper).toEqual("false");
     });
 });
 
