@@ -13,10 +13,10 @@ const renderExchanges = (props) => {
       strokeWidth: 5,
       fillOpacity: 0.8,
       fill: "red",
-      mute: coords.visibility
+      mute: coords.visibility.toString()
     }
     return (
-      <Tooltip title={props.nodes[props.producers+index].name || "default"}>
+      <Tooltip key={index} title={props.nodes[props.producers+index].name || "default"}>
         <circle className={coords.visibility ? "" : "disappear"}  {...exchangeProps}onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+index])}/>
       </Tooltip>
     ) // <rect> is d3 function

@@ -89,13 +89,14 @@ describe('Testing the carrot library (User defined URI)', () => {
     });
 });
 
+
 describe('Enzyme suite testing', () => {
     xit('Should have a class name of "settings1"', () => {
     
         const wrapper.mount(<Main hostName="192.168.0.236"/>)
         wrapper = shallow(<Main hostName="192.168.0.236" />);
         console.log(wrapper);
-        expect(wrapper.props().hostName).toBe('192.168.0.236');
+        expect(wrapper).toEqual("false");
     });
 });
 
