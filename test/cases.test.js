@@ -40,7 +40,7 @@ carrot.options = {
     },
 }
 
-describe('Testing the carrot library (User defined URI)', () => {
+xdescribe('Testing the carrot library (User defined URI)', () => {
 
     test('Host is set correctly', () => {
         expect(carrot.host).toBe(config.host);
@@ -114,7 +114,7 @@ describe('Enzyme suite testing', () => {
       });
 });
 
-describe('Blue bottle testing', () => {
+xdescribe('Blue bottle testing', () => {
 
     const config = {
         host: '192.168.0.236',
