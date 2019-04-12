@@ -26,7 +26,7 @@ function carrot2D3(carrotData) {
   } = carrotData;
 
   // Preparing a canvas
-  let calcWidth = (window.innerWidth * 67) / 100
+  let calcWidth = (window.innerWidth * 65) / 100
   let calcHeight = (parent.innerHeight)
 
   // Provides the app the state for D3
@@ -183,7 +183,7 @@ function carrot2D3(carrotData) {
   buildNodes(consumers, 4);
   linkConsumersToQueues(consumers, queues);
   linkExchangeToQueues(bindings, queues);
-  linkFanoutExchangesToAllQueues(exchanges);
+  // linkFanoutExchangesToAllQueues(exchanges);
   fixOverviewMessageStats(d3Data);
 
   return d3Data

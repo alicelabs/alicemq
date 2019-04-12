@@ -8,7 +8,7 @@ const renderLinks = (props) => {
      if (rate === 0) {
    lineColor = '#bdbdbd'
  } else if (rate > 0 && rate <= 50) {
-   lineColor = '#4caf50'
+   lineColor = '#b9f6ca'
  } else if (rate > 50 && rate <= 150) {
    lineColor = '#ffeb3b'
  } else if (rate > 150 && rate <= 500) {

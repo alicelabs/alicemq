@@ -28,7 +28,7 @@ const OverviewCards = (props) => {
   return (
     <React.Fragment>
       
-        <Card className="s1">
+        <Card className="s1" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Total Delivered
@@ -39,7 +39,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="s2">
+        <Card className="s2" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Published/s
@@ -51,7 +51,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="s3">
+        <Card className="s3" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Producers
@@ -62,7 +62,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="s4">
+        <Card className="s4" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Exchanges
@@ -73,7 +73,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="s5">
+        <Card className="s5" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               In-Queue
@@ -84,7 +84,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="s6">
+        <Card className="s6" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Deliveries/s
@@ -95,7 +95,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="s7">
+        <Card className="s7" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Consumers
@@ -106,7 +106,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
 
-        <Card className="s8">
+        <Card className="s8" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Queues
