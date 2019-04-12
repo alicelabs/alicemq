@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Settings1 from '../Components/Settings1.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
@@ -89,7 +88,6 @@ class Main extends React.Component {
         if(this.state.pause) return;
 
         this.tick()
-        console.log(this.state)
       }
       , 900)
   }
@@ -113,10 +111,8 @@ class Main extends React.Component {
 
   toggleVisibility(e) {
     let nodes = this.state.nodes;
-    console.log('stateNodes', this.state.nodes)
     let newToggled = this.state.toggled;
      nodes.forEach((x)=>{
-       console.log(e.target.id)
       if (x.identifier === e.target.id && x.group === 2){
         newToggled[x.identifier] = !newToggled[x.identifier];
       }
@@ -131,7 +127,6 @@ class Main extends React.Component {
     this.setState({ visualizer: false })
   }
   visualize(e) {
-    console.log('Visualize: ', e);
     const userConfig = {
       host: this.state.hostname,
       username: this.state.username,
@@ -145,7 +140,6 @@ class Main extends React.Component {
   }
 
   updateNodeCards(node) {
-    console.log(node)
     switch (node.group) {
       case 1: {
         return this.setState({
@@ -209,7 +203,7 @@ class Main extends React.Component {
         <div className="grid-reloaded">
           <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} />
           <div className="instance">
-            <Typography color="inherit"><h1>RabbitMQ Instance: {this.state.cluster_name}</h1><h3>{this.state.hostname}</h3></Typography>
+            <h1><Typography variant="h5" color="inherit">RabbitMQ Instance: {this.state.cluster_name}</Typography></h1><h3><Typography color="inherit">{this.state.hostname}</Typography></h3>
           </div>
           <Display {...this.state} updateNodeCards={this.updateNodeCards} />
           {this.state.message_stats && <OverviewCards {...this.state} />}

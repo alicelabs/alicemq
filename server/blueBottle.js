@@ -142,7 +142,6 @@ function carrot2D3(carrotData) {
     b.forEach((binding) => {
       const exchangeName = binding.exchange_name
       d3Data.nodes.forEach((node, i) => {
-        console.log(node.name)
 
         if ( (node.name === exchangeName)  && node.group === 2 ) {
           let currentExchange = exchanges[exchanges.findIndex(el => el.name === exchangeName)]

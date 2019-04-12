@@ -16,7 +16,7 @@ const renderProducers = (props) => {
       fill: "blue"
     }
     return (
-      <Tooltip title={props.nodes[index].name}>
+      <Tooltip key={index} title={props.nodes[index].name}>
       <rect {...producerProps} onClick={(e)=>props.updateNodeCards(props.nodes[index])}/>
       </Tooltip>
       ) // <rect> is d3 function
