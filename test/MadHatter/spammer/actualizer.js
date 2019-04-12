@@ -5,8 +5,8 @@ const amqp = require('amqplib/callback_api');
 
 //type, exchange, binding, message,  uri
 let obj = {
-  type: 'direct',
-  exchange: 'sumo',
+  type: 'fanout',
+  exchange: 'hatsu',
   binding: 'b6',
   message: 'b6 fanout',
   uri: uri 

@@ -13,7 +13,7 @@ const renderExchanges = (props) => {
       strokeWidth: 5,
       fillOpacity: 0.8,
       fill: "red",
-      mute: coords.visibility.toString()
+      mute: coords.visibility
     }
     return (
       <Tooltip key={index} title={props.nodes[props.producers+index].name || "default"}>
