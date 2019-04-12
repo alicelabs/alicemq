@@ -30,7 +30,7 @@ const Settings1 = (props) => {
 
     exchanges = props.nodes.map((node, i) => {
       if (node.group === 2) {
-        return <Toggle key={i} content={node.name} />
+        return <Toggle key={i} ex="1" mute={props.mute} content={node.name} />
       }
     })
 
