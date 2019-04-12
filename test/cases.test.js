@@ -9,6 +9,8 @@ Enzyme.configure({ adapter: new Adapter() });
 import Carrot from '../server/carrot-input.js';
 import BlueBottle from '../server/blueBottle.js';
 import SignIn from '../client/Components/SignIn.jsx';
+import Main from '../client/Containers/Main.jsx';
+
 
 
 let config = {
@@ -88,10 +90,12 @@ describe('Testing the carrot library (User defined URI)', () => {
 });
 
 describe('Enzyme suite testing', () => {
-    it('Should have a class name of "settings1"', () => {
-        const wrapper = shallow(<SignIn visualize="false" />);
+    xit('Should have a class name of "settings1"', () => {
+    
+        const wrapper.mount(<Main hostName="192.168.0.236"/>)
+        wrapper = shallow(<Main hostName="192.168.0.236" />);
         console.log(wrapper);
-        expect(wrapper.prop("visualize")).toEqual("false");
+        expect(wrapper.props().hostName).toBe('192.168.0.236');
     });
 });
 

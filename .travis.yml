@@ -1,0 +1,10 @@
+language: node.js
+node_js:
+  - '11.9.0'
+branches: 
+  only: 
+  - master
+before-install: 
+  - npm i -g  
+script: 
+  - npm tests
