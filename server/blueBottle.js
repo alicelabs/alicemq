@@ -142,12 +142,6 @@ function carrot2D3(carrotData) {
     b.forEach((binding) => {
       const queueName = binding.queue_name
       d3Data.nodes.forEach((node, i) => {
-<<<<<<< HEAD
-
-        if ( (node.name === exchangeName)  && node.group === 2 ) {
-          let currentExchange = exchanges[exchanges.findIndex(el => el.name === exchangeName)]
-          let message_rate = currentExchange.message_stats.publish_out_details.rate;
-=======
         if (node.name === queueName && node.group === 3) {
           let currentQueue = queues[queues.findIndex(el => el.name === queueName)]
           
@@ -156,7 +150,6 @@ function carrot2D3(carrotData) {
           }
 
           let message_rate = currentQueue.message_stats.publish_details.rate;
->>>>>>> 3123481aea0a2d204c1db3845382d6066d38f48a
           // Handles the case it will draw a negative line so we assign 1 to avoid that
           if (message_rate < 0) {
             message_rate = 1
@@ -200,10 +193,6 @@ function carrot2D3(carrotData) {
   buildNodes(consumers, 4);
   linkConsumersToQueues(consumers, queues);
   linkExchangeToQueues(bindings, queues);
-<<<<<<< HEAD
-  // linkFanoutExchangesToAllQueues(exchanges);
-=======
->>>>>>> 3123481aea0a2d204c1db3845382d6066d38f48a
   fixOverviewMessageStats(d3Data);
 
   return d3Data

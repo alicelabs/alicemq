@@ -7,4 +7,5 @@ branches:
 before-install: 
   - npm i -g  
 script: 
-  - npm tests
+  - npm run tests
+  
