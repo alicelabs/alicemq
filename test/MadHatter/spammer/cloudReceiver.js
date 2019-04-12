@@ -5,8 +5,8 @@ const uri = process.env.CATERPILLAR_URI
 
 //type, exchange, binding, message,  uri
 let obj = {
-  type: 'direct',
-  exchange: 'sumo',
+  type: 'fanout',
+  exchange: 'hatsu',
   binding: 'b6',
   message: 'b6 on fanout',
   uri: uri 
