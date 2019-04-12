@@ -2,6 +2,7 @@ require('dotenv').config();
 // Enzyme config
 import React from 'react';
 import Enzyme, { shallow, mount, render } from 'enzyme';
+import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -9,6 +10,7 @@ Enzyme.configure({ adapter: new Adapter() });
 import Carrot from '../server/carrot-input.js';
 import BlueBottle from '../server/blueBottle.js';
 import SignIn from '../client/Components/SignIn.jsx';
+import Button from '../client/Components/Button.jsx';
 
 
 let config = {
@@ -89,11 +91,27 @@ describe('Testing the carrot library (User defined URI)', () => {
 
 
 describe('Enzyme suite testing', () => {
-    it('Should have a class name of "settings1"', () => {
-        const wrapper = shallow(<SignIn visualize="false" />);
-        console.log(wrapper);
-        expect(wrapper).toEqual("false");
+    it('SignIn should have a Button rendered', () => {
+        const wrapper = shallow(<SignIn />);
+        expect(wrapper.find(Button)).toHaveLength(1);
     });
+    it('Should have a class name of "settings1"', () => {
+        const wrapper = shallow(<SignIn />);
+        expect(wrapper.find('.login-box')).toHaveLength(1);
+    });
+    it('Should have a class name of "container"', () => {
+        const wrapper = mount(<SignIn className="container" />);
+        expect(wrapper.props().className).toBe("container");
+    });
+
+    it('simulates change event on hostname', () => {
+        const onChangeTextField = sinon.spy();
+        const wrapper = shallow(<SignIn updateHostname={onChangeTextField} />);
+        wrapper.find('#host').simulate('change');
+        wrapper.find('#host').simulate('change');
+        wrapper.find('#host').simulate('change');
+        expect(onChangeTextField).toHaveProperty('callCount', 3);
+      });
 });
 
 describe('Blue bottle testing', () => {
