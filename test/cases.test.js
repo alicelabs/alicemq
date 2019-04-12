@@ -10,12 +10,9 @@ Enzyme.configure({ adapter: new Adapter() });
 import Carrot from '../server/carrot-input.js';
 import BlueBottle from '../server/blueBottle.js';
 import SignIn from '../client/Components/SignIn.jsx';
-<<<<<<< HEAD
 import Button from '../client/Components/Button.jsx';
-=======
 import Main from '../client/Containers/Main.jsx';
 
->>>>>>> f6f5be1a40067c43fbca7e280d88121a2dc4fdc5
 
 
 let config = {
