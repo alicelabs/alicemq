@@ -3,7 +3,6 @@ import Button from './Button.jsx'
 import Typography from '@material-ui/core/Typography'
 import {TextField} from '@material-ui/core'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import FormControl from '@material-ui/core/FormControl';
 
 
 const purpleTheme = createMuiTheme({
@@ -18,7 +17,7 @@ const purpleTheme = createMuiTheme({
       main: '#e1e1dd',
     },
     error: {
-      main: '#ffffff',
+      main: '#aa0000',
     }
   },
   spacing: 10
@@ -33,16 +32,17 @@ function SignIn(props) {
     <div className='login-box'>
     <Typography variant = 'h4' color="primary" >Alice Visualizer</Typography>
       <TextField
-        id='host'
-        variant='outlined'
+        id='Host'
         label='Host'
+        variant='outlined'
         type='text'
         name='host'
-        placeholder='RabbitMQ HTTP Hostname'
+        placeholder='RabbitMQ IP Address'
         onChange={ props.updateHostname }
         onBlur={ props.validateHostname }
         margin='dense'
-        required='true'
+        autoFocus='true'
+        error={props.errorHostname ? true : false}
       />
       <TextField
         id='username'
@@ -55,6 +55,7 @@ function SignIn(props) {
         variant='outlined'
         margin="dense"
         required='true'
+        error={props.errorUsername ? true : false}
       />
       <TextField
         id='password'
@@ -66,6 +67,7 @@ function SignIn(props) {
         onBlur={ props.validatePassword }
         margin="dense"
         required='true'
+        error={props.errorPassword ? true : false}
       />
       <TextField
         id='port'
@@ -78,6 +80,7 @@ function SignIn(props) {
         label='Port'
         margin='dense'
         required='true'
+        error={props.errorPort ? true : false}
       />
     </div>
     <div id='signIn'>
@@ -89,5 +92,6 @@ function SignIn(props) {
     </div>
     </MuiThemeProvider>)
 }
+
 
 export default SignIn;
