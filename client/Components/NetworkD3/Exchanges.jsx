@@ -5,6 +5,7 @@ const renderExchanges = (props) => {
   return (coords, index) => {
     let lineColor;
     let rate = props.nodes[props.producers+index].message_stats.publish_out_details.rate;
+    console.log('exchange rate: ', rate)
      if (rate === 0) {
     lineColor = '#bdbdbd'
   } else if (rate > 0 && rate <= 50) {
