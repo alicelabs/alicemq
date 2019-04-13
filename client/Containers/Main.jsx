@@ -206,8 +206,7 @@ class Main extends React.Component {
       document.body.classList.add('background-vis')
       return (
         <div className="grid-reloaded">
-          <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} />
-          <TrafficButton {...this.state} toggleMode={this.toggleMode} />
+          <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} toggleMode={this.toggleMode} />
           <div className="instance">
             <h1><Typography variant="h5" color="inherit">RabbitMQ Instance: {this.state.cluster_name}</Typography></h1><h3><Typography color="inherit">{this.state.hostname}</Typography></h3>
           </div>
