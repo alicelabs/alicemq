@@ -92,6 +92,25 @@
   grid-area: s12;
 }
 
+.ocard {
+  padding-top: .4em; 
+  align-content: center;
+  text-align: center;
+  line-height: 1.5em;
+  vertical-align: middle;
+}
+
+.card-title{
+  font-family: 'Roboto';
+  font-size: 1rem;
+}
+
+.card-content{
+  font-family: 'Roboto';
+  font-size: 1rem;
+  padding-top: 2px;
+  text-align: center;
+}
 
 .nodes-1 {
   grid-area: nodes-1;

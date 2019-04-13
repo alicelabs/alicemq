@@ -29,14 +29,13 @@ const OverviewCards = (props) => {
     <React.Fragment>
       
         <Card className="s1">
-          <CardContent>
-            <Typography color='inherit' gutterBottom>
-              Total Delivered
-        </Typography>
-            <Typography variant="h5" component="h2" color='inherit'>
-              {numeral(`${props.message_stats.deliver_get}`).format('0,0')}
-            </Typography>
-          </CardContent>
+        <div className="ocard">
+        <span className="card-title">
+        Total Delivered<br />
+        </span><span className="card-content">
+        {props.message_stats.deliver_get}
+        </span>
+        </div>
         </Card>
 
         <Card className="s2">
