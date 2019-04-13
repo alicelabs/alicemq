@@ -6,7 +6,6 @@
   "scripts": {
     "test": "nodemon server/api/index.js",
     "tests": "jest",
-    "travis": "npm i -g && npm run tests",
     "dev": "webpack-dev-server",
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "web": "webpack-dev-server --config webpack.config.js",
