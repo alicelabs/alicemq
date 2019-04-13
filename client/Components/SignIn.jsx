@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography'
 import {TextField} from '@material-ui/core'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
-
 const purpleTheme = createMuiTheme({
   typography: {
     useNextVariants: true,
@@ -41,7 +40,7 @@ function SignIn(props) {
         onChange={ props.updateHostname }
         onBlur={ props.validateHostname }
         margin='dense'
-        autoFocus='true'
+        autoFocus={true}
         error={props.errorHostname ? true : false}
       />
       <TextField

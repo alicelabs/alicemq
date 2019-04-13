@@ -87,14 +87,19 @@ class Main extends React.Component {
 
   async tick() {
     if (this.blueBottle === null) return;
-    const d3Data = await this.blueBottle.getData();
-    await d3Data.nodes.forEach((x)=>{
-      if (this.state.toggled[x.identifier]){
-        x.visibility = false
-      } else {x.visibility = true}
-    })
-    const dataTitles = makeTitles(d3Data);
-    this.setState({ ...d3Data, titles: dataTitles });
+    try{
+      const d3Data = await this.blueBottle.getData();
+      d3Data.nodes.forEach((x)=>{
+        if (this.state.toggled[x.identifier]){
+          x.visibility = false
+        } else {x.visibility = true}
+      })
+      const dataTitles = makeTitles(d3Data);
+      this.setState({ ...d3Data, titles: dataTitles });
+    }
+    catch(e){
+      console.log('ERROR TO USER(MAIN): ' + e);
+    }
   }
 
   componentWillMount() {
