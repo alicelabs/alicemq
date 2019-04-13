@@ -3,6 +3,9 @@
   color: white;
 } */
 
+html {
+  font-size: calc(10px + (18 - 10) * ((100vw - 600px) / (1800 - 600)));
+ }
 
 .grid-reloaded {
   position: fixed;
@@ -10,10 +13,11 @@
   height: 95%;
   width: 100%;
   grid-template-columns: 10% 3% 3.5% 3.5% 3% 10% 67%;
-  grid-template-rows: 8% 10% 10% 10% 10% 26% 26%;
+  grid-template-rows: 8% 8% 8% 8% 8% 8% 26% 26%;
   grid-gap: 5px;
   grid-template-areas: 
-    "nonviz instance instance instance instance instance viz"
+    "instance instance instance instance instance instance viz"
+    "traffic-mode traffic-mode stop stop signout signout viz"
     "s1 s5 s5 s5 space s9 viz"
     "s2 s6 s6 s6 space s10 viz"
     "s4 s8 s8 s8 space s11 viz"
@@ -23,9 +27,59 @@
     "nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz"
 }
 
+svg {
+  background-color: #FFFFFF;
+  display: block;
+  position:fixed; 
+  top: 0; 
+  height:100%; 
+  width:65%;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 950px) {
+  
+
+  .grid-reloaded {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 25% 25% 25% 25% ;
+    grid-template-rows: 90% 10%;
+    grid-gap: 5px;
+    grid-template-areas: 
+      "viz viz viz viz"
+      "s2 traffic-mode signout stop";
+  }
+
+  svg {
+    background-color: #FFFFFF;
+    position: relative !important;
+    display: block;
+    top: 0; 
+    width:100% ;
+    border-radius: 5px;
+    padding-left: 0px;
+    margin-left: 0px;
+    padding: auto !important;
+    margin: auto !important;
+    left: -1.1%;
+    
+  }
+  
+  .viz {
+    background-color: #995DFF;
+    top:0; 
+    width: 100%;
+    height:100%; 
+    grid-area: viz;
+  }
+}
+
 .instance {
   grid-area: instance;
   color: white !important;
+  font-family: 'Roboto';
+  font-size: 1.2em;
 }
 
 .s1 {
@@ -92,6 +146,38 @@
   grid-area: s12;
 }
 
+.ocard {
+  padding-top: .7em; 
+  align-content: center;
+  text-align: center;
+  line-height: 1.5em;
+  vertical-align: middle;
+  
+}
+
+.signout {
+  grid-area: signout;
+}
+
+.stop {
+  grid-area: stop;
+}
+
+.roboto {
+  font-family: 'Roboto';
+}
+
+.card-title{
+  font-family: 'Roboto';
+  font-size: .8rem;
+}
+
+.card-content{
+  font-family: 'Roboto';
+  font-size: 1.4rem;
+  padding-top: 2px;
+  text-align: center;
+}
 
 .nodes-1 {
   grid-area: nodes-1;
@@ -136,14 +222,13 @@
 
 .nonviz {
   grid-area: nonviz;
-  display:flex;
+  display: flex;
   justify-content: space-around;
   color: #ffffff !important;
 }
 
 
 .settings1 {
-  background-color: aquamarine;
   grid-area: settings1
 }
 
@@ -154,12 +239,6 @@
   align-items: center;
   color: #DAB2FF;
 }
-
-.settings4 {
-  background-color: rgb(87, 223, 177);
-  grid-area: settings4;
-}
-
 
 .login-box {
   margin: 10% auto 0;
@@ -192,18 +271,6 @@ h1 {
   text-align: center;
 }
 
-svg {
-  background-color: #FFFFFF;
-  display: block;
-  position:fixed; 
-  left:35%;
-  top: 0; 
-  height:100%; 
-  width:65%;
-  padding-left: 7px;
-  margin-left: 10px;
-}
-
 .axis path, .axis line {
   fill: none;
   stroke: black;
@@ -231,13 +298,9 @@ svg {
 
 /* CSS for initial D3 setup: ABOVE */
 
-.popup {
-  height: 30px;
-  width: 60px;
-  background-color: #995DFF
-}
 
 .noDots {
+  font-family: 'Roboto';
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -249,4 +312,13 @@ svg {
 
 .disappear {
   display: none;
+}
+
+.material-button {
+  min-height: inherit;
+  font-size: .7em;
+}
+
+.traffic-mode {
+  grid-area: traffic-mode;
 }

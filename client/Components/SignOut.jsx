@@ -27,25 +27,32 @@ const startStopTheme = createMuiTheme({
     useNextVariants: true,
   },
   palette: {
-    primary: {main:'#00a300'}, // gray
-    secondary: {main:'#cc0028'}, // red
+    primary: { main: '#00a300' }, // gray
+    secondary: { main: '#cc0028' }, // red
   },
   spacing: 10
 });
 
 
 const SignOut = (props) => {
-    return(
+  return (
+    <React.Fragment>
+      <div className="signout">
         <MuiThemeProvider theme={buttonTheme}>
-            <div className="nonviz">
-                <Button width='75%' variant="contained" color="primary" onClick={props.configureInstance} >Sign out</Button>
-                <MuiThemeProvider theme={startStopTheme}>
-                    <Button width='75%' variant="contained" color={props.pause ? "primary" : "secondary"} onClick={props.toggleStartStop}>{props.pause ? "START" : "STOP"}</Button>
-                </MuiThemeProvider>
+          <Button classes={{ label: 'material-button' }} fullWidth={true} variant="contained" size='large'  color="primary" onClick={props.configureInstance} >Sign out</Button>
+        </MuiThemeProvider>
+      </div>
+      <div className="traffic-mode">
                 <TrafficButton {...props} toggleMode={props.toggleMode} />
             </div>
+
+      <div className="stop">
+        <MuiThemeProvider theme={startStopTheme}>
+          <Button classes={{ label: 'material-button' }} fullWidth={true} variant="contained" size='large' color={props.pause ? "primary" : "secondary"} onClick={props.toggleStartStop}>{props.pause ? "START" : "STOP"}</Button>
         </MuiThemeProvider>
-    )
+      </div>
+      </React.Fragment>
+  )
 }
 
 export default SignOut;
