@@ -31,7 +31,7 @@ function SignIn(props) {
     <div className='login-box'>
     <Typography variant = 'h4' color="primary" >Alice Visualizer</Typography>
       <TextField
-        id='Host'
+        id='host'
         label='Host'
         variant='outlined'
         type='text'
