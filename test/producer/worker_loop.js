@@ -11,7 +11,7 @@ amqp.connect(URI, (err, conn) => {
 
     ch.assertQueue(q, {durable: false}); // message is not persistent
     setInterval(() => {
-      for(let i = 0; i < 20; i++){
+      for(let i = 0; i < 200; i++){
         ch.sendToQueue(q, new Buffer.from(`${i}`), {persistent: false});
       }
       console.log(" [x] Message Sent");

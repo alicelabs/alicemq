@@ -3,6 +3,21 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const renderProducers = (props) => {
   return (coords, index) => {
+    let lineColor;
+    let rate = props.nodes[index].message_stats.publish_details === undefined ? 0 : props.nodes[index].message_stats.publish_details.rate
+     if (rate === 0) {
+   lineColor = '#bdbdbd'
+  } else if (rate > 0 && rate <= 50) {
+   lineColor = '#b9f6ca'
+  } else if (rate > 50 && rate <= 150) {
+   lineColor = '#ffeb3b'
+  } else if (rate > 150 && rate <= 500) {
+   lineColor = '#f9a825'
+  } else if (rate > 500 && rate <= 2000) {
+   lineColor = '#ff5722'
+  } else if (rate > 2000) {
+  lineColor = '#b71c1c'
+  }
     const producerProps = {
       x: props.nodes[index].x,
       y: props.nodes[index].y,
@@ -12,8 +27,8 @@ const renderProducers = (props) => {
       height: 50,
       key: index,
       stroke: 'black',
-      strokeWidth: 5,
-      fill: "blue"
+      strokeWidth: 3,
+      fill: lineColor
     }
     return (
       <Tooltip key={index} title={props.nodes[index].name}>

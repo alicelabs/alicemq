@@ -3,6 +3,22 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const renderExchanges = (props) => {
   return (coords, index) => {
+    let lineColor;
+    let rate = props.nodes[props.producers+index].message_stats.publish_out_details.rate;
+    console.log('exchange rate: ', rate)
+     if (rate === 0) {
+    lineColor = '#bdbdbd'
+  } else if (rate > 0 && rate <= 50) {
+    lineColor = '#b9f6ca'
+  } else if (rate > 50 && rate <= 150) {
+    lineColor = '#ffeb3b'
+  } else if (rate > 150 && rate <= 500) {
+    lineColor = '#f9a825'
+  } else if (rate > 500 && rate <= 2000) {
+    lineColor = '#ff5722'
+  } else if (rate > 2000) {
+    lineColor = '#b71c1c'
+  }
     const exchangeProps = {
 
       cx: props.nodes[props.producers+index].x,
@@ -10,9 +26,8 @@ const renderExchanges = (props) => {
       r: props.nodes[props.producers+index].r + 10,
       key: props.producers + index,
       stroke: 'black',
-      strokeWidth: 5,
-      fillOpacity: 0.8,
-      fill: "red",
+      strokeWidth: 3,
+      fill: lineColor,
       mute: coords.visibility
     }
     return (

@@ -54,10 +54,10 @@ const OverviewCards = (props) => {
         <Card className="s3" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
-              Producers
+              Total Published
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
-              {numeral(`${props.producers}`).format('0,0')}
+              {numeral(`${props.message_stats.publish}`).format('0,0')}
             </Typography>
           </CardContent>
         </Card>
@@ -65,10 +65,10 @@ const OverviewCards = (props) => {
         <Card className="s4" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
-              Exchanges
+              Total Deliverd No Ack
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
-              {numeral(`${props.exchanges}`).format('0,0')}
+              {numeral(`${props.message_stats.deliver_no_ack}`).format('0,0')}
             </Typography>
           </CardContent>
         </Card>
@@ -98,10 +98,10 @@ const OverviewCards = (props) => {
         <Card className="s7" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
-              Consumers
+              Total Redelivered
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
-              {numeral(`${props.consumers}`).format('0,0')}
+              {numeral(`${props.message_stats.redeliver}`).format('0,0')}
             </Typography>
           </CardContent>
         </Card>
@@ -109,10 +109,10 @@ const OverviewCards = (props) => {
         <Card className="s8" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
-              Queues
+              Disk Writes
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
-              {numeral(`${props.queues}`).format('0,0')}
+              {numeral(`${props.message_stats.disk_writes}`).format('0,0')}
             </Typography>
           </CardContent>
         </Card>
