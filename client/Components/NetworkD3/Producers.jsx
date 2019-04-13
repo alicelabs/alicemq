@@ -3,6 +3,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const renderProducers = (props) => {
   return (coords, index) => {
+    let lineColor = "blue";
+    let rate = props.nodes[index].message_stats.publish_details === undefined ? 0 : props.nodes[index].message_stats.publish_details.rate;
+    
+    if(props.trafficMode)
+      lineColor = props.setColors(rate);
+
     const producerProps = {
       x: props.nodes[index].x,
       y: props.nodes[index].y,
@@ -13,7 +19,7 @@ const renderProducers = (props) => {
       key: index,
       stroke: 'black',
       strokeWidth: props.width / 250,
-      fill: "blue"
+      fill: lineColor
     }
     return (
       <Tooltip key={index} title={props.nodes[index].name}>
