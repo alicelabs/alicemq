@@ -3,6 +3,9 @@
   color: white;
 } */
 
+html {
+  font-size: calc(10px + (18 - 10) * ((100vw - 600px) / (1800 - 600)));
+ }
 
 .grid-reloaded {
   position: fixed;
