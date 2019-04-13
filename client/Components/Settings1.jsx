@@ -50,19 +50,19 @@ const Settings1 = (props) => {
   return (
     <React.Fragment>
       <div className="nodes-1">
-        <h3><Typography color="inherit">Producers: {props.producers}</Typography></h3>
+        <h3 className="roboto">Producers: {props.producers}</h3>
         <ul className="noDots">{producers}</ul>
       </div>
       <div className="nodes-2">
-      <h3><Typography color="inherit">Exchanges: {props.exchanges}</Typography></h3>
+      <h3 className="roboto">Exchanges: {props.exchanges}</h3>
         <ul className="noDots">{exchanges}</ul>
       </div>
       <div className="nodes-3">
-      <h3><Typography color="inherit">Queues: {props.queues}</Typography></h3>
+      <h3 className="roboto">Queues: {props.queues}</h3>
         <ul className="noDots">{queues}</ul>
       </div>
       <div className="nodes-4">
-      <h3><Typography color="inherit">Consumers: {props.consumers}</Typography></h3>
+      <h3 className="roboto">Consumers: {props.consumers}</h3>
         <ul className="noDots">{consumers}</ul>
       </div>
     </React.Fragment>

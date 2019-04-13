@@ -93,21 +93,26 @@
 }
 
 .ocard {
-  padding-top: .4em; 
+  padding-top: .7em; 
   align-content: center;
   text-align: center;
   line-height: 1.5em;
   vertical-align: middle;
+  
+}
+
+.roboto {
+  font-family: 'Roboto';
 }
 
 .card-title{
   font-family: 'Roboto';
-  font-size: 1rem;
+  font-size: .8rem;
 }
 
 .card-content{
   font-family: 'Roboto';
-  font-size: 1rem;
+  font-size: 1.4rem;
   padding-top: 2px;
   text-align: center;
 }
@@ -258,6 +263,7 @@ svg {
 }
 
 .noDots {
+  font-family: 'Roboto';
   list-style-type: none;
   margin: 0;
   padding: 0;
