@@ -3,21 +3,8 @@ import React from 'react';
 const renderLinks = (props) => {
 
   return (coords, index) => {
-    let lineColor;
     let rate = props.links[index].weight;
-     if (rate === 0) {
-   lineColor = '#bdbdbd'
- } else if (rate > 0 && rate <= 50) {
-   lineColor = '#4caf50'
- } else if (rate > 50 && rate <= 150) {
-   lineColor = '#ffeb3b'
- } else if (rate > 150 && rate <= 500) {
-   lineColor = '#f9a825'
- } else if (rate > 500 && rate <= 2000) {
-   lineColor = '#ff5722'
- } else if (rate > 2000) {
-  lineColor = '#b71c1c'
- }
+    let lineColor = props.setColors(rate);
     
     const linksProps = {
       x1: props.nodes[props.links[index].source].x + props.links[index].sourceXCenter,
