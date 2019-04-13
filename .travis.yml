@@ -5,5 +5,5 @@ branches:
   only: 
   - master
 script: 
-  - npm run travis
+  - npm run tests
   
