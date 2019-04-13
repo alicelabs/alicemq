@@ -14,7 +14,7 @@ import Carrot from './carrot-input.js';
 function BlueBottle(config) {
   this.carrot = new Carrot(config);
   this.carrotData = undefined;
-  
+
 }
 
 BlueBottle.prototype.getData = async function () {
@@ -55,15 +55,15 @@ function carrot2D3(carrotData) {
     "identifiers": {}
   };
 
-  function createIdentifiers(bindings){
-    bindings.forEach((x)=>{
+  function createIdentifiers(bindings) {
+    bindings.forEach((x) => {
       if (x.exchange_name === "") x.exchange_name = 'default';
       d3Data.identifiers[x.queue_name] = x.exchange_name;
     })
   }
 
-  function giveNametoDefaultExchange(nodes){
-    nodes.forEach((x)=>{
+  function giveNametoDefaultExchange(nodes) {
+    nodes.forEach((x) => {
       if (x.name === "") x.name = 'default';
     })
   }
@@ -77,12 +77,19 @@ function carrot2D3(carrotData) {
     let total = nodeType.length
     nodeType.forEach((type, i) => {
       let idt;
-      if (groupNumber === 2)  type.name === "" ? idt = 'default' : idt = type.name;
-      else if (groupNumber === 3) d3Data.identifiers[type.name] ?  idt = d3Data.identifiers[type.name] : idt = 'other' //idt = d3Data.identifiers[type.name];
-      else if (groupNumber === 4) d3Data.identifiers[type.queue] ?  idt = d3Data.identifiers[type.queue] : idt = 'other';
+      if (groupNumber === 1 || groupNumber === 4) {
+        if (!type.message_stats) {
+          type.message_stats = { "publish_details": { "rate": 0 } }
+        }
+      }
+
+
+      if (groupNumber === 2) type.name === "" ? idt = 'default' : idt = type.name;
+      else if (groupNumber === 3) d3Data.identifiers[type.name] ? idt = d3Data.identifiers[type.name] : idt = 'other' //idt = d3Data.identifiers[type.name];
+      else if (groupNumber === 4) d3Data.identifiers[type.queue] ? idt = d3Data.identifiers[type.queue] : idt = 'other';
       else idt = 'other'
       let node = {
-        
+
         "message_stats": type.message_stats,
         "identifier": idt,
         "state": type.state,
@@ -128,8 +135,8 @@ function carrot2D3(carrotData) {
             // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
             "xCenter": 25,
             "yCenter": 25,
-            "sourceXCenter": 40, 
-            "sourceYCenter": 25, 
+            "sourceXCenter": 40,
+            "sourceYCenter": 25,
           }
           d3Data.links.push(link)
         }
@@ -144,9 +151,9 @@ function carrot2D3(carrotData) {
       d3Data.nodes.forEach((node, i) => {
         if (node.name === queueName && node.group === 3) {
           let currentQueue = queues[queues.findIndex(el => el.name === queueName)]
-          
+
           if (!currentQueue.message_stats) {
-            currentQueue.message_stats = { "publish_details": {"rate": 0} }
+            currentQueue.message_stats = { "publish_details": { "rate": 0 } }
           }
 
           let message_rate = currentQueue.message_stats.publish_details.rate;
@@ -165,8 +172,8 @@ function carrot2D3(carrotData) {
             // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
             "xCenter": 40,
             "yCenter": 25,
-            "sourceXCenter": 0, 
-            "sourceYCenter": 0, 
+            "sourceXCenter": 0,
+            "sourceYCenter": 0,
           }
           d3Data.links.push(link)
         }
@@ -178,11 +185,11 @@ function carrot2D3(carrotData) {
     if (!e.message_stats.deliver_get) {
       e.message_stats.deliver_get = 0
     }
-    if(!e.message_stats.deliver_get_details) {
-      e.message_stats.deliver_get_details = {"rate": 0}
+    if (!e.message_stats.deliver_get_details) {
+      e.message_stats.deliver_get_details = { "rate": 0 }
     }
-    if(!e.message_stats.publish_details) {
-      e.message_stats.publish_details = {"rate": 0}
+    if (!e.message_stats.publish_details) {
+      e.message_stats.publish_details = { "rate": 0 }
     }
   }
   createIdentifiers(bindings);
