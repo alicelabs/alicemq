@@ -13,7 +13,7 @@
   grid-template-rows: 8% 10% 10% 10% 10% 26% 26%;
   grid-gap: 5px;
   grid-template-areas: 
-    "nonviz instance instance instance instance instance viz"
+    "signout stop stop stop instance instance viz"
     "s1 s5 s5 s5 space s9 viz"
     "s2 s6 s6 s6 space s10 viz"
     "s4 s8 s8 s8 space s11 viz"
@@ -39,12 +39,12 @@ svg {
   .grid-reloaded {
     display: grid;
     width: 100%;
-    grid-template-columns: 100%;
+    grid-template-columns: 25% 25% 25% 25% ;
     grid-template-rows: 90% 10%;
     grid-gap: 5px;
     grid-template-areas: 
-      "viz"
-      "nonviz";
+      "viz viz viz viz"
+      "s2 s6 signout stop";
   }
 
   svg {
@@ -147,6 +147,14 @@ svg {
   line-height: 1.5em;
   vertical-align: middle;
   
+}
+
+.signout {
+  grid-area: signout;
+}
+
+.stop {
+  grid-area: stop;
 }
 
 .roboto {
@@ -298,4 +306,9 @@ h1 {
 
 .disappear {
   display: none;
+}
+
+.material-button {
+  min-height: inherit;
+  font-size: .7em;
 }
