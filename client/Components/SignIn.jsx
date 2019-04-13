@@ -50,6 +50,7 @@ function SignIn(props) {
         name='username'
         placeholder='Username'
         onChange={ props.updateUsername }
+        onBlur={ props.validateUsername }
         label='Username'
         variant='outlined'
         margin="dense"

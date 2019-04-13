@@ -38,10 +38,14 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hostname: "192.168.0.236",
-      username: "test",
-      password: "test",
-      port: "15672",
+      hostname: "",
+      username: "",
+      password: "",
+      port: "",
+      // hostname: "192.168.0.236",
+      // username: "test",
+      // password: "test",
+      // port: "15672",
       // hostname: "192.168.0.35",
       // username: "vhs",
       // password: "4444",
@@ -56,7 +60,8 @@ class Main extends React.Component {
       links: [],
       pause: false,
       trafficMode: false,
-      errorHostname: ''
+      errorHostname: '',
+      errorUsername: ''
     }
 
     this.blueBottle = null;
@@ -73,6 +78,7 @@ class Main extends React.Component {
     this.toggleStartStop = this.toggleStartStop.bind(this);
     this.toggleMode = this.toggleMode.bind(this);
     this.validateHostname = this.validateHostname.bind(this);
+    this.validateUsername = this.validateUsername.bind(this);
   }
 
   async tick() {
@@ -156,9 +162,10 @@ class Main extends React.Component {
     this.setState({trafficMode: !this.state.trafficMode});
   }
   configureInstance(e){
-    this.setState(this.initializeState())
-    
+    this.setState(this.initializeState());
+    // this.setState(this.baseState);
   }
+
   visualize(e) {
     if(!this.validateAll()) return;
 
@@ -177,6 +184,7 @@ class Main extends React.Component {
   validateAll(){
     console.log('Validate All: ', this.state.errorHostname);
     if(this.state.errorHostname !== '') return false; 
+    if(this.state.errorUsername !== '') return false; 
 
     return true;
   }
@@ -189,10 +197,18 @@ class Main extends React.Component {
     console.log('Validate Hostname: ', e.target.value);
     if(regexFormat.test(e.target.value)){
       console.log('PASS TEST');
-      this.setState({errorHostname: ''})
+      this.setState({errorHostname: ''});
       return;
     }
-    this.setState({errorHostname: 'Invalid IP Adress'})
+    this.setState({errorHostname: 'Invalid IP Adress'});
+  }
+
+  validateUsername(e){
+    if(e.target.value){
+      this.setState({errorUsername: ''});
+      return;
+    }
+    this.setState({errorUsername: 'Invalid Username'});
   }
 
   updateNodeCards(node) {
@@ -251,6 +267,7 @@ class Main extends React.Component {
             updatePort={this.updatePort}
             visualize={this.visualize}
             validateHostname={this.validateHostname}
+            validateUsername={this.validateUsername}
             {...this.state}
           />)
     } else {
