@@ -14,6 +14,12 @@ const styles = theme => ({
 
 const renderQueues = (props) => {
   return (coords, index) => {
+    let lineColor = "#4caf50";
+    let rate = props.nodes[props.producers+props.exchanges+index].message_stats.publish_details.rate;
+    
+    if(props.trafficMode)
+      lineColor = props.setColors(rate);
+     
     const queuesProps = {
       x: props.nodes[props.producers+props.exchanges+index].x,
       y: props.nodes[props.producers+props.exchanges+index].y,
@@ -23,8 +29,8 @@ const renderQueues = (props) => {
       height: 50,
       key: [props.producers+props.exchanges+index]+index,
       stroke: 'black',
-      strokeWidth: 5,
-      fill: "#4caf50",
+      strokeWidth: 5,   // 3, from colornodes branch
+      fill: lineColor,
       mute: coords.visibility
     }
     return (

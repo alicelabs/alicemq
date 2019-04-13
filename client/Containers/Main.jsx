@@ -3,6 +3,7 @@ import Settings1 from '../Components/Settings1.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
 import SignOut from '../Components/SignOut.jsx'
+import TrafficButton from '../Components/TrafficButton.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
@@ -51,6 +52,7 @@ class Main extends React.Component {
       nodecards: [],
       visualizer: false,
       toggled: {},
+      trafficMode: false,
       pause: false
     }
 
@@ -64,6 +66,7 @@ class Main extends React.Component {
     this.toggleVisibility = this.toggleVisibility.bind(this);
     this.configureInstance = this.configureInstance.bind(this);
     this.toggleStartStop = this.toggleStartStop.bind(this);
+    this.toggleMode = this.toggleMode.bind(this);
   }
 
   async tick() {
@@ -121,7 +124,10 @@ class Main extends React.Component {
   }
 
   toggleStartStop(e){
-    this.setState({pause: !this.state.pause})
+    this.setState({pause: !this.state.pause});
+  }
+  toggleMode(e){
+    this.setState({trafficMode: !this.state.trafficMode});
   }
   configureInstance(e){
     this.setState({ visualizer: false })
@@ -185,7 +191,6 @@ class Main extends React.Component {
     }
   }
 
-
   render() {
     if (!this.state.visualizer) {
       return (
@@ -202,6 +207,7 @@ class Main extends React.Component {
       return (
         <div className="grid-reloaded">
           <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} />
+          <TrafficButton {...this.state} toggleMode={this.toggleMode} />
           <div className="instance">
             <h1><Typography variant="h5" color="inherit">RabbitMQ Instance: {this.state.cluster_name}</Typography></h1><h3><Typography color="inherit">{this.state.hostname}</Typography></h3>
           </div>
