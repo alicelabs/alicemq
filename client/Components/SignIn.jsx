@@ -40,6 +40,7 @@ function SignIn(props) {
         name='host'
         placeholder='RabbitMQ HTTP Hostname'
         onChange={ props.updateHostname }
+        onBlur={ props.validateHostname }
         margin='dense'
         required='true'
       />

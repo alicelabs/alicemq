@@ -56,9 +56,11 @@ class Main extends React.Component {
       links: [],
       pause: false,
       trafficMode: false,
+      errorHostname: ''
     }
 
     this.blueBottle = null;
+    this.baseState = this.state;
     this.initializeState = this.initializeState.bind(this)
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
@@ -70,6 +72,7 @@ class Main extends React.Component {
     this.configureInstance = this.configureInstance.bind(this);
     this.toggleStartStop = this.toggleStartStop.bind(this);
     this.toggleMode = this.toggleMode.bind(this);
+    this.validateHostname = this.validateHostname.bind(this);
   }
 
   async tick() {
@@ -157,6 +160,8 @@ class Main extends React.Component {
     
   }
   visualize(e) {
+    if(!this.validateAll()) return;
+
     const userConfig = {
       host: this.state.hostname,
       username: this.state.username,
@@ -167,6 +172,27 @@ class Main extends React.Component {
 
     this.blueBottle = new BlueBottle(userConfig);
     this.setState({ visualizer: true, pause: false });
+  }
+
+  validateAll(){
+    console.log('Validate All: ', this.state.errorHostname);
+    if(this.state.errorHostname !== '') return false; 
+
+    return true;
+  }
+  
+
+  // TODO: IMPROVEMENT, validate a non-ip adress
+  validateHostname(e){
+    // format: xxx.xxx.xxx.xxx
+    const regexFormat = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/;
+    console.log('Validate Hostname: ', e.target.value);
+    if(regexFormat.test(e.target.value)){
+      console.log('PASS TEST');
+      this.setState({errorHostname: ''})
+      return;
+    }
+    this.setState({errorHostname: 'Invalid IP Adress'})
   }
 
   updateNodeCards(node) {
@@ -224,6 +250,7 @@ class Main extends React.Component {
             updatePassword={this.updatePassword}
             updatePort={this.updatePort}
             visualize={this.visualize}
+            validateHostname={this.validateHostname}
             {...this.state}
           />)
     } else {
