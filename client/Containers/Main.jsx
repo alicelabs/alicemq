@@ -312,7 +312,8 @@ class Main extends React.Component {
         <div className="grid-reloaded">
           <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} toggleMode={this.toggleMode} />
           <div className="instance">
-            <h1><Typography variant="h5" color="inherit">RabbitMQ Instance: {this.state.cluster_name}</Typography></h1><h3><Typography color="inherit">{this.state.hostname}</Typography></h3>
+            <span>Instance: <strong>{this.state.cluster_name}</strong><br />
+            ip: <strong>{this.state.hostname}</strong></span>
           </div>
           <Display {...this.state} updateNodeCards={this.updateNodeCards} />
           {this.state.message_stats && <OverviewCards {...this.state} />}
