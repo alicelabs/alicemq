@@ -3,7 +3,7 @@ import Settings1 from '../Components/Settings1.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
 import SignOut from '../Components/SignOut.jsx'
-import TrafficButton from '../Components/TrafficButton.jsx'
+import Spinner from '../Components/Spinner.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
@@ -46,6 +46,7 @@ class Main extends React.Component {
       // username: "test",
       // password: "test",
       // port: "15672",
+
       // hostname: "192.168.0.35",
       // username: "vhs",
       // password: "4444",
@@ -55,6 +56,7 @@ class Main extends React.Component {
       padding: 10,
       nodecards: [],
       visualizer: false,
+      loggedIn: false,
       toggled: {},
       nodes: [],
       links: [],
@@ -89,6 +91,8 @@ class Main extends React.Component {
     if (this.blueBottle === null) return;
     try{
       const d3Data = await this.blueBottle.getData();
+      this.setState({visualizer: true});
+
       d3Data.nodes.forEach((x)=>{
         if (this.state.toggled[x.identifier]){
           x.visibility = false
@@ -173,6 +177,7 @@ class Main extends React.Component {
   configureInstance(e){
     // this.setState(this.initializeState());
     this.setState(this.baseState);
+    this.setState({pause: true});
   }
 
   visualize(e) {
@@ -187,7 +192,7 @@ class Main extends React.Component {
     };
 
     this.blueBottle = new BlueBottle(userConfig);
-    this.setState({ visualizer: true, pause: false });
+    this.setState({ pause: false, loggedIn: true });
   }
 
   validateAll(){
@@ -283,7 +288,7 @@ class Main extends React.Component {
   }
 
   render() {
-    if (!this.state.visualizer) {
+    if (!this.state.visualizer && !this.state.loggedIn) {
       return (
           <SignIn className="container"
             updateHostname={this.updateHostname}
@@ -297,7 +302,11 @@ class Main extends React.Component {
             validatePort={this.validatePort}
             {...this.state}
           />)
-    } else {
+    } 
+    else if(!this.state.visualizer && this.state.loggedIn) {
+      return(<Spinner />);
+    }
+    else {
       document.body.classList.add('background-vis')
       return (
         <div className="grid-reloaded">
