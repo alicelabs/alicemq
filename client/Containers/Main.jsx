@@ -61,12 +61,14 @@ class Main extends React.Component {
       pause: false,
       trafficMode: false,
       errorHostname: '',
-      errorUsername: ''
+      errorUsername: '',
+      errorPassword: '',
+      errorPort: ''
     }
 
     this.blueBottle = null;
     this.baseState = this.state;
-    this.initializeState = this.initializeState.bind(this)
+    // this.initializeState = this.initializeState.bind(this)
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -79,6 +81,8 @@ class Main extends React.Component {
     this.toggleMode = this.toggleMode.bind(this);
     this.validateHostname = this.validateHostname.bind(this);
     this.validateUsername = this.validateUsername.bind(this);
+    this.validatePassword = this.validatePassword.bind(this);
+    this.validatePort = this.validatePort.bind(this);
   }
 
   async tick() {
@@ -162,8 +166,8 @@ class Main extends React.Component {
     this.setState({trafficMode: !this.state.trafficMode});
   }
   configureInstance(e){
-    this.setState(this.initializeState());
-    // this.setState(this.baseState);
+    // this.setState(this.initializeState());
+    this.setState(this.baseState);
   }
 
   visualize(e) {
@@ -182,21 +186,19 @@ class Main extends React.Component {
   }
 
   validateAll(){
-    console.log('Validate All: ', this.state.errorHostname);
     if(this.state.errorHostname !== '') return false; 
-    if(this.state.errorUsername !== '') return false; 
+    if(this.state.errorUsername !== '') return false;
+    if(this.state.errorPassword !== '') return false; 
+    if(this.state.errorPort !== '') return false;
 
     return true;
   }
-  
 
   // TODO: IMPROVEMENT, validate a non-ip adress
   validateHostname(e){
     // format: xxx.xxx.xxx.xxx
     const regexFormat = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/;
-    console.log('Validate Hostname: ', e.target.value);
     if(regexFormat.test(e.target.value)){
-      console.log('PASS TEST');
       this.setState({errorHostname: ''});
       return;
     }
@@ -209,6 +211,24 @@ class Main extends React.Component {
       return;
     }
     this.setState({errorUsername: 'Invalid Username'});
+  }
+
+  validatePassword(e){
+    if(e.target.value){
+      this.setState({errorPassword: ''});
+      return;
+    }
+    this.setState({errorPassword: 'Invalid Password'});
+  }
+  
+  validatePort(e){
+    const numRegex = /^[0-9]*$/
+    if(numRegex.test(e.target.value) && e.target.value){
+      this.setState({errorPort: ''});
+      return;
+    }
+    this.setState({errorPort: 'Invalid Port'});
+
   }
 
   updateNodeCards(node) {
@@ -268,6 +288,8 @@ class Main extends React.Component {
             visualize={this.visualize}
             validateHostname={this.validateHostname}
             validateUsername={this.validateUsername}
+            validatePassword={this.validatePassword}
+            validatePort={this.validatePort}
             {...this.state}
           />)
     } else {

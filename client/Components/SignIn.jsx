@@ -63,6 +63,7 @@ function SignIn(props) {
         variant='outlined'
         label='Password'
         onChange={ props.updatePassword }
+        onBlur={ props.validatePassword }
         margin="dense"
         required='true'
       />
@@ -72,6 +73,7 @@ function SignIn(props) {
         name='port'
         placeholder='Default: 15672'
         onChange={ props.updatePort }
+        onBlur={ props.validatePort }
         variant='outlined'
         label='Port'
         margin='dense'
