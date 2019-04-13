@@ -19,8 +19,8 @@ const Legend = (props) => {
       x: (props.width / ranges.length) * i + 90,
       y: 25
     }
-    rangeIcons.push(<rect {...rangeIconProps}/>)
-    rangeValues.push(<text fontFamily="roboto" {...rangeValueProps}> {ranges[i][0]} </text>,)
+    rangeIcons.push(<rect key={i+1} {...rangeIconProps}/>)
+    rangeValues.push(<text key={i+1} fontFamily="roboto" {...rangeValueProps}> {ranges[i][0]} </text>,)
   }
   let msgs = <text fontFamily="roboto" x='12.5' y='25' >Msg/s</text>
 

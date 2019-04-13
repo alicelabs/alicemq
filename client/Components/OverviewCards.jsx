@@ -121,5 +121,4 @@ const OverviewCards = (props) => {
   );
 }
 
-// export default withStyles(styles)(OverviewCards);
 export default OverviewCards;

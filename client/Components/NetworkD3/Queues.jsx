@@ -26,9 +26,9 @@ const renderQueues = (props) => {
       strokeWidth: 5,
       fill: "#4caf50",
       mute: coords.visibility
-     }
+    }
     return (
-      <Tooltip title={props.nodes[props.producers+props.exchanges+index].name}>
+      <Tooltip key={index} title={props.nodes[props.producers+props.exchanges+index].name}>
         <rect {...queuesProps} className={queuesProps.mute ? '' : 'disappear'} onClick={(e)=>props.updateNodeCards(props.nodes[props.producers+props.exchanges+index])}/> 
       </Tooltip>
     )

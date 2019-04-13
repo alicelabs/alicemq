@@ -5,7 +5,7 @@ const Toggle = (props) => {
 
   if (props.ex){
     return (
-    <Typography color="inherit"><li><form><input type="checkbox" id={props.content == "" ? 'default' : props.content } onChange={props.mute}/>{props.content === "" ? 'default' : props.content}</form></li></Typography>
+    <li><form><input type="checkbox" id={props.content == "" ? 'default' : props.content } onChange={props.mute}/><Typography inline={true} color="inherit">{props.content === "" ? 'default' : props.content}</Typography></form></li>
     )
   }
   

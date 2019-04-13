@@ -20,7 +20,6 @@ const Settings1 = (props) => {
   let consumers = [];
   let producers = [];
 
-  console.log(props.cluster_name)
   if (props.nodes) {
     producers = props.nodes.map((node, i) => {
       if (node.group === 1) {
@@ -51,19 +50,19 @@ const Settings1 = (props) => {
   return (
     <React.Fragment>
       <div className="nodes-1">
-        <Typography color="inherit"><h3>Producers</h3></Typography>
+        <h3><Typography color="inherit">Producers</Typography></h3>
         <ul className="noDots">{producers}</ul>
       </div>
       <div className="nodes-2">
-      <Typography color="inherit"><h3>Exchanges</h3></Typography>
+      <h3><Typography color="inherit">Exchanges</Typography></h3>
         <ul className="noDots">{exchanges}</ul>
       </div>
       <div className="nodes-3">
-      <Typography color="inherit"><h3>Queues</h3></Typography>
+      <h3><Typography color="inherit">Queues</Typography></h3>
         <ul className="noDots">{queues}</ul>
       </div>
       <div className="nodes-4">
-      <Typography color="inherit"><h3>Consumers</h3></Typography>
+      <h3><Typography color="inherit">Consumers</Typography></h3>
         <ul className="noDots">{consumers}</ul>
       </div>
     </React.Fragment>
