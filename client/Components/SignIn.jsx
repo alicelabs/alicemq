@@ -3,6 +3,8 @@ import Button from './Button.jsx'
 import Typography from '@material-ui/core/Typography'
 import {TextField} from '@material-ui/core'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import FormControl from '@material-ui/core/FormControl';
+
 
 const purpleTheme = createMuiTheme({
   typography: {
@@ -38,7 +40,8 @@ function SignIn(props) {
         name='host'
         placeholder='RabbitMQ HTTP Hostname'
         onChange={ props.updateHostname }
-        margin="dense"
+        margin='dense'
+        required='true'
       />
       <TextField
         id='username'
@@ -49,6 +52,7 @@ function SignIn(props) {
         label='Username'
         variant='outlined'
         margin="dense"
+        required='true'
       />
       <TextField
         id='password'
@@ -58,6 +62,7 @@ function SignIn(props) {
         label='Password'
         onChange={ props.updatePassword }
         margin="dense"
+        required='true'
       />
       <TextField
         id='port'
@@ -67,7 +72,8 @@ function SignIn(props) {
         onChange={ props.updatePort }
         variant='outlined'
         label='Port'
-        margin="dense"
+        margin='dense'
+        required='true'
       />
     </div>
     <div id='signIn'>

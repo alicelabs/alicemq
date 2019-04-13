@@ -37,25 +37,26 @@ function makeTitles(d3Data) {
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hostname: "",
-    username: "",
-    password: "",
-    // hostname: "192.168.0.35",
-    // username: "vhs",
-    // password: "4444",
-    d3Data: {},
-    port: "",
-    width: (window.innerWidth),
-    height: (parent.innerHeight),
-    padding: 10,
-    nodecards: [],
-    visualizer: false,
-    toggled: {},
-    nodes: [], 
-    links: [],
-    pause: false,
-    trafficMode: false,
-  }
+    this.state = {
+      hostname: "192.168.0.236",
+      username: "test",
+      password: "test",
+      port: "15672",
+      // hostname: "192.168.0.35",
+      // username: "vhs",
+      // password: "4444",
+      d3Data: {},
+      width: (window.innerWidth),
+      height: (parent.innerHeight),
+      padding: 10,
+      nodecards: [],
+      visualizer: false,
+      toggled: {},
+      nodes: [],
+      links: [],
+      pause: false,
+      trafficMode: false,
+    }
 
     this.blueBottle = null;
     this.initializeState = this.initializeState.bind(this)
