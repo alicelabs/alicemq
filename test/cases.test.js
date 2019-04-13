@@ -31,7 +31,7 @@ const bearer = 'Basic ' + Base64.encode(`${config.username}:${config.password}`)
 carrot.options = {
     method: 'GET',
     withCredentials: true,
-    credentials: 'included',
+    credentials: 'include',
     headers: {
         Authorization: bearer,
         'Content-Type': 'application/json'
@@ -124,4 +124,3 @@ describe('Blue bottle testing', () => {
         expect(massagedD3Data).toBeTruthy();
     });
 });
-
