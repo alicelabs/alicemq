@@ -1,5 +1,6 @@
 {
-  "name": "alice",
+  "name": "alicemq",
+  "productName": "AliceMQ",
   "version": "1.0.0",
   "description": "RabbitMQ Visualizer",
   "main": "./main.js",
@@ -9,7 +10,8 @@
     "dev": "webpack-dev-server",
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "web": "webpack-dev-server --config webpack.config.js",
-    "app": "webpack --config webpack.config.electron.js && electron ."
+    "app": "webpack --config webpack.config.electron.js && electron .",
+    "buildalice": "electron-packager ."
   },
   "repository": {
     "type": "git",
@@ -52,6 +54,7 @@
     "@babel/register": "^7.4.0",
     "babel-jest": "^24.5.0",
     "electron": "^4.1.1",
+    "electron-packager": "^13.1.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "jest": "^24.5.0",

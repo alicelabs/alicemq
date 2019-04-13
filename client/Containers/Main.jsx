@@ -37,26 +37,28 @@ function makeTitles(d3Data) {
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hostname: "192.168.0.236",
-      username: "test",
-      password: "test",
-      // hostname: "192.168.0.35",
-      // username: "vhs",
-      // password: "4444",
-
-      port: "15672",
-      width: (window.innerWidth),
-      height: (parent.innerHeight),
-      padding: 10,
-      nodecards: [],
-      visualizer: false,
-      toggled: {},
-      trafficMode: false,
-      pause: false
-    }
+    this.state = { hostname: "",
+    username: "",
+    password: "",
+    // hostname: "192.168.0.35",
+    // username: "vhs",
+    // password: "4444",
+    d3Data: {},
+    port: "",
+    width: (window.innerWidth),
+    height: (parent.innerHeight),
+    padding: 10,
+    nodecards: [],
+    visualizer: false,
+    toggled: {},
+    nodes: [], 
+    links: [],
+    pause: false,
+    trafficMode: false,
+  }
 
     this.blueBottle = null;
+    this.initializeState = this.initializeState.bind(this)
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -112,6 +114,26 @@ class Main extends React.Component {
     this.setState({ port: e.target.value });
   };
 
+  initializeState() {
+    return { hostname: "",
+    username: "",
+    password: "",
+    // hostname: "192.168.0.35",
+    // username: "vhs",
+    // password: "4444",
+    d3Data: {},
+    port: "",
+    width: (window.innerWidth),
+    height: (parent.innerHeight),
+    padding: 10,
+    nodecards: [],
+    visualizer: false,
+    toggled: {},
+    nodes: [], 
+    links: [],
+    pause: true
+  }
+}
   toggleVisibility(e) {
     let nodes = this.state.nodes;
     let newToggled = this.state.toggled;
@@ -130,7 +152,8 @@ class Main extends React.Component {
     this.setState({trafficMode: !this.state.trafficMode});
   }
   configureInstance(e){
-    this.setState({ visualizer: false })
+    this.setState(this.initializeState())
+    
   }
   visualize(e) {
     const userConfig = {

@@ -6,3 +6,4 @@ client/dist/bundle.js
 *.Rhistory
 test/.DS_Store
 .DS_Store
+AliceMQ*
