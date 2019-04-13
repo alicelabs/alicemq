@@ -18,7 +18,12 @@ function BlueBottle(config) {
 }
 
 BlueBottle.prototype.getData = async function () {
-  this.carrotData = await this.carrot.motherLoad();
+  try{
+    this.carrotData = await this.carrot.motherLoad();
+  }
+  catch(e){
+    throw `FAILED to getData(blueBottle) ${e}`;
+  }
   return carrot2D3(this.carrotData);
 }
 

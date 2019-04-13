@@ -146,14 +146,6 @@ svg {
   grid-area: s12;
 }
 
-.ocard {
-  padding-top: .7em; 
-  align-content: center;
-  text-align: center;
-  line-height: 1.5em;
-  vertical-align: middle;
-  
-}
 
 .signout {
   grid-area: signout;
@@ -314,11 +306,15 @@ h1 {
   display: none;
 }
 
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .material-button {
   min-height: inherit;
   font-size: .7em;
 }
-
 .traffic-mode {
   grid-area: traffic-mode;
 }
