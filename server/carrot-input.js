@@ -25,7 +25,7 @@ function Carrot(config) {
     }
   } else {
     const headers = new Headers();
-    headers.set('Authorization', 'Basic ' + Base64.encode(`${config.username}:${config.password}`));
+    headers.append('Authorization', 'Basic ' + Base64.encode(`${config.username}:${config.password}`));
     this.options = {
       method: 'GET',
       headers: headers,
@@ -196,6 +196,7 @@ Carrot.prototype.motherLoad = function () {
         fetch(url, this.options)
           .then(result => result.json())
           .then(data => resolve(data))
+          .catch(err => {console.error(err.stack)})
       )
     ))
       .then(result => {

@@ -1,5 +1,6 @@
 {
-  "name": "alice",
+  "name": "alicemq",
+  "productName": "AliceMQ",
   "version": "1.0.0",
   "description": "RabbitMQ Visualizer",
   "main": "./main.js",
@@ -10,7 +11,7 @@
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "web": "webpack-dev-server --config webpack.config.js",
     "app": "webpack --config webpack.config.electron.js && electron .",
-    "buildapp": "electron-packager ."
+    "buildalice": "electron-packager ."
   },
   "repository": {
     "type": "git",

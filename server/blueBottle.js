@@ -77,6 +77,11 @@ function carrot2D3(carrotData) {
     let total = nodeType.length
     nodeType.forEach((type, i) => {
       let idt;
+      if (groupNumber === 1) {
+        if (!type.message_stats) {
+          type.message_stats = { "publish_details": { "rate": 0 } } //massaged data for color rates
+        }
+      }
       if (groupNumber === 2)  type.name === "" ? idt = 'default' : idt = type.name;
       else if (groupNumber === 3) d3Data.identifiers[type.name] ?  idt = d3Data.identifiers[type.name] : idt = 'other' //idt = d3Data.identifiers[type.name];
       else if (groupNumber === 4) d3Data.identifiers[type.queue] ?  idt = d3Data.identifiers[type.queue] : idt = 'other';
