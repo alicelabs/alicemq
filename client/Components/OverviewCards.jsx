@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import { withStyles } from '@material-ui/core/styles'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import numeral from 'numeral';
@@ -21,19 +21,31 @@ const styles = {
     marginBottom: 2,
   },
 };
+const typographyOptions = {};
+const caption = { 
+  fontFamily:'\"Roboto\", \"Helvetica\", \"Arial\", sans-serif',
+  color:'rgba(0, 0, 0, 0.54)',
+  htmlFontSize: 20,
+  fontSize: '3rem',
+  fontWeight:500,
+  lineHeight: '1.3rem' 
+};
+ typographyOptions.caption = caption;
+
+const cardTheme = createMuiTheme({ typography: typographyOptions });
 
 
 const OverviewCards = (props) => {
 
   return (
-    <React.Fragment>
+    <MuiThemeProvider theme={cardTheme}>
       
-        <Card className="s1" border={1} borderColor="secondary.main">
+        <Card className="s1">
           <CardContent>
             <Typography color='inherit' gutterBottom>
               Total Delivered
         </Typography>
-            <Typography variant="h5" component="h2" color='inherit'>
+            <Typography variant="h5"  color='inherit'>
               {numeral(`${props.message_stats.deliver_get}`).format('0,0')}
             </Typography>
           </CardContent>
@@ -117,7 +129,7 @@ const OverviewCards = (props) => {
           </CardContent>
         </Card>
      
-    </React.Fragment>
+    </MuiThemeProvider>
   );
 }
 

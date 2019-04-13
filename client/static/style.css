@@ -1,8 +1,12 @@
 /* body {
   background: #995DFF;
   color: white;
+  font-size: calc(10 + (16 - 10) * ((100vw - 1200) / (1900 - 100)));
 } */
 
+html {
+ font-size: calc(10px + (18 - 10) * ((100vw - 600px) / (1800 - 600)));
+}
 
 .grid-reloaded {
   position: fixed;
@@ -30,6 +34,7 @@
 
 .s1 {
   grid-area: s1;
+  font-size: 1.2rem;
   background-color: #5F3A9E !important;
   color: #ffffff !important;
 }
@@ -200,7 +205,6 @@ svg {
   top: 0; 
   height:100%; 
   width:65%;
-  border-radius: 5px;
   padding-left: 7px;
   margin-left: 10px;
 }
