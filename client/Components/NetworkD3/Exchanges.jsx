@@ -10,7 +10,7 @@ const renderExchanges = (props) => {
       r: props.nodes[props.producers+index].r + 10,
       key: props.producers + index,
       stroke: 'black',
-      strokeWidth: 5,
+      strokeWidth: props.width / 250,
       fillOpacity: 0.8,
       fill: "red",
       mute: coords.visibility

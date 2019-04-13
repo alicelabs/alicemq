@@ -126,10 +126,10 @@ function carrot2D3(carrotData) {
             "target": d3Data.nodes.findIndex(el => el.name === consumer.name),
             "weight": consumer.message_stats.deliver_get_details.rate,
             // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
-            "xCenter": 25,
-            "yCenter": 25,
-            "sourceXCenter": 40, 
-            "sourceYCenter": 25, 
+            "xCenter": d3Data.width / 40,
+            "yCenter": d3Data.height / 40,
+            "sourceXCenter": d3Data.width / 40, 
+            "sourceYCenter": d3Data.height / 30, 
           }
           d3Data.links.push(link)
         }
@@ -163,8 +163,8 @@ function carrot2D3(carrotData) {
             }),
             "weight": message_rate,
             // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
-            "xCenter": 40,
-            "yCenter": 25,
+            "xCenter": d3Data.width / 40,
+            "yCenter": d3Data.height / 40,
             "sourceXCenter": 0, 
             "sourceYCenter": 0, 
           }

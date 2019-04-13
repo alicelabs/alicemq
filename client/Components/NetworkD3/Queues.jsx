@@ -17,13 +17,13 @@ const renderQueues = (props) => {
     const queuesProps = {
       x: props.nodes[props.producers+props.exchanges+index].x,
       y: props.nodes[props.producers+props.exchanges+index].y,
-      rx: 10,
-      ry: 10,
-      width: 80,
-      height: 50,
+      rx: props.width / 200,
+      ry: props.width / 200,
+      width: props.width / 20,
+      height: props.height / 20,
       key: [props.producers+props.exchanges+index]+index,
       stroke: 'black',
-      strokeWidth: 5,
+      strokeWidth: props.width / 250,
       fill: "#4caf50",
       mute: coords.visibility
     }

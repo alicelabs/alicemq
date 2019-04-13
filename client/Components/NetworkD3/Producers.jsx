@@ -6,13 +6,13 @@ const renderProducers = (props) => {
     const producerProps = {
       x: props.nodes[index].x,
       y: props.nodes[index].y,
-      rx: 10,
-      ry: 10,
-      width: 50,
-      height: 50,
+      rx: props.width / 200,
+      ry: props.width / 200,
+      width: props.width / 20,
+      height: props.width / 20,
       key: index,
       stroke: 'black',
-      strokeWidth: 5,
+      strokeWidth: props.width / 250,
       fill: "blue"
     }
     return (

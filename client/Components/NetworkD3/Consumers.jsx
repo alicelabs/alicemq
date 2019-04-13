@@ -6,12 +6,12 @@ const renderConsumers = (props) => {
     const consumerProps = {
       x: props.nodes[props.producers+props.exchanges+props.queues+index].x,
       y: props.nodes[props.producers+props.exchanges+props.queues+index].y,
-      rx: 10,
-      ry: 10,
-      width: 50,
-      height: 50,
+      rx: props.width / 200,
+      ry: props.width / 200,
+      width: props.width / 20,
+      height: props.width / 20,
       key: 19+index,
-      strokeWidth: 5,
+      strokeWidth: props.width / 250,
       fill: "#ba68c8",
       stroke: "black",
       mute: coords.visibility
