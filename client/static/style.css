@@ -10,10 +10,11 @@
   height: 95%;
   width: 100%;
   grid-template-columns: 10% 3% 3.5% 3.5% 3% 10% 67%;
-  grid-template-rows: 8% 10% 10% 10% 10% 26% 26%;
+  grid-template-rows: 8% 8% 8% 8% 8% 8% 26% 26%;
   grid-gap: 5px;
   grid-template-areas: 
-    "signout stop stop stop instance instance viz"
+    "instance instance instance instance instance instance viz"
+    "signout signout signout stop stop stop viz"
     "s1 s5 s5 s5 space s9 viz"
     "s2 s6 s6 s6 space s10 viz"
     "s4 s8 s8 s8 space s11 viz"
@@ -74,6 +75,8 @@ svg {
 .instance {
   grid-area: instance;
   color: white !important;
+  font-family: 'Roboto';
+  font-size: 1.2em;
 }
 
 .s1 {
