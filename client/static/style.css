@@ -14,7 +14,7 @@
   grid-gap: 5px;
   grid-template-areas: 
     "instance instance instance instance instance instance viz"
-    "signout signout signout stop stop stop viz"
+    "traffic-mode traffic-mode stop stop signout signout viz"
     "s1 s5 s5 s5 space s9 viz"
     "s2 s6 s6 s6 space s10 viz"
     "s4 s8 s8 s8 space s11 viz"
@@ -45,7 +45,7 @@ svg {
     grid-gap: 5px;
     grid-template-areas: 
       "viz viz viz viz"
-      "s2 s6 signout stop";
+      "s2 traffic-mode signout stop";
   }
 
   svg {
@@ -314,4 +314,8 @@ h1 {
 .material-button {
   min-height: inherit;
   font-size: .7em;
+}
+
+.traffic-mode {
+  grid-area: traffic-mode;
 }

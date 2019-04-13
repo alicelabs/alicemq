@@ -3,6 +3,7 @@ import Settings1 from '../Components/Settings1.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
 import SignOut from '../Components/SignOut.jsx'
+import TrafficButton from '../Components/TrafficButton.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
@@ -36,25 +37,28 @@ function makeTitles(d3Data) {
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hostname: "192.168.0.236",
-      username: "test",
-      password: "test",
-      // hostname: "192.168.0.35",
-      // username: "vhs",
-      // password: "4444",
-
-      port: "15672",
-      width: (window.innerWidth),
-      height: (parent.innerHeight),
-      padding: 10,
-      nodecards: [],
-      visualizer: false,
-      toggled: {},
-      pause: false
-    }
+    this.state = { hostname: "",
+    username: "",
+    password: "",
+    // hostname: "192.168.0.35",
+    // username: "vhs",
+    // password: "4444",
+    d3Data: {},
+    port: "",
+    width: (window.innerWidth),
+    height: (parent.innerHeight),
+    padding: 10,
+    nodecards: [],
+    visualizer: false,
+    toggled: {},
+    nodes: [], 
+    links: [],
+    pause: false,
+    trafficMode: false,
+  }
 
     this.blueBottle = null;
+    this.initializeState = this.initializeState.bind(this)
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -64,6 +68,7 @@ class Main extends React.Component {
     this.toggleVisibility = this.toggleVisibility.bind(this);
     this.configureInstance = this.configureInstance.bind(this);
     this.toggleStartStop = this.toggleStartStop.bind(this);
+    this.toggleMode = this.toggleMode.bind(this);
   }
 
   async tick() {
@@ -109,6 +114,26 @@ class Main extends React.Component {
     this.setState({ port: e.target.value });
   };
 
+  initializeState() {
+    return { hostname: "",
+    username: "",
+    password: "",
+    // hostname: "192.168.0.35",
+    // username: "vhs",
+    // password: "4444",
+    d3Data: {},
+    port: "",
+    width: (window.innerWidth),
+    height: (parent.innerHeight),
+    padding: 10,
+    nodecards: [],
+    visualizer: false,
+    toggled: {},
+    nodes: [], 
+    links: [],
+    pause: true
+  }
+}
   toggleVisibility(e) {
     let nodes = this.state.nodes;
     let newToggled = this.state.toggled;
@@ -121,10 +146,14 @@ class Main extends React.Component {
   }
 
   toggleStartStop(e){
-    this.setState({pause: !this.state.pause})
+    this.setState({pause: !this.state.pause});
+  }
+  toggleMode(e){
+    this.setState({trafficMode: !this.state.trafficMode});
   }
   configureInstance(e){
-    this.setState({ visualizer: false })
+    this.setState(this.initializeState())
+    
   }
   visualize(e) {
     const userConfig = {
@@ -185,7 +214,6 @@ class Main extends React.Component {
     }
   }
 
-
   render() {
     if (!this.state.visualizer) {
       return (
@@ -201,7 +229,7 @@ class Main extends React.Component {
       document.body.classList.add('background-vis')
       return (
         <div className="grid-reloaded">
-          <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} />
+          <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} toggleMode={this.toggleMode} />
           <div className="instance">
             <span>Instance: <strong>{this.state.cluster_name}</strong><br />
             ip: <strong>{this.state.hostname}</strong></span>

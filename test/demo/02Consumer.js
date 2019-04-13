@@ -7,7 +7,7 @@ const URI = 'amqp://test:test@192.168.0.236:5672'
 
 amqp.connect(URI, (err, conn) => {
   conn.createChannel((err, ch) => {
-    let q = 'no_persist_new';
+    let q = 'user_post';
 
     ch.assertQueue(q, {durable: false}); // not durable/presistent message
 

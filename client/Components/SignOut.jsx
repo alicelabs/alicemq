@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import TrafficButton from '../Components/TrafficButton.jsx'
 
 const buttonTheme = createMuiTheme({
   typography: {
@@ -41,6 +42,9 @@ const SignOut = (props) => {
           <Button classes={{ label: 'material-button' }} fullWidth={true} variant="contained" size='large'  color="primary" onClick={props.configureInstance} >Sign out</Button>
         </MuiThemeProvider>
       </div>
+      <div className="traffic-mode">
+                <TrafficButton {...props} toggleMode={props.toggleMode} />
+            </div>
 
       <div className="stop">
         <MuiThemeProvider theme={startStopTheme}>

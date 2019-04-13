@@ -3,16 +3,21 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const renderExchanges = (props) => {
   return (coords, index) => {
-    const exchangeProps = {
+    let lineColor = "red";
+    let rate = props.nodes[props.producers+index].message_stats.publish_out_details.rate;
+    
+    if(props.trafficMode)
+      lineColor = props.setColors(rate);
 
+    const exchangeProps = {
       cx: props.nodes[props.producers+index].x,
       cy: props.nodes[props.producers+index].y,
       r: props.nodes[props.producers+index].r + 10,
       key: props.producers + index,
       stroke: 'black',
-      strokeWidth: 5,
+      strokeWidth: props.width / 250,
       fillOpacity: 0.8,
-      fill: "red",
+      fill: lineColor,
       mute: coords.visibility
     }
     return (
