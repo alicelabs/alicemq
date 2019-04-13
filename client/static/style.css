@@ -23,6 +23,54 @@
     "nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz"
 }
 
+svg {
+  background-color: #FFFFFF;
+  display: block;
+  position:fixed; 
+  top: 0; 
+  height:100%; 
+  width:65%;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 950px) {
+  
+
+  .grid-reloaded {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: 90% 10%;
+    grid-gap: 5px;
+    grid-template-areas: 
+      "viz"
+      "nonviz";
+  }
+
+  svg {
+    background-color: #FFFFFF;
+    position: relative !important;
+    display: block;
+    top: 0; 
+    width:100% ;
+    border-radius: 5px;
+    padding-left: 0px;
+    margin-left: 0px;
+    padding: auto !important;
+    margin: auto !important;
+    left: -1.1%;
+    
+  }
+  
+  .viz {
+    background-color: #995DFF;
+    top:0; 
+    width: 100%;
+    height:100%; 
+    grid-area: viz;
+  }
+}
+
 .instance {
   grid-area: instance;
   color: white !important;
@@ -160,14 +208,13 @@
 
 .nonviz {
   grid-area: nonviz;
-  display:flex;
+  display: flex;
   justify-content: space-around;
   color: #ffffff !important;
 }
 
 
 .settings1 {
-  background-color: aquamarine;
   grid-area: settings1
 }
 
@@ -178,12 +225,6 @@
   align-items: center;
   color: #DAB2FF;
 }
-
-.settings4 {
-  background-color: rgb(87, 223, 177);
-  grid-area: settings4;
-}
-
 
 .login-box {
   margin: 10% auto 0;
@@ -216,19 +257,6 @@ h1 {
   text-align: center;
 }
 
-svg {
-  background-color: #FFFFFF;
-  display: block;
-  position:fixed; 
-  left:35%;
-  top: 0; 
-  height:100%; 
-  width:65%;
-  border-radius: 5px;
-  padding-left: 7px;
-  margin-left: 10px;
-}
-
 .axis path, .axis line {
   fill: none;
   stroke: black;
@@ -256,11 +284,6 @@ svg {
 
 /* CSS for initial D3 setup: ABOVE */
 
-.popup {
-  height: 30px;
-  width: 60px;
-  background-color: #995DFF
-}
 
 .noDots {
   font-family: 'Roboto';
