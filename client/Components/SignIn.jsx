@@ -16,7 +16,7 @@ const purpleTheme = createMuiTheme({
       main: '#e1e1dd',
     },
     error: {
-      main: '#ffffff',
+      main: '#aa0000',
     }
   },
   spacing: 10
@@ -32,13 +32,16 @@ function SignIn(props) {
     <Typography variant = 'h4' color="primary" >Alice Visualizer</Typography>
       <TextField
         id='host'
-        variant='outlined'
         label='Host'
+        variant='outlined'
         type='text'
         name='host'
-        placeholder='RabbitMQ HTTP Hostname'
+        placeholder='RabbitMQ IP Address'
         onChange={ props.updateHostname }
-        margin="dense"
+        onBlur={ props.validateHostname }
+        margin='dense'
+        autoFocus={true}
+        error={props.errorHostname ? true : false}
       />
       <TextField
         id='username'
@@ -46,9 +49,12 @@ function SignIn(props) {
         name='username'
         placeholder='Username'
         onChange={ props.updateUsername }
+        onBlur={ props.validateUsername }
         label='Username'
         variant='outlined'
         margin="dense"
+        required='true'
+        error={props.errorUsername ? true : false}
       />
       <TextField
         id='password'
@@ -57,7 +63,10 @@ function SignIn(props) {
         variant='outlined'
         label='Password'
         onChange={ props.updatePassword }
+        onBlur={ props.validatePassword }
         margin="dense"
+        required='true'
+        error={props.errorPassword ? true : false}
       />
       <TextField
         id='port'
@@ -65,9 +74,12 @@ function SignIn(props) {
         name='port'
         placeholder='Default: 15672'
         onChange={ props.updatePort }
+        onBlur={ props.validatePort }
         variant='outlined'
         label='Port'
-        margin="dense"
+        margin='dense'
+        required='true'
+        error={props.errorPort ? true : false}
       />
     </div>
     <div id='signIn'>
@@ -79,5 +91,6 @@ function SignIn(props) {
     </div>
     </MuiThemeProvider>)
 }
+
 
 export default SignIn;

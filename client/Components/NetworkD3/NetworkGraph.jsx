@@ -8,7 +8,11 @@ import Titles from './Titles.jsx'
 import Legend from './Legend.jsx'
 import * as d3 from 'd3';
 
+
+
+
 const NetworkGraph =(props)=> {
+
     return (<svg width={props.width} height={props.height}>
       <Legend {...props} />
       {props.titles && <Titles {...props} />}

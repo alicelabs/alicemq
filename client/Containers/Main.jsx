@@ -3,7 +3,7 @@ import Settings1 from '../Components/Settings1.jsx'
 import Display from '../Components/Display.jsx'
 import SignIn from '../Components/SignIn.jsx'
 import SignOut from '../Components/SignOut.jsx'
-import TrafficButton from '../Components/TrafficButton.jsx'
+import Spinner from '../Components/Spinner.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
 import "@babel/polyfill";
 import BlueBottle from '../../server/blueBottle.js';
@@ -37,28 +37,40 @@ function makeTitles(d3Data) {
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hostname: "",
-    username: "",
-    password: "",
-    // hostname: "192.168.0.35",
-    // username: "vhs",
-    // password: "4444",
-    d3Data: {},
-    port: "",
-    width: (window.innerWidth),
-    height: (parent.innerHeight),
-    padding: 10,
-    nodecards: [],
-    visualizer: false,
-    toggled: {},
-    nodes: [], 
-    links: [],
-    pause: false,
-    trafficMode: false,
-  }
+    this.state = {
+      hostname: "",
+      username: "",
+      password: "",
+      port: "",
+      // hostname: "192.168.0.236",
+      // username: "test",
+      // password: "test",
+      // port: "15672",
+
+      // hostname: "192.168.0.35",
+      // username: "vhs",
+      // password: "4444",
+      d3Data: {},
+      width: (window.innerWidth),
+      height: (parent.innerHeight),
+      padding: 10,
+      nodecards: [],
+      visualizer: false,
+      loggedIn: false,
+      toggled: {},
+      nodes: [],
+      links: [],
+      pause: false,
+      trafficMode: false,
+      errorHostname: '',
+      errorUsername: '',
+      errorPassword: '',
+      errorPort: ''
+    }
 
     this.blueBottle = null;
-    this.initializeState = this.initializeState.bind(this)
+    this.baseState = this.state;
+    // this.initializeState = this.initializeState.bind(this)
     this.updateHostname = this.updateHostname.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -69,18 +81,29 @@ class Main extends React.Component {
     this.configureInstance = this.configureInstance.bind(this);
     this.toggleStartStop = this.toggleStartStop.bind(this);
     this.toggleMode = this.toggleMode.bind(this);
+    this.validateHostname = this.validateHostname.bind(this);
+    this.validateUsername = this.validateUsername.bind(this);
+    this.validatePassword = this.validatePassword.bind(this);
+    this.validatePort = this.validatePort.bind(this);
   }
 
   async tick() {
     if (this.blueBottle === null) return;
-    const d3Data = await this.blueBottle.getData();
-    await d3Data.nodes.forEach((x)=>{
-      if (this.state.toggled[x.identifier]){
-        x.visibility = false
-      } else {x.visibility = true}
-    })
-    const dataTitles = makeTitles(d3Data);
-    this.setState({ ...d3Data, titles: dataTitles });
+    try{
+      const d3Data = await this.blueBottle.getData();
+      this.setState({visualizer: true});
+
+      d3Data.nodes.forEach((x)=>{
+        if (this.state.toggled[x.identifier]){
+          x.visibility = false
+        } else {x.visibility = true}
+      })
+      const dataTitles = makeTitles(d3Data);
+      this.setState({ ...d3Data, titles: dataTitles });
+    }
+    catch(e){
+      console.log('ERROR TO USER(MAIN): ' + e);
+    }
   }
 
   componentWillMount() {
@@ -152,10 +175,14 @@ class Main extends React.Component {
     this.setState({trafficMode: !this.state.trafficMode});
   }
   configureInstance(e){
-    this.setState(this.initializeState())
-    
+    // this.setState(this.initializeState());
+    this.setState(this.baseState);
+    this.setState({pause: true});
   }
+
   visualize(e) {
+    if(!this.validateAll()) return;
+
     const userConfig = {
       host: this.state.hostname,
       username: this.state.username,
@@ -165,7 +192,53 @@ class Main extends React.Component {
     };
 
     this.blueBottle = new BlueBottle(userConfig);
-    this.setState({ visualizer: true, pause: false });
+    this.setState({ pause: false, loggedIn: true });
+  }
+
+  validateAll(){
+    if(this.state.errorHostname !== '') return false; 
+    if(this.state.errorUsername !== '') return false;
+    if(this.state.errorPassword !== '') return false; 
+    if(this.state.errorPort !== '') return false;
+
+    return true;
+  }
+
+  // TODO: IMPROVEMENT, validate a non-ip adress
+  validateHostname(e){
+    // format: xxx.xxx.xxx.xxx
+    const regexFormat = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/;
+    if(regexFormat.test(e.target.value)){
+      this.setState({errorHostname: ''});
+      return;
+    }
+    this.setState({errorHostname: 'Invalid IP Adress'});
+  }
+
+  validateUsername(e){
+    if(e.target.value){
+      this.setState({errorUsername: ''});
+      return;
+    }
+    this.setState({errorUsername: 'Invalid Username'});
+  }
+
+  validatePassword(e){
+    if(e.target.value){
+      this.setState({errorPassword: ''});
+      return;
+    }
+    this.setState({errorPassword: 'Invalid Password'});
+  }
+  
+  validatePort(e){
+    const numRegex = /^[0-9]*$/
+    if(numRegex.test(e.target.value) && e.target.value){
+      this.setState({errorPort: ''});
+      return;
+    }
+    this.setState({errorPort: 'Invalid Port'});
+
   }
 
   updateNodeCards(node) {
@@ -215,7 +288,7 @@ class Main extends React.Component {
   }
 
   render() {
-    if (!this.state.visualizer) {
+    if (!this.state.visualizer && !this.state.loggedIn) {
       return (
           <SignIn className="container"
             updateHostname={this.updateHostname}
@@ -223,15 +296,24 @@ class Main extends React.Component {
             updatePassword={this.updatePassword}
             updatePort={this.updatePort}
             visualize={this.visualize}
+            validateHostname={this.validateHostname}
+            validateUsername={this.validateUsername}
+            validatePassword={this.validatePassword}
+            validatePort={this.validatePort}
             {...this.state}
           />)
-    } else {
+    } 
+    else if(!this.state.visualizer && this.state.loggedIn) {
+      return(<Spinner />);
+    }
+    else {
       document.body.classList.add('background-vis')
       return (
         <div className="grid-reloaded">
           <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} toggleMode={this.toggleMode} />
           <div className="instance">
-            <h1><Typography variant="h5" color="inherit">RabbitMQ Instance: {this.state.cluster_name}</Typography></h1><h3><Typography color="inherit">{this.state.hostname}</Typography></h3>
+            <span>Instance: <strong>{this.state.cluster_name}</strong><br />
+            ip: <strong>{this.state.hostname}</strong></span>
           </div>
           <Display {...this.state} updateNodeCards={this.updateNodeCards} />
           {this.state.message_stats && <OverviewCards {...this.state} />}

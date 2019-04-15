@@ -18,7 +18,12 @@ function BlueBottle(config) {
 }
 
 BlueBottle.prototype.getData = async function () {
-  this.carrotData = await this.carrot.motherLoad();
+  try{
+    this.carrotData = await this.carrot.motherLoad();
+  }
+  catch(e){
+    throw `FAILED to getData(blueBottle) ${e}`;
+  }
   return carrot2D3(this.carrotData);
 }
 
@@ -36,8 +41,9 @@ function carrot2D3(carrotData) {
   } = carrotData;
 
   // Preparing a canvas
-  let calcWidth = (window.innerWidth * 62) / 100
-  let calcHeight = (parent.innerHeight)
+  //if canvas smaller than 950px, stretch to full width  
+  let calcWidth = window.innerWidth < 950 ? (window.innerWidth) : (window.innerWidth * 62) / 100;
+  let calcHeight = window.innerWidth < 950 ? (parent.innerHeight) * 90 / 100 : (parent.innerHeight) 
 
   // Provides the app the state for D3
   const d3Data = {

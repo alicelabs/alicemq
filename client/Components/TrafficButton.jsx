@@ -18,7 +18,7 @@ const TrafficButton = (props) => {
     return(
         <MuiThemeProvider theme={buttonTheme}>
         <div className="traffic">
-            <Button width='75%' variant="contained" color="primary" onClick={props.toggleMode} >{props.trafficMode ? "Normal" : "Traffic"}</Button>
+            <Button classes={{ label: 'material-button' }} fullWidth={true} variant="contained" size='large' color="primary" onClick={props.toggleMode} >{props.trafficMode ? "Normal" : "Traffic"}</Button>
         </div>
         </MuiThemeProvider>
     )
