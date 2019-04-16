@@ -208,7 +208,7 @@ class Main extends React.Component {
   validateHostname(e){
     // format: xxx.xxx.xxx.xxx
     const regexFormat = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/;
-    if(regexFormat.test(e.target.value)){
+    if(e.target.value){
       this.setState({errorHostname: ''});
       return;
     }

@@ -2,18 +2,21 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    mode: 'development',
     entry: path.resolve(__dirname, './client/index.js'),
     output:{
         path: path.resolve(__dirname, 'client/dist'),
         filename: './client/dist/bundle.js'
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin() 
+        new webpack.HotModuleReplacementPlugin(),
     ],
     devServer: {
+        host: '0.0.0.0',
+        port: 8080,
+        publicPath: '/',
         contentBase: __dirname,
-        hot: true
+        hot: true,
+        headers: {'Access-Control-Allow-Origin': '*'},
     },
     module: {
         rules: [
@@ -32,4 +35,6 @@ module.exports = {
             }
         ]
     }
+
+
 };

@@ -9,9 +9,10 @@
     "tests": "jest",
     "dev": "webpack-dev-server",
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "web": "webpack-dev-server --config webpack.config.js",
+    "web": "webpack-dev-server --config webpack.config.js --mode development",
     "app": "webpack --config webpack.config.electron.js && electron .",
-    "buildalice": "electron-packager ."
+    "buildalice": "electron-packager .",
+    "build": "webpack --config webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -44,8 +45,7 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "style-loader": "^0.23.1",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-cli": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -57,11 +57,14 @@
     "electron-packager": "^13.1.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^24.5.0",
     "jest-enzyme": "^7.0.2",
     "nodemon": "^1.18.10",
     "react-hot-loader": "^4.8.1",
     "sinon": "^7.3.1",
-    "webpack": "^4.29.6"
+    "webpack": "^4.29.6",
+    "webpack-dev-server": "^3.2.1",
+    "webpack-cli": "^3.3.0"
   }
 }
