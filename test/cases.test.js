@@ -9,16 +9,15 @@ Enzyme.configure({ adapter: new Adapter() });
 // Alice objects and components
 import Carrot from '../server/carrot-input.js';
 import BlueBottle from '../server/blueBottle.js';
-import SignIn from '../client/Components/SignIn.jsx';
+import FrontPage from '../client/Components/FrontPage.jsx';
 import Button from '../client/Components/Button.jsx';
 import Main from '../client/Containers/Main.jsx';
 
 
-
 let config = {
-    host: '192.168.0.236', // process.env.RABBIT_HOST
-    username: 'test', // process.env.RABBIT_USERNAME
-    password: 'test', // process.env.RABBIT_PASSWORD
+    host: '192.168.0.236', 
+    username: 'test', 
+    password: 'test', 
     port: 15672,
     isWeb: true
 };
