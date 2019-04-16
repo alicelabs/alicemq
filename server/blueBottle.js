@@ -153,16 +153,18 @@ function carrot2D3(carrotData) {
   // Prepares the edges between exchanges and queues
   function linkExchangeToQueues(b, q) {
     b.forEach((binding) => {
-      const queueName = binding.queue_name
+      const queueName = binding.queue_name;
+      const echangeName = binding.exchange_name;
       d3Data.nodes.forEach((node, i) => {
         if (node.name === queueName && node.group === 3) {
           let currentQueue = queues[queues.findIndex(el => el.name === queueName)]
+          let currentExchange = exchanges[exchanges.findIndex(el=>el.name===echangeName)]
 
           if (!currentQueue.message_stats) {
             currentQueue.message_stats = { "publish_details": { "rate": 0 } }
           }
 
-          let message_rate = currentQueue.message_stats.publish_details.rate;
+          let message_rate = Math.min(currentQueue.message_stats.publish_details.rate, currentExchange.message_stats.publish_out_details.rate)
           // Handles the case it will draw a negative line so we assign 1 to avoid that
           if (message_rate < 0) {
             message_rate = 1
