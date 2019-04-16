@@ -65,7 +65,8 @@ class Main extends React.Component {
       errorHostname: '',
       errorUsername: '',
       errorPassword: '',
-      errorPort: ''
+      errorPort: '',
+      errorConnection: '',
     }
 
     this.blueBottle = null;
@@ -102,8 +103,8 @@ class Main extends React.Component {
       this.setState({ ...d3Data, titles: dataTitles });
     }
     catch(e){
-      console.log("%c Error", "color:white;");
-      console.error(e.message);
+      const error = e.message.replace(/^TypeError: /, '');
+      this.setState({ errorConnection: error, loggedIn: false, pause: true });
     }
   }
 

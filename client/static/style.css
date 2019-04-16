@@ -266,10 +266,10 @@ svg {
   height:100%; 
 }
 
-#signIn {
-  margin: auto;
+#frontPage{
   display: flex;
-  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-top: 5px;
 }
 
@@ -328,4 +328,26 @@ h1 {
 }
 .traffic-mode {
   grid-area: traffic-mode;
+}
+
+.displayError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hideError {
+  /* margin: auto;
+  display: flex;
+  align-content: center;
+  margin-top: 5px; */
+  display: none;
+}
+
+#errorMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
 }

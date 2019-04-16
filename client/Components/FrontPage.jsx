@@ -3,6 +3,7 @@ import Button from './Button.jsx'
 import Typography from '@material-ui/core/Typography'
 import {TextField} from '@material-ui/core'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import ErrorMessage from './ErrorMessage.jsx'
 
 const purpleTheme = createMuiTheme({
   typography: {
@@ -53,7 +54,7 @@ function FrontPage(props) {
         label='Username'
         variant='outlined'
         margin="dense"
-        required='true'
+        required={true}
         error={props.errorUsername ? true : false}
       />
       <TextField
@@ -65,7 +66,7 @@ function FrontPage(props) {
         onChange={ props.updatePassword }
         onBlur={ props.validatePassword }
         margin="dense"
-        required='true'
+        required={true}
         error={props.errorPassword ? true : false}
       />
       <TextField
@@ -78,16 +79,19 @@ function FrontPage(props) {
         variant='outlined'
         label='Port'
         margin='dense'
-        required='true'
+        required={true}
         error={props.errorPort ? true : false}
       />
     </div>
-    <div id='signIn'>
+    <div id='frontPage'>
       <Button
           visualize={ props.visualize }
       >
       Visualize
       </Button>
+    </div>
+    <div id='errorMessage'>
+      <ErrorMessage  msg={props.errorConnection} /> 
     </div>
     </MuiThemeProvider>)
 }
