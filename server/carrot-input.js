@@ -196,7 +196,7 @@ Carrot.prototype.motherLoad = function () {
         fetch(url, this.options)
           .then(result => result.json())
           .then(data => resolve(data))
-          .catch(err => {console.error(err.stack); reject('MotherLoad one promise failed(Carrot): ', err)})
+          .catch(err => {reject( new Error(err))})
       )
     ))
       .then(result => {
@@ -205,7 +205,7 @@ Carrot.prototype.motherLoad = function () {
         
         res(data);
       })
-      .catch(err => { console.error(err.stack); rej('MotherLoad ALL FAILED(Carrot): ', err) })
+      .catch(err => { rej(err) })
   });
 }
 

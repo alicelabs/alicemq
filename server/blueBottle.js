@@ -22,7 +22,7 @@ BlueBottle.prototype.getData = async function () {
     this.carrotData = await this.carrot.motherLoad();
   }
   catch(e){
-    throw `FAILED to getData(blueBottle) ${e}`;
+    throw  e;
   }
   return carrot2D3(this.carrotData);
 }
