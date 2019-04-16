@@ -23,7 +23,7 @@ const purpleTheme = createMuiTheme({
 })
 
 
-function SignIn(props) {
+function FrontPage(props) {
   document.body.classList.remove('background-vis');
 
   return (
@@ -93,4 +93,4 @@ function SignIn(props) {
 }
 
 
-export default SignIn;
+export default FrontPage;

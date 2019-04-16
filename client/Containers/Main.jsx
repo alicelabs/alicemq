@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Settings1 from '../Components/Settings1.jsx'
 import Display from '../Components/Display.jsx'
-import SignIn from '../Components/SignIn.jsx'
+import FrontPage from '../Components/FrontPage.jsx'
 import SignOut from '../Components/SignOut.jsx'
 import Spinner from '../Components/Spinner.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
@@ -102,7 +102,8 @@ class Main extends React.Component {
       this.setState({ ...d3Data, titles: dataTitles });
     }
     catch(e){
-      console.log('ERROR TO USER(MAIN): ' + e);
+      console.log("%c Error", "color:white;");
+      console.error(e.message);
     }
   }
 
@@ -290,7 +291,7 @@ class Main extends React.Component {
   render() {
     if (!this.state.visualizer && !this.state.loggedIn) {
       return (
-          <SignIn className="container"
+          <FrontPage className="container"
             updateHostname={this.updateHostname}
             updateUsername={this.updateUsername}
             updatePassword={this.updatePassword}
