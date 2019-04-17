@@ -163,6 +163,9 @@ function carrot2D3(carrotData) {
           if (!currentQueue.message_stats) {
             currentQueue.message_stats = { "publish_details": { "rate": 0 } }
           }
+          if (!currentQueue.message_stats.publish_details) {
+            currentQueue.message_stats.publish_details = { "rate": 0 }
+          }
 
           let message_rate = Math.min(currentQueue.message_stats.publish_details.rate, currentExchange.message_stats.publish_out_details.rate)
           // Handles the case it will draw a negative line so we assign 1 to avoid that
