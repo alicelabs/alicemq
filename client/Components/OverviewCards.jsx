@@ -21,18 +21,31 @@ const styles = {
     marginBottom: 2,
   },
 };
-const typographyOptions = {};
-const caption = { 
-  fontFamily:'\"Roboto\", \"Helvetica\", \"Arial\", sans-serif',
-  color:'rgba(0, 0, 0, 0.54)',
-  htmlFontSize: 20,
-  fontSize: '3rem',
-  fontWeight:500,
-  lineHeight: '1.3rem' 
-};
- typographyOptions.caption = caption;
 
-const cardTheme = createMuiTheme({ typography: typographyOptions });
+// const typographyOptions = {};
+// const caption = { 
+//   fontFamily:'\"Roboto\", \"Helvetica\", \"Arial\", sans-serif',
+//   color:'rgba(0, 0, 0, 0.54)',
+//   htmlFontSize: 20,
+//   fontSize: '3rem',
+//   fontWeight:500,
+//   lineHeight: '1.3rem' 
+// };
+//  typographyOptions.caption = caption;
+
+const cardTheme = createMuiTheme({ 
+  typography: {
+    useNextVariants: true,
+    typographyOptions: { 
+      fontFamily:'\"Roboto\", \"Helvetica\", \"Arial\", sans-serif',
+      color:'rgba(0, 0, 0, 0.54)',
+      htmlFontSize: 20,
+      fontSize: '3rem',
+      fontWeight:500,
+      lineHeight: '1.3rem' 
+    },
+  } 
+});
 
 
 const OverviewCards = (props) => {

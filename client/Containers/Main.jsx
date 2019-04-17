@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Settings1 from '../Components/Settings1.jsx'
 import Display from '../Components/Display.jsx'
-import SignIn from '../Components/SignIn.jsx'
+import FrontPage from '../Components/FrontPage.jsx'
 import SignOut from '../Components/SignOut.jsx'
 import Spinner from '../Components/Spinner.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
@@ -65,7 +65,8 @@ class Main extends React.Component {
       errorHostname: '',
       errorUsername: '',
       errorPassword: '',
-      errorPort: ''
+      errorPort: '',
+      errorConnection: '',
     }
 
     this.blueBottle = null;
@@ -102,7 +103,8 @@ class Main extends React.Component {
       this.setState({ ...d3Data, titles: dataTitles });
     }
     catch(e){
-      console.log('ERROR TO USER(MAIN): ' + e);
+      const error = e.message.replace(/^TypeError: /, '');
+      this.setState({ errorConnection: error, loggedIn: false, pause: true });
     }
   }
 
@@ -208,7 +210,7 @@ class Main extends React.Component {
   validateHostname(e){
     // format: xxx.xxx.xxx.xxx
     const regexFormat = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/;
-    if(regexFormat.test(e.target.value)){
+    if(e.target.value){
       this.setState({errorHostname: ''});
       return;
     }
@@ -290,7 +292,7 @@ class Main extends React.Component {
   render() {
     if (!this.state.visualizer && !this.state.loggedIn) {
       return (
-          <SignIn className="container"
+          <FrontPage className="container"
             updateHostname={this.updateHostname}
             updateUsername={this.updateUsername}
             updatePassword={this.updatePassword}

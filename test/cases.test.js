@@ -9,16 +9,15 @@ Enzyme.configure({ adapter: new Adapter() });
 // Alice objects and components
 import Carrot from '../server/carrot-input.js';
 import BlueBottle from '../server/blueBottle.js';
-import SignIn from '../client/Components/SignIn.jsx';
+import FrontPage from '../client/Components/FrontPage.jsx';
 import Button from '../client/Components/Button.jsx';
 import Main from '../client/Containers/Main.jsx';
 
 
-
 let config = {
-    host: '192.168.0.236', // process.env.RABBIT_HOST
-    username: 'test', // process.env.RABBIT_USERNAME
-    password: 'test', // process.env.RABBIT_PASSWORD
+    host: '192.168.0.236', 
+    username: 'test', 
+    password: 'test', 
     port: 15672,
     isWeb: true
 };
@@ -93,16 +92,16 @@ xdescribe('Testing the carrot library (User defined URI)', () => {
 
 
 describe('Enzyme suite testing', () => {
-    it('SignIn should have a Button rendered', () => {
-        const wrapper = shallow(<SignIn />);
+    it('FrontPage should have a Button rendered', () => {
+        const wrapper = shallow(<FrontPage />);
         expect(wrapper.find(Button)).toHaveLength(1);
     });
     it('Should have a class name of "settings1"', () => {
-        const wrapper = shallow(<SignIn />);
+        const wrapper = shallow(<FrontPage />);
         expect(wrapper.find('.login-box')).toHaveLength(1);
     });
     it('Should have a class name of "container"', () => {
-        const wrapper = mount(<SignIn className="container" />);
+        const wrapper = mount(<FrontPage className="container" />);
         expect(wrapper.props().className).toBe("container");
     });
     it('Should have a hostname property set', () => {
@@ -112,7 +111,7 @@ describe('Enzyme suite testing', () => {
 
     it('simulates change event on hostname', () => {
         const onChangeTextField = sinon.spy();
-        const wrapper = shallow(<SignIn updateHostname={onChangeTextField} />);
+        const wrapper = shallow(<FrontPage updateHostname={onChangeTextField} />);
         wrapper.find('#host').simulate('change');
         wrapper.find('#host').simulate('change');
         wrapper.find('#host').simulate('change');
