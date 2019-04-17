@@ -18,11 +18,11 @@ function BlueBottle(config) {
 }
 
 BlueBottle.prototype.getData = async function () {
-  try{
+  try {
     this.carrotData = await this.carrot.motherLoad();
   }
-  catch(e){
-    throw  e;
+  catch (e) {
+    throw e;
   }
   return carrot2D3(this.carrotData);
 }
@@ -43,7 +43,7 @@ function carrot2D3(carrotData) {
   // Preparing a canvas
   //if canvas smaller than 950px, stretch to full width  
   let calcWidth = window.innerWidth < 950 ? (window.innerWidth) : (window.innerWidth * 62) / 100;
-  let calcHeight = window.innerWidth < 950 ? (parent.innerHeight) * 90 / 100 : (parent.innerHeight) 
+  let calcHeight = window.innerWidth < 950 ? (parent.innerHeight) * 90 / 100 : (parent.innerHeight)
 
   // Provides the app the state for D3
   const d3Data = {
@@ -94,6 +94,51 @@ function carrot2D3(carrotData) {
       else if (groupNumber === 3) d3Data.identifiers[type.name] ? idt = d3Data.identifiers[type.name] : idt = 'other' //idt = d3Data.identifiers[type.name];
       else if (groupNumber === 4) d3Data.identifiers[type.queue] ? idt = d3Data.identifiers[type.queue] : idt = 'other';
       else idt = 'other'
+
+      if (!type.message_stats) {
+        type.message_stats = {
+          "confirm": 0,
+          "confirm_details": {
+            "rate": 0
+          },
+          "publish": 0,
+          "publish_details": {
+            "rate": 0
+          },
+          "return_unroutable": 0,
+          "return_unroutable_details": {
+            "rate": 0
+          },
+          "ack": 0,
+          "ack_details": {
+            "rate": 0
+          },
+          "deliver": 0,
+          "deliver_details": {
+            "rate": 0
+          },
+          "deliver_get": 0,
+          "deliver_get_details": {
+            "rate": 0
+          },
+          "deliver_no_ack": 0,
+          "deliver_no_ack_details": {
+            "rate": 0
+          },
+          "get": 0,
+          "get_details": {
+            "rate": 0
+          },
+          "get_no_ack": 0,
+          "get_no_ack_details": {
+            "rate": 0
+          },
+          "redeliver": 0,
+          "redeliver_details": {
+            "rate": 0
+          }
+        }
+      }
       let node = {
 
         "message_stats": type.message_stats,
@@ -117,21 +162,9 @@ function carrot2D3(carrotData) {
       const queueName = consumer.queue
       d3Data.nodes.forEach((node, j) => {
         if (node.name === queueName && node.group === 3) {
-          if (!consumer.message_stats) {
-            consumer.message_stats = {
-              "ack": 0,
-              "ack_details": {
-                "rate": 0
-              },
-              "deliver": 0,
-              "deliver_details": {
-                "rate": 0
-              },
-              "deliver_get": 0,
-              "deliver_get_details": {
-                "rate": 0
-              },
-            }
+          if (!consumer.message_stats.deliver_get_details) {
+            consumer.message_stats.deliver_get_details = {"rate": 0 }
+            consumer.message_stats.deliver_get = 0;
           }
 
           const link = {
@@ -141,8 +174,8 @@ function carrot2D3(carrotData) {
             // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
             "xCenter": d3Data.width / 40,
             "yCenter": d3Data.height / 40,
-            "sourceXCenter": d3Data.width / 40, 
-            "sourceYCenter": d3Data.height / 30, 
+            "sourceXCenter": d3Data.width / 40,
+            "sourceYCenter": d3Data.height / 30,
           }
           d3Data.links.push(link)
         }
@@ -153,16 +186,21 @@ function carrot2D3(carrotData) {
   // Prepares the edges between exchanges and queues
   function linkExchangeToQueues(b, q) {
     b.forEach((binding) => {
-      const queueName = binding.queue_name
+      const queueName = binding.queue_name;
+      const echangeName = binding.exchange_name;
       d3Data.nodes.forEach((node, i) => {
         if (node.name === queueName && node.group === 3) {
           let currentQueue = queues[queues.findIndex(el => el.name === queueName)]
+          let currentExchange = exchanges[exchanges.findIndex(el => el.name === echangeName)]
 
           if (!currentQueue.message_stats) {
             currentQueue.message_stats = { "publish_details": { "rate": 0 } }
           }
+          if (!currentQueue.message_stats.publish_details) {
+            currentQueue.message_stats.publish_details = { "rate": 0 }
+          }
 
-          let message_rate = currentQueue.message_stats.publish_details.rate;
+          let message_rate = Math.min(currentQueue.message_stats.publish_details.rate, currentExchange.message_stats.publish_out_details.rate)
           // Handles the case it will draw a negative line so we assign 1 to avoid that
           if (message_rate < 0) {
             message_rate = 1
@@ -178,8 +216,8 @@ function carrot2D3(carrotData) {
             // TODO: IMPROVE, the center coordinate depends on the width and height and update auto
             "xCenter": d3Data.width / 40,
             "yCenter": d3Data.height / 40,
-            "sourceXCenter": 0, 
-            "sourceYCenter": 0, 
+            "sourceXCenter": 0,
+            "sourceYCenter": 0,
           }
           d3Data.links.push(link)
         }
