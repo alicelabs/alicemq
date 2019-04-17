@@ -13,6 +13,7 @@ const styles = theme => ({
 })
 
 const renderQueues = (props) => {
+ 
   return (coords, index) => {
     let lineColor = "#4caf50";
     let rate = props.nodes[props.producers+props.exchanges+index].message_stats.publish_details.rate;

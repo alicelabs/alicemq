@@ -7,7 +7,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 const styles = theme => ({
     // progress: {
     //     margin: theme.spacing.unit * 2
-    // }
+    // },
     // root: {
     //     flexGrow: 1,
     //   },
@@ -15,9 +15,9 @@ const styles = theme => ({
 
 function Spinner(props){
     return (
-        <div>
-            <CircularProgress className="spinner" color="primary" size={100} />
-            {/* <LinearProgress color="secondary" /> */}
+        <div className="spinner">
+            <CircularProgress color="primary" size={100} id="spin"/>
+            {/* <LinearProgress color="primary" /> */}
         </div>
     )
 

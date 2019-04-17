@@ -1,16 +1,17 @@
 /* body {
   background: #995DFF;
   color: white;
+  font-size: calc(10 + (16 - 10) * ((100vw - 1200) / (1900 - 100)));
 } */
 
 html {
-  font-size: calc(10px + (18 - 10) * ((100vw - 600px) / (1800 - 600)));
- }
+ font-size: calc(10px + (18 - 10) * ((100vw - 600px) / (1800 - 600)));
+}
 
 .grid-reloaded {
   position: fixed;
   display: grid;
-  height: 95%;
+  height: 100%;
   width: 100%;
   grid-template-columns: 10% 3% 3.5% 3.5% 3% 10% 67%;
   grid-template-rows: 8% 8% 8% 8% 8% 8% 26% 26%;
@@ -37,9 +38,22 @@ svg {
   border-radius: 5px;
 }
 
+#spin {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  .spinner {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
 @media screen and (max-width: 950px) {
   
-
   .grid-reloaded {
     display: grid;
     width: 100%;
@@ -65,7 +79,8 @@ svg {
     left: -1.1%;
     
   }
-  
+ 
+
   .viz {
     background-color: #995DFF;
     top:0; 
@@ -84,6 +99,7 @@ svg {
 
 .s1 {
   grid-area: s1;
+  font-size: 1.2rem;
   background-color: #5F3A9E !important;
   color: #ffffff !important;
 }
@@ -250,10 +266,10 @@ svg {
   height:100%; 
 }
 
-#signIn {
-  margin: auto;
+#frontPage{
   display: flex;
-  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-top: 5px;
 }
 
@@ -306,15 +322,32 @@ h1 {
   display: none;
 }
 
-.spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .material-button {
   min-height: inherit;
   font-size: .7em;
 }
 .traffic-mode {
   grid-area: traffic-mode;
+}
+
+.displayError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hideError {
+  /* margin: auto;
+  display: flex;
+  align-content: center;
+  margin-top: 5px; */
+  display: none;
+}
+
+#errorMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import { withStyles } from '@material-ui/core/styles'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import numeral from 'numeral';
@@ -22,94 +22,126 @@ const styles = {
   },
 };
 
+// const typographyOptions = {};
+// const caption = { 
+//   fontFamily:'\"Roboto\", \"Helvetica\", \"Arial\", sans-serif',
+//   color:'rgba(0, 0, 0, 0.54)',
+//   htmlFontSize: 20,
+//   fontSize: '3rem',
+//   fontWeight:500,
+//   lineHeight: '1.3rem' 
+// };
+//  typographyOptions.caption = caption;
+
+const cardTheme = createMuiTheme({ 
+  typography: {
+    useNextVariants: true,
+    typographyOptions: { 
+      fontFamily:'\"Roboto\", \"Helvetica\", \"Arial\", sans-serif',
+      color:'rgba(0, 0, 0, 0.54)',
+      htmlFontSize: 20,
+      fontSize: '3rem',
+      fontWeight:500,
+      lineHeight: '1.3rem' 
+    },
+  } 
+});
+
 
 const OverviewCards = (props) => {
 
   return (
-    <React.Fragment>
+    <MuiThemeProvider theme={cardTheme}>
       
         <Card className="s1">
-        <div className="ocard">
-        <span className="card-title">
-        Total Delivered<br />
-        </span><span className="card-content">
-        {props.message_stats.deliver_get}
-        </span>
-        </div>
+          <CardContent>
+            <Typography color='inherit' gutterBottom>
+              Total Delivered
+        </Typography>
+            <Typography variant="h5"  color='inherit'>
+              {numeral(`${props.message_stats.deliver_get}`).format('0,0')}
+            </Typography>
+          </CardContent>
         </Card>
 
-        <Card className="s2">
-        <div className="ocard">
-        <span className="card-title">
-        Published/s<br />
-        </span><span className="card-content">
-        {props.message_stats.publish_details.rate}
-        </span>
-        </div>
+        <Card className="s2" border={1} borderColor="secondary.main">
+          <CardContent>
+            <Typography color='inherit' gutterBottom>
+              Published/s
+        </Typography>
+            <Typography variant="h5" component="h2" color='inherit'>
+            {/* TODO: Bug, publish_details is undefined after rabbit resets with no messages */}
+              {numeral(`${props.message_stats.publish_details.rate}`).format('0,0')}
+            </Typography>
+          </CardContent>
         </Card>
 
-        <Card className="s3">
-        <div className="ocard">
-        <span className="card-title">
-        Producers<br />
-        </span><span className="card-content">
-        {props.producers}
-        </span>
-        </div>
+        <Card className="s3" border={1} borderColor="secondary.main">
+          <CardContent>
+            <Typography color='inherit' gutterBottom>
+              Total Published
+        </Typography>
+            <Typography variant="h5" component="h2" color='inherit'>
+              {numeral(`${props.message_stats.publish}`).format('0,0')}
+            </Typography>
+          </CardContent>
         </Card>
 
-        <Card className="s4">
-        <div className="ocard">
-        <span className="card-title">
-        Exchanges<br />
-        </span><span className="card-content">
-        {props.exchanges}
-        </span>
-        </div>
+        <Card className="s4" border={1} borderColor="secondary.main">
+          <CardContent>
+            <Typography color='inherit' gutterBottom>
+              Total Deliverd No Ack
+        </Typography>
+            <Typography variant="h5" component="h2" color='inherit'>
+              {numeral(`${props.message_stats.deliver_no_ack}`).format('0,0')}
+            </Typography>
+          </CardContent>
         </Card>
 
-        <Card className="s5">
-        <div className="ocard">
-        <span className="card-title">
-        In-Queue<br />
-        </span><span className="card-content">
-        {props.queue_totals.messages}
-        </span>
-        </div>
+        <Card className="s5" border={1} borderColor="secondary.main">
+          <CardContent>
+            <Typography color='inherit' gutterBottom>
+              In-Queue
+        </Typography>
+            <Typography variant="h5" component="h2" color='inherit'>
+              {numeral(`${props.queue_totals.messages}`).format('0,0')}
+            </Typography>
+          </CardContent>
         </Card>
 
-        <Card className="s6">
-        <div className="ocard">
-        <span className="card-title">
-        Deliveries/s<br />
-        </span><span className="card-content">
-        {props.message_stats.deliver_get_details.rate}
-        </span>
-        </div>
+        <Card className="s6" border={1} borderColor="secondary.main">
+          <CardContent>
+            <Typography color='inherit' gutterBottom>
+              Deliveries/s
+        </Typography>
+            <Typography variant="h5" component="h2" color='inherit'>
+              {numeral(`${props.message_stats.deliver_get_details.rate}`).format('0,0')}
+            </Typography>
+          </CardContent>
         </Card>
 
-        <Card className="s7">
-        <div className="ocard">
-        <span className="card-title">
-        Consumers<br />
-        </span><span className="card-content">
-        {props.consumers}
-        </span>
-        </div>
+        <Card className="s7" border={1} borderColor="secondary.main">
+          <CardContent>
+            <Typography color='inherit' gutterBottom>
+              Total Redelivered
+        </Typography>
+            <Typography variant="h5" component="h2" color='inherit'>
+              {numeral(`${props.message_stats.redeliver}`).format('0,0')}
+            </Typography>
+          </CardContent>
         </Card>
 
-        <Card className="s8">
-        <div className="ocard">
-        <span className="card-title">
-        Queues<br />
-        </span><span className="card-content">
-        {props.queues}
-        </span>
-        </div>
+        <Card className="s8" border={1} borderColor="secondary.main">
+          <CardContent>
+            <Typography color='inherit' gutterBottom>
+              Disk Writes
+        </Typography>
+            <Typography variant="h5" component="h2" color='inherit'>
+              {numeral(`${props.message_stats.disk_writes}`).format('0,0')}
+            </Typography>
+          </CardContent>
         </Card>
-
-     
-    </React.Fragment>
+    </MuiThemeProvider>
   );
 }
 
