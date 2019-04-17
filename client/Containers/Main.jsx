@@ -279,7 +279,7 @@ class Main extends React.Component {
         return this.setState({
           nodecards: [
             { "Type": "Consumer" },
-            { "Total Recieved": node.message_stats.deliver_get },
+            { "Total Received": node.message_stats.deliver_get },
             { "Delivery Rate": node.message_stats.deliver_get_details.rate },
             { "state": node.state }
           ]
