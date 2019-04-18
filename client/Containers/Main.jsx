@@ -190,7 +190,7 @@ class Main extends React.Component {
       username: this.state.username,
       password: this.state.password,
       port: this.state.port,
-      isWeb: true
+      isWeb: false
     };
 
     this.blueBottle = new BlueBottle(userConfig);

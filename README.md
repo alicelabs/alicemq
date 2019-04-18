@@ -1,6 +1,6 @@
-# Alice - RabbitMQ Visualizer
+# AliceMQ - RabbitMQ Visualizer
 
-One Paragraph of project description goes here
+It uses the RabbitMQ management plugin API to query multiple endpoints: overview, queues, exchanges, bindings, consumers, and producers - then parses the data to re-pipe it into a D3 app. The app is meant to focus on traffic flowing into the system and show which exchanges are getting hit and how hard.
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ npm run buildapp
 
 Once the command finishes, please find the executable electron app in its subfolder. The app is specific built for the platform which you are running.
 
-## Testing Alice with your server
+## Testing AliceMQ with your server
 
 To help you test the app is working correctly with your RabbitMQ server, we provide you with [AliceMQ testing suite](https://github.com/alicelabs/alicemq-test-suite). It is a series of producer and consumer scripts that can simulate all types of RabbitMQ messages: Direct, Topic, Header and Fanout. Please see detailed instruction on its [readme](https://github.com/alicelabs/alicemq-test-suite).
 
@@ -33,7 +33,7 @@ To help you test the app is working correctly with your RabbitMQ server, we prov
 ### Connecting to Cloud Services
 AliceMQ suppports both local and cloud RabbitMQ instance like **AWS**. If you have problem with connection please check:
 * Check internet connectivity.
-* RabbitMQ server is running. 
+* RabbitMQ server is running.
 * Double check username and password to log into RabbitMQ.
 * Ensure RabbitMQ port is correct, open and forward.
 * Still having issues, continue reading below.
@@ -46,6 +46,33 @@ If running on AWS EC2 server:
 * Edit your RabbitMQ config file.
 * Edit EC2 security group to open RabbitMQ port in inbound rules.
 
+### Color Legend
+
+If you'd like to modify the color legend ranges to better suit your RabbitMQ instance's throughput. Two simple modifications need to be made.
+```
+## /client/Components/Legend.jsx ##
+
+let ranges = [['0', '#bdbdbd'], ['1-50', '#b9f6ca'], ['50-150', '#ffeb3b'], ['150-500', '#f9a825'], ['500-2000', '#ff5722'] , ['> 2000', '#b71c1c']]
+```
+
+The ranges are static values in the 1st element of the sub arrays
+
+```
+## /client/Components/NetworkGraph.jsx ##
+
+function setRateColor(rate){
+  let lineColor = '';
+  if (rate === 0) { lineColor = '#bdbdbd' } 
+  else if (rate > 0 && rate <= 50) { lineColor = '#b9f6ca' }
+  else if (rate > 50 && rate <= 150) { lineColor = '#ffeb3b' }
+  else if (rate > 150 && rate <= 500) { lineColor = '#f9a825' }
+  else if (rate > 500 && rate <= 2000) { lineColor = '#ff5722' }
+  else if (rate > 2000) { lineColor = '#b71c1c' }
+  return lineColor;
+}
+```
+
+Be sure to have the static ranges in the Legend component match in the setRateColor function and you're all set. 
 ## Built With
 
 * [React](https://reactjs.org/docs/getting-started.html) - Framework used
@@ -63,7 +90,7 @@ v1.0.1
 
 ## License
 
-[Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/) 
+[Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
 
 ## Acknowledgments
 

@@ -1,7 +1,7 @@
 {
   "name": "alicemq",
   "productName": "AliceMQ",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RabbitMQ Visualizer",
   "main": "./main.js",
   "scripts": {
@@ -11,8 +11,9 @@
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "web": "webpack-dev-server --config webpack.config.js --mode development",
     "app": "webpack --config webpack.config.electron.js && electron .",
-    "buildapp": "electron-packager .",
-    "build": "webpack --config webpack.prod.js --mode production",
+    "buildapp": "electron-packager . --icon=./assets/icon/mac/alice-ribbon.icns",
+    "buildappwin": "electron-packager . --icon=./assets/icon/win/alice-ribbon.ico",
+    "build": "webpack --config webpack.config.js --mode production",
     "buildapplinux": "electron-packager . --platform linux --arch x64"
   },
   "repository": {
@@ -39,8 +40,6 @@
     "node-fetch": "^2.3.0",
     "numeral": "^2.0.6",
     "path": "^0.12.7",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5",
     "style-loader": "^0.23.1"
   },
   "devDependencies": {
@@ -62,7 +61,10 @@
     "jest-enzyme": "^7.0.2",
     "nodemon": "^1.18.10",
     "react-hot-loader": "^4.8.1",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
     "sinon": "^7.3.1",
+    "terser-webpack-plugin": "^1.2.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
