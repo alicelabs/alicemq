@@ -70,8 +70,7 @@ svg {
     position: relative !important;
     display: block;
     top: 0; 
-    width:100% ;
-    border-radius: 5px;
+    width:100%;
     padding-left: 0px;
     margin-left: 0px;
     padding: auto !important;
