@@ -11,9 +11,9 @@
     "reactdev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "web": "webpack-dev-server --config webpack.config.js --mode development",
     "app": "webpack --config webpack.config.electron.js && electron .",
-    "buildappmac": "electron-packager . --icon=./assets/icon/mac/alice-ribbon.icns --out=release-builds --overwrite",
+    "buildappmac": "electron-packager . --platform=darwin --arch=x64 --icon=./assets/icon/mac/alice-ribbon.icns --out=release-builds --overwrite",
     "buildappwin": "electron-packager . --platform=win32 --arch=ia32 --icon=./assets/icon/win/alice-ribbon.ico --out=release-builds",
-    "build": "webpack --config webpack.config.js --mode production",
+    "build": "webpack --config webpack.config.js",
     "buildapplinux": "electron-packager . --platform=linux --arch=x64 --icon=./assets/icon/linux/alice-ribbon.png --out=release-builds",
     "buildapp": "electron-packager ."
   },

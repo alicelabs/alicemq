@@ -5,7 +5,7 @@ module.exports = {
     mode: 'development',
     entry: path.resolve(__dirname, './client/index.js'),
     output:{
-        path: path.resolve(__dirname, 'client/dist'),
+        path: path.resolve(__dirname, ''),
         filename: './client/dist/bundle.js'
     },
     plugins: [
