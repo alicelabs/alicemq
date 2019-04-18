@@ -6,7 +6,7 @@ module.exports = {
     entry: path.resolve(__dirname, './client/index.js'),
     output:{
         path: path.resolve(__dirname, 'client/dist'),
-        filename: './client/dist/bundle.js'
+        filename: 'bundle.js'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -18,7 +18,7 @@ module.exports = {
     module: {
         rules: [
             {
-                exclude: [/node_modules/, /onLoad.json/, /test/],
+                exclude: [/node_modules/, /onLoad.json/, /test/, /assets/],
                 use: {
                     loader: 'babel-loader',
                     options: {

@@ -30,7 +30,7 @@ function FrontPage(props) {
   return (
     <MuiThemeProvider theme={purpleTheme}>
     <div className='login-box'>
-    <Typography variant = 'h4' color="primary" >Alice Visualizer</Typography>
+    <Typography variant = 'h4' color="primary" >AliceMQ</Typography>
       <TextField
         id='host'
         label='Host'

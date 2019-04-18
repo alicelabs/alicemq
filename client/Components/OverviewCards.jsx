@@ -8,6 +8,7 @@ import numeral from 'numeral';
 const styles = {
   card: {
     minWidth: 275,
+    minHeight: 100,
   },
   bullet: {
     display: 'inline-block',
@@ -90,7 +91,7 @@ const OverviewCards = (props) => {
         <Card className="s4" border={1} borderColor="secondary.main">
           <CardContent>
             <Typography color='inherit' gutterBottom>
-              Total Deliverd No Ack
+              Total NoAck
         </Typography>
             <Typography variant="h5" component="h2" color='inherit'>
               {numeral(`${props.message_stats.deliver_no_ack}`).format('0,0')}
