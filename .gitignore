@@ -1,6 +1,6 @@
 node_modules
 package-lock.json
-client/dist/bundle.js
+client/dist
 .env
 *.DS_Store
 *.Rhistory

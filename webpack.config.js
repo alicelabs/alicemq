@@ -6,7 +6,7 @@ module.exports = {
     entry: path.resolve(__dirname, './client/index.js'),
     output:{
         path: path.resolve(__dirname, 'client/dist'),
-        filename: 'bundle.js'
+        filename: './client/dist/bundle.js'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
