@@ -11,8 +11,9 @@ function createWindow (){
     height: 600,
     webPreferences: {
       devTools: false,
-    }
+    },
   })
+  win.maximize();
   win.loadFile('index.html');
   win.webContents.openDevTools();
   win.on('closed', () => {

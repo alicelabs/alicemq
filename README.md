@@ -21,6 +21,12 @@ git clone https://github.com/alicelabs/alicemq.git
 cd alicemq
 npm run buildapp
 ```
+For platform specific build:
+```
+npm run buildappwin
+npm run buildappmac
+npm run buildapplinux
+```
 
 Once the command finishes, please find the executable electron app in its subfolder. The app is specific built for the platform which you are running.
 
@@ -29,6 +35,19 @@ Once the command finishes, please find the executable electron app in its subfol
 To help you test the app is working correctly with your RabbitMQ server, we provide you with [AliceMQ testing suite](https://github.com/alicelabs/alicemq-test-suite). It is a series of producer and consumer scripts that can simulate all types of RabbitMQ messages: Direct, Topic, Header and Fanout. Please see detailed instruction on its [readme](https://github.com/alicelabs/alicemq-test-suite).
 
 ## Troubleshooting
+
+### Web App not Working
+
+Since the current script is built for electron app, the web app may not work out of the box. Please modify
+```
+## Main.jsx - Change isWeb false to true ##
+
+isWeb: true
+
+## Run Script ##
+
+npm run web
+```
 
 ### Connecting to Cloud Services
 AliceMQ suppports both local and cloud RabbitMQ instance like **AWS**. If you have problem with connection please check:

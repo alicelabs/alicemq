@@ -7,3 +7,4 @@ client/dist/bundle.js
 test/.DS_Store
 .DS_Store
 AliceMQ*
+release-builds
