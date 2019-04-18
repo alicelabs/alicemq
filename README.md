@@ -1,7 +1,7 @@
 # AliceMQ - RabbitMQ Visualizer
 
 It uses the RabbitMQ management plugin API to query multiple endpoints: overview, queues, exchanges, bindings, channels - then parses the data to re-pipe it into a D3 app. The app is meant to focus on traffic flowing into the system and show which exchanges are getting hit and how hard.
-![AliceMQGIF](https://github.com/alicelabs/alicemq/assets/alicemq0.gif)
+![AliceMQGIF](https://github.com/alicelabs/alicemq/assets/icon/alicemq0.gif)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
