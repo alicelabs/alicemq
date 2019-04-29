@@ -25,14 +25,19 @@ git clone https://github.com/alicelabs/alicemq.git
 cd alicemq
 npm run buildapp
 ```
-For platform specific build:
+For Mac and Windows build:
 ```
 npm run buildappwin
 npm run buildappmac
-npm run buildapplinux
+```
+Once the command finishes, please find the executable electron app in its subfolder. The app is specific built for the platform which you are running.
+
+For Linux:
+We haven't yet packaged the production build for Linux. You can package it yourself or run it in development mode. 
+```
+npm run app
 ```
 
-Once the command finishes, please find the executable electron app in its subfolder. The app is specific built for the platform which you are running.
 
 ## Testing AliceMQ with your server
 
@@ -42,14 +47,14 @@ To help you test the app is working correctly with your RabbitMQ server, we prov
 
 ### Web App not Working
 
-Since the current script is built for electron app, the web app may not work out of the box. Please modify
+Since the current script is built for the electron build, the web app may not work out of the box. Please modify
+
+in ./Clinet/Containers/Main.jsx - Change isWeb false to true 
 ```
-## Main.jsx - Change isWeb false to true ##
-
 isWeb: true
-
-## Run Script ##
-
+```
+then run the script
+```
 npm run web
 ```
 
