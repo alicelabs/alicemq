@@ -50,11 +50,11 @@ To help you test the app is working correctly with your RabbitMQ server, we prov
 Since the current script is built for the electron build, the web app may not work out of the box. Please modify
 
 in ./Clinet/Containers/Main.jsx - Change isWeb false to true 
-```
+```javascript
 isWeb: true
 ```
 then run the script
-```
+```javascript
 npm run web
 ```
 
@@ -77,17 +77,18 @@ If running on AWS EC2 server:
 ### Color Legend
 
 If you'd like to modify the color legend ranges to better suit your RabbitMQ instance's throughput. Two simple modifications need to be made.
-```
-## /client/Components/Legend.jsx ##
 
+## /client/Components/Legend.jsx ##
+```javascript
 let ranges = [['0', '#bdbdbd'], ['1-50', '#b9f6ca'], ['50-150', '#ffeb3b'], ['150-500', '#f9a825'], ['500-2000', '#ff5722'] , ['> 2000', '#b71c1c']]
 ```
 
 The ranges are static values in the 1st element of the sub arrays
 
-```
+
 ## /client/Components/NetworkGraph.jsx ##
 
+```javascript
 function setRateColor(rate){
   let lineColor = '';
   if (rate === 0) { lineColor = '#bdbdbd' } 
