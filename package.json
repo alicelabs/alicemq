@@ -33,7 +33,7 @@
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "acorn": "^8.2.2",
-    "amqplib": "^0.5.3",
+    "amqplib": "^0.7.1",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
     "d3": "^5.9.2",
