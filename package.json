@@ -52,7 +52,7 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
-    "electron": "^9.1.0",
+    "electron": "^13.0.1",
     "electron-packager": "^13.1.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
