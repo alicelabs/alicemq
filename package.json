@@ -35,7 +35,7 @@
     "acorn": "^8.2.2",
     "amqplib": "^0.5.3",
     "babel-loader": "^8.0.5",
-    "css-loader": "^2.1.1",
+    "css-loader": "^5.2.7",
     "d3": "^5.9.2",
     "js-base64": "^3.6.0",
     "node-fetch": "^2.3.0",
