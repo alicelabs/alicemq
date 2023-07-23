@@ -105,7 +105,7 @@ Be sure to have the static ranges in the Legend component match in the setRateCo
 ## Built With
 
 * [React](https://reactjs.org/docs/getting-started.html) - Framework used
-* [Electron](https://maven.apache.org/) - Build cross-platform application
+* [Electron](https://www.electronjs.org/) - Build cross-platform application
 * [D3](https://github.com/d3/d3/wiki) - Used to draw graphs
 * [RabbitMQ](https://www.rabbitmq.com/documentation.html) - Message broker and underlining technology
 
