@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Button } from '@mui/material';
-import { ThemeProvider, createMuiTheme } from '@mui/material/styles'
-import TrafficButton from '../Components/TrafficButton.jsx'
+import { ThemeProvider, createMuiTheme } from '@mui/material/styles';
+import TrafficButton from '../Components/TrafficButton.jsx';
 
 const buttonTheme = createMuiTheme({
   typography: {
@@ -17,9 +17,9 @@ const buttonTheme = createMuiTheme({
     },
     error: {
       main: '#00a300', // green
-    }
+    },
   },
-  spacing: 10
+  spacing: 10,
 });
 
 const startStopTheme = createMuiTheme({
@@ -30,29 +30,46 @@ const startStopTheme = createMuiTheme({
     primary: { main: '#00a300' }, // gray
     secondary: { main: '#cc0028' }, // red
   },
-  spacing: 10
+  spacing: 10,
 });
-
 
 const SignOut = (props) => {
   return (
     <React.Fragment>
       <div className="signout">
         <ThemeProvider theme={buttonTheme}>
-          <Button classes={{ label: 'material-button' }} fullWidth={true} variant="contained" size='large'  color="primary" onClick={props.configureInstance} >Sign out</Button>
+          <Button
+            classes={{ label: 'material-button' }}
+            fullWidth={true}
+            variant="contained"
+            size="large"
+            color="primary"
+            onClick={props.configureInstance}
+          >
+            Sign out
+          </Button>
         </ThemeProvider>
       </div>
       <div className="traffic-mode">
-                <TrafficButton {...props} toggleMode={props.toggleMode} />
-            </div>
+        <TrafficButton {...props} toggleMode={props.toggleMode} />
+      </div>
 
       <div className="stop">
         <ThemeProvider theme={startStopTheme}>
-          <Button classes={{ label: 'material-button' }} fullWidth={true} variant="contained" size='large' color={props.pause ? "primary" : "secondary"} onClick={props.toggleStartStop}>{props.pause ? "START" : "STOP"}</Button>
+          <Button
+            classes={{ label: 'material-button' }}
+            fullWidth={true}
+            variant="contained"
+            size="large"
+            color={props.pause ? 'primary' : 'secondary'}
+            onClick={props.toggleStartStop}
+          >
+            {props.pause ? 'START' : 'STOP'}
+          </Button>
         </ThemeProvider>
       </div>
-      </React.Fragment>
-  )
-}
+    </React.Fragment>
+  );
+};
 
 export default SignOut;

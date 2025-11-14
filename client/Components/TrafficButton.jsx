@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { ThemeProvider, createMuiTheme } from '@mui/material/styles'
+import { ThemeProvider, createMuiTheme } from '@mui/material/styles';
 
 const buttonTheme = createMuiTheme({
   typography: {
@@ -11,17 +11,26 @@ const buttonTheme = createMuiTheme({
       main: '#e1e1dd', // gray
     },
   },
-  spacing: 10
+  spacing: 10,
 });
 
 const TrafficButton = (props) => {
-    return(
-        <ThemeProvider theme={buttonTheme}>
-        <div className="traffic">
-            <Button classes={{ label: 'material-button' }} fullWidth={true} variant="contained" size='large' color="primary" onClick={props.toggleMode} >{props.trafficMode ? "Normal" : "Traffic"}</Button>
-        </div>
-        </ThemeProvider>
-    )
+  return (
+    <ThemeProvider theme={buttonTheme}>
+      <div className="traffic">
+        <Button
+          classes={{ label: 'material-button' }}
+          fullWidth={true}
+          variant="contained"
+          size="large"
+          color="primary"
+          onClick={props.toggleMode}
+        >
+          {props.trafficMode ? 'Normal' : 'Traffic'}
+        </Button>
+      </div>
+    </ThemeProvider>
+  );
 };
 
 export default TrafficButton;

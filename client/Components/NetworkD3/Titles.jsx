@@ -7,13 +7,17 @@ const renderTitles = (props) => {
       y: props.titles[index].y,
       fontSize: 15,
       key: index,
-      fill: "black"
-    }
+      fill: 'black',
+    };
 
-    return <text fontFamily="roboto" {...titlesProps} >{props.titles[index].name} </text> // <rect> is d3 function
-  }
-}
+    return (
+      <text fontFamily="roboto" {...titlesProps}>
+        {props.titles[index].name}{' '}
+      </text>
+    ); // <rect> is d3 function
+  };
+};
 
 export default (props) => {
-  return <g>{ props.titles.map(renderTitles(props)) }</g>
-}
+  return <g>{props.titles.map(renderTitles(props))}</g>;
+};

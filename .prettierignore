@@ -1,0 +1,9 @@
+node_modules
+client/dist
+release-builds
+package-lock.json
+*.gif
+*.png
+*.jpg
+*.ico
+*.icns

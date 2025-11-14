@@ -1,317 +1,294 @@
-import React, { Component } from 'react';
-import Settings1 from '../Components/Settings1.jsx'
-import Display from '../Components/Display.jsx'
-import FrontPage from '../Components/FrontPage.jsx'
-import SignOut from '../Components/SignOut.jsx'
-import Spinner from '../Components/Spinner.jsx'
-import OverviewCards from '../Components/OverviewCards.jsx'
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Settings1 from '../Components/Settings1.jsx';
+import Display from '../Components/Display.jsx';
+import FrontPage from '../Components/FrontPage.jsx';
+import SignOut from '../Components/SignOut.jsx';
+import Spinner from '../Components/Spinner.jsx';
+import OverviewCards from '../Components/OverviewCards.jsx';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import BlueBottle from '../../server/blueBottle.js';
 import NodeCards from '../Components/NodeCards.jsx';
-import Typography from '@mui/material/Typography';
-
-// d3Data reference
-// "cluster_name": cluster_name,
-// "nodes": [],
-// "links": [],
-// "identifiers": [{binding: exchange}],
-// "producers": producers.length,
-// "exchanges": exchanges.length,
-// "queues": queues.length,
-// "consumers": consumers.length
 
 function makeTitles(d3Data) {
   const titles = [];
-  const nameTitles = ['Producers', 'Exchanges', 'Queues', 'Consumers']
+  const nameTitles = ['Producers', 'Exchanges', 'Queues', 'Consumers'];
 
   for (let i = 0; i < nameTitles.length; i++)
     titles.push({
       name: nameTitles[i],
-      y: (d3Data.height / 4) * (i + 1) - (d3Data.height * 0.1) - 40,
-      x: 25
+      y: (d3Data.height / 4) * (i + 1) - d3Data.height * 0.1 - 40,
+      x: 25,
     });
 
   return titles;
 }
 
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hostname: "",
-      username: "",
-      password: "",
-      port: "",
-      d3Data: {},
-      width: (window.innerWidth),
-      height: (parent.innerHeight),
-      padding: 10,
-      nodecards: [],
-      visualizer: false,
-      loggedIn: false,
-      toggled: {},
-      nodes: [],
-      links: [],
-      pause: false,
-      trafficMode: false,
-      errorHostname: '',
-      errorUsername: '',
-      errorPassword: '',
-      errorPort: '',
-      errorConnection: '',
-    }
+const initialState = {
+  hostname: '',
+  username: '',
+  password: '',
+  port: '',
+  d3Data: {},
+  width: window.innerWidth,
+  height: window.innerHeight,
+  padding: 10,
+  nodecards: [],
+  visualizer: false,
+  loggedIn: false,
+  toggled: {},
+  nodes: [],
+  links: [],
+  pause: false,
+  trafficMode: false,
+  errorHostname: '',
+  errorUsername: '',
+  errorPassword: '',
+  errorPort: '',
+  errorConnection: '',
+};
 
-    this.blueBottle = null;
-    this.baseState = this.state;
-    // this.initializeState = this.initializeState.bind(this)
-    this.updateHostname = this.updateHostname.bind(this);
-    this.updateUsername = this.updateUsername.bind(this);
-    this.updatePassword = this.updatePassword.bind(this);
-    this.updatePort = this.updatePort.bind(this);
-    this.visualize = this.visualize.bind(this);
-    this.updateNodeCards = this.updateNodeCards.bind(this);
-    this.toggleVisibility = this.toggleVisibility.bind(this);
-    this.configureInstance = this.configureInstance.bind(this);
-    this.toggleStartStop = this.toggleStartStop.bind(this);
-    this.toggleMode = this.toggleMode.bind(this);
-    this.validateHostname = this.validateHostname.bind(this);
-    this.validateUsername = this.validateUsername.bind(this);
-    this.validatePassword = this.validatePassword.bind(this);
-    this.validatePort = this.validatePort.bind(this);
-  }
+const Main = () => {
+  const [state, setState] = useState(initialState);
+  const blueBottleRef = useRef(null);
+  const timerRef = useRef(null);
 
-  async tick() {
-    if (this.blueBottle === null) return;
-    try{
-      const d3Data = await this.blueBottle.getData();
-      this.setState({visualizer: true});
+  const tick = useCallback(async () => {
+    if (blueBottleRef.current === null) return;
+    try {
+      const d3Data = await blueBottleRef.current.getData();
 
-      d3Data.nodes.forEach((x)=>{
-        if (this.state.toggled[x.identifier]){
-          x.visibility = false
-        } else {x.visibility = true}
-      })
+      d3Data.nodes.forEach((x) => {
+        if (state.toggled[x.identifier]) {
+          x.visibility = false;
+        } else {
+          x.visibility = true;
+        }
+      });
+
       const dataTitles = makeTitles(d3Data);
-      this.setState({ ...d3Data, titles: dataTitles });
-    }
-    catch(e){
+      setState((prev) => ({ ...prev, ...d3Data, titles: dataTitles, visualizer: true }));
+    } catch (e) {
       const error = e.message.replace(/^TypeError: /, '');
-      this.setState({ errorConnection: error, loggedIn: false, pause: true });
+      setState((prev) => ({
+        ...prev,
+        errorConnection: error,
+        loggedIn: false,
+        pause: true,
+      }));
     }
-  }
+  }, [state.toggled]);
 
-  componentDidMount() {
+  useEffect(() => {
     document.body.classList.add('background');
-    this.timer = setInterval(
-      () => {
-        if(this.state.pause) return;
 
-        this.tick()
+    timerRef.current = setInterval(() => {
+      if (!state.pause) {
+        tick();
       }
-      , 900)
-  }
-  componentWillUnmount() {
-    this.blueBottle = null;
-    clearInterval(this.timer);
-  }
+    }, 900);
 
-  updateHostname(e) {
-    this.setState({ hostname: e.target.value });
-  };
-  updateUsername(e) {
-    this.setState({ username: e.target.value });
-  };
-  updatePassword(e) {
-    this.setState({ password: e.target.value });
-  };
-  updatePort(e) {
-    this.setState({ port: e.target.value });
+    return () => {
+      blueBottleRef.current = null;
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [state.pause, tick]);
+
+  const updateHostname = (e) => {
+    setState((prev) => ({ ...prev, hostname: e.target.value }));
   };
 
-  initializeState() {
-    return { hostname: "",
-    username: "",
-    password: "",
-    d3Data: {},
-    port: "",
-    width: (window.innerWidth),
-    height: (parent.innerHeight),
-    padding: 10,
-    nodecards: [],
-    visualizer: false,
-    toggled: {},
-    nodes: [], 
-    links: [],
-    pause: true
-  }
-}
-  toggleVisibility(e) {
-    let nodes = this.state.nodes;
-    let newToggled = this.state.toggled;
-     nodes.forEach((x)=>{
-      if (x.identifier === e.target.id && x.group === 2){
+  const updateUsername = (e) => {
+    setState((prev) => ({ ...prev, username: e.target.value }));
+  };
+
+  const updatePassword = (e) => {
+    setState((prev) => ({ ...prev, password: e.target.value }));
+  };
+
+  const updatePort = (e) => {
+    setState((prev) => ({ ...prev, port: e.target.value }));
+  };
+
+  const toggleVisibility = (e) => {
+    const nodes = state.nodes;
+    const newToggled = { ...state.toggled };
+
+    nodes.forEach((x) => {
+      if (x.identifier === e.target.id && x.group === 2) {
         newToggled[x.identifier] = !newToggled[x.identifier];
       }
-    })
-    this.setState({ toggled: Object.assign(newToggled) })
-  }
+    });
 
-  toggleStartStop(e){
-    this.setState({pause: !this.state.pause});
-  }
-  toggleMode(e){
-    this.setState({trafficMode: !this.state.trafficMode});
-  }
-  configureInstance(e){
-    // this.setState(this.initializeState());
-    this.setState(this.baseState);
-    this.setState({pause: true});
-  }
+    setState((prev) => ({ ...prev, toggled: newToggled }));
+  };
 
-  visualize(e) {
-    if(!this.validateAll()) return;
+  const toggleStartStop = () => {
+    setState((prev) => ({ ...prev, pause: !prev.pause }));
+  };
+
+  const toggleMode = () => {
+    setState((prev) => ({ ...prev, trafficMode: !prev.trafficMode }));
+  };
+
+  const configureInstance = () => {
+    setState({ ...initialState, pause: true });
+  };
+
+  const validateAll = () => {
+    if (state.errorHostname !== '') return false;
+    if (state.errorUsername !== '') return false;
+    if (state.errorPassword !== '') return false;
+    if (state.errorPort !== '') return false;
+    return true;
+  };
+
+  const validateHostname = (e) => {
+    if (e.target.value) {
+      setState((prev) => ({ ...prev, errorHostname: '' }));
+      return;
+    }
+    setState((prev) => ({ ...prev, errorHostname: 'Invalid IP Address' }));
+  };
+
+  const validateUsername = (e) => {
+    if (e.target.value) {
+      setState((prev) => ({ ...prev, errorUsername: '' }));
+      return;
+    }
+    setState((prev) => ({ ...prev, errorUsername: 'Invalid Username' }));
+  };
+
+  const validatePassword = (e) => {
+    if (e.target.value) {
+      setState((prev) => ({ ...prev, errorPassword: '' }));
+      return;
+    }
+    setState((prev) => ({ ...prev, errorPassword: 'Invalid Password' }));
+  };
+
+  const validatePort = (e) => {
+    const numRegex = /^[0-9]*$/;
+    if (numRegex.test(e.target.value) && e.target.value) {
+      setState((prev) => ({ ...prev, errorPort: '' }));
+      return;
+    }
+    setState((prev) => ({ ...prev, errorPort: 'Invalid Port' }));
+  };
+
+  const visualize = () => {
+    if (!validateAll()) return;
 
     const userConfig = {
-      host: this.state.hostname,
-      username: this.state.username,
-      password: this.state.password,
-      port: this.state.port,
-      isWeb: false
+      host: state.hostname,
+      username: state.username,
+      password: state.password,
+      port: state.port,
+      isWeb: false,
     };
 
-    this.blueBottle = new BlueBottle(userConfig);
-    this.setState({ pause: false, loggedIn: true });
-  }
+    blueBottleRef.current = new BlueBottle(userConfig);
+    setState((prev) => ({ ...prev, pause: false, loggedIn: true }));
+  };
 
-  validateAll(){
-    if(this.state.errorHostname !== '') return false; 
-    if(this.state.errorUsername !== '') return false;
-    if(this.state.errorPassword !== '') return false; 
-    if(this.state.errorPort !== '') return false;
+  const updateNodeCards = (node) => {
+    let nodecards = [];
 
-    return true;
-  }
-
-  // TODO: IMPROVEMENT, validate a non-ip adress
-  validateHostname(e){
-    // format: xxx.xxx.xxx.xxx
-    const regexFormat = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/;
-    if(e.target.value){
-      this.setState({errorHostname: ''});
-      return;
-    }
-    this.setState({errorHostname: 'Invalid IP Adress'});
-  }
-
-  validateUsername(e){
-    if(e.target.value){
-      this.setState({errorUsername: ''});
-      return;
-    }
-    this.setState({errorUsername: 'Invalid Username'});
-  }
-
-  validatePassword(e){
-    if(e.target.value){
-      this.setState({errorPassword: ''});
-      return;
-    }
-    this.setState({errorPassword: 'Invalid Password'});
-  }
-  
-  validatePort(e){
-    const numRegex = /^[0-9]*$/
-    if(numRegex.test(e.target.value) && e.target.value){
-      this.setState({errorPort: ''});
-      return;
-    }
-    this.setState({errorPort: 'Invalid Port'});
-
-  }
-
-  updateNodeCards(node) {
     switch (node.group) {
-      case 1: {
-        return this.setState({
-          nodecards: [
-            { "Type": "Producer" },
-            { "Total Published": node.message_stats.publish },
-            { "Publishes/s": node.message_stats.publish_details.rate },
-            { "state": node.state }
-          ]
-        })
-      }
-      case 2: {
-        return this.setState({
-          nodecards: [
-            { "Type": node.type },
-            { "Publishes/s": node.message_stats.publish_in_details.rate },
-            { "Messages Sent": node.message_stats.publish_out },
-            { "Sent/s": node.message_stats.publish_out_details.rate },
-          ]
-        })
-      }
-      case 3: {
-        return this.setState({
-          nodecards: [
-            { "Total Received": node.message_stats.publish },
-            { "Recieved/s": node.message_stats.publish_details.rate },
-            { "Total Sent": node.message_stats.deliver_get === undefined ? '0': node.message_stats.deliver_get},
-            { "Sent/s": node.message_stats.deliver_get_details === undefined ? '0': node.message_stats.deliver_get_details.rate},
-          ]
-        })
-      }
-      case 4: {
-        return this.setState({
-          nodecards: [
-            { "Type": "Consumer" },
-            { "Total Received": node.message_stats.deliver_get },
-            { "Delivery Rate": node.message_stats.deliver_get_details.rate },
-            { "state": node.state }
-          ]
-        })
-      }
-      default: return;
+      case 1:
+        nodecards = [
+          { Type: 'Producer' },
+          { 'Total Published': node.message_stats.publish },
+          { 'Publishes/s': node.message_stats.publish_details.rate },
+          { state: node.state },
+        ];
+        break;
+      case 2:
+        nodecards = [
+          { Type: node.type },
+          { 'Publishes/s': node.message_stats.publish_in_details.rate },
+          { 'Messages Sent': node.message_stats.publish_out },
+          { 'Sent/s': node.message_stats.publish_out_details.rate },
+        ];
+        break;
+      case 3:
+        nodecards = [
+          { 'Total Received': node.message_stats.publish },
+          { 'Recieved/s': node.message_stats.publish_details.rate },
+          {
+            'Total Sent':
+              node.message_stats.deliver_get === undefined ? '0' : node.message_stats.deliver_get,
+          },
+          {
+            'Sent/s':
+              node.message_stats.deliver_get_details === undefined
+                ? '0'
+                : node.message_stats.deliver_get_details.rate,
+          },
+        ];
+        break;
+      case 4:
+        nodecards = [
+          { Type: 'Consumer' },
+          { 'Total Received': node.message_stats.deliver_get },
+          { 'Delivery Rate': node.message_stats.deliver_get_details.rate },
+          { state: node.state },
+        ];
+        break;
+      default:
+        return;
     }
+
+    setState((prev) => ({ ...prev, nodecards }));
+  };
+
+  // Render logic
+  if (!state.visualizer && !state.loggedIn) {
+    return (
+      <FrontPage
+        className="container"
+        updateHostname={updateHostname}
+        updateUsername={updateUsername}
+        updatePassword={updatePassword}
+        updatePort={updatePort}
+        visualize={visualize}
+        validateHostname={validateHostname}
+        validateUsername={validateUsername}
+        validatePassword={validatePassword}
+        validatePort={validatePort}
+        {...state}
+      />
+    );
   }
 
-  render() {
-    if (!this.state.visualizer && !this.state.loggedIn) {
-      return (
-          <FrontPage className="container"
-            updateHostname={this.updateHostname}
-            updateUsername={this.updateUsername}
-            updatePassword={this.updatePassword}
-            updatePort={this.updatePort}
-            visualize={this.visualize}
-            validateHostname={this.validateHostname}
-            validateUsername={this.validateUsername}
-            validatePassword={this.validatePassword}
-            validatePort={this.validatePort}
-            {...this.state}
-          />)
-    } 
-    else if(!this.state.visualizer && this.state.loggedIn) {
-      return(<Spinner />);
-    }
-    else {
-      document.body.classList.add('background-vis')
-      return (
-        <div className="grid-reloaded">
-          <SignOut {...this.state} configureInstance={this.configureInstance} toggleStartStop={this.toggleStartStop} toggleMode={this.toggleMode} />
-          <div className="instance">
-            <span>Instance: <strong>{this.state.cluster_name}</strong><br />
-            ip: <strong>{this.state.hostname}</strong></span>
-          </div>
-          <Display {...this.state} updateNodeCards={this.updateNodeCards} />
-          {this.state.message_stats && <OverviewCards {...this.state} />}
-          <NodeCards {...this.state} />
-          <Settings1 {...this.state} mute={this.toggleVisibility} />
-        </div>
-      )
-    }
+  if (!state.visualizer && state.loggedIn) {
+    return <Spinner />;
   }
-}
 
-export default Main
+  document.body.classList.add('background-vis');
+  return (
+    <div className="grid-reloaded">
+      <SignOut
+        {...state}
+        configureInstance={configureInstance}
+        toggleStartStop={toggleStartStop}
+        toggleMode={toggleMode}
+      />
+      <div className="instance">
+        <span>
+          Instance: <strong>{state.cluster_name}</strong>
+          <br />
+          ip: <strong>{state.hostname}</strong>
+        </span>
+      </div>
+      <Display {...state} updateNodeCards={updateNodeCards} />
+      {state.message_stats && <OverviewCards {...state} />}
+      <NodeCards {...state} />
+      <Settings1 {...state} mute={toggleVisibility} />
+    </div>
+  );
+};
+
+export default Main;
