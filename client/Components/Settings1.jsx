@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Toggle from './Toggle.jsx'
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 // d3Data reference
 

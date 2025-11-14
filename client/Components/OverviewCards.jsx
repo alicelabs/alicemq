@@ -1,8 +1,8 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import Card from '@mui/material/Card';
+import { ThemeProvider, createMuiTheme } from '@mui/material/styles'
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import numeral from 'numeral';
 
 const styles = {
@@ -52,7 +52,7 @@ const cardTheme = createMuiTheme({
 const OverviewCards = (props) => {
 
   return (
-    <MuiThemeProvider theme={cardTheme}>
+    <ThemeProvider theme={cardTheme}>
       
         <Card className="s1">
           <CardContent>
@@ -142,7 +142,7 @@ const OverviewCards = (props) => {
             </Typography>
           </CardContent>
         </Card>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 }
 

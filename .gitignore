@@ -1,5 +1,4 @@
 node_modules
-package-lock.json
 client/dist
 .env
 *.DS_Store

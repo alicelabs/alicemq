@@ -1,6 +1,6 @@
 import React from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@mui/material/Tooltip';
+import { withStyles } from '@mui/material/styles';
 
 // styles is not working
 const styles = theme => ({

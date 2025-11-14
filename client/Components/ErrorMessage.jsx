@@ -1,6 +1,6 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import Typography from '@mui/material/Typography'
+import { ThemeProvider, createMuiTheme } from '@mui/material/styles'
 
 const redTheme = createMuiTheme({
   typography: {
@@ -22,12 +22,12 @@ const redTheme = createMuiTheme({
 
 function ErrorMessage(props){
     return(
-    <MuiThemeProvider theme={redTheme}>
+    <ThemeProvider theme={redTheme}>
         <div className={props.msg ? 'displayError' : 'hideError'}>
             <Typography color='error'>{props.msg}</Typography>
             <div><Typography>Please check <a href="https://github.com/alicelabs/alicemq/blob/master/README.md#troubleshooting" target="_blank">troubleshooting</a> page</Typography></div>
         </div>
-    </MuiThemeProvider>
+    </ThemeProvider>
     )
 }
 

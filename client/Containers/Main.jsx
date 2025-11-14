@@ -5,10 +5,11 @@ import FrontPage from '../Components/FrontPage.jsx'
 import SignOut from '../Components/SignOut.jsx'
 import Spinner from '../Components/Spinner.jsx'
 import OverviewCards from '../Components/OverviewCards.jsx'
-import "@babel/polyfill";
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import BlueBottle from '../../server/blueBottle.js';
 import NodeCards from '../Components/NodeCards.jsx';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 // d3Data reference
 // "cluster_name": cluster_name,
@@ -42,14 +43,6 @@ class Main extends React.Component {
       username: "",
       password: "",
       port: "",
-      // hostname: "192.168.0.236",
-      // username: "test",
-      // password: "test",
-      // port: "15672",
-
-      // hostname: "192.168.0.35",
-      // username: "vhs",
-      // password: "4444",
       d3Data: {},
       width: (window.innerWidth),
       height: (parent.innerHeight),
@@ -108,11 +101,8 @@ class Main extends React.Component {
     }
   }
 
-  componentWillMount() {
-    document.body.classList.add('background')
-  }
-
   componentDidMount() {
+    document.body.classList.add('background');
     this.timer = setInterval(
       () => {
         if(this.state.pause) return;
@@ -143,9 +133,6 @@ class Main extends React.Component {
     return { hostname: "",
     username: "",
     password: "",
-    // hostname: "192.168.0.35",
-    // username: "vhs",
-    // password: "4444",
     d3Data: {},
     port: "",
     width: (window.innerWidth),

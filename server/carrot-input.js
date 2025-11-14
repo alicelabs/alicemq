@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+// Use global fetch (available in Node.js 18+ and modern browsers)
+// For older Node versions, you may need to import node-fetch
 import { Base64 } from 'js-base64';
 
 

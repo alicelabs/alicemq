@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from './Button.jsx'
-import Typography from '@material-ui/core/Typography'
-import {TextField} from '@material-ui/core'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import Typography from '@mui/material/Typography'
+import {TextField} from '@mui/material'
+import { ThemeProvider, createMuiTheme } from '@mui/material/styles'
 import ErrorMessage from './ErrorMessage.jsx'
 
 const purpleTheme = createMuiTheme({
@@ -28,7 +28,7 @@ function FrontPage(props) {
   document.body.classList.remove('background-vis');
 
   return (
-    <MuiThemeProvider theme={purpleTheme}>
+    <ThemeProvider theme={purpleTheme}>
     <div className='login-box'>
     <Typography variant = 'h4' color="primary" >AliceMQ</Typography>
       <TextField
@@ -93,7 +93,7 @@ function FrontPage(props) {
     <div id='errorMessage'>
       <ErrorMessage  msg={props.errorConnection} /> 
     </div>
-    </MuiThemeProvider>)
+    </ThemeProvider>)
 }
 
 

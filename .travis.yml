@@ -1,9 +1,13 @@
 language: node_js
 node_js:
-  - '11.9.0'
-branches: 
-  only: 
+  - '20'
+  - '18'
+branches:
+  only:
   - master
-script: 
+cache:
+  directories:
+    - node_modules
+script:
   - npm run tests
   

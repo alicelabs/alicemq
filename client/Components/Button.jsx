@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { withStyles } from '@mui/material/styles';
+import { Button } from '@mui/material';
 
 const styles = theme => ({
   sizing: "75%"
