@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import Settings1 from '../Components/Settings1.jsx';
-import Display from '../Components/Display.jsx';
+import React, { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import FrontPage from '../Components/FrontPage.jsx';
-import SignOut from '../Components/SignOut.jsx';
 import Spinner from '../Components/Spinner.jsx';
-import OverviewCards from '../Components/OverviewCards.jsx';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import BlueBottle from '../../server/blueBottle.js';
-import NodeCards from '../Components/NodeCards.jsx';
+
+// Lazy load heavy components for code splitting
+const Display = lazy(() => import('../Components/Display.jsx'));
+const OverviewCards = lazy(() => import('../Components/OverviewCards.jsx'));
+const NodeCards = lazy(() => import('../Components/NodeCards.jsx'));
+const Settings1 = lazy(() => import('../Components/Settings1.jsx'));
+const SignOut = lazy(() => import('../Components/SignOut.jsx'));
 
 function makeTitles(d3Data) {
   const titles = [];
@@ -269,25 +271,27 @@ const Main = () => {
 
   document.body.classList.add('background-vis');
   return (
-    <div className="grid-reloaded">
-      <SignOut
-        {...state}
-        configureInstance={configureInstance}
-        toggleStartStop={toggleStartStop}
-        toggleMode={toggleMode}
-      />
-      <div className="instance">
-        <span>
-          Instance: <strong>{state.cluster_name}</strong>
-          <br />
-          ip: <strong>{state.hostname}</strong>
-        </span>
+    <Suspense fallback={<Spinner />}>
+      <div className="grid-reloaded">
+        <SignOut
+          {...state}
+          configureInstance={configureInstance}
+          toggleStartStop={toggleStartStop}
+          toggleMode={toggleMode}
+        />
+        <div className="instance">
+          <span>
+            Instance: <strong>{state.cluster_name}</strong>
+            <br />
+            ip: <strong>{state.hostname}</strong>
+          </span>
+        </div>
+        <Display {...state} updateNodeCards={updateNodeCards} />
+        {state.message_stats && <OverviewCards {...state} />}
+        <NodeCards {...state} />
+        <Settings1 {...state} mute={toggleVisibility} />
       </div>
-      <Display {...state} updateNodeCards={updateNodeCards} />
-      {state.message_stats && <OverviewCards {...state} />}
-      <NodeCards {...state} />
-      <Settings1 {...state} mute={toggleVisibility} />
-    </div>
+    </Suspense>
   );
 };
 

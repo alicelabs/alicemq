@@ -7,3 +7,6 @@ test/.DS_Store
 .DS_Store
 AliceMQ*
 release-builds
+.webpack_cache
+bundle-report.html
+*.gz

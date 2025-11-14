@@ -30,7 +30,8 @@ function ErrorMessage(props) {
             Please check{' '}
             <a
               href="https://github.com/alicelabs/alicemq/blob/master/README.md#troubleshooting"
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
             >
               troubleshooting
             </a>{' '}
