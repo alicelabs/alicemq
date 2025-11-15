@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
 
 const Legend = (props) => {
   //ranges give the string in first element, and color in second element of sub arrays

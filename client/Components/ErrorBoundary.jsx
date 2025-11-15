@@ -11,7 +11,7 @@ class ErrorBoundary extends Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error) {
     // Update state so the next render will show the fallback UI
     return { hasError: true };
   }
@@ -51,7 +51,7 @@ class ErrorBoundary extends Component {
             Something went wrong
           </Typography>
           <Typography variant="body1" color="textSecondary" sx={{ mb: 3, maxWidth: 600 }}>
-            We're sorry for the inconvenience. An unexpected error has occurred.
+            We&apos;re sorry for the inconvenience. An unexpected error has occurred.
           </Typography>
           {this.state.error && (
             <Box

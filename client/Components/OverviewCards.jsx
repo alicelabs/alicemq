@@ -5,24 +5,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import numeral from 'numeral';
 
-const styles = {
-  card: {
-    minWidth: 275,
-    minHeight: 100,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 10px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 0.2 + 'em',
-  },
-  pos: {
-    marginBottom: 2,
-  },
-};
-
 // const typographyOptions = {};
 // const caption = {
 //   fontFamily:'\"Roboto\", \"Helvetica\", \"Arial\", sans-serif',
@@ -38,7 +20,7 @@ const cardTheme = createMuiTheme({
   typography: {
     useNextVariants: true,
     typographyOptions: {
-      fontFamily: '\"Roboto\", \"Helvetica\", \"Arial\", sans-serif',
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
       color: 'rgba(0, 0, 0, 0.54)',
       htmlFontSize: 20,
       fontSize: '3rem',

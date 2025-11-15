@@ -6,7 +6,6 @@ import Consumers from './Consumers.jsx';
 import Links from './Links.jsx';
 import Titles from './Titles.jsx';
 import Legend from './Legend.jsx';
-import * as d3 from 'd3';
 
 const NetworkGraph = (props) => {
   return (
