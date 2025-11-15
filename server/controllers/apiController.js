@@ -207,7 +207,7 @@ apiController.onLoad = function (req, res) {
 
     data.consumers.forEach((consumer) => {
       result[3].forEach((el) => {
-        if (el.channel_details.name == consumer.name) {
+        if (el.channel_details.name === consumer.name) {
           consumer.queue = el.queue.name;
         }
       });
