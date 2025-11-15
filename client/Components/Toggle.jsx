@@ -8,7 +8,7 @@ const Toggle = (props) => {
         <form>
           <input
             type="checkbox"
-            id={props.content == '' ? 'default' : props.content}
+            id={props.content === '' ? 'default' : props.content}
             onChange={props.mute}
           />
           <Typography inline={true} color="inherit">
