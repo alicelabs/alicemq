@@ -172,7 +172,7 @@ apiController.onLoad = function (req, res) {
     data.queues = result[2].map((el) => {
       const { message_stats, backing_queue_status, messages, messages_details, name, node, state } =
         el;
-      return (el = {
+      return {
         message_stats,
         backing_queue_status,
         messages,
@@ -180,7 +180,7 @@ apiController.onLoad = function (req, res) {
         name,
         node,
         state,
-      });
+      };
     });
     data.consumers = [];
     data.producers = [];
