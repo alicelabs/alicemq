@@ -20,7 +20,7 @@ apiController.queues = (req, res) => {
     .then((result) => result.json())
     .then((data) => {
       const result = data.map((el) => {
-        return (el = {
+        return {
           message_stats: el.message_stats,
           messages_persistent: el.messages_persistent,
           backing_queue_status: el.backing_queue_status,
@@ -29,7 +29,7 @@ apiController.queues = (req, res) => {
           name: el.name,
           node: el.node,
           state: el.state,
-        });
+        };
       });
       res.json(result);
     })
@@ -56,7 +56,7 @@ apiController.exchanges = (req, res) => {
             },
           };
         }
-        return (el = result);
+        return result;
       });
       res.json(result);
     })
