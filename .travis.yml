@@ -1,13 +1,19 @@
-language: node_js
-node_js:
-  - '20'
-  - '18'
-branches:
-  only:
-  - master
-cache:
-  directories:
-    - node_modules
-script:
-  - npm run tests
+# This project now uses GitHub Actions for CI/CD
+# See .github/workflows/ci.yml for the new CI configuration
+# This file is kept for reference only and can be deleted
+
+# Old Travis CI configuration (deprecated)
+# language: node_js
+# node_js:
+#   - '20'
+#   - '18'
+# branches:
+#   only:
+#   - master
+# cache:
+#   directories:
+#     - node_modules
+# script:
+#   - npm run test:ci
+#   - npm run build
   
