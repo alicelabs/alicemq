@@ -3,7 +3,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { withStyles } from '@mui/material/styles';
 
 // styles is not working
-const styles = (theme) => ({
+const styles = (_theme) => ({
   absolute: {
     position: 'absolute',
     bottom: 15,
