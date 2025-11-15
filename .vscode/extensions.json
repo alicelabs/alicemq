@@ -1,0 +1,42 @@
+{
+  "recommendations": [
+    // Essential
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+
+    // React Development
+    "dsznajder.es7-react-js-snippets",
+    "burkeholland.simple-react-snippets",
+
+    // Testing
+    "orta.vscode-jest",
+    "firsttris.vscode-jest-runner",
+
+    // Git
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+
+    // Docker
+    "ms-azuretools.vscode-docker",
+
+    // Code Quality
+    "streetsidesoftware.code-spell-checker",
+    "wayou.vscode-todo-highlight",
+
+    // Utilities
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "formulahendry.auto-rename-tag",
+    "bradlc.vscode-tailwindcss",
+
+    // Markdown
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+
+    // Theme (optional)
+    "pkief.material-icon-theme",
+    "github.github-vscode-theme"
+  ],
+  "unwantedRecommendations": ["hookyqr.beautify", "ms-vscode.vscode-typescript-tslint-plugin"]
+}
