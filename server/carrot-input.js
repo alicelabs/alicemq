@@ -66,7 +66,7 @@ Carrot.prototype.queues = function () {
       .then((result) => result.json())
       .then((data) => {
         const result = data.map((el) => {
-          return (el = {
+          return {
             message_stats: el.message_stats,
             messages_persistent: el.messages_persistent,
             backing_queue_status: el.backing_queue_status,
@@ -75,7 +75,7 @@ Carrot.prototype.queues = function () {
             name: el.name,
             node: el.node,
             state: el.state,
-          });
+          };
         });
         res(result);
       })
@@ -313,7 +313,7 @@ function massageData(result) {
         },
       };
     }
-    return (el = result);
+    return result;
   });
 
   data.consumers = [];
