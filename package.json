@@ -25,6 +25,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "type-check": "tsc --noEmit",
+    "fix-all": "npm run lint:fix && npm run format && npm run type-check",
     "prepare": "husky"
   },
   "repository": {
