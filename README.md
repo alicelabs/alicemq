@@ -325,7 +325,7 @@ v1.0.1
 - [Anthony Valentin](https://github.com/vhsconnect)
 - [Christian Niedermayer](https://github.com/Chris-N)
 - [Parker Allen](https://github.com/csrudy)
-- [Siye Sam Yu](https://github.com/yudataguy)
+- [Sam S. Yu](https://github.com/yudataguy)
 
 ## License
 
