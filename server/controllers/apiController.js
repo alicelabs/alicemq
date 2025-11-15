@@ -20,7 +20,7 @@ apiController.queues = (req, res) => {
     .then((result) => result.json())
     .then((data) => {
       const result = data.map((el) => {
-        return (el = {
+        return {
           message_stats: el.message_stats,
           messages_persistent: el.messages_persistent,
           backing_queue_status: el.backing_queue_status,
@@ -29,7 +29,7 @@ apiController.queues = (req, res) => {
           name: el.name,
           node: el.node,
           state: el.state,
-        });
+        };
       });
       res.json(result);
     })
@@ -56,7 +56,7 @@ apiController.exchanges = (req, res) => {
             },
           };
         }
-        return (el = result);
+        return result;
       });
       res.json(result);
     })
@@ -69,7 +69,7 @@ apiController.consumers = (req, res) => {
     .then((data) => {
       const result = data.map((el) => {
         const { arguments, channel_details, consumer_tag, queue } = el;
-        return (el = { arguments, channel_details, consumer_tag, queue });
+        return { arguments, channel_details, consumer_tag, queue };
       });
       res.json(result);
     })
@@ -172,7 +172,7 @@ apiController.onLoad = function (req, res) {
     data.queues = result[2].map((el) => {
       const { message_stats, backing_queue_status, messages, messages_details, name, node, state } =
         el;
-      return (el = {
+      return {
         message_stats,
         backing_queue_status,
         messages,
@@ -180,7 +180,7 @@ apiController.onLoad = function (req, res) {
         name,
         node,
         state,
-      });
+      };
     });
     data.consumers = [];
     data.producers = [];
