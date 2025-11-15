@@ -1,6 +1,5 @@
 'use strict';
 const { app, BrowserWindow, dialog } = require('electron');
-const path = require('path');
 
 let win;
 const isDevelopment = process.env.NODE_ENV === 'development';

@@ -17,11 +17,7 @@ function BlueBottle(config) {
 }
 
 BlueBottle.prototype.getData = async function () {
-  try {
-    this.carrotData = await this.carrot.motherLoad();
-  } catch (e) {
-    throw e;
-  }
+  this.carrotData = await this.carrot.motherLoad();
   return carrot2D3(this.carrotData);
 };
 
@@ -87,12 +83,15 @@ function carrot2D3(carrotData) {
         }
       }
 
-      if (groupNumber === 2) type.name === '' ? (idt = 'default') : (idt = type.name);
-      else if (groupNumber === 3)
-        d3Data.identifiers[type.name] ? (idt = d3Data.identifiers[type.name]) : (idt = 'other'); //idt = d3Data.identifiers[type.name];
-      else if (groupNumber === 4)
-        d3Data.identifiers[type.queue] ? (idt = d3Data.identifiers[type.queue]) : (idt = 'other');
-      else idt = 'other';
+      if (groupNumber === 2) {
+        idt = type.name === '' ? 'default' : type.name;
+      } else if (groupNumber === 3) {
+        idt = d3Data.identifiers[type.name] ? d3Data.identifiers[type.name] : 'other';
+      } else if (groupNumber === 4) {
+        idt = d3Data.identifiers[type.queue] ? d3Data.identifiers[type.queue] : 'other';
+      } else {
+        idt = 'other';
+      }
 
       if (!type.message_stats) {
         type.message_stats = {
@@ -154,7 +153,7 @@ function carrot2D3(carrotData) {
   }
 
   // Prepares the edges between consumers and queues
-  function linkConsumersToQueues(c, q) {
+  function linkConsumersToQueues(c, _q) {
     c.forEach((consumer) => {
       const queueName = consumer.queue;
       d3Data.nodes.forEach((node, j) => {
@@ -181,7 +180,7 @@ function carrot2D3(carrotData) {
   }
 
   // Prepares the edges between exchanges and queues
-  function linkExchangeToQueues(b, q) {
+  function linkExchangeToQueues(b, _q) {
     b.forEach((binding) => {
       const queueName = binding.queue_name;
       const echangeName = binding.exchange_name;

@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@mui/material/styles';
 import { Button } from '@mui/material';
 
-const styles = (theme) => ({
+const styles = (_theme) => ({
   sizing: '75%',
 });
 
