@@ -1,5 +1,4 @@
 node_modules
-package-lock.json
 client/dist
 .env
 *.DS_Store
@@ -8,3 +7,15 @@ test/.DS_Store
 .DS_Store
 AliceMQ*
 release-builds
+.webpack_cache
+bundle-report.html
+*.gz
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Coverage
+coverage
+.nyc_output

@@ -1,6 +1,6 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import Typography from '@mui/material/Typography';
+import { ThemeProvider, createMuiTheme } from '@mui/material/styles';
 
 const redTheme = createMuiTheme({
   typography: {
@@ -15,20 +15,32 @@ const redTheme = createMuiTheme({
     },
     error: {
       main: '#aa0000',
-    }
+    },
   },
-  spacing: 10
-})
+  spacing: 10,
+});
 
-function ErrorMessage(props){
-    return(
-    <MuiThemeProvider theme={redTheme}>
-        <div className={props.msg ? 'displayError' : 'hideError'}>
-            <Typography color='error'>{props.msg}</Typography>
-            <div><Typography>Please check <a href="https://github.com/alicelabs/alicemq/blob/master/README.md#troubleshooting" target="_blank">troubleshooting</a> page</Typography></div>
+function ErrorMessage(props) {
+  return (
+    <ThemeProvider theme={redTheme}>
+      <div className={props.msg ? 'displayError' : 'hideError'}>
+        <Typography color="error">{props.msg}</Typography>
+        <div>
+          <Typography>
+            Please check{' '}
+            <a
+              href="https://github.com/alicelabs/alicemq/blob/master/README.md#troubleshooting"
+              target="_blank"
+              rel="noreferrer"
+            >
+              troubleshooting
+            </a>{' '}
+            page
+          </Typography>
         </div>
-    </MuiThemeProvider>
-    )
+      </div>
+    </ThemeProvider>
+  );
 }
 
 export default ErrorMessage;

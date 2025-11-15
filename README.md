@@ -1,126 +1,341 @@
 # AliceMQ - RabbitMQ Visualizer
 
-We use the RabbitMQ management plugin API to query multiple endpoints: overview, queues, exchanges, bindings, channels - then parse the data and re-pipe it into a D3.js/React app. The app is meant to focus on traffic flowing into the system and show which exchanges are getting hit and how hard.
+[![CI](https://github.com/alicelabs/alicemq/actions/workflows/ci.yml/badge.svg)](https://github.com/alicelabs/alicemq/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/alicelabs/alicemq/actions/workflows/codeql.yml/badge.svg)](https://github.com/alicelabs/alicemq/actions/workflows/codeql.yml)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18.3.1-61dafb.svg)](https://reactjs.org/)
+[![Electron](https://img.shields.io/badge/Electron-28.3.3-47848f.svg)](https://www.electronjs.org/)
 
+A real-time RabbitMQ visualization tool that uses the RabbitMQ management plugin API to query multiple endpoints (overview, queues, exchanges, bindings, channels), then parses and visualizes the data using D3.js and React. The app focuses on traffic flowing into the system, showing which exchanges are getting hit and how hard.
 
-![](alicemq0.gif)
+![AliceMQ Demo](alicemq0.gif)
 
+## Features
+
+- 📊 **Real-time Visualization** - Live D3.js graphs showing message flow
+- 🔄 **Message Tracking** - Track messages across exchanges, queues, and consumers
+- 🎨 **Color-coded Throughput** - Visual indicators for message rates
+- ☁️ **Cloud Support** - Works with local and cloud RabbitMQ instances (AWS, etc.)
+- 🖥️ **Cross-platform** - Desktop app for Windows, macOS, and Linux
+- 🌐 **Web Interface** - Also runs as a web application
+
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Quick Start with Docker](#quick-start-with-docker)
+  - [Manual Installation](#manual-installation)
+- [Development](#development)
+- [Building for Production](#building-for-production)
+- [Testing](#testing)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
+- [Built With](#built-with)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
-We have pre-built packages available for Windows, MacOSX, Linux. Please visit [AliceMQ](https://alicemq.com) download page.
+- **Node.js** >= 18.0.0
+- **npm** >= 9.0.0
+- **Git**
+- **RabbitMQ** server with management plugin enabled
 
-For MacOSX and Linux platforms, please ensure to have git and npm installed.
+### Quick Start with Docker
 
-### Manual Install
+The easiest way to get started is using Docker Compose, which sets up both RabbitMQ and AliceMQ:
 
-If you want build your own electron app, please follow the following instruction.
-
-```
+```bash
+# Clone the repository
 git clone https://github.com/alicelabs/alicemq.git
 cd alicemq
-npm run buildapp
-```
-For Mac and Windows build:
-```
-npm run buildappwin
-npm run buildappmac
-```
-Once the command finishes, please find the executable electron app in its subfolder. The app is specific built for the platform which you are running.
 
-For Linux:
-We haven't yet packaged the production build for Linux. You can package it yourself or run it in development mode. 
+# Start RabbitMQ and AliceMQ
+docker-compose up
+
+# Access the application
+# - AliceMQ Web UI: http://localhost:8080
+# - RabbitMQ Management UI: http://localhost:15672 (guest/guest)
 ```
+
+### Manual Installation
+
+If you prefer to run AliceMQ without Docker:
+
+```bash
+# Clone the repository
+git clone https://github.com/alicelabs/alicemq.git
+cd alicemq
+
+# Install dependencies
+npm install
+
+# For development (web interface)
+npm run dev
+
+# For Electron app development
 npm run app
 ```
 
+## Development
 
-## Testing AliceMQ with your server
+### Available Scripts
 
-To help you test the app is working correctly with your RabbitMQ server, we provide you with [AliceMQ testing suite](https://github.com/alicelabs/alicemq-test-suite). It is a series of producer and consumer scripts that can simulate all types of RabbitMQ messages: Direct, Topic, Header and Fanout. Please see detailed instruction on its [readme](https://github.com/alicelabs/alicemq-test-suite).
+```bash
+# Development
+npm run dev              # Start webpack dev server
+npm run app              # Build and run Electron app
 
-## Troubleshooting
+# Testing
+npm test                 # Run tests
+npm run test:watch       # Run tests in watch mode
+npm run test:coverage    # Run tests with coverage
 
-### Web App not Working
+# Linting & Formatting
+npm run lint             # Check for linting errors
+npm run lint:fix         # Fix linting errors
+npm run format           # Format code with Prettier
+npm run format:check     # Check code formatting
+npm run type-check       # Run TypeScript type checking
 
-Since the current script is built for the electron build, the web app may not work out of the box. Please modify
-
-in ./Clinet/Containers/Main.jsx - Change isWeb false to true 
-```javascript
-isWeb: true
-```
-then run the script
-```javascript
-npm run web
-```
-
-### Connecting to Cloud Services
-AliceMQ suppports both local and cloud RabbitMQ instance like **AWS**. If you have problem with connection please check:
-* Check internet connectivity.
-* RabbitMQ server is running.
-* Double check username and password to log into RabbitMQ.
-* Ensure RabbitMQ port is correct, open and forward.
-* Still having issues, continue reading below.
-
-### CORS
-When accessing the rabbitmq API remotely on a network, you'll need to whitelist your ip to allow for cross origin fetching. Check out this page on how to setup [configure](https://www.rabbitmq.com/management.html#cors) file
-
-If running on AWS EC2 server:
-* SSH into your EC2 server.
-* Edit your RabbitMQ config file.
-* Edit EC2 security group to open RabbitMQ port in inbound rules.
-
-### Color Legend
-
-If you'd like to modify the color legend ranges to better suit your RabbitMQ instance's throughput. Two simple modifications need to be made.
-
-## /client/Components/Legend.jsx ##
-```javascript
-let ranges = [['0', '#bdbdbd'], ['1-50', '#b9f6ca'], ['50-150', '#ffeb3b'], ['150-500', '#f9a825'], ['500-2000', '#ff5722'] , ['> 2000', '#b71c1c']]
+# Building
+npm run build            # Production webpack build
+npm run build:dev        # Development webpack build
+npm run build:analyze    # Analyze bundle size
 ```
 
-The ranges are static values in the 1st element of the sub arrays
+### Project Structure
 
+```
+alicemq/
+├── client/              # React frontend
+│   ├── Components/      # React components
+│   ├── Containers/      # Container components
+│   └── utils/           # Utility functions
+├── server/              # Server-side code
+├── assets/              # Static assets
+├── test/                # Test configuration and setup
+├── .github/             # GitHub Actions workflows
+├── main.js              # Electron main process
+└── webpack.*.js         # Webpack configurations
+```
 
-## /client/Components/NetworkGraph.jsx ##
+### Docker Development
+
+```bash
+# Start services
+docker-compose up
+
+# Start in detached mode
+docker-compose up -d
+
+# View logs
+docker-compose logs -f alicemq
+
+# Stop services
+docker-compose down
+
+# Rebuild after changes
+docker-compose up --build
+```
+
+## Building for Production
+
+### Desktop Applications
+
+```bash
+# Build for macOS
+npm run buildappmac
+
+# Build for Windows
+npm run buildappwin
+
+# Build for Linux
+npm run buildapplinux
+
+# Build for current platform
+npm run buildapp
+```
+
+Executables will be created in the `release-builds/` directory.
+
+### Web Application
+
+```bash
+# Create production build
+npm run build
+
+# Build output will be in client/dist/
+```
+
+## Testing
+
+AliceMQ uses Jest and React Testing Library for testing:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+```
+
+### Testing with RabbitMQ Test Suite
+
+To test AliceMQ with your RabbitMQ server, use the [AliceMQ testing suite](https://github.com/alicelabs/alicemq-test-suite). It provides producer and consumer scripts that simulate all types of RabbitMQ messages: Direct, Topic, Header, and Fanout.
+
+## Configuration
+
+### Environment Variables
+
+Create a `.env` file in the root directory (see `.env.example`):
+
+```env
+NODE_ENV=development
+RABBITMQ_HOST=localhost
+RABBITMQ_PORT=15672
+RABBITMQ_USER=guest
+RABBITMQ_PASS=guest
+```
+
+### Web App Mode
+
+To run in web app mode instead of Electron:
+
+1. Open `client/Containers/Main.jsx`
+2. Change `isWeb` to `true`:
 
 ```javascript
-function setRateColor(rate){
+isWeb: true;
+```
+
+3. Run: `npm run web`
+
+### Customizing Color Legend
+
+To modify the color legend ranges for your RabbitMQ instance's throughput:
+
+**In `client/Components/Legend.jsx`:**
+
+```javascript
+let ranges = [
+  ['0', '#bdbdbd'],
+  ['1-50', '#b9f6ca'],
+  ['50-150', '#ffeb3b'],
+  ['150-500', '#f9a825'],
+  ['500-2000', '#ff5722'],
+  ['> 2000', '#b71c1c'],
+];
+```
+
+**In `client/Components/NetworkGraph.jsx`:**
+
+```javascript
+function setRateColor(rate) {
   let lineColor = '';
-  if (rate === 0) { lineColor = '#bdbdbd' } 
-  else if (rate > 0 && rate <= 50) { lineColor = '#b9f6ca' }
-  else if (rate > 50 && rate <= 150) { lineColor = '#ffeb3b' }
-  else if (rate > 150 && rate <= 500) { lineColor = '#f9a825' }
-  else if (rate > 500 && rate <= 2000) { lineColor = '#ff5722' }
-  else if (rate > 2000) { lineColor = '#b71c1c' }
+  if (rate === 0) {
+    lineColor = '#bdbdbd';
+  } else if (rate > 0 && rate <= 50) {
+    lineColor = '#b9f6ca';
+  } else if (rate > 50 && rate <= 150) {
+    lineColor = '#ffeb3b';
+  } else if (rate > 150 && rate <= 500) {
+    lineColor = '#f9a825';
+  } else if (rate > 500 && rate <= 2000) {
+    lineColor = '#ff5722';
+  } else if (rate > 2000) {
+    lineColor = '#b71c1c';
+  }
   return lineColor;
 }
 ```
 
-Be sure to have the static ranges in the Legend component match in the setRateColor function and you're all set. 
+Ensure the ranges match in both files.
+
+## Troubleshooting
+
+### Connecting to Cloud Services
+
+AliceMQ supports both local and cloud RabbitMQ instances (e.g., AWS). If you have connection issues:
+
+- ✅ Check internet connectivity
+- ✅ Verify RabbitMQ server is running
+- ✅ Double-check username and password
+- ✅ Ensure RabbitMQ port is correct, open, and forwarded
+- ✅ Check CORS configuration (see below)
+
+### CORS Configuration
+
+When accessing RabbitMQ API remotely, you'll need to whitelist your IP for cross-origin requests. See the [RabbitMQ CORS configuration guide](https://www.rabbitmq.com/management.html#cors).
+
+For AWS EC2:
+
+1. SSH into your EC2 server
+2. Edit your RabbitMQ config file to enable CORS
+3. Edit EC2 security group to open RabbitMQ port in inbound rules
+
+### Common Issues
+
+**Port already in use:**
+
+```bash
+# Change the port in docker-compose.yml or use:
+PORT=3000 npm run dev
+```
+
+**Electron app won't start:**
+
+```bash
+# Rebuild electron
+npm install --ignore-scripts
+npm rebuild electron
+```
+
 ## Built With
 
-* [React](https://reactjs.org/docs/getting-started.html) - Framework used
-* [Electron](https://www.electronjs.org/) - Build cross-platform application
-* [D3](https://github.com/d3/d3/wiki) - Used to draw graphs
-* [RabbitMQ](https://www.rabbitmq.com/documentation.html) - Message broker and underlining technology
+- [React 18](https://reactjs.org/) - UI framework
+- [Electron 28](https://www.electronjs.org/) - Cross-platform desktop apps
+- [D3.js 7](https://d3js.org/) - Data visualization
+- [Material-UI v5](https://mui.com/) - React component library
+- [RabbitMQ](https://www.rabbitmq.com/) - Message broker
+- [Webpack 5](https://webpack.js.org/) - Module bundler
+- [Jest](https://jestjs.io/) - Testing framework
 
-## Versioning
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
+
+- Code of Conduct
+- Development workflow
+- Submitting pull requests
+- Reporting issues
+
+## Version
 
 v1.0.1
 
 ## Authors
 
-[Anthony Valentin](https://github.com/vhsconnect), [Christian Niedermayer](https://github.com/Chris-N), [Parket Allen](https://github.com/csrudy), [Siye Sam Yu](https://github.com/yudataguy)
+- [Anthony Valentin](https://github.com/vhsconnect)
+- [Christian Niedermayer](https://github.com/Chris-N)
+- [Parker Allen](https://github.com/csrudy)
+- [Siye Sam Yu](https://github.com/yudataguy)
 
 ## License
 
-[Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
+This project is licensed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
 
 ## Acknowledgments
 
-* [RabbitMQ User Group](https://groups.google.com/forum/#!forum/rabbitmq-users)
+- [RabbitMQ User Group](https://groups.google.com/forum/#!forum/rabbitmq-users)
+- All our contributors and users
+
+---
+
+**Download Pre-built Packages:** Visit [AliceMQ.com](https://alicemq.com) for Windows, macOS, and Linux packages.

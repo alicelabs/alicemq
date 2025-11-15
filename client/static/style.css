@@ -5,8 +5,7 @@
 } */
 
 html {
- font-size: calc(10px + (18 - 10) * ((100vw - 600px) / (1800 - 600)));
- 
+  font-size: calc(10px + (18 - 10) * ((100vw - 600px) / (1800 - 600)));
 }
 
 .grid-reloaded {
@@ -17,74 +16,70 @@ html {
   grid-template-columns: 10% 3% 3.5% 3.5% 3% 10% 67%;
   grid-template-rows: 8% 8% 8% 8% 8% 8% 26% 26%;
   grid-gap: 5px;
-  grid-template-areas: 
-    "instance instance instance instance instance instance viz"
-    "traffic-mode traffic-mode stop stop signout signout viz"
-    "s1 s5 s5 s5 space s9 viz"
-    "s2 s6 s6 s6 space s10 viz"
-    "s4 s8 s8 s8 space s11 viz"
-    "s3 s7 s7 s7 space s12 viz"
-    "nodes-1 nodes-1 nodes-1 nodes-2 nodes-2 nodes-2 viz"
-    "nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz"
-    "nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz"
+  grid-template-areas:
+    'instance instance instance instance instance instance viz'
+    'traffic-mode traffic-mode stop stop signout signout viz'
+    's1 s5 s5 s5 space s9 viz'
+    's2 s6 s6 s6 space s10 viz'
+    's4 s8 s8 s8 space s11 viz'
+    's3 s7 s7 s7 space s12 viz'
+    'nodes-1 nodes-1 nodes-1 nodes-2 nodes-2 nodes-2 viz'
+    'nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz'
+    'nodes-3 nodes-3 nodes-3 nodes-4 nodes-4 nodes-4 viz';
 }
 
 svg {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: block;
-  position:fixed; 
-  top: 0; 
-  height:100%; 
-  width:65%;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 65%;
 }
 
 #spin {
   display: flex;
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
-  .spinner {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
+.spinner {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 @media screen and (max-width: 950px) {
-  
   .grid-reloaded {
     display: grid;
     width: 100%;
-    grid-template-columns: 25% 25% 25% 25% ;
+    grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 90% 10%;
     grid-gap: 5px;
-    grid-template-areas: 
-      "viz viz viz viz"
-      "s2 traffic-mode signout stop";
+    grid-template-areas:
+      'viz viz viz viz'
+      's2 traffic-mode signout stop';
   }
 
   svg {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     position: relative !important;
     display: block;
-    top: 0; 
-    width:100%;
+    top: 0;
+    width: 100%;
     padding-left: 0px;
     margin-left: 0px;
     padding: auto !important;
     margin: auto !important;
     left: -1.1%;
-    
   }
- 
 
   .viz {
-    background-color: #995DFF;
-    top:0; 
+    background-color: #995dff;
+    top: 0;
     width: 100%;
-    height:100%; 
+    height: 100%;
     grid-area: viz;
   }
 }
@@ -99,49 +94,49 @@ svg {
 .s1 {
   grid-area: s1;
   font-size: 1.2rem;
-  background-color: #5F3A9E !important;
+  background-color: #5f3a9e !important;
   color: #ffffff !important;
 }
 
 .s2 {
   grid-area: s2;
-  background-color: #5F3A9E !important;
+  background-color: #5f3a9e !important;
   color: #ffffff !important;
 }
 
 .s3 {
   grid-area: s3;
-  background-color: #5F3A9E !important;
+  background-color: #5f3a9e !important;
   color: #ffffff !important;
 }
 
 .s4 {
   grid-area: s4;
-  background-color: #5F3A9E !important;
+  background-color: #5f3a9e !important;
   color: #ffffff !important;
 }
 
 .s5 {
   grid-area: s5;
-  background-color: #5F3A9E !important;
+  background-color: #5f3a9e !important;
   color: #ffffff !important;
 }
 
 .s6 {
   grid-area: s6;
-  background-color: #5F3A9E !important;
+  background-color: #5f3a9e !important;
   color: #ffffff !important;
 }
 
-.s7{
+.s7 {
   grid-area: s7;
-  background-color: #5F3A9E !important;
+  background-color: #5f3a9e !important;
   color: #ffffff !important;
 }
 
 .s8 {
   grid-area: s8;
-  background-color: #5F3A9E !important;
+  background-color: #5f3a9e !important;
   color: #ffffff !important;
 }
 
@@ -153,14 +148,13 @@ svg {
   grid-area: s10;
 }
 
-#s11{
+#s11 {
   grid-area: s11;
 }
 
 #s12 {
   grid-area: s12;
 }
-
 
 .signout {
   grid-area: signout;
@@ -174,12 +168,12 @@ svg {
   font-family: 'Roboto';
 }
 
-.card-title{
+.card-title {
   font-family: 'Roboto';
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
-.card-content{
+.card-content {
   font-family: 'Roboto';
   font-size: 1.4rem;
   padding-top: 2px;
@@ -193,7 +187,6 @@ svg {
   background-color: #543393;
   color: #fff;
   overflow-y: scroll;
-
 }
 
 .nodes-2 {
@@ -203,7 +196,6 @@ svg {
   background-color: #543393;
   color: #fff;
   overflow-y: scroll;
-
 }
 
 .nodes-3 {
@@ -213,7 +205,6 @@ svg {
   background-color: #543393;
   color: #fff;
   overflow-y: scroll;
-
 }
 
 .nodes-4 {
@@ -224,7 +215,6 @@ svg {
   overflow-y: scroll;
   color: #fff;
   scrollbar-color: auto;
-
 }
 
 .nonviz {
@@ -234,9 +224,8 @@ svg {
   color: #ffffff !important;
 }
 
-
 .settings1 {
-  grid-area: settings1
+  grid-area: settings1;
 }
 
 .cluster {
@@ -244,7 +233,7 @@ svg {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #DAB2FF;
+  color: #dab2ff;
 }
 
 .login-box {
@@ -258,14 +247,14 @@ svg {
 }
 
 .viz {
-  background-color: #995DFF;
+  background-color: #995dff;
   grid-area: viz;
-  top:0; 
-  left:35%; 
-  height:100%; 
+  top: 0;
+  left: 35%;
+  height: 100%;
 }
 
-#frontPage{
+#frontPage {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -278,7 +267,8 @@ h1 {
   text-align: center;
 }
 
-.axis path, .axis line {
+.axis path,
+.axis line {
   fill: none;
   stroke: black;
   shape-rendering: crispEdges;
@@ -300,11 +290,10 @@ h1 {
 }
 
 .background-vis {
-  background-color: #995DFF !important;
+  background-color: #995dff !important;
 }
 
 /* CSS for initial D3 setup: ABOVE */
-
 
 .noDots {
   font-family: 'Roboto';
@@ -323,7 +312,7 @@ h1 {
 
 .material-button {
   min-height: inherit;
-  font-size: .7em;
+  font-size: 0.7em;
 }
 .traffic-mode {
   grid-area: traffic-mode;

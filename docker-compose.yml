@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # RabbitMQ with Management Plugin
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: alicemq-rabbitmq
+    ports:
+      - "5672:5672"   # AMQP port
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - alicemq-network
+
+  # AliceMQ Application
+  alicemq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alicemq-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=15672
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - alicemq-network
+    command: npm run dev
+
+networks:
+  alicemq-network:
+    driver: bridge
+
+volumes:
+  rabbitmq-data:
