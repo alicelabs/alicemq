@@ -218,7 +218,7 @@ const Main = () => {
       case 3:
         nodecards = [
           { 'Total Received': node.message_stats.publish },
-          { 'Recieved/s': node.message_stats.publish_details.rate },
+          { 'Received/s': node.message_stats.publish_details.rate },
           {
             'Total Sent':
               node.message_stats.deliver_get === undefined ? '0' : node.message_stats.deliver_get,
