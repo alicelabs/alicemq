@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const rabbit_url = process.env.RABBIT_API_URI;
 const fetch = require('node-fetch');
 
@@ -68,8 +68,8 @@ apiController.consumers = (req, res) => {
     .then((result) => result.json())
     .then((data) => {
       const result = data.map((el) => {
-        const { arguments, channel_details, consumer_tag, queue } = el;
-        return (el = { arguments, channel_details, consumer_tag, queue });
+        const { arguments: args, channel_details, consumer_tag, queue } = el;
+        return (el = { arguments: args, channel_details, consumer_tag, queue });
       });
       res.json(result);
     })
@@ -136,7 +136,7 @@ apiController.onLoad = function (req, res) {
   Promise.all(
     urls.map(
       (url) =>
-        new Promise((resolve, reject) =>
+        new Promise((resolve, _reject) =>
           fetch(url)
             .then((result) => result.json())
             // .then(data => console.log(data))
