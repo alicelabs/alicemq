@@ -76,7 +76,7 @@
     "dotenv": "^16.4.7",
     "electron": "^35.7.5",
     "electron-packager": "^17.1.2",
-    "eslint": "^8.57.1",
+    "eslint": "^9.39.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
